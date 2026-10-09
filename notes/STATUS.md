@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-09T17:56:57Z
+Updated: 2026-10-09T18:05:10Z
 
 Current milestone: **M4 — On-device model export**, in progress. NEXT_ACTION:
 CONTINUE. M0–M3 gates exist; no M4 gate, accepted export, app or APK.
@@ -17,7 +17,7 @@ only and cannot replace selected-baseline parity.
   remain unchanged: rounded BN disabled/basic/extended maxima 0.000143051 raw /
   0.00000183769 probability, 13/21 violations, zero flips. No new saved-baseline
   inference, reference/state/fits/budget change or frozen evaluation. Generated
-  complete replay does not establish selected-baseline agreement.
+  persistence/reconstruction tests do not establish selected-baseline agreement.
 - **Size ≤20 MB / preprocessing written and tested: BUILT.** Original float
   6,095,579 bytes; INT8 1,730,515/1,861,702; rounded diagnostic 6,255,113.
   RGB letterbox, float32 1×3×224×224 → raw_logit [1] unchanged. Android
@@ -25,65 +25,56 @@ only and cannot replace selected-baseline parity.
 
 ## This iteration's evidence
 
-- Added export_remaining_replay.py supplied-tensor integration: separately
-  measured uncaptured/captured native logits, both original/tapped whole-runtime
-  pairs, every remaining operator and saved Conv/BN on both exact input origins,
-  with full rank-general four-term signed accounting. All binary operands,
-  saved parameters and squeeze axes remain explicit ordered isolated inputs.
-- Retained complete Conv/BN controls: native ONNX, three primitive BN formulas,
-  two promoted affine formulas, float64 expression and 32 two-engine rounding
-  recipes, on both native/runtime origins and both graphs. Paired recipe/engine
-  differences and all instrumentation/extraction discrepancies are unsuppressed.
-- Before any supplied input runs, independently rebuild the complete rounded
-  graph from fixed saved coefficients and audit all whole/isolated runtime
-  expressions. Changed serialized coefficients/expressions, stale model state,
-  geometry/mode/hooks and invalid inputs fail before inference.
-- Independent no-inference row reconstruction validates source/plan binding,
-  complete ordered operator/graph/operand/origin/control scope, tensor specs,
-  exact saved constant/axis bits, and native/runtime boundary lineage through
-  final logits, then recomputes every signed metric. Recorded arrays are
-  observations; this is not an independent recomputation of inference results
-  or historical authentication. Persistence/ordered-source/prior auditing remains.
-- Generated-only complete random mobile replay covers all 159 computational
-  nodes (53 Conv, 34 BN, 72 remaining), both graphs/origins and complete controls.
-  Every generated native replay is exact; original/captured and original/tapped
-  fixture logits are exact, while local HardSwish drift remains measured.
-  All weights/tensors generated anew; no selected saved model or training image
-  was opened for inference. Historical aggregate reports remain unchanged.
+- Added export_remaining_evidence.py: lossless compressed dtype/shape/bit-addressed
+  array files deduplicate only identical tensors; explicit ordered trees preserve
+  complete component/operator/operand/graph/origin/control observations. All files
+  stay under ignored data/ in fresh PLACEHOLDER directories. No pickle or symlink
+  evidence reads; partial runs have no completed index.
+- Before persisting a row, reconstruct every metric and require exact original
+  native/runtime logit bits against supplied ADR-022 disabled prior observations.
+  Original/captured/tapped instrumentation differences remain unsuppressed.
+- Independent streaming reconstruction checks complete files/arrays/rows, hashes,
+  specs, existing saved-constant/axis/boundary lineage and every metric, all numeric
+  and boolean aggregate leaves, both fixed-budget original parity reports and
+  supplied exact prior bits. No decode, eager recipe, forward or runtime session
+  needed. Aggregate reports omit IDs, logits and individual failure observations.
+- Generated two-component miniature architecture includes Conv/BN controls,
+  residual/SE/activation/pooling/head arithmetic. Its prior logits are fixture
+  observations, never selected saved M3 evidence. Tests establish persistence
+  mechanics; no independent recomputation/authentication of historical inference.
+  Full saved/preparation/source/dependency/prior report integration remains open.
 
 ## Observed verification
 
-- Initial integration suite: **34 PASS** (40.36s), 64 warnings. Expanded suite:
-  **42 PASS / 1 FAIL** (42.78s), 82 warnings; a new corruption test used a wrong
-  graph prefix. Replaced the test-only literal with the existing PREFIX constant;
-  its four serialized-corruption cases then **4 PASS** (2.29s), 40 deselected,
-  eight warnings. Exact corruption assertions retained; no production tolerance
-  or existing test changed.
-- bash scripts/check.sh exit 0: **686 ML tests PASS** (134.03s), 522 warnings;
-  includes all **44 new tests**. Android SKIPPED, RESULT PASS. No APK claim.
-  Root repository contracts: six PASS (0.098s) before final records; final
-  documentation checks recorded in JOURNAL. git diff --check clean.
+- New persistence suite: **37 PASS** (6.59s), two warnings; no failing attempt.
+- bash scripts/check.sh exit 0: **723 ML tests PASS** (137.51s), 524 warnings;
+  includes all 37 new tests. Android SKIPPED, RESULT PASS. No APK claim.
+- Root repository contracts before final records: six PASS (0.066s).
+  git diff --check clean; final documentation checks recorded in JOURNAL.
 - No saved reference/state/fits/budget change, baseline retraining, frozen
   inference, quantisation fit, acquisition/install, protected edit, review.sh,
   REVIEW/CHECK/GATE write, external message/publication or push.
 
 ## Open blockers and limits
 
-Selected-baseline float/INT8 parity remains the blocker. Complete generated
-replay and row reconstruction do not establish saved whole-model agreement.
-The guarded training-scope runner, ignored tensor/row persistence, complete
-ordered-component/aggregate/source/saved/prior reconstruction and exact ADR-022
-disabled-logit checks remain incomplete. Selective static QDQ and mobile double
-support/performance remain unresolved. Clinical validation, ethics/legal,
-native-language review and weight notices still need humans.
+Selected-baseline float/INT8 parity remains the blocker. Persistence verifies
+supplied observations, not saved provenance or historical inference authenticity.
+The guarded training-scope runner and complete saved/preparation/source/current
+code/dependency/prior report/runtime-expression reconstruction remain unfinished.
+Exact ADR-022 logit comparisons are implemented but not run on selected saved
+training observations. Selective static QDQ and mobile double support/performance
+remain unresolved. Clinical validation, ethics/legal, native-language review and
+weight notices still need humans.
 
 ## Next concrete step
 
-Build the ADR-023 guarded training-scope runner around CompleteReplay. Finish
-ignored evidence persistence, complete ordered-component/aggregate/provenance
-reconstruction and exact ADR-022 disabled-logit checks before opening an existing
-ordered training image. Then run all 152 ordered training components only, with
-fixed reference/fits/preprocessing/profile/budgets. No favourable subset, frozen
+Build the ADR-023 guarded training-scope runner around CompleteReplay and
+OrderedEvidence. Independently reconstruct complete saved/preparation/retained/
+source/current-code/dependency/ADR-022 prior report and all runtime expression
+records, then audit a generated full-run fixture before opening an existing
+ordered training image. Run all 152 ordered training components only with fixed
+reference/fits/preprocessing/profile/budgets; repeat exact prior original-logit
+checks and streaming aggregate reconstruction. No favourable subset, frozen
 inference or new fit. Declare selective QDQ scope from that evidence before
 fitting; resolve mobile support before bundling. REVIEW M4 only after acceptance;
 do not start M5.

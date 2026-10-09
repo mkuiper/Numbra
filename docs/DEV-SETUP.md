@@ -602,3 +602,32 @@ graphs/tensors are generated-only and ignored. Retained arrays support separate
 no-inference metric/constant/lineage reconstruction; authenticated ordered
 training evidence and prior-logit reconstruction remain unfinished. M4 has no
 new saved-baseline parity result, accepted bundle or gate; no app or APK exists.
+
+## M4 ordered evidence persistence — observed 2026-10-09 UTC
+
+No installation, dependency change, acquisition or selected saved-baseline
+inference. Existing pinned environment, from repository root:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_evidence.py
+bash scripts/check.sh > data/exports/PLACEHOLDER-m4-evidence-check.log 2>&1
+python3 -m unittest discover -s tests -v
+git diff --check
+```
+
+The new persistence suite passed all 37 tests (6.59s), two legacy-export warnings.
+Generated two-component observations use a newly randomised miniature model,
+not the selected saved M3 artifact. Complete arrays, row observations and supplied
+fixture prior logits stay ignored under data/; fixtures clean up after testing.
+Independent reconstruction runs with inference/decode/session creation blocked.
+File/row/array corruption, changed aggregates/fits/budgets, ordered scope, exact
+prior logit bits, signed zero, lossless deduplication and partial-run rejection
+are covered. No existing test or parity budget changed.
+
+Full check exit 0: 723 ML tests PASS; Android SKIPPED, RESULT PASS. Duration and
+warnings are recorded in JOURNAL. Root repository contracts before final records:
+six PASS (0.066s). M4 remains open: the guarded training runner and complete
+saved/preparation/source/dependency/prior report integration remain unfinished.
+Persistence verifies supplied observations; it cannot independently authenticate
+historical inference or establish selected-baseline/mobile parity. No accepted
+bundle, new fit, frozen evaluation, app or APK exists.

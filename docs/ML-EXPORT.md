@@ -890,8 +890,8 @@ lineage through the final logits. All controls retain both differences from
 native eager results and paired recipe/engine differences. The arrays are
 observations: this audit does not independently recalculate their inference
 results or authenticate their historical origin. The future complete runner
-must bind ordered rows to selected saved/source/preparation evidence and exact
-ADR-022 disabled logits, persist ignored evidence, and reconstruct aggregates.
+must bind persisted ordered rows and reconstructed aggregates to selected
+saved/source/preparation evidence and independently verified ADR-022 reports.
 
 Generated-only integration tests cover the complete random MobileNet
 architecture (159 computations: 53 Conv, 34 BN and 72 remaining nodes), both
@@ -902,6 +902,42 @@ and coefficient corruption, and unconditional capture cleanup on failure.
 Weights and input tensors are generated anew; no saved M3 forward or existing
 training image is used. Observed test outcomes are recorded in JOURNAL.
 
+## Complete ordered evidence persistence — generated fixtures only
+
+`export_remaining_evidence` persists supplied replay observations only below
+ignored `data/` in fresh `PLACEHOLDER-*` directories. Every nonempty finite
+float32/int64 array is compressed losslessly and addressed by its dtype, shape
+and exact C-order bytes. Identical arrays share a file, including repeated saved
+parameters and identical control outputs. This removes redundant storage without
+dropping an operator, origin, graph, control or bit. Explicit ordered dictionary
+trees preserve scope order even when JSON serializers sort object keys. Files
+and decoded bits have separate checksums; decoding forbids pickle and symlinks.
+
+The writer accepts one declared ordered component at a time. It reconstructs
+its complete row metrics and requires original native/runtime logit bits to
+match the supplied ADR-022 disabled observations before writing that row. An
+incomplete run has no completed index. Original/captured and original/tapped
+instrumentation differences remain recorded and unsuppressed. Fits and ADR-011
+budgets remain unchanged; no quantisation or deployment decision is made.
+
+`audit_ordered` streams the retained rows without image decoding, eager recipes,
+model forward or runtime session creation. It validates exact component order,
+complete file/array/row scope, each checksum/specification, all existing
+operator/operand/constant/lineage checks, every row metric, every numeric/boolean
+aggregate leaf and both original-graph parity reports. It repeats exact prior
+original-logit checks, including signed-zero bits. The aggregate contains no
+component IDs, logits or individual failure observations; these stay ignored.
+
+This API does **not** reconstruct saved-model/preparation/source/dependency or
+ADR-022 report provenance. Its caller must independently verify those artifacts
+before supplying the prior details and scope. Generated tests use two newly
+generated tensors and a new random miniature architecture containing Conv/BN,
+activation, residual, SE, pooling and head arithmetic. Their prior observations
+come from that same fixture, rather than the saved M3 model. The tests establish
+persistence/checking mechanics, never selected-baseline numerical parity or
+historical inference authentication. No existing ordered training image or saved
+M3 forward was opened. Observed test results are in JOURNAL.
+
 ## Remaining M4 work
 
 Optimisation profiles do not fix selected-baseline parity. Next implement
@@ -909,10 +945,13 @@ ADR-023's complete training runner using the implemented native mapping,
 pre-mutation capture, complete runtime expression audits and validated taps.
 The supplied-tensor integration now includes both-origin isolated replay,
 original/captured native logits, both original/tapped runtime logits, complete
-remaining scope and every Conv/BN control. Next add the guarded ordered
-training-scope runner and persisted evidence audit. Before opening any existing
-training image, finish independent ordered-row/aggregate reconstruction and
-exact ADR-022 disabled prior-logit checks. Then use every ordered training
+remaining scope and every Conv/BN control. Ordered persistence, complete metric
+aggregate reconstruction and supplied exact prior-logit checks now have generated
+regressions. Next connect them to the guarded training-scope runner and complete
+independent saved/preparation/source/current-code/dependency/prior report and
+runtime-expression reconstruction. Before opening any existing training image,
+verify complete provenance, scope, graph audits and the evidence audit on
+generated fixtures. Then use every ordered training
 component with unchanged reference, fits, preprocessing and budgets. Do not
 keep rerunning the failed profiles or choose a favourable subset.
 

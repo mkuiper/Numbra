@@ -1339,3 +1339,53 @@ publication or push.
 - Final documentation/iteration-record verification: repository contracts 6 PASS
   (0.079s), git diff --check clean. Committing the complete logical integration
   step and iteration records as M4: integrate complete supplied-tensor replay.
+
+## 2026-10-09T18:05:10Z — iteration
+
+- Oriented in required order: roadmap, STATUS, HARNESS, missing M4 review folder,
+  AGENTS and ADRs 011/022/023. No new harness message or gate. Continued ADR-023's
+  unfinished evidence persistence; no new model/runtime/budget decision or ADR.
+- Added export_remaining_evidence.py: fresh ignored PLACEHOLDER output, lossless
+  compressed dtype/shape/bit-addressed arrays, identical-tensor deduplication,
+  and explicit ordered trees preserving all component/operator/operand/graph/
+  origin/control observations. Separate compressed-file and decoded-bit checks;
+  no pickle or symlink evidence reads. Partial runs cannot produce a completed
+  index; no data, weights or per-component evidence is tracked.
+- Writer reconstructs every row metric and requires original native/runtime
+  logit bits to match supplied ADR-022 disabled observations before row writes.
+  Instrumentation differences remain measured, including original/captured
+  native and original/tapped runtime logits. Fits/budgets stay fixed.
+- Independent streaming audit validates complete row/array/file scope, ordered
+  identities, checksums/specs, existing source/plan/operand/constant/axis/lineage
+  checks, every row metric, every numeric/boolean aggregate leaf, both unchanged
+  fixed-budget original parity reports and exact supplied prior logits. Arrays
+  are released per component. Aggregate omits component IDs/logits/failure cases.
+  Reconstruction blocks image decode, eager recipes, model calls and ORT sessions.
+- Generated two-component fixture uses a new random miniature architecture with
+  complete Conv/BN controls, residual/SE/activation/pooling/head arithmetic. Prior
+  observations come from that fixture; no saved M3 model forward or existing
+  training image opened. This verifies persistence/checking mechanics, not saved
+  agreement, historical inference authentication or mobile/clinical validity.
+  Caller must verify complete saved/preparation/source/dependency/prior report
+  provenance; that integration and guarded runner remain incomplete.
+- New suite observed 37 PASS (6.59s), two legacy-export warnings, first attempt.
+  Regressions cover exact bits/signed zero/int64/scalars/order, lossless sharing,
+  independent no-inference audit, partial/repeated/out-of-order runs, invalid
+  arrays/prior/scope, ignored-only paths, and corruption despite rehashed row/
+  index/array containers. No existing tests deleted/weakened/skipped.
+- bash scripts/check.sh observed exit 0: 723 ML tests PASS (137.51s),
+  524 warnings; Android SKIPPED, RESULT PASS. Log ignored at
+  data/exports/PLACEHOLDER-m4-evidence-check.log. Root repository contracts before
+  final records: six PASS (0.066s); git diff --check clean.
+- Updated ADR-023 observations, ML README, export/setup documentation, STATUS,
+  HUMAN-QUEUE and NEXT_ACTION CONTINUE. No HANDOFF/review request because M4
+  acceptance remains incomplete. Next integrate guarded selected training runner,
+  full static/current provenance and runtime-expression audit, then run all 152
+  training components only. Selective QDQ/mobile support remain blockers; every
+  previous failed export rejected; no M5/app/APK.
+- No saved reference/state/fits/budget change, retraining, frozen evaluation,
+  quantisation fit, acquisition/install, protected edit, review.sh,
+  REVIEW/CHECK/GATE write, external message/publication/push or deployment choice.
+- Final documentation/iteration-record verification: repository contracts six
+  PASS (0.081s), git diff --check clean. Committing the logical persistence step
+  and iteration records as M4: persist complete ordered replay evidence.

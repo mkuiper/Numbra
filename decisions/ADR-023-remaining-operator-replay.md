@@ -195,6 +195,32 @@ quantisation fit, frozen evaluation, mobile result or accepted export occurred;
 M4 remains incomplete. The complete runner must finish before ordered training
 images are opened. Test outcomes are recorded in JOURNAL.
 
+## Observed ordered persistence foundation — 2026-10-09 UTC
+
+`export_remaining_evidence` now stores complete supplied replay arrays losslessly
+under ignored data/: dtype/shape/bit-addressed compressed files deduplicate only
+identical tensors, and explicit ordered trees retain every component/operator/
+origin/control. All row metrics and original native/runtime prior bits are
+checked before the row is written; incomplete runs have no completed index.
+
+Independent streaming reconstruction validates complete file/array/row scope,
+checksums/specifications, existing constant/lineage/metric checks, every aggregate
+numeric/boolean leaf and both fixed-budget original parity reports. Supplied
+ADR-022 disabled original logits must match exactly, including signed-zero bits.
+Original/captured/tapped instrumentation changes remain unsuppressed. No inference
+or image decoding occurs during reconstruction; these are retained observations,
+never independent inference results or historical authentication.
+
+Generated two-component regressions use a fresh random miniature architecture
+with complete Conv/BN controls, residual/SE/activation/pooling/head arithmetic.
+The supplied prior observations are from that fixture. This tests persistence
+and reconstruction mechanisms only, not saved M3 agreement. The API requires its
+caller to verify selected saved/preparation/source/dependency and complete prior
+report provenance; that integration and the guarded training runner remain open.
+No existing ordered training image, selected saved-model forward, new fit, frozen
+evaluation, mobile execution or accepted export occurred. M4 stays incomplete.
+Test results are recorded in JOURNAL.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?

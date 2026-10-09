@@ -156,8 +156,14 @@ remaining operator, complete Conv/BN formula/promoted/rounding controls, and
 four-term signed accounting. It retains arrays for independent metric and exact
 boundary-lineage reconstruction without inference. All serialized rounded-BN
 expressions and coefficients are first bound to the unchanged saved recipe.
-The generated full mobile fixture covers all 159 computational nodes. A guarded
-training-scope runner, persistence/provenance audit and exact ADR-022 prior-logit
-reconstruction remain unfinished; there is no saved-baseline replay CLI or new
-accepted export.
+The generated full mobile fixture covers all 159 computational nodes.
+`export_remaining_evidence` adds ignored lossless compressed/deduplicated arrays,
+explicit ordered component/operator trees, partial-run rejection, and independent
+streaming reconstruction of every row metric, full aggregates and fixed-budget
+original-graph parity. It checks original native/runtime logit bits against
+supplied ADR-022 disabled observations. Generated two-component tests exercise
+these checks without saved M3 inference. The guarded training-scope runner and
+complete saved/preparation/source/prior provenance integration remain unfinished;
+the persistence API requires verified prior observations from its caller. There
+is no saved-baseline replay CLI or new accepted export.
 See [the export document](../docs/ML-EXPORT.md) for scope and evidence limits.
