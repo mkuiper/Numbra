@@ -212,3 +212,36 @@ Append-only log of Builder iterations.
 ## 2026-10-09T12:52:42Z — iteration
 
 Read roadmap, status, harness, M0 review files, AGENTS and ADRs in order. Harness closed M0 PASS WITH CHANGES. Addressed Review-2 consistency issues in RESPONSE-2: canonical referral list, explicit volunteer concern/contact handling, observation superset, count-bound interpretation, stable IJDVL landing page, and publication PDF cleanup. DermaCon catalogue confirmation failed via web export then direct HTTP 403; labelled documentation-only workaround preserves reviewer file enumeration as UNVERIFIED and holds weights/archives. No patient-row audit or image acquisition. Root unittest: 5 PASS; git diff --check PASS. Starting M1 only; Python 3.12.3 venv created in ml/.venv, pinned M1 dependency installation underway. No protected edits, reviews, publishing, messages or pushes.
+
+### 2026-10-09T13:05:05Z — M1 implementation and iteration completion
+
+Implemented one milestone, M1: pinned Python src-layout project, strict versioned
+JSONL schema/typed records, M0 taxonomy and exact provisional mappings, optional
+full canonical observation superset, integrity/source/path/RGB interfaces,
+supervised selection with explicit exclusions and patient/group/exact-hash split
+validation before filtering. Fixtures are generated shapes only; synthetic labels
+cannot claim clinical confirmation or real skin-tone annotation. ADR-006 accepted
+in autopilot pending human review and queued; documented setup/data contract.
+
+Installed toolchain dependencies only into ml/.venv using existing Python 3.12.3;
+editable install succeeded and pip check reports no broken requirements. Pins
+include the observed typing-extensions transitive dependency. Initial direct test
+command mistakenly repeated ml/ inside the ml working directory (exit 127);
+corrected command ran 78 tests PASS, then added missing-image/EXIF/multiframe and
+missingness/tone cases. No failing test removed, skipped or weakened. One combined
+documentation patch rejected duplicate operations on README and applied nothing;
+corrected it as a single update.
+
+Final scripts/check.sh: exit 0, 83 ML tests PASS, app SKIPPED, RESULT PASS. Root
+unittest: 5 PASS; Builder-attested only, harness script unchanged. git diff --check
+PASS. Wrote M1 HANDOFF and overwrote STATUS/NEXT_ACTION with REVIEW M1. No model,
+training, clinical metric, parity, APK or future milestone completion claimed.
+No protected edits, reviewer/check/gate writes, patient data, clinical image
+acquisition, external messages, publishing or pushes. M0 cleanup commit a8e076a
+precedes the M1 logical commit. Harness owns the next review and remote actions.
+
+Final staged audit: 22 text/code files, no protected/data/image/weight paths;
+NEXT_ACTION is exactly REVIEW M1. Final link/contract rerun after HANDOFF: 5 PASS.
+Staged whitespace check caught one trailing blank line in new pyproject.toml
+(earlier unstaged check did not include untracked files); removed it and reran
+the staged whitespace check before commit.

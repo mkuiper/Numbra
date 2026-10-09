@@ -2,6 +2,8 @@
 
 Decisions made autonomously, blockers, and anything needing human review.
 
+- 2026-10-09 — ADR-006 accepts strict versioned Python 3.12 JSONL/taxonomy/data interfaces with exact dependency pins and synthetic-only loading, pending human review. Schema missingness does not relax the canonical M6 required assessment; M7 must extend confirmation/consent/custodian provenance. No real data or clinical use authorised.
+
 - 2026-10-09 — M0 Review-2: M6 must implement the full canonical research/04 / ADR-001 question set; protected roadmap questions are a minimum. Contact yes refers, contact unknown/declined is optional, and volunteer concern is an explicit required question. Humans must clinically review this superset and all M0 ADRs before field use.
 - 2026-10-09 — M0 Review-2: root repository-contract tests are Builder-attested only because protected check.sh does not run them. Humans/harness maintainers may add them to tests of record; Builder did not edit scripts.
 - 2026-10-09 — M0 Review-2: DermaCon-IN descriptor examples mention leprosy but cannot establish released labels. Catalogue re-check failed via web and direct HTTP 403; labelled documentation-only workaround leaves the reported weights/archive enumeration UNVERIFIED. All weights/archives remain held under NC-SA. Any future patient-row label audit requires amended dataset authority; none performed.

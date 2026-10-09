@@ -1,76 +1,69 @@
 # Status
 
-Updated: 2026-10-09T12:44:00Z
+Updated: 2026-10-09T13:05:05Z
 
-Current milestone: **M0 — Research and plan**, Review-1 REVISE addressed and
-**ready for harness re-review**. No GATE exists. NEXT_ACTION: REVIEW M0.
-Research only; do not begin M1 until the harness closes M0.
+Current milestone: **M1 — ML project scaffold**, implemented and **ready for
+harness review**. NEXT_ACTION: REVIEW M1. M0 GATE exists: PASS WITH CHANGES,
+closed by harness 2026-10-09T12:48:54Z; human approval pending. M0 Review-2
+follow-through is documented in reviews/M0/RESPONSE-2.md. No M1 gate yet.
 
 ## Acceptance status
 
-- **Research documents, synthesis and required ADRs: SATISFIED.** Seven research
-  documents, source register, synthesis and required ADR-001/002/003/004 exist;
-  additional ADR-005 remains. All ADRs Accepted (autopilot) — pending human review.
-  ADR-001/002 revised following review; amendments and unresolved choices queued.
-- **Every dataset claim sourced or UNVERIFIED: SATISFIED.** DermaCon-IN added,
-  AI4 restricted access/licence corrected, Fitzpatrick label counts checked and
-  32-category compilation excluded. Target coverage/linkage/access gaps explicit.
-  No real task dataset approved. Research retains Open questions/Confidence.
-- **Review response: COMPLETE.** reviews/M0/RESPONSE-1.md answers all 3 blocking,
-  7 non-blocking, missed-work and human-question items. HANDOFF updated.
-- **Gate: PENDING.** No clinical, scientific, legal or milestone approval claimed.
+- **Python project, pinned dependencies, ml/tests: SATISFIED.** src-layout package,
+  pyproject.toml, exact direct/transitive dependency versions in requirements-dev.txt,
+  repository-local ml/.venv on existing Python 3.12.3. Editable install succeeded;
+  pip check green. No JDK/SDK installed. Commands recorded in docs/DEV-SETUP.md.
+- **Data-loading interfaces, manifest and taxonomy: SATISFIED.** Strict versioned
+  executable JSON Schema plus JSONL reader/writer, source/licence/original/mapped
+  label, confirmed-by assertion, source-scoped patient/group IDs, split and hashes.
+  Taxonomy preserves all M0 families, explicit PB/MB/reaction and label provenance;
+  exact vocabulary mappings remain provisional. Loaders enforce synthetic-only
+  PLACEHOLDER policy, hash integrity, safe paths and group/patient/hash split
+  checks before filtering. Missingness stays explicit and eligibility exclusions
+  are reported. All new canonical referral-trigger answers have observation fields.
+- **Tiny generated synthetic tests: SATISFIED.** Eight in-code RGB-block fixtures
+  across families/two sources; no real images or committed generated data.
+  Tests run in ignored ml/tests/.tmp. Current suite: 83 passing tests.
+- **Handoff/review: READY.** reviews/M1/HANDOFF.md states evidence, reproduction,
+  limits and requested scrutiny. ADR-006 Accepted (autopilot) — pending human
+  review and queued. Harness owns review/check/gate files.
 
 ## Verification observed
 
-- `python3 -m unittest discover -s tests -v`: **5 tests PASS** after research edits;
-  final documentation pass recorded in JOURNAL. No tests changed or weakened.
-- `bash scripts/check.sh`: exit 0, RESULT PASS; ML and Android explicitly SKIPPED
-  because projects do not exist. No APK, model performance or clinical validation.
-- `git diff --check`: passed after review-response/handoff edits; staged whitespace
-  and boundary checks recorded in JOURNAL before commit.
-- No protected edits, review.sh, REVIEW/CHECK/GATE writes, training/app work,
-  toolchain installation, clinical images, patient-row tables, weights, external
-  messages, publishing or pushes. Fitzpatrick CSV counted transiently in memory
-  only; no individual rows/image URLs retained. Publication PDFs/supplements,
-  documentation and catalogues inspected as research evidence.
+- bash scripts/check.sh: exit 0, **83 ML tests PASS**, Android explicitly SKIPPED,
+  RESULT PASS. No APK, model, clinical validation, M2 split algorithm or M4 parity.
+- python3 -m unittest discover -s tests -v: **5 PASS**; root suite remains
+  Builder-attested only because protected check.sh does not run it.
+- ml/.venv/bin/python -m pip check: no broken requirements.
+- git diff --check: PASS; final staged boundary/whitespace checks in JOURNAL.
+- No protected edits, review.sh, REVIEW/CHECK/GATE writes, patient data, clinical
+  images, weight download, app implementation, external messages, publishing or pushes.
 
-## Review findings, decisions and open blockers
+## Decisions, carried requirements and open blockers
 
-- AI4Leprosy Fiocruz direct HTML/API verifies CC BY-NC 4.0, v1.10 release
-  2024-05-16, 1,456 restricted files (1,231 JPEG / 225 JSON), owner request route.
-  Excluded under unattended limits. Human access/NC decisions replace stale
-  unknown-licence queue entry. No access requested. Actual guestbook requirement
-  remains UNVERIFIED (generic UI but API guestbook ID null).
-- AI4 full text/supplement and code verified: ResNet-50 close-ups, MIT code,
-  currently archived. Main Table 3 SEN/SP 89/91% is metadata outputs plus patient
-  info; supplement conflicts on CV/holdout description. Final refit includes
-  testing patients. Abstract/results count discrepancy retained; no invented
-  reconciliation or Numbra performance inferred.
-- DermaCon-IN: regional clinical smartphone/camera candidate, CC BY-NC-SA 4.0,
-  anonymous README/schema access, documented Subject_ID/subject-wise split.
-  Actual target diagnoses, patient linkage, image flow and derived-weight terms
-  unresolved. Documentation/dictionary omit diagnosis enumeration; **labelled
-  documentation-only workaround** keeps coverage UNVERIFIED and queues a future
-  permitted audit. No negatives-only assumption. ADR-002 remains synthetic-only;
-  every downstream model/report/UI must say **PLACEHOLDER**.
-- ADR-001 now includes intact-sensation/MB limitation and proposed independent
-  patch/skin/eyebrow/injury/contact referral triggers; unknown required assessment
-  refers. Planned M6 tests cover intact sensation/zero score, boundaries and
-  monotonicity. Human clinical approval and whether low-photo wording is ever
-  appropriate remain unresolved; added rules do not guarantee all MB detection.
-- Proposed M3 threshold guardrails: 100 independent groups/class after separate
-  calibration subset 20/class, exact 95% sensitivity bounds and explicitly
-  unselected refer-all fallback below counts. Engineering choices queued; no
-  clinical sample-size or supported-sensitivity claim.
-- Added macular PKDL, historical Sarlahi literacy/training/incentive/stigma context,
-  Privacy Act ss.11/16 and journal-targeted search coverage. Existing NHRC/DDA,
-  Nepal field/device/language, governance/custodian and real-pilot gaps persist.
-- Firecrawl credits remain zero; continued documented web-tool/direct-document
-  workaround. ILA HTTP PDF works after HTTPS failures; Harvard export works after
-  ordinary API/page failures. No auth/account/billing changes.
+- No blocking M1 issue known; clinical/legal review remains pending for real use.
+- ADR-002 still approves no real dataset: M2 will generate synthetic-only data.
+  Every downstream model/report/UI must say **PLACEHOLDER**.
+- M0 Review-2 consistency fixed: research/04 canonical integrated referral list;
+  contact yes refers, unknown/declined remains optional; volunteer concern is one
+  explicit required yes/no/uncertain question. **M6 must implement the ADR-001
+  question superset; protected roadmap list is a minimum.** Clinical approval and
+  whether any low-photo outcome is appropriate remain open in HUMAN-QUEUE.
+- Research/06 and ADR-004 preserve all trigger answers for M7 summaries; M1
+  observations carry this superset. Manifest optionality never supplies normal
+  workflow answers. M7 confirmation/consent/credential/custodian details remain work.
+- M0 Review-2: stable IJDVL landing page cited; ignored publication PDFs deleted.
+  DermaCon descriptor examples mention leprosy but do not establish released labels.
+  Web catalogue fetch and direct export HTTP 403 failed; labelled documentation-only
+  workaround retains reviewer weight/archive enumeration as UNVERIFIED. All held
+  under NC-SA; no patient-row audit/archives/weights acquired. Humans queued.
+- JSONL checks detect exact-hash split leakage but M2 must handle connected groups,
+  perceptual duplicates/conflicts, deterministic assignment and held-out sources.
+- Raw loader EXIF/RGB conversion is not complete model preprocessing; M4 still
+  must document/test letterbox, normalisation and exported-model parity.
 
 ## Next concrete step
 
-Harness reruns checks and M0 review. Read next REVIEW/CHECK in full; if still
-REVISE, answer each numbered issue and fix within M0. If GATE exists, address cheap
-non-blocking issues, queue remaining human decisions and begin **M1 only**.
+Harness runs M1 checks/review. Read resulting REVIEW/CHECK in full, answer all
+numbered issues and revise if needed. If M1 GATE exists, address cheap follow-ups,
+queue the rest and begin **M2 only**. Do not start training or Android work here.
