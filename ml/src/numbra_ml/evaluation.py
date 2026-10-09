@@ -368,3 +368,58 @@ def evaluation_report(values: Iterable[Prediction], *, held_out_source: str) -> 
                             "selection intervals are descriptive after search; test threshold is frozen",
                             "calibration-split summaries are in-sample after temperature fitting",
                             "multi-source components count once per represented source; strata overlap"]}
+
+
+def bootstrap_intervals(values: Iterable[Prediction], temperature: float, threshold: float,
+                        *, seed: int, replicates: int = 1000) -> dict:
+    """Frozen-score, ordinary component bootstrap; no re-fitting within replicas.
+
+    A component's single index image is drawn as a whole unit. Single-class draws
+    contribute only available metrics; valid counts accompany every interval.
+    Conditional on the fitted model/operating point, not total training uncertainty.
+    """
+    values = _validate(values)
+    if (type(seed) is not int or not 0 <= seed < 2**32 or type(replicates) is not int
+            or not 100 <= replicates <= 10000):
+        raise ValueError("invalid bootstrap seed or replicate count")
+    if any(item.split not in {"test", "held_out"} for item in values):
+        raise ValueError("bootstrap requires frozen test/held_out scores")
+    if len({item.split for item in values}) > 1:
+        raise ValueError("bootstrap cannot pool independent evaluation splits")
+    metrics(values, temperature, threshold)  # Reuse public parameter validation.
+    labels, _, scores = _arrays(values, temperature)
+    samples = {key: [] for key in ("sensitivity", "specificity", "auc", "brier", "ece")}
+    rng = np.random.default_rng(seed)
+    for _ in range(replicates if values else 0):
+        draw = rng.integers(0, len(values), size=len(values))
+        y, p = labels[draw], scores[draw]
+        positive = p >= threshold
+        npos, nneg = int(y.sum()), int((1 - y).sum())
+        if npos:
+            samples["sensitivity"].append(float(positive[y == 1].mean()))
+        if nneg:
+            samples["specificity"].append(float((~positive[y == 0]).mean()))
+        if npos and nneg:
+            # Tied-group positive × preceding negative counts; half credit for ties.
+            order = np.argsort(p, kind="stable")
+            _, starts = np.unique(p[order], return_index=True)
+            positives = np.add.reduceat(y[order], starts)
+            totals = np.diff(np.append(starts, len(y)))
+            negatives = totals - positives
+            precede = np.cumsum(negatives) - negatives
+            samples["auc"].append(float(np.sum(positives * (precede + 0.5 * negatives)) / (npos * nneg)))
+        samples["brier"].append(float(np.mean((p - y) ** 2)))
+        assignments = np.minimum((p * 10).astype(int), 9)
+        counts = np.bincount(assignments, minlength=10)
+        score_sums = np.bincount(assignments, weights=p, minlength=10)
+        target_sums = np.bincount(assignments, weights=y, minlength=10)
+        samples["ece"].append(float(np.abs(score_sums[counts > 0] - target_sums[counts > 0]).sum() / len(y)))
+    return {"notice": PLACEHOLDER_NOTICE, "seed": seed, "replicates": replicates,
+            "unit": "duplicate-connected component; one index image",
+            "method": "ordinary bootstrap, percentile 95%, linear quantiles",
+            "conditioning": "fixed model, temperature and threshold; no fitting uncertainty",
+            "n": len(values), "score_sha256": _hash(values),
+            "metrics": {key: {"interval_95": np.quantile(sample, [0.025, 0.975]).tolist() if sample else None,
+                              "valid_replicates": len(sample),
+                              "unavailable_reason": None if sample else "empty_or_single_class"}
+                        for key, sample in samples.items()}}

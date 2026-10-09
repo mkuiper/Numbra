@@ -80,6 +80,18 @@ checkpoint/dependency evidence, seeded component bootstrap uncertainty, hardware
 runtime provenance and model card remain unbuilt. No completed-M3 or clinical
 performance claim is made. End-to-end referral-rule/workflow metrics belong to M6.
 
+## M3 conditional component bootstrap
+
+Training adds bootstrap_intervals for frozen test/held-out primary endpoints:
+1,000 ordinary whole-component resamples, seeded independently per overall/source/
+synthetic-colour cohort, percentile 95% linear quantiles. Sensitivity, specificity,
+tied AUC, Brier and ECE each report valid replicate counts; single-class draws omit
+only unavailable metrics. No calibration/threshold/model fitting in resamples;
+intervals condition on the fitted model/operating point, not total uncertainty.
+No partition pooling. Exact binomial intervals remain beside the bootstrap.
+See ADR-010 and [training documentation](ML-TRAINING.md). Source/colour cohorts
+overlap and tiny strata are unstable; these are synthetic software demonstrations.
+
 ## Open questions
 
 - Do humans approve ADR-009's engineering choices and the broader ADR-001 protocol?

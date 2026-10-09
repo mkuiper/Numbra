@@ -87,6 +87,49 @@ RESULT PASS. Root contract suite: 5 passed. No broken Python requirements.
 See [evaluation contract](ML-EVALUATION.md). Training/checkpoint/dependency-lock
 setup remains pending; these checks do not establish a trained model or APK.
 
+## M3 CPU transfer environment — observed 2026-10-09 UTC
+
+Python remains 3.12.3. CPU torch 2.8.0+cpu / torchvision 0.23.0+cpu,
+timm 1.0.22, safetensors 0.6.2 and huggingface-hub 0.36.0 installed in ml/.venv.
+The 35-wheel full runtime/test/build lock is ml/requirements-cpu.lock; it includes
+all transitive pins and one SHA-256 per wheel for CPython 3.12 Linux x86_64.
+No system packages/JDK/SDK installed. From repository root:
+
+```bash
+mkdir -p data/toolchains/wheels ml/.tmp/pip
+PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip download --only-binary=:all: --no-deps --index-url https://download.pytorch.org/whl/cpu --dest data/toolchains/wheels 'torch==2.8.0+cpu' 'torchvision==0.23.0+cpu'
+```
+
+Initial dependency resolution downloaded M1 requirements plus timm/safetensors;
+it selected hub 2.2.0. Before installing, explicitly chose hub 0.36.0 for timm
+compatibility, resolved again into data/toolchains/m3-wheels with the M1 pins
+and torch/torchvision/timm/safetensors/hub pins, then generated the lock by reading
+each wheel's dist-info/METADATA name/version and hashing the wheel bytes. The
+original M1 requirements list is available in git history. No floating dependency
+resolution is needed for subsequent installs. Reproduce the final environment:
+
+```bash
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip download --require-hashes --dest data/toolchains/m3-wheels -r ml/requirements-cpu.lock
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --force-reinstall --no-index --find-links data/toolchains/m3-wheels --require-hashes -r ml/requirements-cpu.lock
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --no-build-isolation --no-deps -e ml
+ml/.venv/bin/python -m pip check
+ml/.venv/bin/python -m numbra_ml.pretrained
+```
+
+The force-reinstall was observed, including all previously installed M1 wheels,
+so installed dependencies were read from hash-checked archives. Earlier pip's
+editable build used its automatic transient /tmp directory; subsequent installs
+set TMPDIR inside ignored ml/.tmp. No unrelated files manually modified.
+Checkpoint anonymous access, licence/revision/checksums and installed environment
+are recorded in ADR-010 and the training report provenance. All downloaded wheels,
+README/config and weights remain ignored under data/. Firecrawl still has zero
+credits; reused the documented web/direct-anonymous-HTTP workaround with no
+account, subscription or credential changes.
+
+Training/reproduction commands and results: [ML-TRAINING.md](ML-TRAINING.md).
+Existing synthetic-v2/default and selection fixtures are not regenerated/tuned
+in response to scores. No Android or clinical performance evidence.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

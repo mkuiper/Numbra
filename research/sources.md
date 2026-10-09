@@ -132,6 +132,16 @@ documents, not task datasets; only their text was inspected.
 | NIST-BINOMIAL | [NIST exact binomial confidence interval construction](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm) | Exact interval calculation; minimum group-count guardrails are Numbra proposals, not NIST recommendations. |
 | JOURNAL-SEARCH | [Leprosy Review 2024 WHO-app commentary](https://leprosyreview.org/article/95/2/20-24030), [IJDVL AI review](https://ijdvl.com/artificial-intelligence-in-dermatology-and-healthcare-an-overview/), [IJL 2025 research editorial](https://www.ijl.org.in/published-articles/26032025110641/1_Editorial__VMK_Jan_March_2025_final_print_version.pdf) | Accessed 2026-10-09; IJDVL stable publisher landing page replaces failed tokenised viewer. Targeted domain searches found contextual reviews/commentaries; no new diagnostic metric or reuse licence asserted from them. Not systematic coverage. |
 
+## M3 implementation-access bookkeeping — 2026-10-09 UTC
+
+These entries record verification of the already-selected M0 architecture and
+its build toolchain; no new clinical/dataset survey or patient-data authority.
+
+| ID | Primary source | What was checked |
+| --- | --- | --- |
+| TIMM-PINNED-M3 | [Revision-pinned publisher card](https://huggingface.co/timm/mobilenetv3_small_100.lamb_in1k/blob/1824797e7887cbec1990e4adbd6675960a36c589/README.md), [anonymous repository metadata](https://huggingface.co/api/models/timm/mobilenetv3_small_100.lamb_in1k?blobs=true) | Accessed 2026-10-09 UTC using web/direct anonymous HTTP. Card/config checksum verified, Apache-2.0 publisher declaration, private=false/gated=false, pinned revision and safetensors SHA-256; anonymous weight retrieval matched bytes/checksum. No ImageNet or patient images. No warranty about all pretraining-image rights. |
+| PYTORCH-CPU-M3 | [Official previous-version installation instructions](https://pytorch.org/get-started/previous-versions/), [official CPU wheel index](https://download.pytorch.org/whl/cpu) | Accessed 2026-10-09 UTC via web/pip. torch 2.8.0 / torchvision 0.23.0 CPU pair, anonymous CPython 3.12 Linux x86_64 wheels downloaded and hash-locked. Other platforms unverified; no clinical or conversion success claim. |
+
 ## Open questions
 
 - Will humans seek AI4's restricted-data permission and resolve its evaluation-description discrepancy?

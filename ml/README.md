@@ -1,10 +1,9 @@
 # Numbra ML — PLACEHOLDER data pipeline
 
 **PLACEHOLDER — synthetic demonstration, not clinically validated.**
-M0–M2 harness gates are closed. M3 preparation/evaluation provides generated data,
-duplicate components, frozen splits and tested component-level evaluation
-primitives. Training, real-data acquisition, model export and Android implementation
-remain later work.
+M0–M2 harness gates are closed. M3 supplies generated data, frozen component splits, CPU frozen-feature transfer
+training, isolated evaluation and PLACEHOLDER model-card/report generation. Real
+task data, model export and Android implementation remain later work.
 [ADR-002](../decisions/ADR-002-dataset-selection.md) approves generated fixtures
 only. Every future synthetic model, report and app result must say PLACEHOLDER.
 
@@ -12,14 +11,16 @@ Use Python 3.12 (observed 3.12.3) from the repository root:
 
 ```bash
 python3 -m venv ml/.venv
-PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install -r ml/requirements-dev.txt
+PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --require-hashes -r ml/requirements-dev.txt
 PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --no-build-isolation --no-deps -e ml
 bash scripts/check.sh
 python3 -m unittest discover -s tests -v
 ```
 
-Or from `ml/`: `.venv/bin/python -m pytest -q`. All direct and transitive M1
-runtime/test/build dependencies are version-pinned in `requirements-dev.txt`.
+Or from `ml/`: `.venv/bin/python -m pytest -q`. All direct and transitive M3 runtime/test/build dependencies are pinned with wheel
+hashes in `requirements-cpu.lock`, included by `requirements-dev.txt`. This lock
+supports CPython 3.12 Linux x86_64 only. Install before the editable project so
+pip can find the CPU-specific torch versions without dependency re-resolution.
 Tests set their temporary directory to ignored `ml/tests/.tmp/`; their PNG/GIF
 pixels are generated in code and contain no people or clinical data. No external
 dataset, network service, weight or model is needed to run them.
@@ -72,4 +73,7 @@ synthetic circle / synthetic square, never clinical classes; describe source C
 as a single held-out-source fold. Synthetic metrics are not clinical performance.
 The [evaluation library](../docs/ML-EVALUATION.md) now implements component index
 selection, calibration/threshold isolation, count guards and metric summaries.
-No training command, trained model, script-written model report or weights exist yet.
+See [CPU training](../docs/ML-TRAINING.md) for checkpoint acquisition, the one-command
+training run, provenance, reproduction and limitations. Only the checkpoint command
+uses the network; task training/evaluation is offline. Weights/predictions stay
+under ignored data/, aggregate reports/model cards under ml/reports/.
