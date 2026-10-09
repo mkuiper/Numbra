@@ -1,0 +1,79 @@
+# ADR-023 — Complete remaining PLACEHOLDER operator replay
+
+Date: 2026-10-10
+
+Status: Accepted (autopilot) — pending human review
+
+## Context
+
+ADR-022's four fixed runtime profiles all fail ADR-011. Exact rounded BN
+expressions alone do not resolve whole-model error. Conv/BN replay already has
+complete controls; remaining activation, pooling, residual, squeeze/excitation
+and head arithmetic must not be omitted or assumed equivalent. Every previous
+failed export remains rejected; ADR-012's toy diagnostic workaround remains.
+
+## Decision — declared before implementation or execution
+
+Implement in two reviewable stages. First build a **no-inference preflight**
+and generated-fixture isolated replay primitives. Preflight verifies the saved
+model and prior preserved/rounded evidence, inventories every original graph
+node in topological order, partitions Conv/BN controls from the complete
+remaining scope, checks every saved head constant bit and operator attribute,
+and verifies each remaining node is byte-identical in the rounded graph.
+Reject missing/extra/ambiguous nodes, unsupported arithmetic, disconnected nodes,
+changed head parameters, dynamic boundaries or incomplete reports. Initializers,
+Constant and Identity aliases are explicit scope records, never silent exclusions.
+No image decoding, model forward call or baseline runtime inference in this stage.
+
+The fixed remaining scope includes every Relu, HardSwish, HardSigmoid,
+ReduceMean, GlobalAveragePool, Mul, Add, Flatten, Sub, Div, Gemm and Squeeze,
+not a favourable module/error subset. Isolated graphs preserve operand order,
+attributes, exact constants, shapes and float32 boundaries (int64 squeeze axes).
+Audit both serialized and disabled-optimisation runtime graphs. Independent
+eager PyTorch recipes use native hard-swish/hard-sigmoid, native reduction/pool,
+float32 elementwise operations and native linear head arithmetic. These recipes
+are diagnostic expressions; they must not be described as captured saved-model
+outputs. Report signed discrepancies without tolerance-based suppression.
+
+Second, in a subsequent implementation step, complete the runner before opening
+the existing ordered training index images. Capture actual saved native inputs
+and outputs for mapped modules and functional residual/SE/head boundaries,
+copying before in-place mutation; validate mapping and native replay fidelity.
+Replay on both exact native and tapped runtime input tuples, preserving all
+operands for binary operators. Measure original/tapped whole logits separately
+on both unchanged preserved and rounded graphs. Keep complete Conv/BN controls,
+four-term signed telescoping accounting and all instrumentation differences.
+Reconstruct every ordered component/operator/origin/graph/metric and exact prior
+disabled-profile logits independently without additional inference.
+
+All real diagnostic inference remains all and only the existing 152 ordered
+training components; sequential CPU, two intra-op/one inter-op threads, disabled
+optimisation. Keep the selected native saved Python reference, state, fits,
+preprocessing, temperature, threshold and ADR-011 budgets. No frozen
+test/held-out/stress inference, new quantisation fit, adaptive formula/profile,
+retraining, deployment selection or mobile claim. Generated unit fixtures are
+separate and cannot establish selected-baseline parity.
+
+All outputs are **PLACEHOLDER diagnostic only, never bundle**. Preflight PASS
+means complete static scope/provenance checks passed, not arithmetic equivalence
+or M4 acceptance. Track aggregate evidence only; graphs/details remain ignored
+under data/. A separate static QDQ scope decision and mobile compatibility work
+are still required before acceptance evaluation and bundling.
+
+## Consequences
+
+The first stage provides a tested fail-closed foundation and actionable complete
+scope without another model experiment. Remaining native boundary mapping and
+full training replay are explicit incomplete work. This decision cannot close
+M4, accept any failed graph or authorise M5.
+
+## Open questions
+
+- Can complete remaining arithmetic replay isolate an actionable parity strategy?
+- Which selective QDQ scope and mobile runtime can meet the unchanged contract?
+- Do humans accept the staged protocol and continued export blocker?
+
+## Confidence
+
+High for the bounded protocol; arithmetic outcomes, accepted export, mobile
+execution and clinical validity remain unverified.
