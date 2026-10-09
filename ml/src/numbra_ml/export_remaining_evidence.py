@@ -230,12 +230,24 @@ def scope(source, plan, identifiers, temperature, threshold):
 class OrderedEvidence:
     """Write one component at a time; partial runs have no completed index."""
 
+    notice = NOTICE
+    make_protocol = staticmethod(scope)
+    reconstruct = staticmethod(reconstruct_row)
+
+    @staticmethod
+    def retained(evidence):
+        return evidence
+
+    @staticmethod
+    def aggregate(*args):
+        return aggregate(*args)
+
     def __init__(self, repo, output, source, plan, identifiers, prior, *, temperature, threshold):
         self.output = ignored_path(repo, output)
         if self.output.exists() or not self.output.name.startswith('PLACEHOLDER-'):
             raise ValueError('persisted replay output must be fresh and named PLACEHOLDER-*')
         self.source, self.plan, self.ids = source, plan, tuple(identifiers)
-        self.protocol = scope(source, plan, self.ids, temperature, threshold)
+        self.protocol = self.make_protocol(source, plan, self.ids, temperature, threshold)
         self.prior = prior_logits(prior, self.ids)
         self.output.mkdir(parents=True, exist_ok=False)
         (self.output / 'tensors').mkdir()
@@ -248,28 +260,29 @@ class OrderedEvidence:
         position = len(self.rows)
         if self.finished or position >= len(self.ids) or identifier != self.ids[position]:
             raise ValueError('persisted replay append ordered component scope mismatch')
-        metrics = reconstruct_row(self.source, self.plan, evidence)
-        check_prior(evidence, self.prior, position)
+        metrics = self.reconstruct(self.source, self.plan, evidence)
+        retained = self.retained(evidence)
+        check_prior(retained, self.prior, position)
         tree = self.arrays.encode(evidence)
-        row = {'notice': NOTICE, 'position': position, 'component_id': identifier,
+        row = {'notice': self.notice, 'position': position, 'component_id': identifier,
                'evidence': tree, 'metrics': metrics}
         relative = f'rows/PLACEHOLDER-component-{position:04d}.json'
         with (self.output / relative).open('x') as stream:
             stream.write(json_text(row))
         self.rows.append({'position': position, 'path': relative, 'sha256': sha256(self.output / relative)})
         self.metrics.add(metrics)
-        self.reference.append(float(evidence['native_original_logit'][0]))
+        self.reference.append(float(retained['native_original_logit'][0]))
         for kind in KINDS:
-            self.candidates[kind].append(float(evidence['graphs'][kind]['original_logit'][0]))
+            self.candidates[kind].append(float(retained['graphs'][kind]['original_logit'][0]))
 
     def finish(self):
         if self.finished or len(self.rows) != len(self.ids):
             raise ValueError('persisted replay cannot complete partial/repeated evidence')
-        index = {'notice': NOTICE, 'protocol': self.protocol, 'rows': self.rows, 'arrays': self.arrays.records}
+        index = {'notice': self.notice, 'protocol': self.protocol, 'rows': self.rows, 'arrays': self.arrays.records}
         with (self.output / INDEX).open('x') as stream:
             stream.write(json_text(index))
         self.finished = True
-        return aggregate(self.protocol, self.metrics, self.ids, self.reference, self.candidates,
+        return self.aggregate(self.protocol, self.metrics, self.ids, self.reference, self.candidates,
                          sha256(self.output / INDEX))
 
 
@@ -285,13 +298,20 @@ def aggregate(protocol, metrics, ids, reference, candidates, index_hash):
 
 def audit_ordered(repo, output, source, plan, identifiers, prior, report, *, temperature, threshold):
     """Stream complete arrays/rows, reconstruct all metrics and original parity."""
+    return _audit_ordered(repo, output, source, plan, identifiers, prior, report,
+        temperature=temperature, threshold=threshold, persistence=OrderedEvidence)
+
+
+def _audit_ordered(repo, output, source, plan, identifiers, prior, report, *,
+                   temperature, threshold, persistence):
+    """Shared storage audit; the protocol reconstructs its entire evidence row."""
     output = ignored_path(repo, output)
     ids = tuple(identifiers)
-    expected = scope(source, plan, ids, temperature, threshold)
+    expected = persistence.make_protocol(source, plan, ids, temperature, threshold)
     previous = prior_logits(prior, ids)
     path = local_file(output, INDEX)
     index = read_json(path)
-    if (set(index) != {'notice', 'protocol', 'rows', 'arrays'} or index['notice'] != NOTICE
+    if (set(index) != {'notice', 'protocol', 'rows', 'arrays'} or index['notice'] != persistence.notice
             or index['protocol'] != expected or not isinstance(index['rows'], list)
             or len(index['rows']) != len(ids) or not isinstance(index['arrays'], dict)):
         raise ValueError('persisted replay index scope/protocol mismatch')
@@ -312,23 +332,24 @@ def audit_ordered(repo, output, source, plan, identifiers, prior, report, *, tem
             raise ValueError('persisted replay ordered row checksum/scope mismatch')
         row = read_json(row_path)
         if (set(row) != {'notice', 'position', 'component_id', 'evidence', 'metrics'}
-                or row['notice'] != NOTICE or row['position'] != position or row['component_id'] != identifier):
+                or row['notice'] != persistence.notice or row['position'] != position or row['component_id'] != identifier):
             raise ValueError('persisted replay ordered row identity mismatch')
         evidence = decode(output, row['evidence'], index['arrays'], used, {})
-        reconstructed = reconstruct_row(source, plan, evidence)
+        reconstructed = persistence.reconstruct(source, plan, evidence)
         if row['metrics'] != reconstructed:
             raise ValueError('persisted replay reconstructed row metric mismatch')
-        check_prior(evidence, previous, position)
+        retained = persistence.retained(evidence)
+        check_prior(retained, previous, position)
         metrics.add(reconstructed)
-        reference.append(float(evidence['native_original_logit'][0]))
+        reference.append(float(retained['native_original_logit'][0]))
         for kind in KINDS:
-            candidates[kind].append(float(evidence['graphs'][kind]['original_logit'][0]))
-        del evidence, row  # Per-row array cache is released before the next component.
+            candidates[kind].append(float(retained['graphs'][kind]['original_logit'][0]))
+        del evidence, retained, row  # Release arrays before the next component.
     if used != set(index['arrays']):
         raise ValueError('persisted replay unreferenced array records')
-    if report != aggregate(expected, metrics, ids, reference, candidates, sha256(path)):
+    if report != persistence.aggregate(expected, metrics, ids, reference, candidates, sha256(path)):
         raise ValueError('persisted replay complete aggregate reconstruction mismatch')
-    return {'notice': NOTICE, 'status': 'PASS', 'components': len(ids),
+    return {'notice': persistence.notice, 'status': 'PASS', 'components': len(ids),
             'complete_ordered_rows_arrays_metrics_and_parity': True,
             'prior_disabled_original_logits_exact_bits': True,
             'baseline_inference': False, 'historical_inference_authentication': False}

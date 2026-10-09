@@ -165,6 +165,45 @@ selected native inference, whole-model candidate, fit, frozen evaluation, mobile
 compatibility result or accepted export occurred. M4 remains incomplete and
 M5 must wait for its gate.
 
+## Observed ordered arithmetic persistence — 2026-10-09 UTC
+
+`export_arithmetic_evidence` persists complete supplied observations: every
+original retained control/array and all fixed recipe outputs on both graph
+contexts/input origins/engines. The ADR-024 protocol binds ordered target scope,
+recipe order, original source/plan, fixed fits and ADR-011 budgets. Shared
+ADR-023 lossless ordered storage keeps every tensor bit and file hash; the
+original protocol/report format is unchanged. Partial runs have no completed
+index. Complete row/metric/prior reconstruction precedes each append.
+
+Independent streaming reconstruction checks complete file/array/ordered row
+scope, every original control/lineage, all signed recipe comparisons/accounting,
+every numeric/boolean aggregate, both original-graph parity reports and exact
+prior bits. Generated tests also verify arrays are released between components.
+No decode, native inference, sessions, eager recipe or evidence writes are
+needed during reconstruction. Numerical truth of recipe outputs and historical
+inference authentication are not claimed. The aggregate declares whole-model
+recipe parity UNVERIFIED and deployment selection false.
+
+Initial focused generated-only persistence suites: 72 PASS, four deprecation
+warnings, 15.49s. Four additional protocol/acceptance-claim rejection cases are
+included in the required full check; final results are recorded in JOURNAL and
+STATUS. No test weakened or skipped. Complete generated two-component fixtures
+include all original Conv/BN controls and recipe arrays, exact round-trips,
+partial/ordered scope and corrupt/rehashed container rejection, signed-zero and
+nonzero discrepancies, and unchanged fits/budgets/prior bits.
+
+This is supplied-row software infrastructure, not a selected training experiment.
+The guarded selected runner must still verify full original historical-source/
+dependency/context evidence and every setup graph before any retained recipe
+input, exhaust all 152 components, persist and independently reconstruct the
+entire experiment before publishing a completed report. No selected recipe
+execution, native baseline inference, new fit, frozen evaluation, whole-model
+candidate, mobile compatibility or accepted export occurred. M4 stays incomplete.
+
+Required scripts/check.sh observed exit 0: 909 ML PASS, 588 deprecation warnings,
+273.91s; Android SKIPPED, RESULT PASS. All 37 new arithmetic persistence tests
+included, with every historical audit/control/parity test intact. No APK claim.
+
 ## Open questions
 
 - Which fixed recipes reduce native drift across the complete retained scope?

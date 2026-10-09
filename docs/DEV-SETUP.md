@@ -631,3 +631,33 @@ saved/preparation/source/dependency/prior report integration remain unfinished.
 Persistence verifies supplied observations; it cannot independently authenticate
 historical inference or establish selected-baseline/mobile parity. No accepted
 bundle, new fit, frozen evaluation, app or APK exists.
+
+## M4 ordered arithmetic evidence — observed 2026-10-09 UTC
+
+No installation, dependency change, data acquisition or selected saved-baseline
+inference. Existing pinned environment, from repository root:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_arithmetic_evidence.py ml/tests/test_export_remaining_evidence.py
+bash scripts/check.sh > data/exports/PLACEHOLDER-m4-arithmetic-evidence-check.log 2>&1
+python3 -m unittest discover -s tests -v
+git diff --check
+```
+
+Initial focused persistence suites: 72 PASS, four exporter deprecation warnings,
+15.49s. Four additional protocol/acceptance-claim rejection cases are included
+in the required full check. Final check results appear in JOURNAL and STATUS.
+Generated-only two-component fixtures retain all original controls/arrays and
+both engines of every fixed arithmetic recipe. Lossless order/bits, signed-zero
+and nonzero discrepancies, complete metrics/prior/parity, corrupt/rehashed files,
+partial runs, cross-protocol rejection and per-row memory release are tested.
+Original storage/report semantics remain, with ADR-024 scope added separately.
+
+All graphs/arrays/details stay ignored and fixture temporary directories clean
+up after testing. No selected arithmetic experiment, reference/fit/budget change,
+accepted deployment bundle, app or APK exists. The guarded retained training
+runner and full selected experiment remain unfinished; M4 is incomplete.
+
+Required full check observed exit 0: 909 ML tests PASS, 588 deprecation warnings,
+273.91s; Android SKIPPED (no app/gradlew), RESULT PASS. Includes all 37 new
+arithmetic persistence regressions. No failing test was weakened or skipped.

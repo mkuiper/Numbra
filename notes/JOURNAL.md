@@ -1727,3 +1727,57 @@ publication or push.
 - Final root contracts: six PASS (0.081s); whitespace clean. Staging only
   the new replay code/tests, ADR/docs and iteration records for the M4 logical
   step commit. No protected edits, tracked data/weights, publication or push.
+
+## 2026-10-09T20:35:23Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, current M4 folder
+  (absent), AGENTS and relevant ADR-023/024/011. No new harness instruction.
+  M0–M3 gates exist; stayed on M4, with no M4 review request or M5 work.
+- Implemented `export_arithmetic_evidence`: lossless ordered persistence of
+  every original control/array and all fixed arithmetic recipe outputs, both
+  unchanged graphs/input origins/engines. Protocol binds target/recipe order,
+  source/plan, fixed fits and unchanged ADR-011 budgets. Complete row and exact
+  prior-bit validation precedes writes; partial runs have no completed index.
+- Reused ADR-023 storage/audit through narrow protocol reconstruction hooks.
+  Original format, metric/lineage/prior and parity checks remain. Explicit
+  ordered trees preserve every float32/int64 bit, signed zero and file hash;
+  only identical arrays deduplicate. Tightened arithmetic graph-context and
+  engine order checks; no original control or numerical difference suppressed.
+- Independent complete streaming audit reconstructs all original controls,
+  native/runtime lineage, signed arithmetic/accounting metrics, every numeric/
+  boolean aggregate, original-graph parity and exact ADR-022 prior bits.
+  Per-component cache is released before the next row, checked by weak-reference
+  regressions. Audit uses no image decode, native calls, sessions, eager recipe
+  or evidence writes. Recorded outputs are not independently recomputed
+  numerical truth or historical inference authentication.
+- Initial focused generated-only persistence suites: 72 PASS, four exporter
+  deprecation warnings, 15.49s. Added four protocol/acceptance-claim rejection
+  tests before required full check. New arithmetic suite collects 37 tests.
+  Fixtures use two generated miniature-model components with all original
+  controls. Exact full-array round-trips, partial/ordered scope, corrupt and
+  rehashed files/arrays/metrics/aggregates, prior/fits/budgets, signed zero and
+  nonzero error, and memory release are covered. No failing or weakened test.
+- Updated ML README, ML-EXPORT, DEV-SETUP and ADR-024 observed infrastructure;
+  queued remaining blockers for humans. No new scientific/protocol decision.
+  Supplied-row persistence is not a completed selected training experiment.
+  Next guarded runner must audit full original historical-source/dependency/
+  context and all new setup graphs before inputs, exhaust all 152 retained rows,
+  persist and independently reconstruct before publishing any complete report.
+- Root repository contracts: six PASS (0.061s); git diff --check clean.
+  Required scripts/check.sh running; final results recorded below before commit.
+- No selected retained recipe execution/native baseline inference, new fit,
+  frozen evaluation, candidate/reference/budget change, data/toolchain acquisition,
+  protected edit, review.sh, REVIEW/CHECK/GATE write, publication or push.
+  All existing failed exports remain rejected; M4 incomplete, no app/APK.
+  NEXT_ACTION CONTINUE.
+- Required scripts/check.sh observed exit 0: 909 ML PASS, 588 exporter
+  deprecation warnings, 273.91s; Android SKIPPED (no app/gradlew), RESULT PASS.
+  Includes all 37 new arithmetic persistence regressions and every existing
+  historical audit/control/parity test. No failed or skipped ML test; no APK.
+- Final status updated at 2026-10-09T20:39:18Z; NEXT_ACTION overwritten CONTINUE.
+  Remaining work: complete guarded runner and full selected retained arithmetic
+  replay/audit before any whole-model candidate or selective QDQ decision.
+  No M4 acceptance, HANDOFF or review request, and no M5 implementation.
+- Final root repository contracts: six PASS (0.068s); whitespace clean.
+  Staging only permitted code/tests/ADR/docs and iteration records for the
+  logical M4 commit. No protected files, tracked data/weights or push.

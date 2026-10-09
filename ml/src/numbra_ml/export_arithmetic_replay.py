@@ -85,7 +85,7 @@ def reconstruct_arithmetic(source, plan, evidence):
     authenticate their arithmetic truth against rerun inference.
     """
     if (set(evidence) != {'notice', 'retained', 'recipes'} or evidence['notice'] != NOTICE
-            or set(evidence['recipes']) != set(KINDS)):
+            or list(evidence['recipes']) != list(KINDS)):
         raise ValueError('arithmetic replay evidence scope mismatch')
     retained = evidence['retained']
     controls = reconstruct_row(source, plan, retained)
@@ -111,7 +111,7 @@ def reconstruct_arithmetic(source, plan, evidence):
                 native_reference = original['eager_native'] if origin == 'native_input' else data['eager_runtime']
                 isolated_reference = data['isolated_native'] if origin == 'native_input' else data['isolated_runtime']
                 for variant, outputs in row[origin].items():
-                    if set(outputs) != {'eager', 'runtime'}:
+                    if list(outputs) != ['eager', 'runtime']:
                         raise ValueError('arithmetic replay engine output scope mismatch')
                     for value in outputs.values():
                         validate(value, record['boundaries'][record['outputs'][0]])

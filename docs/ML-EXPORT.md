@@ -1121,11 +1121,37 @@ reader API on all generated training rows, with native-model calls/decode/origin
 control recipes blocked. This is software evidence only: no selected model
 inference or retained selected arithmetic replay has occurred.
 
-Next add lossless new arithmetic observation persistence, its complete streaming
-audit and a guarded training runner. It must exhaust the verified retained reader
-over all and only the 152 training components, preserving exact prior bits and
-all original controls. Resolve float arithmetic before choosing a selective
-QDQ scope, fitting or using frozen acceptance inputs.
+`export_arithmetic_evidence` now adds lossless new arithmetic persistence and
+independent streaming reconstruction. It stores all original arrays/controls,
+both eager/runtime outputs of every fixed recipe on both graphs/input origins,
+and every signed comparison/accounting metric. Shared ADR-023 storage preserves
+ordered dictionary trees, float32/int64 bits, signed zeros, hashes and exact
+prior checks; the original protocol and report format remain unchanged. Only
+identical arrays deduplicate. Partial runs have no completed index.
+
+The ADR-024 protocol additionally binds ordered targets and fixed recipe/graph/
+origin/engine scope. Independent reconstruction checks all files/arrays/rows,
+every original control/lineage and recipe metric, complete numeric/boolean
+aggregates, unchanged original-graph parity and exact original ADR-022 prior bits.
+One component's array cache is released before the next is decoded. No image
+decode, native call, session, eager recipe or evidence write is needed. No
+recipe-output numerical truth or historical inference authentication is claimed.
+The aggregate explicitly says whole-model recipe parity UNVERIFIED and
+deployment selection false. Original-graph failures cannot become acceptance.
+
+Generated two-component regressions cover exact complete-array round-trips,
+partial and reordered scope, both recipe/control metric corruption, rehashed
+file/array corruption, unreferenced arrays, symlinks, unchanged budgets/fits/prior
+bits, signed-zero/nonzero errors, and per-component memory release. A mismatched
+protocol or aggregate acceptance claim is rejected. This is software evidence;
+no selected retained arithmetic replay or new baseline parity result occurred.
+
+Next build a guarded training runner. It must audit full original source/
+dependency/context evidence and every new setup graph before recipe inputs,
+exhaust the verified reader over all and only the 152 training components,
+then reconstruct the entire persisted experiment before publishing a completed
+report. Resolve float arithmetic before choosing a selective QDQ scope,
+fitting or using frozen acceptance inputs.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

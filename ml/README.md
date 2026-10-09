@@ -270,8 +270,28 @@ coverage, stale state/expression rejection and every ordered reader fixture row:
 ml/.venv/bin/python -m pytest -q ml/tests/test_export_arithmetic_replay.py
 ```
 
-This supplied-tensor API has no selected-baseline entry point or completion
-report. Next implement lossless arithmetic observation persistence and its
-streaming audit, then the guarded runner that exhausts `training_rows` and
-checks exact prior bits across all 152 ordered training components. No selected
-arithmetic replay is authorised by generated primitive success alone.
+`numbra_ml.export_arithmetic_evidence.OrderedArithmeticEvidence` persists every
+original control and every eager/runtime recipe output in ignored lossless NPZ
+arrays, with explicit tree ordering, content identities and file hashes. It
+validates complete row scope and exact prior logits before writing each row;
+partial runs have no completed index. The protocol binds ordered targets,
+fixed recipes, both graphs/origins/engines and unchanged fits/parity budgets.
+
+`audit_arithmetic_ordered` independently streams all rows and arrays, rebuilding
+every original control/lineage and signed recipe/accounting metric, every numeric
+and boolean aggregate, original-graph parity and exact prior bits. The per-row
+array cache is released before reading the next component. It does not decode,
+infer, execute eager recipes or write evidence. Reports remain **DIAGNOSTIC ONLY**,
+with whole-model recipe parity **UNVERIFIED** and deployment selection false.
+These are recorded observations, not independently recomputed numerical truth.
+
+```sh
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_arithmetic_evidence.py
+```
+
+The persistence API requires its caller to verify full original experiment and
+source/dependency provenance and all new setup graphs before recipe execution.
+Next build the guarded runner that exhausts `training_rows`, connects all 152
+ordered components to this persistence/audit, and publishes a complete report
+only after final independent reconstruction. No selected arithmetic experiment
+or accepted export is established by generated fixture success.
