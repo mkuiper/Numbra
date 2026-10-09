@@ -506,3 +506,39 @@ check before schema fix: 434 PASS in 70.03s; fresh check after fix: 434 PASS in
 70.00s, 170 warnings. Android skipped; no APK. Initial root suite 6 PASS in 0.092s;
 final documentation check is recorded in JOURNAL. All logs/graphs/details stay
 under ignored data/; aggregate reports only are tracked.
+
+## M4 native capture foundation — observed 2026-10-09 UTC
+
+No toolchain installation, dependency change, acquisition or saved-baseline
+inference. Existing pinned environment, from repository root:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_native.py
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_native.py ml/tests/test_export_remaining.py
+ml/.venv/bin/python data/exports/PLACEHOLDER-m4-native-mapping-audit.py
+bash scripts/check.sh > data/exports/PLACEHOLDER-m4-native-check.log 2>&1
+python3 -m unittest discover -s tests -v
+```
+
+The new capture suite initially had 6 FAIL/17 PASS (4.76s): Tensor method
+descriptors lack `__module__`, and rounded graphs have internal double values.
+Next 3 FAIL/20 PASS (4.44s) isolated pinned PyTorch's binary Tensor-method dispatch.
+After those fixes, 1 FAIL/22 PASS (4.08s) exposed the small fixture's missing ReLU;
+added its asserted activation. Expanded combined suite: 1 FAIL/105 PASS (11.44s)
+exposed an altered rounded BN expression outside the tap checker. Added whole
+original-graph binding and complete original boundary reconstruction, including
+every replaced BN; corruption coverage retained. Combined suite 107 PASS (11.65s).
+Final new suite with explicit static no-inference guards: 39 PASS (4.94s).
+No existing test deleted, skipped or weakened; production parity budgets unchanged.
+
+The local ignored audit script creates the tracked static mapping aggregate and
+reconstructs saved/preparation/prior/graph/source/dependency/mapping/tap evidence
+with image decoding, Module forward and ORT sessions blocked. Its SHA-256 is
+955e96aa301498c4464b8464f95aea86209371cc18b62702b52ccb7f04a2f02a.
+Observed PASS covers 159 computational nodes and 373 original boundaries per
+graph, **static only**. To repeat reconstruction without inference or overwriting
+the aggregate, pass `audit` as the script's argument. Historical commit/dirty
+fields are validated separately; all other evidence is reconstructed exactly.
+Generated full-architecture capture/fidelity evidence uses new random weights
+and generated tensors, never the saved M3 model or training index images.
+The full check result is recorded in JOURNAL; Android/M4 acceptance remains open.

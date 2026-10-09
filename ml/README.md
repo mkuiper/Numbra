@@ -139,3 +139,13 @@ expression, and reconstructs fixed-budget parity from ignored ordered details.
 The complete candidate reduces training errors but still fails both numeric budgets.
 All copies remain **PLACEHOLDER diagnostic only, never bundle**; no quantisation,
 frozen evaluation or deployment selection occurred.
+
+ADR-023 remaining-operator preflight is available as
+`python -m numbra_ml.export_remaining --output data/exports/PLACEHOLDER-<new-name>`.
+It performs no image decoding or model inference. The companion
+`export_remaining_native` module provides complete native owner mapping,
+pre-mutation multi-operand capture, full static taps and separate eager-fidelity
+metrics. Its generated-only tests cover the full random mobile architecture;
+saved-baseline mapping is static only. The complete two-graph training replay
+runner is unfinished, so no baseline replay CLI or new accepted export exists.
+See [the export document](../docs/ML-EXPORT.md) for scope and evidence limits.

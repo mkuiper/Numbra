@@ -764,11 +764,61 @@ The second report regenerates provenance after the fix; complete plan, graphs,
 scope, saved-model/preparation/prior records reproduce the first report exactly.
 There is no inference-expression change or additional baseline inference.
 
+## ADR-023 native capture primitives — 2026-10-09 UTC
+
+[Native mapping evidence](../ml/reports/PLACEHOLDER-m4-native-mapping1.json)
+binds all 159 computational nodes (87 Conv/BN controls and 72 remaining operators)
+to exact saved module owners and native types. The one Constant remains explicit
+in the original static inventory. Complete scope, saved model/preparation/prior
+provenance, graph hashes and all tap specifications reconstruct independently
+without image decoding, module forward calls or ORT sessions; raising guards
+blocked all three during saved-baseline mapping. This PASS means **static mapping
+only**, with no new saved-baseline arithmetic/parity result.
+
+`export_remaining_native.native_plan` validates exact exporter scope, owner type,
+geometry, saved constants and the complete ordered computational scope before
+inference. `capture_native` observes actual native calls under their owning
+modules with `TorchFunctionMode`. It copies every operand before execution and
+every output immediately afterwards, including pre-activation BN values and
+both residual/SE operands. It verifies each operand against its declared graph
+producer or exact constant, and rejects extra, missing or reordered calls,
+unsupported settings, shared owners, foreign hooks, changed state or boundaries.
+It calls the original saved forward; eager recipes are separate comparisons.
+Hooks and interception are removed after success or exceptions.
+
+`native_fidelity` reports unsuppressed signed differences and bit equality for
+every remaining recipe versus its captured output. Generated-only tests use both
+a small residual/SE fixture and the full mobile architecture with new random
+weights, no checkpoint download or saved M3 artifact. On the full generated
+fixture, capture covers all 159 operations and every one of the 72 remaining
+recipes reproduces the captured native result bit-for-bit; captured/untapped
+native whole logits also match exactly. This is **generated-fixture evidence**,
+not saved-baseline or export parity evidence.
+
+`tap_complete_graph` adds every original operand/output, including constants and
+int64 axes, to both declared graphs without changing computation or initializer
+bytes. It checks original graph binding, full original boundary order (including
+all replaced BN boundaries), and shape/dtype. Internal double BN values are not
+original boundaries. Generated disabled-ORT original/tapped logits agree exactly
+on both graphs. Actual runtime expression audits and per-origin isolated replay
+on the saved training inputs are still unimplemented in this runner.
+
+The new suite has 39 PASS, including failure cleanup/reuse, altered native
+operands/settings, signed-zero preservation, unsuppressed drift, partial/reordered
+mapping rejection, invalid inputs and explicit no-inference mapping guards.
+Initial runs exposed missing Tensor-method metadata, binary dispatch aliases,
+rounded-graph double intermediates and a fixture without its asserted ReLU.
+Fixed capture/tap code and added ReLU to the fixture; exact assertions and all
+existing parity budgets remain. The original preflight reports remain historical:
+current-code audits intentionally change when source changes. The new mapping
+report records this implementation's complete source/dependency provenance.
+
 ## Remaining M4 work
 
 Optimisation profiles do not fix selected-baseline parity. Next implement
-ADR-023's native boundary mapping, pre-mutation capture, original/tapped logits
-and full training-only replay on both unchanged graphs. Use every ordered
+ADR-023's complete training runner using the implemented native mapping,
+pre-mutation capture and static taps. Measure original/tapped native and runtime
+logits and full training-only replay on both unchanged graphs. Use every ordered
 training component and complete remaining scope; distinguish local arithmetic
 from propagation, including both binary operands, and preserve all Conv/BN
 controls and exact prior disabled logits. Do not keep rerunning the failed
@@ -777,8 +827,8 @@ profiles or choose a favourable subset.
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile
 compatibility/performance remains unresolved. ADR-012's labelled toy workaround
-is diagnostic only. No accepted export, deployment-metadata package, M4 HANDOFF
-or review request exists; Android ABI/decode/device work remains M5–M8.
+is diagnostic only. No accepted export, deployment-metadata package or M4 review
+request exists; Android ABI/decode/device work remains M5–M8.
 
 ## Open questions
 

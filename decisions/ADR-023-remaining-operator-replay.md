@@ -106,6 +106,24 @@ exactly. Added commit-context regressions and regenerated the second report;
 complete scope/plan/graph/saved/preparation/prior evidence is identical. No
 inference-expression or parity-budget change.
 
+## Observed native capture foundation — 2026-10-09 UTC
+
+Stage two's native mapping, actual-call pre-mutation capture, complete multi-operand
+static taps and eager-fidelity primitives are implemented. Generated-only tests
+exercise residual/SE/head arithmetic and the complete mobile architecture with
+new random weights. Capture and untapped native logits agree exactly; every one
+of the 72 remaining recipes reproduces captured outputs on that generated full
+fixture. These are generated fixtures, never the selected saved M3 baseline.
+
+[Saved native mapping](../ml/reports/PLACEHOLDER-m4-native-mapping1.json) covers all
+159 computational nodes and complete original boundaries on both unchanged
+graphs. Independent static reconstruction of saved/prior/preparation/graph/source
+provenance and the full mapping/taps PASS with decode, forward and ORT session
+creation blocked. No saved-baseline inference, quantisation fit, frozen evaluation,
+deployment selection or accepted export occurred. Actual runtime graph audits,
+original/tapped saved logits, full training replay, signed accounting and complete
+ordered-row/prior-logit reconstruction remain unimplemented. Stage two is incomplete.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?

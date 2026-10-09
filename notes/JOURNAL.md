@@ -1168,3 +1168,59 @@ accounting controls; selective QDQ and mobile support remain blockers. No
 model/reference/fits/budgets change, baseline retraining, frozen inputs, install,
 acquisition, protected edit, review.sh, REVIEW/CHECK/GATE write, external message,
 publication or push.
+
+## 2026-10-09T17:30:32Z — iteration
+
+- Oriented in required order: roadmap, STATUS, HARNESS, missing M4 review folder,
+  AGENTS and relevant ADRs (002/005/011/022/023). No new harness messages or gate;
+  continued M4 only. Existing ADR-023 authorises this native capture foundation;
+  no new unattended scope/runtime/model decision was needed.
+- Added export_remaining_native.py with complete static native mapping and
+  actual-call capture. Copy all operands before execution and outputs immediately,
+  including in-place activations, BN before activation, both residual/SE operands,
+  head/scaling/constants and scalar-axis validation. Verify ordered scope,
+  geometry/settings, exact graph producer/constant bits, CPU float32 boundaries,
+  saved state and input immutability. Hook/mode cleanup is unconditional; partial,
+  reordered, unknown/shared owners, foreign hooks and altered native calls fail.
+- Added separate complete remaining eager-fidelity metrics with unsuppressed signed
+  drift and exact-bit comparisons. Complete static taps check original graph
+  binding, unchanged computation/constants and every original operand/output,
+  including all rounded-BN original boundaries; exclude double intermediates.
+- New generated-only tests use a small residual/SE fixture and full mobile
+  architecture with new random weights. Full fixture captures all 159 operations
+  and reproduces all 72 remaining native recipes exactly; native whole logits
+  match without capture. Small fixtures check Conv/BN controls and disabled ORT
+  original/tapped logits on both graphs. Never infer saved-baseline arithmetic
+  from generated results. No new saved M3 inference or data image decoding.
+- Guarded saved static mapping/provenance execution and independent reconstruction
+  PASS: 159 computational nodes, 373 original boundaries on each unchanged graph.
+  Decode, Module forward and ORT sessions were forbidden with raising guards.
+  Tracked aggregate PLACEHOLDER-m4-native-mapping1.json hash:
+  70c9fd66955783e22c92564a4dea034a5ee93f406192a8a6918a52f1797e6f3b.
+  Ignored local audit script hash:
+  955e96aa301498c4464b8464f95aea86209371cc18b62702b52ccb7f04a2f02a.
+  It independently regenerates full saved/preparation/prior/graph/source/dependency
+  evidence and native mapping/taps without inference, validates historical git
+  context separately and compares all other report fields exactly.
+- Test progression: initial native suite 6 FAIL/17 PASS (4.76s): Tensor descriptor
+  metadata and rounded graph double internal values; then 3 FAIL/20 PASS (4.44s)
+  for actual Tensor binary dispatch aliases; then 1 FAIL/22 PASS (4.08s) because
+  the fixture lacked its asserted ReLU. Fixed code and added ReLU to the fixture,
+  retaining assertions. Expanded combined suite 1 FAIL/105 PASS (11.44s) exposed
+  changed rounded BN arithmetic escaping initial tap validation. Added original
+  graph binding and complete original boundary reconstruction (including every
+  BN), retained corruption tests; combined 107 PASS (11.65s). Final new suite
+  adds static no-inference guards: 39 PASS (4.94s). No existing tests changed.
+- Full bash scripts/check.sh observed exit 0: 571 ML tests PASS in 87.56s,
+  314 warnings; Android SKIPPED, RESULT PASS. Log stays ignored at
+  data/exports/PLACEHOLDER-m4-native-check.log. Root contract suite 6 PASS
+  (0.063s), git diff --check clean. No APK, M4 acceptance or baseline parity claim.
+- Updated ADR-023 observed progress, ML README/export documentation and DEV-SETUP;
+  queued human visibility. All earlier failed graphs remain rejected. No new
+  quantisation fit, baseline retraining/fits/threshold/reference/budget change,
+  frozen evaluation, mobile/deployment selection, protected edit, review tooling,
+  CHECK/REVIEW/GATE file, installation/acquisition, external message/publish/push.
+- Next: complete two-graph native/runtime replay, actual runtime expression audit,
+  rank-general signed accounting, ordered-row reconstruction and exact ADR-022
+  disabled-logit audit before opening all 152 training images. M4 stays incomplete;
+  NEXT_ACTION CONTINUE; do not start M5.
