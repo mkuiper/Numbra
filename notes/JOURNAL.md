@@ -1617,3 +1617,65 @@ publication or push.
   Test-generated temporary report files have been cleaned up by their fixtures.
   Only allowed code/tests/ADRs/documentation/iteration records remain changed;
   committing this logical M4 primitive foundation without requesting review.
+
+## 2026-10-09T20:03:29Z — iteration
+
+- Read ROADMAP, STATUS, HARNESS, current review-folder availability, AGENTS and
+  relevant ADRs in order. No new harness message or M4 review folder/gate;
+  M0–M3 gates verified. Continue M4 only; every failed export remains rejected.
+- Implemented ADR-023's existing historical-source rule for audit_training:
+  explicit full source_commit independently binds every recorded source file
+  and full tree hash. Separate ADR-022 profile snapshot remains required;
+  live dependencies/locks/hardware and complete context/setup/ordered observations/
+  metrics/lineage/prior bits remain exact. No retained report rewrite or budget,
+  saved model, reference, fit, profile or arithmetic change.
+- Added ADR-024 retained training reader: complete original audit before exposing
+  first row; independent checks of accessed row/array bits, metrics and native/
+  runtime boundary lineage thereafter. Full original operators/graphs/origins/
+  controls are read-only. Complete array-use check on exhaustion; partial
+  consumption produces no completed experiment or report. No decoding, native
+  forward, eager recipes, runtime sessions or evidence writes in this reader.
+- Generated-only focused runner/reader suite observed 46 PASS, 26 deprecation
+  warnings, 53.01s. Tests reject omitted/unknown/mismatching snapshots and live
+  dependency/lock/hardware drift, verify all ordered generated rows with decode/
+  native/session/eager/persistence guards, reject a corrupt last row before first
+  yield, and recheck index/row/tensor changes after global audit. No failing test
+  deleted, skipped, weakened or disputed. Root contracts six PASS (0.074s);
+  git diff --check clean.
+- Started complete selected ADR-023 reconstruction against exact historical
+  snapshot 50f7c65e7b6a6168a17d498be4d663c89b11742f, with actual image/native/
+  session/eager/write guards. Original prior snapshot is still
+  808cc3393ccf1cce95c2feeef91e5a8608b481e4. New script/log stay ignored under
+  data/exports; final aggregate will be tracked only after observed PASS.
+- Updated ML README/export documentation and iteration records. Required
+  scripts/check.sh running; observed result and audit outcome follow below.
+  NEXT_ACTION CONTINUE. Actual retained recipe execution/persistence remains
+  unfinished; next integrate every fixed ADR-024 expression across the full
+  retained scope without new saved-model inference or image decoding.
+- No selected inference/quantisation fit/frozen evaluation, model/reference/
+  tolerance change, new toolchain or dataset acquisition, protected edit,
+  review.sh, REVIEW/CHECK/GATE write, external message, publication or push.
+- Required scripts/check.sh observed exit 0: 836 ML PASS, 574 warnings,
+  200.77s; Android SKIPPED (no app/gradlew), RESULT PASS. No APK claim.
+  Full historical-source selected audit remains running; no completion claim yet.
+- Complete selected historical-source audit observed exit 0, PASS at
+  2026-10-09T20:18:05.486894+00:00 for all 152 retained rows, 159 operators,
+  904 setup graphs and every array/metric/lineage/parity/prior bit. All five
+  actual decode/native-call/session/eager/evidence-write guards active. Exact
+  historical snapshot matches all 33 recorded files/full tree; live dependencies
+  remain exact. Tracked aggregate:
+  ml/reports/PLACEHOLDER-m4-remaining-training3-snapshot-audit.json. Detailed
+  script/log remain ignored. Current and previous audits do not authenticate
+  historical execution. No selected retained-recipe execution or model inference.
+- Independently verified new audit's status/scope/source commit and all guard
+  fields. Its report fingerprint equals both original tracked and ignored report
+  SHA256 ce8ade4d296a801b85e21662ac0dbaa6763ee39d38b15b6de89a0796eb7a8fad.
+  Original report bytes/observations untouched. No new selected parity outcome;
+  all previous float/INT8 failures remain rejected.
+- Final records updated at 2026-10-09T20:19:25Z; NEXT_ACTION CONTINUE. Next finish guarded
+  ADR-024 recipe replay and persistence across every retained row, both graph
+  contexts/input origins, retaining all original controls, then independently
+  reconstruct all metrics/lineage. No M4 acceptance/HANDOFF/review request or M5.
+- Final root repository contracts: six PASS (0.080s); whitespace clean.
+  Only allowed code/tests/aggregate reports/ADRs/docs/iteration records changed.
+  No protected edits or tracked data/weights; committing this M4 logical step.

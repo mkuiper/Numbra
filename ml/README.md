@@ -217,7 +217,33 @@ ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_arithmetic.py
 ```
 
 Full random mobile scope covers 39 target nodes/77 recipe graphs with identical
-bits across both generated contexts. Retained selected training integration,
-provenance/evidence reconstruction and any whole-model candidate remain
-unimplemented. No M4 acceptance, quantisation fit or mobile claim. See
+bits across both generated contexts. The retained-training reader below provides
+complete provenance/evidence reconstruction; recipe execution/persistence and
+any whole-model candidate remain unimplemented. No M4 acceptance, quantisation fit or mobile claim. See
 [ADR-024](../decisions/ADR-024-bounded-remaining-arithmetic.md).
+
+`numbra_ml.export_remaining_retained.training_rows` audits the complete ADR-023
+report, setup and every observation before yielding the first ordered training
+row. It exposes the retained native/runtime operands and all existing controls
+without opening images or running inference. Every accessed row/array is checked
+again, and arrays are read-only. Exhausting the iterator is required for complete
+scope; stopping early creates no completed experiment or report.
+
+The ADR-023 audit now accepts `source_commit` separately from
+`profile_source_commit`. For the existing selected evidence, supply
+`50f7c65e7b6a6168a17d498be4d663c89b11742f` and
+`808cc3393ccf1cce95c2feeef91e5a8608b481e4`, respectively. Every historical
+source file/hash and full tree must match its explicit commit; live dependencies,
+locks, hardware, saved model, prior bits and all metrics remain checked. Neither
+report is rewritten. This binds local source provenance, never historical
+inference authentication. The guarded reader has generated-only regression tests:
+
+```sh
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_retained.py
+```
+
+[Selected historical-source audit](reports/PLACEHOLDER-m4-remaining-training3-snapshot-audit.json)
+PASS for all 152 retained rows and 904 setup graphs, with actual decode/native/
+session/eager/write guards. Exact original report fingerprints and prior bits
+are preserved. This is recorded-evidence reconstruction; selected arithmetic
+replay remains unimplemented and M4 remains incomplete.

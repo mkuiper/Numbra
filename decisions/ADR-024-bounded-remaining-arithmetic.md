@@ -99,6 +99,36 @@ No selected saved-model execution, retained-observation replay, whole candidate,
 new fit, frozen inference or accepted export occurred. Complete guarded retained
 training replay and its source-snapshot/evidence audits remain unfinished.
 
+## Observed retained-reader foundation — 2026-10-09 UTC
+
+The complete ADR-023 auditor now applies that decision's explicit historical
+source rule to its own report: exact full commit/file map/tree hash, with live
+dependencies/locks/hardware and complete artifact/scope/metric/prior checks.
+ADR-022 remains separately bound. Old reports and numerical budgets stay intact.
+
+`export_remaining_retained.training_rows` completes that original audit before
+exposing any row, then rechecks accessed ordered rows and read-only arrays,
+metrics, native/runtime lineage and exact prior bits. Every original control
+remains available. Exhaustion checks full array use; partial consumption creates
+no completed experiment. Generated tests reject source/dependency/hardware drift,
+a corrupt final row before first yield, and index/row/tensor mutations after the
+global audit. Decode, model calls, sessions, eager recipes and persistence are
+blocked during generated reading. Focused runner/reader verification: 46 PASS;
+required scripts/check.sh: 836 ML PASS, 574 warnings, 200.77s, exit 0; Android
+SKIPPED, RESULT PASS. No APK claim or selected-model inference.
+
+This is a provenance/reading foundation. Selected retained recipe execution,
+new arithmetic persistence and complete independent reconstruction remain
+unfinished. All previous parity failures and M4 blockers remain.
+
+[Separate historical-source selected audit](../ml/reports/PLACEHOLDER-m4-remaining-training3-snapshot-audit.json)
+PASS: all 152 retained rows, 159 operators, 904 setup graphs and complete
+tensor/metric/lineage/parity/prior-bit reconstruction. All five actual
+decode/native-call/session/eager/write guards remained active. Exact historical
+snapshot matches all 33 source files/tree; dependencies remain live and exact.
+Tracked and ignored original report fingerprints agree and remain unchanged.
+No selected arithmetic experiment or new model inference occurred.
+
 ## Open questions
 
 - Which fixed recipes reduce native drift across the complete retained scope?

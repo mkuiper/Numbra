@@ -1,0 +1,47 @@
+{
+  "audit": {
+    "baseline_inference": false,
+    "complete_saved_preparation_retained_source_dependencies_and_prior": true,
+    "components": 152,
+    "historical_inference_authentication": false,
+    "notice": "PLACEHOLDER complete training replay diagnostic only; never bundle",
+    "ordered_observations": {
+      "baseline_inference": false,
+      "complete_ordered_rows_arrays_metrics_and_parity": true,
+      "components": 152,
+      "historical_inference_authentication": false,
+      "notice": "PLACEHOLDER persisted complete replay diagnostic only; never bundle",
+      "prior_disabled_original_logits_exact_bits": true,
+      "status": "PASS"
+    },
+    "setup": {
+      "baseline_inference": false,
+      "complete_saved_expressions_constants_and_records": true,
+      "historical_inference_authentication": false,
+      "notice": "PLACEHOLDER complete supplied-tensor replay diagnostic only; never bundle",
+      "operators": 159,
+      "serialized_and_runtime_graphs": 904,
+      "status": "PASS"
+    },
+    "source_environment_audit": {
+      "historical_inference_authentication": false,
+      "live_dependencies_exact": true,
+      "notice": "PLACEHOLDER source provenance only",
+      "source": "exact local commit snapshot",
+      "source_commit": "50f7c65e7b6a6168a17d498be4d663c89b11742f",
+      "source_files": 33,
+      "status": "PASS"
+    },
+    "status": "PASS"
+  },
+  "created_utc": "2026-10-09T20:18:05.486894+00:00",
+  "guards": {
+    "eager_recipes": true,
+    "evidence_writes": true,
+    "image_decode": true,
+    "native_forward": true,
+    "runtime_sessions": true
+  },
+  "notice": "PLACEHOLDER complete training replay diagnostic only; never bundle",
+  "report_sha256": "ce8ade4d296a801b85e21662ac0dbaa6763ee39d38b15b6de89a0796eb7a8fad"
+}

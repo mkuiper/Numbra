@@ -1034,8 +1034,9 @@ hardware remain exact. Local reconstruction never authenticates past inference.
 [ADR-024](../decisions/ADR-024-bounded-remaining-arithmetic.md) now predeclares
 bounded complete activation/reduction recipes and constant-preserved head
 isolation. The supplied-graph primitives in `export_remaining_arithmetic`
-are built and generated-only tests pass. **Guarded retained training replay
-is still unimplemented**; there is no new selected-baseline parity result.
+are built and generated-only tests pass. The guarded retained training reader
+is built; **recipe replay/persistence is still unimplemented**. There is no new
+selected-baseline parity result.
 
 Each HardSigmoid uses float32 `clamp(x+3,0,6)` followed by either division by
 six or multiplication by the rounded float32 reciprocal. Each HardSwish first
@@ -1064,9 +1065,38 @@ or equivalence assertion. Exact isolated-versus-original constant-context ONNX
 equality is verified for that fixture. This does not resolve the selected head's
 extraction discrepancy or establish kernel-packing causality.
 
-Next integrate these primitives with complete verified ADR-023 retained
-observations, including an explicit exact historical source snapshot after code
-changes. Keep every existing Conv/BN/remaining control and all ordered training
+`export_remaining_retained.training_rows` now completes the original ADR-023
+context/setup/ordered-observation audit before exposing any retained row. The
+audit binds its historical source to the explicit complete commit
+`50f7c65e7b6a6168a17d498be4d663c89b11742f`; ADR-022 remains bound separately
+to `808cc3393ccf1cce95c2feeef91e5a8608b481e4`. Both recorded source maps/tree
+hashes stay intact. Live dependencies/locks/hardware and every artifact, fit,
+metric, lineage, ordered row, parity budget and original prior bit remain
+required. Without an explicit matching snapshot, changed live code still fails.
+This extends the existing ADR-023 provenance rule, never authenticates past
+execution or changes either retained report.
+
+The reader reconstructs each accessed row again and rechecks file/array hashes
+after the full audit; arrays are read-only. It exposes complete original
+observations, both native/runtime origins, both graph contexts and every
+Conv/BN/remaining control. No image decoding, saved-model forward, eager recipe,
+runtime session or evidence write is needed. Exhausting it checks complete
+array use; an early-stopped iterator creates no completed replay evidence.
+Generated regressions cover historical source/dependency/hardware drift, a
+corrupt final row blocking the first yield, and index/row/tensor changes after
+the complete audit. Recipe execution and new persistence remain separate work.
+
+[Separate historical-source audit](../ml/reports/PLACEHOLDER-m4-remaining-training3-snapshot-audit.json)
+of the selected evidence now PASS: all 152 retained rows, all 159 operators,
+904 setup graphs and complete arrays/metrics/lineage/parity/prior-bit checks.
+Actual decode/native-call/session/eager/write guards remained active throughout
+reconstruction. All 33 historical source files/full tree and live dependencies
+agree exactly; tracked/ignored original report fingerprints remain identical.
+No selected-model inference, retained recipe experiment or historical execution
+authentication occurred.
+
+Next integrate the fixed arithmetic primitives with these complete verified
+ADR-023 retained observations. Keep every existing Conv/BN/remaining control and all ordered training
 inputs on both graph/input origins. Resolve float arithmetic before choosing a
 selective QDQ scope, fitting or using frozen acceptance inputs.
 

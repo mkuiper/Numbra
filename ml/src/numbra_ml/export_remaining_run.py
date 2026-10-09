@@ -76,7 +76,8 @@ def training_context(repo, prepared, run, experiments, source, prior, profiles, 
 
 
 def audit_training(repo, output, report, prepared, run, experiments, source, prior, profiles, *,
-                   backbone_factory=backbone_architecture, profile_source_commit=None):
+                   backbone_factory=backbone_architecture, profile_source_commit=None,
+                   source_commit=None):
     """Read-only reconstruction; no decode, eager replay, forward or ORT session."""
     output = ignored_path(repo, output)
     expected, model, graphs, training, previous = training_context(repo, prepared, run, experiments,
@@ -84,9 +85,14 @@ def audit_training(repo, output, report, prepared, run, experiments, source, pri
     context = report['context']
     environment = context['preflight']['environment']
     checkout_context(repo, environment)
-    # Preserve historical checkout flags; all current source/dependency/hardware
-    # fields and complete context are still reconstructed exactly.
-    for key in ('git_commit', 'git_dirty'):
+    environment_audit = audit_environment(repo, environment, expected['preflight']['environment'],
+                                          source_commit=source_commit)
+    # Only independently bound historical source fields may differ. Live
+    # dependency/hardware/artifact/scope fields remain reconstructed exactly.
+    historical_keys = ('git_commit', 'git_dirty')
+    if source_commit is not None:
+        historical_keys += ('source_files_sha256', 'source_tree_sha256')
+    for key in historical_keys:
         expected['preflight']['environment'][key] = environment[key]
     if (set(report) != {'notice', 'status', 'created_utc', 'context', 'setup_records_sha256',
             'setup_audit', 'observations', 'model_state_after_sha256'}
@@ -112,6 +118,7 @@ def audit_training(repo, output, report, prepared, run, experiments, source, pri
         temperature=context['protocol']['temperature'], threshold=context['protocol']['threshold'])
     return {'notice': NOTICE, 'status': 'PASS', 'components': len(training),
         'complete_saved_preparation_retained_source_dependencies_and_prior': True,
+        'source_environment_audit': environment_audit,
         'setup': setup, 'ordered_observations': observation_audit,
         'baseline_inference': False, 'historical_inference_authentication': False}
 

@@ -1,21 +1,21 @@
 # Status
 
-Updated: 2026-10-09T19:57:14Z
+Updated: 2026-10-09T20:19:25Z
 
 Current milestone: **M4 — On-device model export**, in progress. M0–M3 gates
 exist; M4 acceptance remains incomplete. NEXT_ACTION: CONTINUE. All models and
-results **PLACEHOLDER**, synthetic-only. No M4 gate, accepted deployment
-package, app or APK; every failed export remains rejected.
+results **PLACEHOLDER**, synthetic-only. No accepted deployment package, app or
+APK. Every failed export remains rejected.
 
 ## M4 acceptance status
 
 - **Quantised ONNX Runtime Mobile export: built, not accepted.** Original INT8
   QDQ graphs fail parity. No new selected-baseline quantisation fit, selective
   scope, deployment selection or mobile compatibility result.
-- **Exported/Python parity: FAIL, budgets unchanged.** Latest complete ADR-023
-  training replay: preserved max raw/probability 0.000240326/0.00000279320
-  (26/29 violations); rounded BN 0.000143051/0.00000183769 (13/21 violations).
-  Zero threshold flips. This iteration has no new selected-baseline parity.
+- **Exported/Python parity: FAIL, budgets unchanged.** Complete ADR-023 training
+  replay: preserved max raw/probability 0.000240326/0.00000279320 (26/29
+  violations); rounded BN 0.000143051/0.00000183769 (13/21 violations). Zero
+  threshold flips. This iteration produces no new selected-baseline parity.
 - **Size ≤20 MB / preprocessing written and tested: built.** Original float
   6,095,579 bytes; INT8 1,730,515/1,861,702; rounded diagnostic 6,255,113.
   RGB letterbox float32 1×3×224×224 → raw_logit [1] unchanged. Android
@@ -23,48 +23,46 @@ package, app or APK; every failed export remains rejected.
 
 ## This iteration
 
-- ADR-024 predeclares exactly two activation/reduction recipes per operator,
-  plus original-constant Gemm isolation. Saved reference/model/fits/budgets and
-  all existing Conv/BN/remaining controls remain fixed. Decision queued for humans.
-- Added supplied-graph export_remaining_arithmetic: float32 clamp/add/product
-  followed by division or rounded reciprocal; float32 sum/divide or double
-  mean/cast; original initializer/Constant/Identity head dependency closure.
-  It has no dataset/saved-baseline execution entry point.
-- Complete generated random mobile scope covers every 39 target node and all
-  77 recipe graphs, identical across both generated contexts. Existing complete
-  scope validation checks all 87 Conv/BN controls before recipe construction.
-  Static test guards block decode, model forward and runtime sessions.
-- Serialized audits reconstruct full expressions/constants/interfaces; actual
-  disabled-runtime audits use ADR-023's unchanged complete auditor. Signed
-  runtime/eager drift is reported without suppression or native equivalence.
-- Generated constant-head Gemm differs from eager linear by 0.0000019073486.
-  Initial exact-equality test was unjustified: documented as disputed, replaced
-  with exact original constant-context ONNX equality and full signed metric
-  checks. Protobuf fixture insertion also fixed. Existing parity tests/budgets
-  and activation/reduction equality assertions remain intact.
-- No selected saved-model inference, retained training-observation replay,
-  whole-model candidate, frozen inference, new quantisation fit or mobile claim.
+- Extended audit_training with an explicit ADR-023 source_commit binding:
+  every historical source file/hash and full tree must match that local commit.
+  Live dependencies/locks/hardware and complete saved/preparation/prior/setup/
+  ordered-array/metric/lineage/parity checks remain exact. Original report bytes
+  are preserved; omitted or mismatching snapshots still fail. ADR-022's source
+  commit remains separate. No historical-inference authentication claim.
+- Added export_remaining_retained.training_rows: full original context/setup/
+  observation audit before first yield, then per-access row/file/array/metric/
+  lineage/prior-bit checks. Every original graph/origin/Conv/BN/remaining control
+  is exposed read-only without decode, forward, eager recipes or sessions.
+  Exhaustion checks complete array use; early stopping creates no completed
+  experiment. Generated tests cover corruption before/after the full audit.
+- No ADR-024 recipe execution on retained selected tensors yet. Primitive scope
+  remains every 39 target node/77 fixed expressions, both graph contexts and
+  input origins. New arithmetic persistence and guarded replay remain open.
 
 ## Observed checks
 
-- First focused run: six FAIL, 42 PASS (one disputed equality assumption and
-  five protobuf fixture errors). Follow-through: 48 PASS; final expanded suite
-  **56 PASS**, four deprecation warnings, 12.02s.
-- Required scripts/check.sh: exit 0, **822 ML PASS**, 568 warnings, 172.81s;
+- Focused runner/retained-reader suite: **46 PASS**, 26 deprecation warnings,
+  53.01s. Root repository contracts: six PASS (0.074s); whitespace clean.
+- Required scripts/check.sh: exit 0, **836 ML PASS**, 574 warnings, 200.77s;
   Android SKIPPED, RESULT PASS. No APK claim.
-- Final root repository contracts: six PASS (0.081s); whitespace clean.
+- Complete historical-source selected audit: exit 0, **PASS** for all 152 rows,
+  159 operators, 904 setup graphs, arrays/metrics/lineage/parity/prior bits.
+  All five actual decode/native/session/eager/evidence-write guards active.
+  Snapshot matches all 33 historical source files/tree; live dependencies exact.
+  Aggregate: ml/reports/PLACEHOLDER-m4-remaining-training3-snapshot-audit.json.
+  Original tracked/ignored report fingerprints unchanged and identical.
 
 ## Next concrete step and blockers
 
-Integrate ADR-024 with the complete retained ADR-023 training observations.
-First bind historical source provenance to exact snapshot
-50f7c65e7b6a6168a17d498be4d663c89b11742f after these code additions, retaining
-exact live dependencies and all saved/prior/ordered-array/metric/lineage checks.
-Then replay every fixed recipe and constant-head isolation on every 152 ordered
-training input, both graph contexts/input origins, alongside all existing controls.
-Use independently verified retained tensors where possible; do not decode or run
-the selected native model again unnecessarily. Guarded replay and persistence
-remain unimplemented. Local arithmetic results cannot establish a whole-model fix.
+Integrate all ADR-024 fixed recipes and original-constant head isolation with
+training_rows, all 152 ordered retained components, both graph contexts/input
+origins and every original control. Build/audit every serialized/runtime recipe
+before supplied inputs, persist all signed native/eager/runtime comparisons,
+then independently reconstruct complete scope/metrics/lineage without inference.
+Historical ADR-023 source: 50f7c65e7b6a6168a17d498be4d663c89b11742f;
+ADR-022 source: 808cc3393ccf1cce95c2feeef91e5a8608b481e4.
+Reuse verified retained tensors without another selected native-model run or
+image decode. Local arithmetic results cannot establish a whole-model fix.
 
 Float parity, separately predeclared selective QDQ scope, acceptance evaluation
 and mobile double compatibility/performance remain blockers. Clinical validation,
