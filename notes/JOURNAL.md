@@ -1224,3 +1224,8 @@ publication or push.
   rank-general signed accounting, ordered-row reconstruction and exact ADR-022
   disabled-logit audit before opening all 152 training images. M4 stays incomplete;
   NEXT_ACTION CONTINUE; do not start M5.
+- Committed logical native capture step as 181d8e5. Fresh post-commit guarded
+  no-inference reconstruction exit 0 / PASS, with identical report/script hashes
+  and all 159 computational nodes. Historical git context survives commit; every
+  other static provenance/mapping/tap field reconstructs exactly. Clean worktree
+  observed before recording this final audit.

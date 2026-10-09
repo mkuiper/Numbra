@@ -43,7 +43,7 @@ only and cannot replace selected-baseline parity.
   373 original operand/output boundaries on each unchanged graph. No image decode,
   saved-model forward or ORT session permitted: all blocked with raising guards.
   Full saved/preparation/prior/graph/source/dependency/mapping/tap reconstruction
-  PASS without inference. Report SHA-256:
+  PASS without inference, including a fresh post-commit audit after 181d8e5. Report SHA-256:
   70c9fd66955783e22c92564a4dea034a5ee93f406192a8a6918a52f1797e6f3b.
 - The ignored mapping audit script validates historical checkout context and
   reconstructs every other field exactly. Its SHA-256:
