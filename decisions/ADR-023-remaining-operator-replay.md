@@ -276,6 +276,35 @@ This is a bounded serialization audit correction, never arithmetic suppression
 or approval of changed live parameters. Generated nondefault BN fixtures and
 corruption cases must pass before a fresh complete training retry.
 
+## PLACEHOLDER storage workaround — declared before third attempt
+
+The second attempt passes setup and retains 25 ordered rows with exact prior
+logits, but is deliberately interrupted without an index/completed report.
+Recent serialization takes about 28 seconds per input; a read-only timing of one
+retained row takes 3.953 seconds to parse/decode arrays and 3.190 seconds to
+reconstruct metrics, before the additional full checksums/provenance checks.
+Full replay plus both complete audits risks the harness's documented default
+90-minute iteration limit. These timings are resource observations, not a
+favourable diagnostic subset, parity result or full independent audit.
+
+**PLACEHOLDER labelled workaround: lossless uncompressed NPZ evidence storage.**
+Use `numpy.savez` instead of `savez_compressed`, retaining every array, dtype,
+shape and bit, content-addressed deduplication, ordered tree, file checksum and
+metric/lineage/prior reconstruction. The reader keeps support for previous
+compressed archives and verifies their original hashes; never rewrite old
+evidence. Available disk capacity exceeds the estimated full uncompressed run.
+Test actual ZIP_STORED containers and bit-identical reconstruction in both
+formats before retrying every ordered input in a fresh directory. No model,
+reference, preprocessing, numerical expression, profile, fit or budget changes.
+Both earlier attempts remain retained and incomplete; no partial analysis is
+promoted to complete evidence. The existing toy model remains diagnostic only.
+
+Observed before retry: focused evidence/runner suite 71 PASS, 22 warnings,
+34.07s. The same retained row encodes in 2.336s with an identical ordered tree
+and 3,379 arrays: 456,434,104 decoded bytes, 457,326,160 archive bytes compared
+with 412,322,311 compressed bytes. No inference or full-audit claim. Available
+272 GB at the decision point exceeds the approximate 70 GB complete raw run.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?

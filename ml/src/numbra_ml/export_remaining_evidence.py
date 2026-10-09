@@ -61,7 +61,12 @@ def local_file(root, relative):
 
 
 class ArrayStore:
-    """Content-addressed compressed arrays, deduplicated without dropping bits."""
+    """Content-addressed lossless NPZ arrays, deduplicated without dropping bits.
+
+    Store without compression to bound complete-run CPU cost. Reading also
+    supports earlier compressed evidence; decoded bits and file hashes stay
+    separately verified for both formats.
+    """
 
     def __init__(self, root):
         self.root = root
@@ -73,7 +78,7 @@ class ArrayStore:
             if key not in self.records:
                 path = self.root / 'tensors' / f'PLACEHOLDER-{key}.npz'
                 with path.open('xb') as stream:
-                    np.savez_compressed(stream, value=value)
+                    np.savez(stream, value=value)
                 self.records[key] = {'array_sha256': key, 'file_sha256': sha256(path),
                     'dtype': str(value.dtype), 'shape': list(value.shape),
                     'uncompressed_bytes': value.nbytes, 'file_bytes': path.stat().st_size}
@@ -114,7 +119,7 @@ def decode(root, tree, records, used, cache):
             raise ValueError('persisted replay array record scope mismatch')
         path = local_file(root, f'tensors/PLACEHOLDER-{value}.npz')
         if path.stat().st_size != record['file_bytes'] or sha256(path) != record['file_sha256']:
-            raise ValueError('persisted replay compressed array checksum mismatch')
+            raise ValueError('persisted replay archive checksum mismatch')
         with np.load(path, allow_pickle=False) as archive:
             if archive.files != ['value']:
                 raise ValueError('persisted replay archive array scope mismatch')

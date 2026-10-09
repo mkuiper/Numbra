@@ -1465,3 +1465,30 @@ publication or push.
   PLACEHOLDER-m4-unused-constants-tests1.log. No APK or accepted export.
 - Committing the tested serialization-audit correction as a logical step; full
   ordered replay and independent no-decode/no-inference audit continue below.
+- Resource observation: second attempt progressed through 25 ordered inputs
+  with exact prior bits, but roughly 28s/input plus both full audits risked
+  the documented default 90m iteration limit. Read-only timing on its first
+  retained row: parse/decode 3.953s, metric reconstruction 3.190s, 3,379 arrays.
+  This was a resource benchmark only, not complete parity/audit evidence.
+- Deliberately interrupted second attempt with SIGINT (exit 130), retaining all
+  partial evidence; no completed index/report. Before third execution, declared
+  ADR-023's **PLACEHOLDER labelled storage workaround: lossless uncompressed NPZ**.
+  All array bits/types/shapes, deduplication, ordered scope, exact archive hashes,
+  metrics/lineage/prior checks remain. Reader also accepts retained legacy
+  compressed archives; none rewritten. No arithmetic/model/fit/budget change.
+- Added actual ZIP_STORED and both-format exact bit/read-only regressions.
+  Focused evidence/runner suite observed 71 PASS, 22 warnings, 34.07s.
+  Storage-only benchmark of the same retained row: identical encoded tree,
+  2.336s, 456,434,104 decoded bytes, 457,326,160 raw archive bytes vs
+  412,322,311 compressed bytes. Approximate 70 GB run fits available capacity.
+  Benchmark copies/log stay ignored; no inference or acceptance claim.
+- Fresh PLACEHOLDER-m4-remaining-training3 executes the same full 152-input
+  protocol. Fifteen rows complete at this checkpoint, all prior bits exact.
+  Prepared separate audit script with decode/native-call/session/eager-recipe
+  and Path/builtin evidence-write guards; it has not audited a complete report yet.
+- Required check rerun after storage code change: exit 0, 766 ML PASS,
+  564 warnings, 179.41s; Android SKIPPED, RESULT PASS. Root contracts six PASS
+  (0.081s). Logs ignored as PLACEHOLDER-m4-uncompressed-tests1.log,
+  PLACEHOLDER-m4-uncompressed-check.log and PLACEHOLDER-m4-uncompressed-timing.log.
+- Committing the independently tested lossless storage step. Complete replay
+  and no-inference selected evidence audit continue; no accepted export/M5/APK.

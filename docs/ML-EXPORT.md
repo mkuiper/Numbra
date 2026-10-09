@@ -906,7 +906,7 @@ training image is used. Observed test outcomes are recorded in JOURNAL.
 
 `export_remaining_evidence` persists supplied replay observations only below
 ignored `data/` in fresh `PLACEHOLDER-*` directories. Every nonempty finite
-float32/int64 array is compressed losslessly and addressed by its dtype, shape
+float32/int64 array is stored losslessly and addressed by its dtype, shape
 and exact C-order bytes. Identical arrays share a file, including repeated saved
 parameters and identical control outputs. This removes redundant storage without
 dropping an operator, origin, graph, control or bit. Explicit ordered dictionary
@@ -950,6 +950,18 @@ constants and unexplained missing boundaries still fail. Generated nondefault
 BN fixtures exercise both the removal and the tapped retention paths; corruption
 regressions preserve live/alias/input/output/Constant and signed-zero checks.
 The failed directory remains incomplete and cannot produce accepted evidence.
+
+**PLACEHOLDER storage workaround:** the second full attempt was deliberately
+interrupted after 25 ordered rows, without a completed index/report. Its roughly
+28 seconds/input rate plus complete audits risked the documented default
+90-minute iteration limit. New files use lossless uncompressed NPZ, preserving
+all content-addressed tensor bits/dtypes/shapes, exact file checksums, ordered
+scope and full reconstruction. Previous compressed evidence is never rewritten;
+the reader accepts either archive format with independent bit/file verification.
+Actual ZIP_STORED and both-format bit regressions pass. One retained row's storage
+benchmark is 2.336s, 457,326,160 archive bytes vs 412,322,311 compressed bytes;
+this is resource evidence only, not complete-run parity or provenance acceptance.
+All earlier partial runs remain diagnostic and incomplete.
 
 Optimisation profiles do not fix selected-baseline parity. ADR-023's complete
 training runner now connects native mapping, pre-mutation capture, complete

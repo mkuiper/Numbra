@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-09T18:26:49Z
+Updated: 2026-10-09T18:41:01Z
 
 Current milestone: **M4 — On-device model export**, in progress. M0–M3 gates
 exist; M4 acceptance remains incomplete. All models/results **PLACEHOLDER**.
@@ -26,12 +26,18 @@ roles; all live/Identity/tapped/Constant and retained-bit checks remain.
 Generated nondefault BN and eight corruption regressions added; focused suite
 112 PASS. Static selected runtime audit PASS without inference.
 
-Fresh PLACEHOLDER-m4-remaining-training2 is executing all 152 ordered training
+Second attempt stopped deliberately after 25 rows, without a completed index or
+report, because compression/full audits risked the default iteration timeout.
+ADR-023 declares lossless uncompressed NPZ: identical bits and ordered evidence,
+exact hashes; reader retains both formats. Storage benchmark 2.336s per retained
+row, 457 MB vs 412 MB compressed; approximately 70 GB full run fits capacity.
+
+Fresh PLACEHOLDER-m4-remaining-training3 is executing all 152 ordered training
 inputs, unchanged saved model/state/fits/preprocessing/profile/budgets and all
-controls. Seven rows retained at this checkpoint; prior-logit bits exact per row.
+controls. Fifteen rows retained at this checkpoint; prior-logit bits exact per row.
 No completed report or final evidence-audit claim yet.
 
-Required check exit 0: 764 ML PASS, 564 warnings, 176.43s; Android SKIPPED.
+Required check exit 0: 766 ML PASS, 564 warnings, 179.41s; Android SKIPPED.
 Six root contracts PASS. All observations/weights/graphs ignored; no protected
 edit, review.sh, REVIEW/CHECK/GATE write, push or publication.
 

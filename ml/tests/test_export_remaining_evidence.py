@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import shutil
 import tempfile
+import zipfile
 
 import numpy as np
 import onnxruntime as ort
@@ -104,6 +105,31 @@ def test_invalid_arrays_never_serialize(bad):
               'inf': np.array([np.inf], np.float32)}
     with pytest.raises(ValueError, match='persisted replay'):
         array_id(values[bad])
+
+
+@pytest.mark.parametrize('compressed', [False, True])
+def test_storage_is_uncompressed_and_reader_keeps_legacy_compressed_bits(tmp_path, compressed):
+    (tmp_path / 'tensors').mkdir()
+    store = ArrayStore(tmp_path)
+    value = np.random.default_rng(241).normal(size=(16, 31)).astype(np.float32)
+    value[0, :2] = [0., -0.]
+    tree = store.encode(value)
+    key = tree[1]
+    path = tmp_path / 'tensors' / f'PLACEHOLDER-{key}.npz'
+    with zipfile.ZipFile(path) as archive:
+        assert archive.namelist() == ['value.npy']
+        assert archive.getinfo('value.npy').compress_type == zipfile.ZIP_STORED
+    if compressed:
+        # Historical containers keep the same decoded content identity, with
+        # their own exact file checksum/size. No evidence is silently rewritten.
+        np.savez_compressed(path, value=value)
+        store.records[key]['file_sha256'] = sha256(path)
+        store.records[key]['file_bytes'] = path.stat().st_size
+    restored = decode(tmp_path, tree, store.records, set(), {})
+    assert array_id(restored) == key
+    assert restored.dtype == value.dtype and restored.shape == value.shape
+    assert restored.tobytes() == value.tobytes()
+    assert not restored.flags.writeable
 
 
 def test_aggregates_retain_signed_values_and_one_nonexact_row():

@@ -157,7 +157,7 @@ four-term signed accounting. It retains arrays for independent metric and exact
 boundary-lineage reconstruction without inference. All serialized rounded-BN
 expressions and coefficients are first bound to the unchanged saved recipe.
 The generated full mobile fixture covers all 159 computational nodes.
-`export_remaining_evidence` adds ignored lossless compressed/deduplicated arrays,
+`export_remaining_evidence` adds ignored lossless deduplicated NPZ arrays,
 explicit ordered component/operator trees, partial-run rejection, and independent
 streaming reconstruction of every row metric, full aggregates and fixed-budget
 original-graph parity. It checks original native/runtime logit bits against
