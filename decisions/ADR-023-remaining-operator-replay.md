@@ -67,6 +67,19 @@ scope without another model experiment. Remaining native boundary mapping and
 full training replay are explicit incomplete work. This decision cannot close
 M4, accept any failed graph or authorise M5.
 
+## Tooling observation and bounded audit rule — before baseline preflight
+
+Generated fixtures expose two exporter/runtime details: equal saved constants
+may be Identity aliases, and disabled ORT adds unused domain imports and expands
+HardSwish into its HardSigmoid/Mul function. Keep exact serialized-node audits.
+For actual isolated runtime HardSwish allow only the two-node ordered expression
+`HardSigmoid(x, alpha=float32(1/6), beta=0.5)` followed by `Mul(x, gate)` with
+the original float32 input/output and same-shape float32 gate. Audit every
+connection/attribute and reject all other rewrites. Inventory unused imports;
+they cannot authorise a custom-domain computation. This is a runtime expression
+audit, not an arithmetic-equivalence claim against native PyTorch. Preserve all
+measured rounding differences. No baseline inference has occurred.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?
