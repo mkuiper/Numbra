@@ -139,7 +139,10 @@ def audit_rounding_coefficients(model, report):
     expected = {name: module for name, module in model.named_modules() if isinstance(module, nn.BatchNorm2d)}
     actual = {name: graph for name, graph in report['diagnostics']['operator_graphs'].items()
               if graph['original_operator'] == 'BatchNormalization'}
-    if (list(actual) != list(expected) or report['protocol']['decision'] != 'ADR-020'
+    selection = report['diagnostics']['selection']
+    if (set(actual) != set(expected)
+            or [name for name in selection if name in actual] != list(expected)
+            or report['protocol']['decision'] != 'ADR-020'
             or not expected):
         raise ValueError('rounding complete saved BN scope mismatch')
     for name, module in expected.items():

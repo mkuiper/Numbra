@@ -192,6 +192,15 @@ def test_rounding_pipeline_training_isolation_provenance_and_audit_refusals():
             from numbra_ml.verify import load_reference
             model, _ = load_reference(run, backbone_factory=complete_backbone)
             assert audit_rounding_coefficients(model, result)['status'] == 'PASS'
+            serialized = json.loads(json.dumps(result, sort_keys=True))
+            # Dictionary insertion order is not saved module order. Only the
+            # explicit selection sequence carries that contract.
+            serialized['diagnostics']['operator_graphs'] = dict(reversed(
+                list(serialized['diagnostics']['operator_graphs'].items())))
+            assert audit_rounding_coefficients(model, serialized)['status'] == 'PASS'
+            serialized['diagnostics']['selection'].reverse()
+            with pytest.raises(ValueError, match='complete saved BN scope'):
+                audit_rounding_coefficients(model, serialized)
             assert audit_complete_report(repo, output, result)['status'] == 'PASS'
             changed = deepcopy(result)
             changed['protocol']['rounding_recipes'].pop()
