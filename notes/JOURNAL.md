@@ -947,3 +947,64 @@ clinical data/validation, weight notices and mobile execution remain open.
   iteration records; git diff --check clean. NEXT_ACTION exactly CONTINUE.
   Changed paths contain no protected files and data/ has no tracked files.
   All changes committed before ending.
+
+## 2026-10-09T16:31:45Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent M4 review folder,
+  AGENTS and relevant data/runtime/M4 ADRs. No new harness instruction or review.
+  Worked only on M4; no app/gate/acceptance claim. All exports remain rejected;
+  ADR-012's labelled toy workaround remains diagnostic only.
+- Predeclared ADR-020's complete 32-recipe Cartesian rounding protocol, queued
+  humans and committed 66ee6e8 before experiments. Added independent NumPy/eager
+  PyTorch coefficient/output expressions, saved-bit/epsilon records, full recipe/
+  origin/layer auditing, training-only replay and coefficient reconstruction.
+  Existing complete native/primitive/promoted replay controls retained unchanged.
+- Initial targeted subset 44 PASS / 16 FAIL in 12.06s, 36 warnings: new fixture
+  incorrectly assumed exact float64 reciprocal equality for irrational roots,
+  contrary to the declared protocol. Difference 2^-54. Retained exact equality
+  assertions on exact-square fixture; original irrational case retained as a
+  coefficient-bit-disagreement regression. Production formulas/budgets unchanged;
+  disputed-test rationale recorded in HUMAN-QUEUE. Corrected subset 61 PASS in
+  12.20s, 36 warnings. No existing test skipped/deleted or tolerance widened.
+  Committed ad274b7 before full diagnostic.
+- First full diagnostic deliberately interrupted (exit 130, KeyboardInterrupt)
+  before any report was written after spotting a sorted-JSON dictionary-order
+  audit bug. Fixed production to check the explicit module-selection sequence,
+  added dictionary-reordering/selection-corruption regression. Partial graphs/logs
+  retained ignored; no diagnostic success claimed. New-only subset 42 PASS in
+  7.05s, 8 warnings. Committed 908dbdd before a separately named complete rerun.
+- Complete rerun CLI exit 0, DIAGNOSTIC ONLY:
+  ml/reports/PLACEHOLDER-m4-bn-rounding2.json; all and only 152 ordered training
+  inputs, all 34 saved BNs, 32 recipes, both origins/engines. Native/primitive/
+  promoted controls cover all 53 Conv/34 BN and 517 graph records. No frozen
+  test/held-out/stress inference, quantisation fit, model/fit/reference/budget
+  change, complete-model replacement or deployment selection. State unchanged.
+- e32-r32-a32-b64-o64 and e32-r32-a64-b64-o64 exactly reproduce native BN at
+  every tested layer/input/origin in both engines. Corresponding e64/r32 recipes
+  match 23/34 layers; other 28 match no layer across all inputs. All recipes'
+  NumPy/PyTorch output differences are zero. Float64 reciprocal bits differ at
+  23 e32/r64 or 19 e64/r64 BNs without changing observed rounded output. All
+  recipes/layers remain reported; local agreement is not kernel-source proof,
+  hardware-FMA implementation, unseen-input or complete-model/mobile parity.
+- Independent no-inference audit exit 0/PASS: tracked/private report equality,
+  all coefficients/saved parameters/epsilon bits, aggregate reconstruction,
+  graph checksums/native/promoted runtime expression audits, ordered training IDs,
+  model/preparation/source/dependency/retained provenance and exact prior ADR-019
+  ordered logits/all prior operator metrics. Preserved parity reproduced exactly:
+  FAIL, raw/probability maxima 0.000240326/0.00000279320, 26/29 violations, zero
+  flips. Audit script/details/logs, graphs and weights stay under ignored data/.
+- First full bash scripts/check.sh exit 0: 419 ML tests PASS in 74.38s,
+  152 warnings. Fresh full check after order correction exit 0: 419 PASS in
+  77.60s, 152 warnings; Android SKIPPED, RESULT PASS. Root contract checks after
+  initial docs: 6 PASS in 0.070s; after evidence docs: 6 PASS in 0.076s.
+- Updated ADR follow-through, HUMAN-QUEUE, ML README, ML-EXPORT, DEV-SETUP and
+  iteration records. M4 incomplete, NEXT_ACTION CONTINUE; no HANDOFF or review
+  request. Next predeclare one all-BN exact-recipe whole-model training-only
+  candidate/control; Conv drift, selective QDQ and mobile support remain open.
+- No toolchain/dependency/acquisition changes, protected edits, review.sh,
+  REVIEW/CHECK/GATE writes, publishing/push or external messages. All changes
+  committed before ending; no APK/completion claim.
+- Final root checks: 6 PASS in 0.080s after iteration records; aggregate-only
+  PLACEHOLDER/private-field and exact NEXT_ACTION checks PASS. git diff --check
+  clean; no protected changed path and no data/ file tracked. Final source commit
+  for experiment reproduction: 908dbdd; documentation/evidence committed separately.

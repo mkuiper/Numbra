@@ -119,3 +119,13 @@ BN. It measures both promoted BN recipes, audits saved parameters and runtime
 arithmetic, and reports four-term signed accounting. Graphs and ordered rows
 remain ignored. Aggregate reconstruction/checksum success is diagnostic only;
 no baseline export is accepted and M4 remains incomplete.
+
+
+Complete BN coefficient-rounding diagnostics are available as
+`python -m numbra_ml.export_bn_rounding --output data/exports/PLACEHOLDER-<new-name>`.
+[ADR-020](../decisions/ADR-020-batchnorm-rounding-replay.md) fixes 32 epsilon,
+reciprocal, alpha, beta and output rounding recipes before execution. It compares
+independent NumPy/eager-PyTorch expressions against every native BN on both
+training input origins, records coefficient bits and audits full scope. All
+existing Conv/BN replay controls remain; no replacement graph or deployable
+model is produced. M4 acceptance still requires whole-model quantised parity.

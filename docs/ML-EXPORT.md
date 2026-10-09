@@ -563,15 +563,56 @@ error 0.000240326/0.00000279320, 26/29 violations, zero threshold flips. This
 experiment creates no whole-model replacement or INT8 candidate, fits nothing
 and never reads frozen test/held-out/stress inputs.
 
+## Complete BN coefficient-rounding replay (ADR-020)
+
+**PLACEHOLDER diagnostic only, never bundle.** The command
+`python -m numbra_ml.export_bn_rounding --output data/exports/PLACEHOLDER-<new-name>`
+retains ADR-019's complete native/operator/control audits, and evaluates all 32
+predeclared coefficient/output recipes at every saved BN on both native-Python
+and preserved-ORT inputs. It fits nothing and builds no replacement graph.
+
+The five binary choices separately specify epsilon-sum, square-root/reciprocal,
+alpha, beta and output rounding boundaries. Independent NumPy and eager PyTorch
+implementations retain both engines' coefficient-bit records and native-relative
+output errors; equality between library square roots is not presumed. Saved
+float32 parameters and Python epsilon bits remain unchanged. The rounded-double
+output is a mathematical diagnostic, not a hardware float32-FMA implementation.
+Complete recipe/origin/layer scope, serialized/runtime graph audits, ordered
+training inputs, coefficient reconstruction and aggregate reconstruction are
+checked. Dictionary order is irrelevant; the explicit saved selection list
+carries module order through JSON serialization. See
+[the protocol](../decisions/ADR-020-batchnorm-rounding-replay.md).
+
+[Complete aggregate evidence](../ml/reports/PLACEHOLDER-m4-bn-rounding2.json):
+152 ordered training components, all 34 BNs and 32 recipes, both origins and
+engines. Independent no-inference audit passes 517 graph records, coefficient
+bits/reconstruction, aggregates, saved-state/model/preparation/source/dependency/
+retained provenance, exact prior ADR-019 control logits/operator metrics and
+preserved fixed-budget parity. No replacement graph or frozen inference.
+
+| Declared recipes (all alpha choices included) | Count | Native-exact layers, Python / ORT origins | Max native error, Python / ORT origins |
+| --- | ---: | ---: | ---: |
+| e32-r32-a{32,64}-b64-o64 | 2 | 34 / 34 | 0 / 0 |
+| e64-r32-a{32,64}-b64-o64 | 2 | 23 / 23 | 0.000000953674 / 0.00000143051 |
+| Every remaining declared recipe | 28 | 0 / 0 | Up to 0.0000152588 / 0.0000152588 |
+
+Exact means all tested inputs at that layer; this is finite training evidence,
+not the native kernel's documented implementation or a mobile/unseen-input
+claim. Both engines' outputs agree at every layer/origin for all 32 recipes.
+Float64 reciprocal bits still disagree at 23 e32/r64 or 19 e64/r64 BNs, recorded
+without changing the observed rounded float32 output. Complete individual recipe
+and layer aggregates remain in the linked report. Preserved control remains FAIL:
+raw/probability maxima 0.000240326/0.00000279320, 26/29 violations, zero flips.
+
 ## Remaining M4 work
 
-Complete same-input replay confirms residual kernel differences throughout the
-saved backbone and neither promoted BN recipe matches native Python exactly.
-Next predeclare complete BN coefficient/epsilon-rounding variants using all
-34 layers, both input origins and the existing training inputs before any further
-whole-graph replacement. This is a hypothesis to test, not an assumed fix;
-Conv kernel drift also remains unresolved. Keep every failed export, reference,
-fit, input and ADR-011 budget; never adapt to frozen evaluation.
+Complete rounding replay identifies two locally exact BN recipes on all tested
+training inputs. Next predeclare a single all-BN `e32-r32-a32-b64-o64` candidate
+and preserved control, then test complete-model training parity with actual
+runtime coefficient/arithmetic audits. Local agreement is not an assumed fix:
+Conv kernel drift remains unresolved. Keep every failed export, reference, fit,
+input and ADR-011 budget; never adapt to frozen evaluation or select a favourable
+layer subset. No whole-model candidate was built or selected in this iteration.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

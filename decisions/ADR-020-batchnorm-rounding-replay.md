@@ -57,6 +57,44 @@ Conv kernel drift, establish whole-model parity, select quantisation scope, or
 prove mobile operator support/performance. A separately predeclared candidate
 and unchanged full acceptance checks are necessary before bundling.
 
+## Observed follow-through — 2026-10-09 UTC
+
+[Complete aggregate evidence](../ml/reports/PLACEHOLDER-m4-bn-rounding2.json)
+retains all 152 ordered training components, every saved 34 BN and all 32
+recipes on both origins. The unchanged native/primitive/promoted controls still
+cover 53 Conv/34 BN and 517 serialized/runtime graph records. All coefficient,
+aggregate and runtime audits pass; saved state is unchanged. The independent
+no-inference audit rechecks saved model/preparation/retained/source provenance,
+coefficient reconstruction, ordered IDs, exact prior ADR-019 ordered logits and
+all prior per-operator metrics, and exact preserved-control parity.
+
+Both `e32-r32-a32-b64-o64` and `e32-r32-a64-b64-o64` match native Python exactly
+at all 34 BNs, on both origins across every tested training input, in both
+NumPy and eager PyTorch. These recipes use the float32 epsilon sum and
+square-root/reciprocal, round beta from double arithmetic and round the double
+output affine expression once. Their alpha choices collapse on these parameters.
+The corresponding e64/r32 recipes match 23/34 layers; remaining 28 recipes match
+no layer across all tested inputs. All 32 recipes' NumPy/PyTorch output errors
+are zero at all layers on both origins. Float64 reciprocal bits nevertheless
+differ at 23 (e32/r64) or 19 (e64/r64) BNs; these differences do not change the
+observed rounded float32 coefficients/outputs. All recipes remain reported.
+
+The initial run was deliberately interrupted before a report was written after
+spotting that sorted JSON dictionaries cannot encode module order. The corrected
+audit uses the explicit selection list, with a regression. Original partial
+graphs/logs remain ignored. No complete-model replacement, quantisation fit,
+frozen inference or deployment selection occurred. Preserved control still FAILS
+ADR-011: raw/probability maxima 0.000240326/0.00000279320, 26/29 violations, zero
+flips. The first full check passed 419 tests; after the order correction the
+fresh full check passed 419 tests in 77.60s. M4 remains incomplete.
+
+Next predeclare a single all-BN `e32-r32-a32-b64-o64` candidate and unchanged
+preserved control for training-only whole-model testing, auditing every saved
+coefficient and actual runtime Cast/Mul/Add expression. No favourable layer
+subset or changed reference/budget; local agreement does not prove unseen-input
+or whole-model agreement. Conv drift, selective QDQ and mobile double arithmetic
+support/performance remain unresolved before acceptance/bundling.
+
 ## Open questions
 
 - Does any declared recipe reproduce native BN across every tested layer/input?
@@ -65,5 +103,5 @@ and unchanged full acceptance checks are necessary before bundling.
 
 ## Confidence
 
-High for the explicit finite protocol; outcomes, mobile and clinical validity
-remain unverified before execution.
+High for the tested finite training-only protocol and observed local agreement.
+Whole-model parity, mobile execution and clinical validity remain unverified.

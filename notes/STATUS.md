@@ -1,90 +1,90 @@
 # Status
 
-Updated: 2026-10-09T16:16:35Z
+Updated: 2026-10-09T16:31:45Z
 
 Current milestone: **M4 — On-device model export**, in progress. NEXT_ACTION:
 CONTINUE. M0–M3 gates exist (PASS WITH CHANGES); no M4 gate, app or APK.
-Every task model/result remains **PLACEHOLDER**, synthetic-only under ADR-002.
-Every failed export remains rejected; diagnostic copies are never bundles.
+All task models/results remain **PLACEHOLDER**, synthetic-only under ADR-002.
+Every failed export remains rejected; diagnostics are never bundles.
 
 ## M4 acceptance status
 
 - **Quantised ONNX Runtime Mobile export: BUILT, ACCEPTANCE INCOMPLETE.** Both
-  retained INT8 QDQ graphs fail parity, calibrated on all/only 152 training
+  retained INT8 QDQ graphs fail parity after calibration on all/only 152 training
   components. No new quantisation fit or scope selection. ADR-012's labelled
-  toy diagnostic workaround stays in force; mobile operator/ABI support unverified.
-- **Exported/Python parity: FAIL, budgets unchanged.** Complete same-input
-  training-only replay now covers every 53 Conv/34 BN, with both promoted BN
-  recipes. It builds no whole-model replacement. The preserved control exactly
-  reproduces prior ordered logits/parity: raw/probability maxima
-  0.000240326/0.00000279320 against 0.0001/0.000001, 26/29 violations, zero flips.
-  Joint and BN-only graphs still fail. No frozen evaluation, model/fit/reference/
-  budget change or deployment selection; every earlier failure retained.
+  toy diagnostic workaround remains in force; mobile operator/ABI support unverified.
+- **Exported/Python parity: FAIL, budgets unchanged.** Complete BN rounding replay
+  finds two locally exact recipes across all 34 BNs/both origins/all 152 training
+  inputs, but builds no whole-model replacement. Original control reproduces all
+  prior ordered logits/operator metrics exactly and still fails raw/probability
+  budgets: maxima 0.000240326/0.00000279320 against 0.0001/0.000001, 26/29
+  violations, zero flips. Original float, INT8, BN-only and joint failures retained.
+  No frozen inference, model/fit/reference/budget change or deployment selection.
 - **Size ≤20 MB / preprocessing written and tested: BUILT.** Original float
   6,095,579 bytes, INT8 1,730,515/1,861,702, BN-only 6,255,113, joint 6,265,822.
-  New 517 diagnostic graph copies are ignored and cannot establish acceptance.
+  New 517 control graph copies are ignored and cannot establish acceptance.
   RGB letterbox, float32 1×3×224×224 → raw_logit [1] unchanged. No accepted
   deployment-metadata package or Android decoding/preprocessing.
 
 ## This iteration's evidence
 
-- Predeclared/committed ADR-019 and queued human review. Complete replay matches
-  every saved Conv/BN by module order and saved parameter names, checks exact
-  float32 parameter bits (including signed zero), geometry, epsilon/inference
-  mode and one-to-one node scope. Includes Conv without a following BN.
-- ml/reports/PLACEHOLDER-m4-complete-replay1.json: all 152 ordered training inputs.
-  Every native graph and both promoted BN recipes pass serialized/actual runtime
-  audits. All 87 operators have zero Python/ORT replay-fidelity differences;
-  all taps preserve logits and every signed-accounting residual is zero.
-  Four signed float64 terms separate Python replay, propagation, kernel and
-  extraction drift; min/max/mean aggregates include all layers.
-- Local native differences remain at 48/53 Conv and all 34 BN. Same-Python-input
-  maxima 0.00000190735/0.00000762939; propagated maxima
-  0.0000308752/0.000339508. Separate maxima are not additive causal accounting.
-  Both promoted BN recipes match their Python expression exactly at every BN on
-  both origins, but neither matches native Python across tested inputs at any BN.
-  Rsqrt lowers/equal maxima at 22/12 layers on Python input, 23/11 on ORT input;
-  divide lowers/equal/raises at 9/14/11 and 9/18/7. No favourable subset selected.
-- Independent audit PASS: aggregate/private equality and reconstruction, 517
-  graph records, runtime arithmetic/parameter audits, ordered training IDs,
-  model/preparation/source/dependency/retained provenance and exact control
-  logits/parity reproduction. Saved state unchanged; audit uses no inference.
-  Graphs/weights/ordered details/logs stay ignored. Updated ADR, HUMAN-QUEUE,
-  export/setup docs and ML README.
+- Predeclared/committed ADR-020 and queued human review. Full Cartesian product:
+  epsilon sum, reciprocal, alpha, beta and output rounding (32 recipes). Every
+  saved BN in explicit module order, both exact Python/preserved-ORT input origins,
+  all ordered training components; no favourable subset or adaptive additions.
+- ml/reports/PLACEHOLDER-m4-bn-rounding2.json: independent NumPy/eager-PyTorch
+  expressions and coefficient-bit records. e32-r32-a32-b64-o64 and
+  e32-r32-a64-b64-o64 match native BN exactly on every tested layer/input/origin.
+  These two alpha choices collapse on these parameters. Corresponding e64/r32
+  recipes match 23/34 layers; the remaining 28 match no layer across all inputs.
+  All 32 recipes' outputs agree between engines at every layer/origin. Float64
+  reciprocal bits disagree at 23 e32/r64 or 19 e64/r64 BNs without changing the
+  observed rounded float32 outputs. Rounded-double output is not hardware FMA.
+- Native/primitive/promoted controls retain all 53 Conv/34 BN, 517 graph records,
+  zero replay-fidelity/tap-logit/signed-accounting residuals and unchanged state.
+  Independent no-inference audit PASS: coefficients, saved parameters/epsilon
+  bits, complete aggregates, serialized/runtime arithmetic, ordered IDs,
+  model/preparation/source/dependency/retained provenance, exact prior ADR-019
+  logits/operator metrics and preserved fixed-budget parity reproduction.
+- First diagnostic deliberately interrupted before writing a report after
+  finding sorted JSON dictionary order cannot encode module order. Corrected
+  audit verifies the explicit selection list; regression added. Partial first
+  graphs/logs retained under ignored data/. Complete second run exit 0 means
+  DIAGNOSTIC ONLY. Graphs/weights/ordered details/logs remain ignored.
 
 ## Observed verification
 
-- Initial combined replay subset: 32 PASS / 1 FAIL in 15.24s, 52 warnings.
-  Duplicate correctly rejected but lacked expected one-to-one error wording.
-  Production now adds scope to the boundary error; assertion retained.
-  Corrected subset: 33 PASS in 16.07s, 52 warnings. After evidence-audit and
-  partial-recipe-refusal additions: complete subset 19 PASS in 7.05s, 28 warnings.
-  No test weakened/skipped/deleted.
-- Diagnostic CLI exit 0: DIAGNOSTIC ONLY; independent audit PASS, M4 incomplete.
-- bash scripts/check.sh exit 0: 377 ML tests PASS in 111.72s (alongside replay),
-  144 legacy-export warnings; Android SKIPPED, RESULT PASS. No APK claim.
-- Root repository-contract tests: 6 PASS in 0.068s after command documentation;
-  final 6 PASS in 0.080s after all docs/iteration records. git diff --check clean;
-  NEXT_ACTION exactly CONTINUE.
-- No install/dependency/checkpoint/dataset acquisition, protected edit,
-  review.sh, REVIEW/CHECK/GATE write, publication/push or external message.
+- Initial new/complete subset: 44 PASS / 16 FAIL in 12.06s, 36 warnings. New
+  fixture wrongly assumed exact irrational reciprocal equality across libraries;
+  observed difference 2^-54. Exact assertions retained on an exact-square
+  fixture; original irrational case retained as measured-bit-disagreement regression.
+  No production expression or budget changed; rationale queued for humans.
+- Corrected combined subset: 61 PASS in 12.20s, 36 warnings. After JSON/module-order
+  regression: 42 PASS in 7.05s, 8 warnings. No existing test skipped/deleted and
+  no tolerance widened.
+- First bash scripts/check.sh exit 0: 419 ML tests PASS in 74.38s, 152 warnings.
+  Fresh full check after order correction exit 0: 419 PASS in 77.60s, 152 warnings;
+  Android SKIPPED, RESULT PASS. No APK claim.
+- Root repository-contract tests: 6 PASS in 0.070s after initial docs, 6 PASS in
+  0.076s after evidence docs. Independent audit exit 0/PASS; git diff --check clean.
+- No install/dependency/acquisition, protected edit, review.sh, REVIEW/CHECK/GATE
+  write, publication/push or external message.
 
 ## Open blockers and limits
 
-Selected-baseline float and INT8 parity remains the implementation blocker.
-Complete replay shows residual local native arithmetic throughout the backbone;
-exact agreement between promoted ONNX/Python formulas does not reproduce the
-native reference. No current baseline export is accepted. Float64 mobile support/
-performance, unseen-input parity, clinical data approval, clinical/ethics/legal/
-native-language validation and weight-notice approval remain unresolved.
+Selected-baseline whole-model float and INT8 parity remains the blocker. Local
+exact BN expressions do not prove whole-model/unseen-input parity; native Conv
+kernel differences remain throughout the backbone. Mobile double-operator support,
+performance, clinical data approval/validation, ethics/legal/native-language
+review and weight-notice approval remain unresolved. No current export is accepted.
 
 ## Next concrete step
 
-Predeclare complete BN coefficient/epsilon-rounding replay against native Python,
-using all 34 saved BNs, both existing input origins and all ordered training
-components. Specify all recipes before execution, including epsilon/reciprocal/
-alpha/beta rounding boundaries and unchanged saved bits. Audit expressions and
-report all layers; do not select a favourable subset or assume a full-graph fix.
-Conv kernel drift remains unresolved. Declare selective static QDQ scope from
-training evidence before new quantisation/frozen evaluation, and resolve mobile
-float64 support before bundling. REVIEW M4 only after acceptance.
+Predeclare a single complete all-BN e32-r32-a32-b64-o64 replacement plus preserved
+control for training-only whole-model parity. Audit every coefficient bit and
+actual runtime Cast/Mul/Add expression against the declared recipe, preserving
+float32 boundaries and original model/fits/budgets. No favourable layer subset
+or frozen evaluation before training-only evidence. Conv drift may still prevent
+acceptance. Declare selective static QDQ scope from training evidence before
+new quantisation/frozen evaluation; resolve mobile double support before bundling.
+REVIEW M4 only after acceptance.

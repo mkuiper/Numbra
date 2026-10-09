@@ -400,6 +400,69 @@ source change intentionally invalidates that comparison; use the recorded source
 commit to reproduce it. The experiment and independent audit retain graph copies,
 ordered rows and logs under ignored data/. See [export evidence](ML-EXPORT.md).
 
+## M4 BN coefficient-rounding diagnostics — 2026-10-10
+
+No installation or acquisition. Commands in the existing pinned environment:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_bn_rounding.py ml/tests/test_export_complete_replay.py
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_bn_rounding.py
+OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 ml/.venv/bin/python -m numbra_ml.export_bn_rounding --output data/exports/PLACEHOLDER-m4-bn-rounding2
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+The first targeted run had **44 passed, 16 failed in 12.06s**, 36 warnings:
+a new fixture wrongly assumed exact float64 reciprocal equality for irrational
+roots. NumPy/PyTorch differed by 2^-54. The exact equality assertions remain on
+an exact-square fixture; the original irrational case now explicitly tests that
+coefficient-bit disagreement is retained. Production expressions/budgets did not
+change. Corrected combined subset: **61 passed in 12.20s**, 36 warnings.
+After adding the explicit-order/JSON regression: **42 passed in 7.05s**,
+8 warnings. No existing test skipped/deleted or tolerance widened.
+
+The initial full diagnostic was deliberately interrupted before any report was
+written after finding an independent-audit order issue: sorted JSON dictionaries
+do not encode saved module order. The corrected audit verifies the explicit
+selection list. Incomplete first-run graphs/logs remain ignored and are never
+bundles. The complete rerun uses a new output name, retaining all earlier evidence.
+OMP/MKL were set to two threads for the rerun; the saved Python model and ORT
+profile retain their existing fixed two-thread execution setting.
+
+Complete rerun CLI exit 0: **DIAGNOSTIC ONLY**, all 152 training inputs, 34 BNs,
+32 recipes and 517 unchanged control graph records. Two recipes match native BN
+on every tested layer/input/origin; complete-model parity remains unproven.
+Independent no-inference audit PASS, including exact prior ordered controls;
+preserved raw/probability parity still FAILS. First full check: **419 passed in
+74.38s**, 152 warnings. Fresh check after the order correction: **419 passed in
+77.60s**, 152 warnings; Android skipped, RESULT PASS. Root checks after initial
+documentation: **6 passed in 0.070s**. No APK or M4 completion claim.
+
+Coefficient/aggregate auditing can be repeated without inference:
+
+```python
+import json
+from pathlib import Path
+import torch
+from numbra_ml.export_bn_rounding import audit_rounding_coefficients
+from numbra_ml.export_complete_replay import audit_complete_report
+from numbra_ml.verify import load_reference
+
+repo = Path.cwd()
+torch.set_num_threads(2)
+model, _ = load_reference(repo / "data/models/PLACEHOLDER-m3-baseline")
+output = repo / "data/exports/PLACEHOLDER-m4-bn-rounding2"
+report = json.loads((repo / "ml/reports/PLACEHOLDER-m4-bn-rounding2.json").read_text())
+print(audit_rounding_coefficients(model, report))
+print(audit_complete_report(repo, output, report))
+```
+
+These audits require the recorded source checkout and ignored artifact bytes.
+Subsequent source changes intentionally invalidate current-source comparisons.
+The separate observed audit additionally rechecks model/preparation/retained
+provenance, native/promoted runtime arithmetic, exact prior ordered training
+controls and their original fixed-budget parity, without new inference.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?
