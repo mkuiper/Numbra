@@ -8,7 +8,7 @@ image archives or weights were acquired. No organisations were contacted.
 Review-1 added targeted journal-domain searches for leprosy AI/imaging in
 **Leprosy Review, IJDVL and Indian Journal of Leprosy**, initially omitted.
 Search results found [Leprosy Review's 2024 WHO-app commentary](https://leprosyreview.org/article/95/2/20-24030),
-[IJDVL's AI review](https://ijdvl.com/?article=f95403cc7ddbe468fc249d9a2284fcb6kOH1AhQgusZg2Q%3D%3D&embedded=true&view-pdf=1)
+[IJDVL's AI review](https://ijdvl.com/artificial-intelligence-in-dermatology-and-healthcare-an-overview/)
 and [IJL's 2025 research editorial](https://www.ijl.org.in/published-articles/26032025110641/1_Editorial__VMK_Jan_March_2025_final_print_version.pdf).
 These are context/commentary, not new primary diagnostic-accuracy estimates;
 no metrics or image rights are borrowed from them. The search remains targeted,

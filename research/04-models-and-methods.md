@@ -95,8 +95,12 @@ action plus every applicable reason, rule version, model version and quality sta
    This is qualified photo wording, not exclusion of disease or a discharge decision.
 
 Duration contextualises the summary and cannot rule out disease. Contact history
-stays optional/private; absent/unknown/declined contact never cancels referral and
-does not alone force a positive answer. Other required concern fields use explicit
+stays optional/private: yes refers under rule 2 for the presenting skin concern;
+unknown/declined is neither a trigger nor a rule-3 missingness case, and no can
+never lower the outcome. Volunteer concern is one explicit required question:
+“Are you concerned that this person needs clinical assessment despite the other
+answers?” Yes refers; uncertain/declined/missing routes to rule 3; no does not
+cancel other reasons. Other required concern fields use explicit
 yes/no/uncertain; uncertain/declined/omitted required fields route to rule 3, while
 any positive trigger still routes to rule 2. Patch count never assigns PB/MB.
 Even with all negative answers, disease may be missed; humans must decide whether
@@ -109,6 +113,8 @@ overlapping reasons, missingness, score boundaries, failures and monotonicity
 present, usable photo and score zero, paired separately with each new trigger,
 must refer; >5 versus exactly 5, widespread/unknown count, contact declined,
 uncertain morphology and omitted required fields must preserve the stated rules.
+Test volunteer concern yes/no/uncertain/declined/missing independently, including
+yes with intact sensation and score zero, and contact yes/no/unknown/declined.
 Adding any trigger must suppress low concern at every finite model score, even
 under overlap with urgency/failure. These tests are planned, not executed in M0.
 Test every returned outcome against
@@ -161,7 +167,10 @@ These are project specifications for M1–M4, not claimed empirical findings.
   If the point estimate meets 0.95 but its lower bound does not, label it
   `empirical_target_only`, never “supported sensitivity ≥0.95”. Selection-set
   intervals are descriptive after threshold search; use the independent frozen
-  test for a fixed-threshold interval. Synthetic intervals concern fixtures only.
+  test for a fixed-threshold interval. At 100 positive groups the lower bound is
+  approximately 0.887 for 95/100 and 0.964 for 100/100, so `empirical_target_only`
+  is expected unless sensitivity is near-perfect; do not tune until it disappears.
+  Synthetic intervals concern fixtures only.
 - **Secondary requested endpoint:** sensitivity at validation specificity
   **≥0.80**, a separate illustrative target. Choose the lowest threshold meeting
   that specificity, with a prespecified above-maximum sentinel for the all-negative

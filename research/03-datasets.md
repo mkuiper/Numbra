@@ -62,6 +62,8 @@ and an independent validation source; negative-only public data do not suffice.
   The paper's descriptor examples name vitiligo, pityriasis alba and tinea
   versicolor; examples do not prove released disease labels. Do not call this a
   negatives-only source or infer laboratory confirmation for individual cases.
+  Appendix A's descriptor examples mention leprosy under Patch, Induration,
+  Macule and Ulcer. This is a hint only, not evidence of a released disease label.
 - **Tone/grouping:** schema documents Fitzpatrick and Monk annotations and
   **`Subject_ID` as a patient identifier**, with a stratified subject-wise 80:20
   split. The [public data dictionary](https://dataverse.harvard.edu/api/access/datafile/13321639/metadata/ddi)
@@ -74,6 +76,11 @@ and an independent validation source; negative-only public data do not suffice.
   step. Metadata export worked after two failing ordinary API/page paths.
   **Image/weight retrieval was not attempted**; their download flow is UNVERIFIED.
   No patient-row tables, archives or weights downloaded.
+  Review-2 reports `*.pth` weights and two `DATASET_*.zip` archives in the
+  catalogue. Independent re-check failed via web export and direct HTTP 403 on
+  2026-10-09: **UNVERIFIED** file enumeration, **labelled documentation-only
+  workaround**. Weights and archives remain out of scope under the same NC-SA
+  hold regardless of unrestricted status; no download authorised.
 - **Licence fitness (bounded inference):** NC restricts permitted uses; SA applies
   when sharing qualifying adapted material, under the
   [licence text](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en).

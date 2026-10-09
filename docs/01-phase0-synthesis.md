@@ -30,8 +30,10 @@ cannot establish WHO's sensory cardinal sign. Local volunteer procedures and
 referral routes remain UNVERIFIED.
 
 [ADR-001](../decisions/ADR-001-task-framing.md) selects a binary image evidence score
-with transparent symptom-first referral: urgent deterioration, sensory/nerve
-concern, incomplete/failed assessment, then photo score. A low score permits only
+with transparent symptom-first referral. The single canonical list is
+[research/04, Proposed transparent rule precedence](../research/04-models-and-methods.md#proposed-transparent-rule-precedence);
+M6 implements its full question set as a superset of the roadmap minimum.
+A low score permits only
 qualified low-photo-concern wording with follow-up; never a negative diagnosis.
 Every synthetic result says **PLACEHOLDER — not clinically validated**.
 Intact sensation does not exclude MB disease. Proposed independent triggers now

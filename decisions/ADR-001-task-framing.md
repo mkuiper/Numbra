@@ -33,9 +33,10 @@ an illustrative ≥0.95 sensitivity operating point; test reports the achieved
 sensitivity and specificity at that frozen threshold. The target is an engineering
 choice, not clinical approval. Unavailable calibration/selection remains explicit.
 
-Rule precedence is urgent symptoms, then sensory/nerve concern, then incomplete
-assessment or quality/model failure, then high image evidence, then qualified low
-photo concern with follow-up. Unknown sensation cannot become normal sensation.
+The single canonical rule list is [research/04, Proposed transparent rule
+precedence](../research/04-models-and-methods.md#proposed-transparent-rule-precedence).
+M6 implements that full list; the roadmap's question list is a minimum, not the
+complete clinical-review proposal. Unknown sensation cannot become normal sensation.
 Rules return referral actions and reasons, never disease absence, treatment, PB/MB
 classification or a clinically calibrated probability. Every synthetic POC result
 says **PLACEHOLDER — not clinically validated**. Local clinical rules, translations,
@@ -47,7 +48,12 @@ warns against relying on anaesthetic patches alone. Volunteer touch-test sensiti
 is UNVERIFIED. Before interpreting scores, the proposed engine also refers for
 more than five patches, many/widespread patches with unknown count, raised/nodular/thickened
 skin or earlobes, eyebrow loss, painless hand/foot wounds/burns, close contact
-with the presenting skin concern, or volunteer concern. Incomplete required
+with the presenting skin concern, or an explicit volunteer-concern answer.
+Ask: “Are you concerned that this person needs clinical assessment despite the
+other answers?” Use yes/no/uncertain: yes refers; uncertain, declined or missing
+routes to incomplete-assessment review. Contact history is optional: yes refers,
+unknown/declined is neither a trigger nor required-answer missingness, and no
+never lowers an outcome. Incomplete required
 assessment routes to clinical review. These proposals cannot guarantee detection
 of all MB disease; future humans must explicitly approve whether low-photo wording
 is appropriate at all. M6 must test each override with intact sensation and score

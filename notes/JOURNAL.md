@@ -208,3 +208,7 @@ Append-only log of Builder iterations.
 - Final documentation suite: all 5 tests PASS; staged diff --check PASS. Staged
   boundary audit confirms 16 builder files, no protected/data files, and exact
   single-line REVIEW M0 request. Commit: M0: address first research review.
+
+## 2026-10-09T12:52:42Z — iteration
+
+Read roadmap, status, harness, M0 review files, AGENTS and ADRs in order. Harness closed M0 PASS WITH CHANGES. Addressed Review-2 consistency issues in RESPONSE-2: canonical referral list, explicit volunteer concern/contact handling, observation superset, count-bound interpretation, stable IJDVL landing page, and publication PDF cleanup. DermaCon catalogue confirmation failed via web export then direct HTTP 403; labelled documentation-only workaround preserves reviewer file enumeration as UNVERIFIED and holds weights/archives. No patient-row audit or image acquisition. Root unittest: 5 PASS; git diff --check PASS. Starting M1 only; Python 3.12.3 venv created in ml/.venv, pinned M1 dependency installation underway. No protected edits, reviews, publishing, messages or pushes.

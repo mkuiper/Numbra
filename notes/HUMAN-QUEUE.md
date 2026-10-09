@@ -2,6 +2,10 @@
 
 Decisions made autonomously, blockers, and anything needing human review.
 
+- 2026-10-09 — M0 Review-2: M6 must implement the full canonical research/04 / ADR-001 question set; protected roadmap questions are a minimum. Contact yes refers, contact unknown/declined is optional, and volunteer concern is an explicit required question. Humans must clinically review this superset and all M0 ADRs before field use.
+- 2026-10-09 — M0 Review-2: root repository-contract tests are Builder-attested only because protected check.sh does not run them. Humans/harness maintainers may add them to tests of record; Builder did not edit scripts.
+- 2026-10-09 — M0 Review-2: DermaCon-IN descriptor examples mention leprosy but cannot establish released labels. Catalogue re-check failed via web and direct HTTP 403; labelled documentation-only workaround leaves the reported weights/archive enumeration UNVERIFIED. All weights/archives remain held under NC-SA. Any future patient-row label audit requires amended dataset authority; none performed.
+
 - 2026-10-09 — ADR-003 accepts Apache-2.0 for code, pending human review; data and weight licences remain separate.
 - 2026-10-09 — Firecrawl has zero credits; two requests failed. Workaround: available web search/open tools for primary-source research, without account or billing changes.
 - 2026-10-09 — `data/` remains entirely ignored; tracked `docs/DATA-LAYOUT.md` replaces the brief's suggested committed data README.

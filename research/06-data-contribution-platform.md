@@ -44,7 +44,7 @@ Missing follow-up remains unresolved, including for referred and low-score cases
 | Proposed record group | Minimum fields / constraints |
 | --- | --- |
 | Identity and grouping | Random record/encounter IDs, site-scoped patient/group token, lesion/view IDs, source and capture/import origin. The clinic alone holds any re-identification key separately. Never hash a name/phone number as an allegedly anonymous ID. |
-| Observations | Sensation status/method/assessor, patch count, duration, nerve symptoms and optional contact history with unknown/declined values; no other person's name. |
+| Observations | Sensation status/method/assessor, patch count, distribution/widespread, duration, nerve symptoms, urgent weakness/eye symptoms, raised/nodular/thickened skin or earlobes, eyebrow loss, painless hand/foot wounds/burns, explicit volunteer concern, and optional contact history. Preserve unknown/uncertain/declined/not-tested values; no other person's name. Every answer-based referral reason must remain reconstructable from the stored answers. |
 | Label assertions | Original diagnosis, versioned mapped family/diagnosis, explicit PB/MB/reaction if supplied, provisional/confirmed status, confirmation method, confirmer role/reference, dates, disagreement and supersession reason. |
 | Consent | Information-sheet version/language, separate scope decisions, how comprehension was checked, date, collector role, participant/guardian/assent status where applicable, withdrawal token/state. No default research opt-in. |
 | Image and security | Derivative ID/hash, quality findings, orientation/redaction/metadata-removal version, access and export events, retention policy/due date. Hashes and tokens remain sensitive local metadata. |

@@ -33,6 +33,14 @@ score can never supply it. The POC does not verify professional credentials or
 connect to a real research cohort. All demo records and models are synthetic,
 with models/UI labelled **PLACEHOLDER**.
 
+Preserve the full canonical ADR-001 question set: sensation and its assessment
+method/assessor, count/distribution, duration, nerve and urgent weakness/eye
+symptoms, skin/earlobe thickening or nodules, eyebrow loss, painless wounds/burns,
+explicit volunteer concern and optional contact history, including missingness.
+M1 exposes these as optional observations; M7 stores them and includes applicable
+answers/reasons in the referral summary. Optional manifest fields do not imply
+that an incomplete M6 assessment may produce low concern.
+
 Preview clinic summaries and contribution metadata separately; omit direct
 identifiers and photos by default, record explicit sharing, and explain that a
 recipient's copy cannot be recalled. No background sync, server, research image

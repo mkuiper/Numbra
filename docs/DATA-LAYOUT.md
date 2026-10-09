@@ -20,6 +20,12 @@ synthetic fixtures are constructed by tests; no real images are test fixtures.
 Models are ignored as well. M4 must document an explicit, reviewed strategy for
 providing its small PLACEHOLDER artifact to the app without committing patient data.
 
+Research publication PDFs can contain clinical figures even when they are not
+task datasets. Inspect only for research evidence and delete local copies once
+no longer needed; never use their figures as training data. Review-2 cleanup
+removed `.firecrawl/ila-diagnosis.pdf` and `.firecrawl/ai4-supplement.pdf`; retained
+text extracts are ignored evidence notes, not datasets.
+
 ## Open questions
 
 - What versioned manifest and deduplication metadata will M1/M2 require?
