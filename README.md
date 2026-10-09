@@ -10,7 +10,8 @@ pilot at this stage. Any model trained only on synthetic fixtures must display
 **PLACEHOLDER** in its model card, reports, and app UI.
 
 Current work: M0 research. See [status](notes/STATUS.md), the
-[roadmap](docs/ROADMAP.md), and [human review queue](notes/HUMAN-QUEUE.md).
+[phase-0 synthesis](docs/01-phase0-synthesis.md), the [roadmap](docs/ROADMAP.md),
+and [human review queue](notes/HUMAN-QUEUE.md).
 No patient data or model weights are committed. No server, upload service,
 app-store release, or autonomous diagnosis is in scope.
 

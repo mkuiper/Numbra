@@ -27,8 +27,9 @@ Clinical definitions: [WHO leprosy fact sheet](https://www.who.int/news-room/fac
 Morphology terminology: [Benedetti, MSD Manual Professional, August 2026](https://www.msdmanuals.com/professional/dermatologic-disorders/approach-to-the-dermatologic-patient/description-of-skin-lesions).
 All accessed 2026-10-09; text only, no clinical photos downloaded. The MSD page
 is an authored clinical reference, not a primary diagnostic-performance study.
-Other rows define evaluation notation or proposed project conventions. The pending
-methods document will specify calibration and operating-point selection.
+Other rows define evaluation notation or proposed project conventions. The
+[methods plan](../research/04-models-and-methods.md) specifies calibration and
+operating-point selection as future engineering work.
 
 ## Open questions
 

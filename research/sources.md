@@ -89,15 +89,34 @@ no model binaries, patient photos, registrations or terms acceptances.
 | DHIS2-ANDROID | [DHIS2 Android overview](https://dhis2.org/android/) | Offline aggregate/individual capture and synchronisation; no claim about Nepal programme configuration. |
 | HMIS-LOGIN | [Nepal HMIS government login page](https://hmis.gov.np/dataportal/dhis-web-commons/security/login.action) | Indexed primary-page text identifies DHIS2/DoHS; direct open failed HTTP 502. Authenticated schemas/APIs/permissions UNVERIFIED and not accessed. |
 
+## Contribution and ethics additions
+
+All accessed **2026-10-09**, using the labelled web-tool workaround after Firecrawl
+status again showed zero credits. Only document/metadata text was inspected.
+Failed full opens are explicitly distinguished from indexed primary evidence.
+
+| ID | Primary source | What was checked / access limits |
+| --- | --- | --- |
+| WHO-AI-ETHICS | [WHO six AI health principles, 28 June 2021](https://www.who.int/news/item/28-06-2021-who-issues-first-global-report-on-ai-in-health-and-six-guiding-principles-for-its-design-and-use) | Human control, consent, privacy, transparency, accountability and equity; governance guidance, not Nepal legal clearance. |
+| NHRC-2022 | [NHRC National Ethical Guidelines for Health Research in Nepal 2022](https://elibrary.nhrc.gov.np/bitstream/20.500.14356/2481/1/National-ethical-guidelines-October.pdf) | Indexed official text: ERB online submission, Annex II/SOP and withdrawal without penalty. Full eLibrary open timed out; [NHRC-hosted copy](https://nhrc.gov.np/wp-content/uploads/2022/04/National-ethical-guidelines-October.pdf) also failed. Current jurisdiction, fees/forms/timelines UNVERIFIED. |
+| RAHS-IRC | [RAHS Institutional Review Committee](https://www.rahs.edu.np/research/institutional-review-committee) | Indexed institution's statement of NHRC approval and internal/affiliated scope. Does not establish Numbra jurisdiction or replace national approval. |
+| NEPAL-PRIVACY-INDEX | [Law Commission, Privacy Act 2075](https://lawcommission.gov.np/content/12261/the-privacy-act-2075/) | Opened official page and followed its English PDF link. |
+| NEPAL-PRIVACY-TEXT | [Government-hosted English Act](https://giwmscdnone.gov.np/media/app/public/275/posts/1721034328_44.pdf) | Inspected sections 3, 12, 19, 23 and 27. Secondary-use, amendments/rules, localisation and Numbra-specific duties not established. Initial [NIC copy](https://nic.gov.np/files/new_files/the-privacy-act-2075-2018.pdf) returned 404. |
+| DDA-DIRECTIVE | [Official translated directive record](https://www.dda.gov.np/content/23/health-technology-product-and-equipment-directive--2074/), [English directive](https://dda.gov.np/download/Health%20Technology%20Product%20and%20Equipment%20Directive%2C%202074%20%282017%29_Translated%20Final.pdf) | Indexed official existence/title/introduction. Record/PDF opens failed; [catalogue](https://www.dda.gov.np/content/act-policies) timed out. Software classification and current process UNVERIFIED. |
+| FDA-CDS-NAV | [FDA policy navigator step 6](https://www.fda.gov/medical-devices/digital-health-center-excellence/step-6-software-function-intended-provide-clinical-decision-support) | Dermatology as medical images and image-analysis limit on non-device CDS criteria. Page contains a contradictory No/Yes sentence in explanatory text; conclusion uses the question, Yes branch and listed criteria, not that apparent typo. No Numbra classification/clearance established. |
+| EU-MDCG-SOFTWARE | [MDCG 2019-11 rev.1, June 2025](https://health.ec.europa.eu/document/download/b45335c5-1679-4c71-a91c-fc7a4d37f12b_en?filename=md_mdcg_2019_11_guidance_qualification_classification_software_en.pdf&prefLang=fr) | Intended purpose, nonbinding guidance and Rule 11, section 4.2.1. Not a definitive Numbra class or Nepal rule. |
+| FEDAVG | [McMahan et al., AISTATS 2017 / arXiv:1602.05629](https://arxiv.org/abs/1602.05629) | Original distributed-data/local-update aggregation proposal; not evidence of Nepal infrastructure, anonymity or clinical performance. |
+
 ## Open questions
 
 - Can the AI4 repository's licence and stable anonymous access be verified later?
 - Can full Nepal burden tables, current district pathways and local sensory-test protocols be verified?
 - Can anonymous checkpoint access and measured export/device budgets be verified during the implementation milestones?
-- Which primary contribution-governance and regulatory sources will the remaining M0 documents require?
+- Which current NHRC/IRC jurisdiction, privacy rules and DDA classification apply to a future Numbra pilot?
 
 ## Confidence
 
 Medium: linked primary documentation supports the research, but the central AI4
-repository, real-data label details and Nepal field/device configuration remain
-unverified; proposed methods and budgets are not measured performance.
+repository, real-data label details, Nepal field/device configuration and legal
+determinations remain unverified; proposed methods and budgets are not measured
+performance. Indexed NHRC/DDA evidence cannot establish full current procedures.

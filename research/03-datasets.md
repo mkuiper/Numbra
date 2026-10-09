@@ -183,7 +183,7 @@ that invented labels represent these study populations.
 
 ## Proposed unified taxonomy and mappings
 
-This is a **project design**, pending clinical scrutiny in the remaining M0 work.
+This is a **project design**, pending human clinical scrutiny under ADR-001/002.
 Keep the original source label and confirmation provenance alongside the mapping:
 
 | Field | Proposed values and rules |
@@ -210,8 +210,8 @@ Keep the original source label and confirmation provenance alongside the mapping
 
 A model may later estimate a confirmed leprosy-vs-labelled-control score. It must
 not learn “don't refer” from controls: skin cancers and other conditions can need
-referral too. The transparent symptom/quality rules determine the action. Final
-task framing and operating point belong in ADR-001 and the methods document.
+referral too. The transparent symptom/quality rules determine the action. Selected
+task framing and operating-point proposals are in ADR-001 and the methods document.
 
 ## Combination risks and required controls
 

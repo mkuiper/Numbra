@@ -70,6 +70,18 @@ class RepositoryContractTests(unittest.TestCase):
                 self.assertLess(content.index("## Open questions"), content.index("## Confidence"))
                 self.assertRegex(content, r"https://[^\s)]+")
 
+    def test_builder_research_citations_have_source_register_entries(self):
+        # Evidence bookkeeping, not a validation of the source's factual claims.
+        url_pattern = r"https?://[^\s)]+"
+        registered = set(re.findall(url_pattern, (ROOT / "research/sources.md").read_text()))
+        for folder in ("research", "docs", "decisions"):
+            for file in (ROOT / folder).glob("*.md"):
+                if file.name in {"sources.md", "ROADMAP.md", "AUTOPILOT.md"}:
+                    continue
+                for url in set(re.findall(url_pattern, file.read_text())):
+                    with self.subTest(file=str(file.relative_to(ROOT)), source=url):
+                        self.assertIn(url, registered, "Add source evidence and access limits")
+
 
 if __name__ == "__main__":
     unittest.main()
