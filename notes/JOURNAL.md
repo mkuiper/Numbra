@@ -834,3 +834,61 @@ clinical data/validation, weight notices and mobile execution remain open.
 - Final repository-contract rerun after documentation/records: 6 PASS in 0.077s.
   git diff --check clean; NEXT_ACTION exactly CONTINUE. No protected/data files
   changed or staged. All iteration changes committed before ending.
+
+## 2026-10-09T15:59:42Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent reviews/M4 folder,
+  AGENTS and relevant runtime/training/export ADRs. No new harness intervention;
+  M0–M3 gates exist, M4 still open. Clean starting worktree.
+- Predeclared ADR-018 and HUMAN-QUEUE; committed 75c442d before implementation/
+  experiment. Joint stem/all-BN diagnostic on training only; unchanged saved
+  model/reference/fits/inputs/budgets. No new quantisation scope or frozen run.
+- Implemented export_joint and composed guarded ADR-017 runner. Stem validates
+  saved float32 parameters/geometry/input connection before embedding ADR-016's
+  double patch/MatMul with one float32 boundary. All BN expressions and other
+  serialized nodes/constants/interface retained. Actual runtime audits enforce
+  exact expressions/constant bits and 52 Conv/one MatMul/one Gemm counts.
+- Added synthetic multi-pixel border/channel arithmetic through both timm
+  in-place activations, corruption guards for saved geometry/weights/connection/
+  namespace/eval state and expression casts/constants/patch geometry/Reshape/
+  Conv counts/other-node retention. End-to-end diagnostic test corrupts all
+  non-training pixel bytes and checks unchanged inputs/state, private outputs,
+  three controls, complete training IDs and stale-provenance rejection.
+- Initial subset 22 PASS / 2 FAIL in 9.75s (56 warnings): BN substitution reused
+  all-Conv matching after stem replacement. Fixed production to independently
+  validate every saved BN boundary, retaining all parameter/count assertions.
+  Second subset 22 PASS / 2 FAIL in 10.09s (56 warnings): exact runtime audit
+  found ORT adding Reshape default allowzero=0. Explicitly declared the default
+  in the composed expression, retaining exact node-byte checks and adding a
+  corruption regression. No test deleted/skipped/weakened. Corrected subset:
+  25 PASS in 10.19s, 58 exporter warnings. Committed d71bf32 before experiment.
+- Diagnostic CLI exit 0, DIAGNOSTIC ONLY. All 152 ordered training inputs and
+  preserved/BN-only/joint controls; report ml/reports/PLACEHOLDER-m4-joint1.json.
+  No frozen test/held-out/stress inference, fit, selection or acquisition.
+- Both controls exactly reproduce retained graph hashes and diagnostic
+  aggregates. Joint still FAILS: raw/probability maxima
+  0.000200748/0.00000256741 versus fixed 0.0001/0.000001, 25/32 violations,
+  zero flips. BN-only maxima 0.000189304/0.00000240022 are smaller; joint means
+  0.0000554888/0.000000648783 are lower. Mixed statistics do not imply passing
+  parity or causal improvement. All earlier failures remain rejected.
+- Joint serialized size 6,265,822 bytes (runtime 6,165,050); float32/float64,
+  no INT8 weights. Exact stem/all-BN runtime audits PASS; ORT removes unused
+  original initializers and expands HardSwish even at disabled optimisation.
+  Other runtime-node byte identity is not claimed. Original/tapped logits equal,
+  saved-state hashes unchanged. Feature/head maxima reported separately.
+- Independent audit PASS: tracked/private equality, recomputed private/aggregate
+  parity, 152 ordered training IDs/hash, model/source/locks/dependencies/
+  preparation provenance, both prior controls and 14 graph records. No additional
+  inference. Models/graphs/weights/individual details/logs stay ignored in data/.
+- Updated ADR-018 follow-through, HUMAN-QUEUE, ML-EXPORT, DEV-SETUP and ML README.
+  M4 incomplete; ADR-012 labelled toy workaround remains diagnostic only.
+  NEXT_ACTION CONTINUE, no HANDOFF/review request. Next predeclare complete
+  same-input Conv/BN replay before further graph substitutions; quantised scope
+  and mobile float64 compatibility remain unresolved.
+- bash scripts/check.sh exit 0: 358 ML tests PASS in 56.27s, 116 legacy-export
+  warnings; Android SKIPPED, RESULT PASS. Root checks 6 PASS in 0.078s after
+  documentation changes; final root check 6 PASS in 0.074s after iteration
+  records. git diff --check clean. No APK/completion claim.
+- No toolchain/dependency/acquisition changes, protected edits, review.sh,
+  REVIEW/CHECK/GATE writes, publishing/push or external messages. All changes
+  committed before ending.

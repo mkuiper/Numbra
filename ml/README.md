@@ -104,3 +104,9 @@ Complete promoted BN substitution is available as
 ADR-017 and the export document record all 34 replacements, training-only
 whole-model parity and actual runtime audits. It lowers maximum errors but
 still fails both fixed numeric budgets; no deployment artifact is accepted.
+
+Joint promoted stem/BN substitution is available as
+`python -m numbra_ml.export_joint --output data/exports/PLACEHOLDER-<new-name>`.
+ADR-018 and the export document record training-only controls, exact runtime
+expression audits and unchanged-model provenance. The joint graph still fails
+both numerical budgets, with worse maxima than BN-only. M4 remains open.

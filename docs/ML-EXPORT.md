@@ -439,21 +439,74 @@ audit corruption, invalid source parameters, training-only image isolation,
 private output handling and stale provenance rejection. Float64 mobile support
 and performance remain unverified. Exit 0 means DIAGNOSTIC ONLY; M4 stays open.
 
+## Joint promoted stem/BatchNorm graph — ADR-018
+
+**PLACEHOLDER diagnostic, never bundle.** Run to a new ignored output:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_joint --output data/exports/PLACEHOLDER-m4-joint1
+```
+
+[ADR-018](../decisions/ADR-018-joint-promoted-stem-batchnorm.md) was committed
+before the experiment. The command uses the same guarded training-only pipeline
+as ADR-017, comparing preserved, BN-only and joint controls. It validates the
+first saved stem Conv's parameters, geometry and graph-input connection, embeds
+ADR-016's double patch/MatMul expression, and retains the float32 stem output.
+All 34 BN substitutions and every remaining serialized node, original initializer
+and graph interface are preserved. BN matching now validates only BN boundaries,
+so it can compose with the independently validated stem substitution.
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-joint1.json): all 152 existing
+training components, no frozen test/held-out/stress inference or quantisation fit.
+Preserved and BN-only controls reproduce prior graph hashes and diagnostic
+aggregates exactly. All comparisons FAIL the unchanged budgets.
+
+| Training comparison | Preserved | BN-only | Joint stem/BN |
+| --- | ---: | ---: | ---: |
+| Max raw-logit absolute error | 0.000240326 | 0.000189304 | 0.000200748 |
+| Mean raw-logit absolute error | 0.0000558684 | 0.0000575436 | 0.0000554888 |
+| Max probability absolute error | 0.00000279320 | 0.00000240022 | 0.00000256741 |
+| Mean probability absolute error | 0.000000653101 | 0.000000667205 | 0.000000648783 |
+| Raw / probability violations | 26 / 29 | 23 / 32 | 25 / 32 |
+| Frozen-threshold flips | 0 | 0 | 0 |
+
+The joint graph has worse maxima than BN-only despite lower means. No statistic
+changes the fixed acceptance result. Joint feature maximum drift 0.0000152588
+and induced Python-head maximum error 0.000206947 are separate diagnostics;
+maxima can occur on different inputs and cannot be added as causal accounting.
+All original/tapped logit differences are zero; saved state hashes match.
+
+Serialized joint size is 6,265,822 bytes; runtime copy 6,165,050. It is float32/
+float64, with 52 Conv, one promoted MatMul and one Gemm, **no INT8 weights**.
+Actual original/tapped runtime graphs pass exact BN/stem node, constant-bit and
+float32-boundary audits. ORT adds default Reshape allowzero=0 even at disabled
+optimisation; the composed expression declares it explicitly to retain exact
+node-byte auditing. Unused original initializers are removed and HardSwish is
+expanded at runtime; identity of every other runtime node is not claimed.
+
+Separate audit checks report/private equality, recomputed parity, ordered
+training IDs, source/model/dependency/preparation provenance, both retained
+controls and 14 graph records. All graphs, weights and ordered details remain
+ignored. Tests cover multi-pixel border/channel arithmetic through both timm
+in-place activations, scope/parameter/geometry/cast/constant corruption, training
+pixel isolation and stale provenance rejection. Exit 0 is DIAGNOSTIC ONLY.
+
 ## Remaining M4 work
 
-BatchNorm preservation and complete promoted BN substitution both fail parity.
-Next predeclare a joint training-only graph combining the already declared
-promoted stem Conv patch/MatMul expression with complete promoted BN, retaining
-all other Conv/head nodes and float32 stage boundaries. Compare to the preserved
-and BN-only controls before choosing quantised scope. ADR-016's local promoted
-stem Conv did not lower its native-Python maximum, so improvement is uncertain;
-do not assume higher precision fixes the contract. A selective static QDQ scope
-must be explicitly declared and justified from training evidence before any
-new frozen evaluation; float64 mobile compatibility also needs resolution.
-Keep every failure, original reference, fits/inputs and ADR-011 budgets. The toy
-model stays diagnostic only.
-No passing deployment artifact, runtime-metadata package or M4 review request
-exists. Android runtime/ABI/decode and device performance remain M5–M8 work.
+The joint substitution still fails float parity and provides no quantised
+candidate. Next predeclare complete saved Conv/BN same-input replay on training
+inputs, extending ADR-015 beyond its two pairs. Compare all 34 BNs against the
+existing native and both promoted coefficient recipes, and all 53 native Conv
+replays, with complete rather than favourably selected reporting. This can test
+whether remaining kernel discrepancies have an actionable arithmetic explanation
+before proposing further whole-graph replacements. Keep every failed export,
+reference, fit, input and ADR-011 budget; never adapt to frozen evaluation.
+
+An explicit selective static QDQ scope must still be declared from training
+evidence before a new quantisation fit or frozen evaluation. Float64 mobile
+compatibility/performance remains unresolved. ADR-012's labelled toy workaround
+is diagnostic only. No accepted export, deployment-metadata package, M4 HANDOFF
+or review request exists; Android ABI/decode/device work remains M5–M8.
 
 ## Open questions
 

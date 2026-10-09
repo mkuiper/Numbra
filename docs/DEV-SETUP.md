@@ -323,6 +323,34 @@ Full check: **345 ML tests passed in 52.62s**, 86 exporter deprecation warnings;
 Android skipped, RESULT PASS. No APK, accepted export or M4 completion claim.
 Final root repository-contract checks: **6 passed in 0.077s**.
 
+## M4 joint promoted stem/BN — observed 2026-10-09 UTC
+
+No installation or acquisition; existing pinned tools ran:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_joint.py ml/tests/test_export_promoted_bn.py
+ml/.venv/bin/python -m numbra_ml.export_joint --output data/exports/PLACEHOLDER-m4-joint1
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+Two initial subsets each had 22 PASS / 2 FAIL (9.75s and 10.09s, 56 exporter
+warnings). First exposed BN substitution's unnecessary all-Conv matching after
+stem replacement; production now independently matches all saved BN nodes.
+Second exposed ORT's serialized Reshape allowzero=0 default; the composed graph
+now declares it explicitly. Exact audit assertions retained, plus a default-
+attribute corruption regression. No test weakened, skipped or deleted.
+Corrected subset: **25 passed in 10.19s**, 58 exporter warnings.
+
+Diagnostic CLI exit 0, DIAGNOSTIC ONLY. All 152 training inputs and three controls
+completed; joint parity FAILS both budgets, zero flips. Separate aggregate/
+private/parity/provenance/control/14-graph audit passes. No quantisation fitting,
+frozen evaluation, deployment selection or mobile execution.
+
+Full check: **358 ML tests passed in 56.27s**, 116 exporter deprecation warnings;
+Android skipped, RESULT PASS. Final root repository checks: **6 passed in
+0.074s**. No APK or M4 completion claim.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

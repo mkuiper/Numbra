@@ -46,6 +46,32 @@ evaluation. Float64 mobile compatibility, performance, quantisation and unseen
 input parity remain unresolved. After this experiment, assess whether more
 arithmetic diagnostics have a plausible route to the contract before continuing.
 
+## Observed follow-through — 2026-10-09 UTC
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-joint1.json) retains all 152
+training inputs only. Preserved and BN-only controls exactly reproduce retained
+aggregate diagnostics and serialized graph checksums. The joint graph FAILS:
+maximum raw/probability errors 0.000200748/0.00000256741 exceed unchanged
+0.0001/0.000001 budgets; 25/32 violating inputs and zero threshold flips.
+Its maxima are worse than BN-only (0.000189304/0.00000240022), while means
+are lower. No causal improvement or acceptance follows from these mixed results.
+
+Actual disabled original/tapped runtime graphs pass all BN/stem expression,
+constant-bit and boundary audits: 52 Conv, one promoted MatMul, one Gemm.
+The serialized joint graph is 6,265,822 bytes; original runtime copy 6,165,050.
+It is float32/float64, with no INT8 weights. Original/tapped logit changes are
+zero; saved state unchanged. ORT removes unused original initializers, expands
+HardSwish and serializes default Reshape allowzero=0 even when optimisation is
+disabled. The composed expression explicitly declares that default, retaining
+exact expression-node audits. Full runtime identity of other nodes is not claimed.
+
+Separate audit passes aggregate/private equality, recomputed parity, ordered
+training IDs, model/source/dependency/preparation provenance, exact control
+reproduction and 14 graph records. No frozen evaluation, fit, quantisation,
+deployment selection or mobile claim. M4 stays open; every failed graph remains
+rejected. Broadening same-input operator replay across the saved backbone is the
+next diagnostic step before proposing more complete-model arithmetic changes.
+
 ## Open questions
 
 - Does the joint substitution reduce complete-model drift on training inputs?
