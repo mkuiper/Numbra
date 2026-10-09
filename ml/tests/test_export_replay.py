@@ -118,7 +118,8 @@ def test_primitive_bn_graphs_use_saved_buffers_and_match_python(tmp_path, formul
         difference(value, value[..., :0])
 
 
-def test_replay_pipeline_training_only_and_rejects_stale_provenance():
+@pytest.mark.parametrize('promoted', [False, True])
+def test_replay_pipeline_training_only_and_rejects_stale_provenance(promoted):
     repo = repository_root()
     parent = repo / 'data/test-runs'
     parent.mkdir(parents=True, exist_ok=True)
@@ -142,18 +143,21 @@ def test_replay_pipeline_training_only_and_rejects_stale_provenance():
                 if component.split != 'train':
                     (prepared / component.row.image_path).write_bytes(b'bad nontraining pixels')
             output = root / 'PLACEHOLDER-replay'
-            result = replay_run(repo, prepared, run, [experiment], preserved, output, backbone_factory=toy_backbone)
+            result = replay_run(repo, prepared, run, [experiment], preserved, output,
+                                backbone_factory=toy_backbone, promoted=promoted)
             train_ids = [item.id for item in index.components if item.split == 'train']
             assert result['status'] == 'DIAGNOSTIC ONLY'
             assert result['protocol']['components'] == len(train_ids)
             assert not result['protocol']['frozen_evaluation_inputs_used']
             assert not result['protocol']['quantisation_fit'] and not result['protocol']['deployment_selection']
+            assert result['protocol']['decision'] == ('ADR-016' if promoted else 'ADR-015')
             assert result['model_state_before_sha256'] == result['model_state_after_sha256']
-            detail = output / 'PLACEHOLDER-replay-details.json'
+            kind = 'precision' if promoted else 'replay'
+            detail = output / f'PLACEHOLDER-{kind}-details.json'
             assert json.loads(detail.read_text())['component_ids'] == train_ids
             assert sha256(detail) == result['diagnostic_details_sha256']
             assert {path: sha256(path) for path in hashes} == hashes
-            assert json.loads((output / 'PLACEHOLDER-replay-report.json').read_text()) == result
+            assert json.loads((output / f'PLACEHOLDER-{kind}-report.json').read_text()) == result
             for private in ('component_ids"', 'python_logit"', 'rows"'):
                 assert private not in json.dumps(result)
             with pytest.raises(ValueError, match='new and named'):

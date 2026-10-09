@@ -192,7 +192,10 @@ def verified_preserved(source, model, saved, index, prepared, run):
     return path, report_path, report
 
 
-def replay_diagnostics(model, source, output, inputs):
+def replay_diagnostics(model, source, output, inputs, *, promoted=False):
+    if promoted:
+        from .export_precision import (AFFINE_FORMULAS, promoted_affine_graph,
+            promoted_conv_graph, python_promoted_affine, python_promoted_conv)
     graph = onnx.shape_inference.infer_shapes(onnx.load(source, load_external_data=False), strict_mode=True)
     selected = selected_operators(model, graph)
     observed, handles = {}, []
@@ -236,7 +239,7 @@ def replay_diagnostics(model, source, output, inputs):
         tapped = ort.InferenceSession(str(tapped_path), sess_options=options, providers=['CPUExecutionProvider'])
         original_audit = output / 'PLACEHOLDER-original-optimized.onnx'
         original = runtime(source, optimisation='disabled', optimized_path=original_audit)
-        sessions, graphs, formula_sessions = {}, {}, {}
+        sessions, graphs, formula_sessions, promoted_sessions = {}, {}, {}, {}
         for position, (name, module, node) in enumerate(selected):
             path = output / f'PLACEHOLDER-operator-{position}.onnx'
             extracted = onnx.utils.Extractor(graph).extract_model([node.input[0]], [node.output[0]])
@@ -256,6 +259,19 @@ def replay_diagnostics(model, source, output, inputs):
                     formula_graph(module, shapes[node.input[0]], formula, graph, path)
                     formula_sessions[name, formula] = operator_session(path, optimized)
                     graphs[name]['formula_graphs'][formula] = {'graph': graph_report(path), 'runtime_graph': graph_report(optimized)}
+            if promoted and (position == 0 or isinstance(module, nn.BatchNorm2d)):
+                strategies = AFFINE_FORMULAS if isinstance(module, nn.BatchNorm2d) else ('stem_matmul',)
+                graphs[name]['promoted_graphs'] = {}
+                for strategy in strategies:
+                    path = output / f'PLACEHOLDER-operator-{position}-promoted-{strategy}.onnx'
+                    optimized = output / f'PLACEHOLDER-operator-{position}-promoted-{strategy}-optimized.onnx'
+                    if strategy == 'stem_matmul':
+                        promoted_conv_graph(module, shapes[node.input[0]], graph, path)
+                    else:
+                        promoted_affine_graph(module, shapes[node.input[0]], strategy, graph, path)
+                    promoted_sessions[name, strategy] = operator_session(path, optimized)
+                    graphs[name]['promoted_graphs'][strategy] = {'graph': graph_report(path),
+                        'runtime_graph': graph_report(optimized)}
         rows, ids = [], []
         with torch.inference_mode():
             for identifier, value in inputs:
@@ -293,6 +309,18 @@ def replay_diagnostics(model, source, output, inputs):
                                     'python_vs_native': difference(native, py_formula),
                                     'onnx_vs_native': difference(native, ort_formula),
                                     'onnx_vs_python_formula': difference(py_formula, ort_formula)}
+                    if 'promoted_graphs' in graphs[name]:
+                        stats['promoted'] = {}
+                        for origin, x, native in (('python_input', py_input, py_on_py), ('onnx_input', ort_input, py_on_ort)):
+                            stats['promoted'][origin] = {}
+                            for strategy in graphs[name]['promoted_graphs']:
+                                py_promoted = (python_promoted_conv(module, x) if strategy == 'stem_matmul'
+                                    else python_promoted_affine(module, x, strategy))
+                                ort_promoted = run_operator(promoted_sessions[name, strategy], x)
+                                stats['promoted'][origin][strategy] = {
+                                    'python_vs_native': difference(native, py_promoted),
+                                    'onnx_vs_native': difference(native, ort_promoted),
+                                    'onnx_vs_python_promoted': difference(py_promoted, ort_promoted)}
                     local[name] = stats
                 ids.append(identifier)
                 rows.append({'operators': local, 'python_logit': python_logit, 'original_logit': original_logit,
@@ -318,7 +346,8 @@ def replay_diagnostics(model, source, output, inputs):
     return summary, {'notice': PLACEHOLDER_NOTICE, 'component_ids': ids, 'rows': rows}
 
 
-def replay_run(repo, prepared, run, experiments, source, output, *, backbone_factory=backbone_architecture):
+def replay_run(repo, prepared, run, experiments, source, output, *, backbone_factory=backbone_architecture,
+               promoted=False):
     prepared, run, source, output = [ignored_path(repo, path) for path in (prepared, run, source, output)]
     experiments = tuple(ignored_path(repo, path) for path in experiments)
     if not experiments:
@@ -337,11 +366,12 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
     selected_operators(model, onnx.load(path, load_external_data=False))
     output.mkdir(parents=True, exist_ok=False)
     summary, details = replay_diagnostics(model, path, output,
-        ((item.id, component_input(prepared, item)) for item in training))
+        ((item.id, component_input(prepared, item)) for item in training), promoted=promoted)
     after = tensor_hash(model.state_dict())
     if after != before or any(module.training for module in model.modules()):
         raise ValueError('replay changed saved model state or eval mode')
-    details_path = output / 'PLACEHOLDER-replay-details.json'
+    kind = 'precision' if promoted else 'replay'
+    details_path = output / f'PLACEHOLDER-{kind}-details.json'
     details_path.write_text(json_text(details))
     report = {'notice': PLACEHOLDER_NOTICE, 'status': 'DIAGNOSTIC ONLY', 'version': '1.0.0',
         'created_utc': datetime.now(timezone.utc).isoformat(), 'environment': environment,
@@ -351,18 +381,23 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
         'source_graph': graph_report(path), 'source_report_sha256': sha256(report_path),
         'retained_artifacts': {digest: {'kind': artifact['kind'], 'graph': artifact['graph'],
             'source_experiments': artifact['sources']} for digest, artifact in artifacts.items()},
-        'protocol': {'decision': 'ADR-015', 'split': 'train', 'components': len(training),
+        'protocol': {'decision': 'ADR-016' if promoted else 'ADR-015', 'split': 'train', 'components': len(training),
             'component_ids_sha256': hashlib.sha256(json_text([item.id for item in training]).encode()).hexdigest(),
             'frozen_evaluation_inputs_used': False, 'quantisation_fit': False, 'optimisation': 'disabled',
             'intra_op_threads': 2, 'inter_op_threads': 1, 'execution': 'sequential', 'formulas': list(FORMULAS),
             'deployment_selection': False},
         'diagnostics': summary, 'diagnostic_details_sha256': sha256(details_path),
         'scope': 'PLACEHOLDER training-only operator replay; never bundle; no deployment/mobile/clinical evidence'}
-    (output / 'PLACEHOLDER-replay-report.json').write_text(json_text(report))
+    if promoted:
+        from .export_precision import AFFINE_FORMULAS
+        report['protocol']['promoted_strategies'] = {'stem': 'float64 patch MatMul, bias, float32 boundary',
+            'batchnorm': ['float32 coefficients, float64 multiply/add, float32 boundary: ' + formula
+                          for formula in AFFINE_FORMULAS]}
+    (output / f'PLACEHOLDER-{kind}-report.json').write_text(json_text(report))
     return report
 
 
-def main(argv=None):
+def main(argv=None, *, promoted=False):
     parser = argparse.ArgumentParser(description=f'{PLACEHOLDER_NOTICE}; training-only operator replay')
     parser.add_argument('--prepared', type=Path, default=Path('data/prepared/synthetic-v2-selection'))
     parser.add_argument('--run', type=Path, default=Path('data/models/PLACEHOLDER-m3-baseline'))
@@ -379,7 +414,7 @@ def main(argv=None):
         if (target.exists() or target.is_symlink() or reports.resolve() != reports
                 or not output.name.startswith('PLACEHOLDER-')):
             raise ValueError('aggregate target must be new, local and PLACEHOLDER-*')
-        report = replay_run(repo, args.prepared, args.run, args.experiments, args.source, output)
+        report = replay_run(repo, args.prepared, args.run, args.experiments, args.source, output, promoted=promoted)
         with target.open('x') as stream:
             stream.write(json_text(report))
     except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:

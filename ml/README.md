@@ -92,3 +92,9 @@ Same-input stem/depthwise Conv/BN replay is available as
 It uses training images only, reports propagation separately from local kernel
 arithmetic, and compares three fixed BN primitive formulas. See the export
 document and ADR-015 for measured evidence; these copies are never app bundles.
+
+Promoted stem Conv / affine BN arithmetic is available as
+`python -m numbra_ml.export_precision --output data/exports/PLACEHOLDER-<new-name>`.
+It retains training-only replay and tests float64 accumulation with float32
+boundaries against native saved operators. ADR-016 and the export document
+record local BN improvement and remaining differences; M4 stays incomplete.

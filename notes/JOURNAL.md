@@ -723,3 +723,54 @@ clinical data/validation, weight notices and mobile execution remain open.
   checkpoint or dataset acquisition; no protected edits, review.sh invocation,
   REVIEW/CHECK/GATE files written, publishing, pushing or messaging.
 - Final repository-contract rerun after docs/records: 6 PASS in 0.065s. Saved model/run, preparation and both dependency-lock hashes match the aggregate; NEXT_ACTION contract verified. git diff --check clean.
+
+## 2026-10-09T15:40:15Z — iteration
+
+- Oriented in required order: roadmap, STATUS, HARNESS, current M4 review folder
+  (absent), AGENTS and relevant ADRs. No new harness messages or M4 review/gate.
+  M0–M3 gates closed; worked only on M4 and retained ADR-012's labelled toy
+  diagnostic workaround. No delegation or human question.
+- Predeclared ADR-016 (Accepted (autopilot) — pending human review), queued it,
+  and built promoted operator arithmetic. Reused ADR-015 provenance/input/replay
+  guards, native saved Python reference and exact float32 parameter bits.
+  First stem Conv uses explicit zero Pad/strided-dilated patch extraction,
+  float64 MatMul and bias, one float32 boundary cast. Both BNs use two existing
+  float32 affine coefficient recipes and promoted multiply/add/float32 cast.
+  Actual disabled ORT graphs audited; original profile/thread settings unchanged.
+- Tests independently check convolution ordering, border zeros, stride/dilation,
+  non-square geometry, bias, rejected unsupported geometry/inputs, saved weight
+  bits, affine cancellation versus unfused float32, both origins, pre-activation
+  replay and hook cleanup. Existing end-to-end replay/provenance fixture now also
+  runs promoted mode with deliberately corrupt non-training pixels; only training
+  is read, saved inputs/graphs remain unchanged, output details stay private.
+- First subset: 15 PASS in 10.63s, 24 exporter warnings plus test-only scalar/
+  autograd warning. Added detach to the test scalar; full suite has only exporter
+  warnings. No failure, skipped/deleted/weakened test or tolerance change.
+- Promoted CLI exit 0: DIAGNOSTIC ONLY, all 152 training inputs and no frozen
+  evaluation/quantisation fit/deployment selection. Tracked aggregate:
+  ml/reports/PLACEHOLDER-m4-precision1.json. All promoted ONNX/Python expressions
+  agree exactly on both origins; native Python differences remain. Stem Conv max
+  0.000000476837 (same maximum as native ORT); stem BN rsqrt-affine
+  0.0000000596046 versus native ORT 0.000000953674. Stem divide max
+  0.000000178814. First depthwise BN max 0.00000381470 / 0.00000762939 on Python/
+  ORT origins with either recipe. Local improvements do not imply propagated or
+  complete-model improvement; no expression exactly recovers native Python.
+- Original/tapped logits, replay-fidelity errors and signed residuals are zero;
+  before/after state hashes match. Checksum audit first used an assumed .pt path
+  and failed FileNotFoundError; corrected the audit command to the actual
+  PLACEHOLDER-model.safetensors and passed. Aggregate/private equality,
+  source/lock/preparation/saved-model provenance, details and 33 graph records
+  verified. No implementation/model change for this audit typo.
+- Updated ML-EXPORT, ML README, DEV-SETUP, ADR-016 and HUMAN-QUEUE. Graphs, weights,
+  tensors and ordered component details stay ignored. Existing failed exports,
+  fits/reference/preprocessing and ADR-011 budgets unchanged.
+- bash scripts/check.sh exit 0: 333 ML tests PASS in 48.97s, 58 legacy exporter
+  deprecation warnings; Android SKIPPED, RESULT PASS. Root repository suite
+  6 PASS in 0.066s before final docs/records. No APK or M4 completion claim.
+- Next predeclare complete preserved-graph promoted rsqrt-BN substitution on
+  training components with original Conv/head and float32 boundaries, then choose
+  explicitly declared selective static QDQ scope before any frozen evaluation.
+  Mobile float64 compatibility remains unresolved. NEXT_ACTION CONTINUE; no
+  HANDOFF/review request. No installs/acquisition, protected edits, review.sh,
+  REVIEW/CHECK/GATE writes, publication/push or messages.
+- Final repository-contract rerun after docs/records: 6 PASS in 0.068s. git diff --check clean; NEXT_ACTION is exactly CONTINUE. All generated data/graphs remain ignored.

@@ -324,17 +324,77 @@ Every full/tapped/extracted/formula/runtime graph is labelled **PLACEHOLDER
 diagnostic, never bundle** and stays under ignored data/. Ordered component
 details are private; tracked evidence contains only aggregates and hashes.
 
+## Promoted operator arithmetic — ADR-016
+
+**PLACEHOLDER diagnostic, never bundle.** Run from the repository root with a
+new output directory:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_precision --output data/exports/PLACEHOLDER-m4-precision1
+```
+
+This extends the guarded ADR-015 replay, retaining all 152 training components,
+both exact input origins, pre-activation outputs and original graph/replay
+comparisons. It never opens frozen test/held-out images or generated stress
+inputs. Source/preparation/model/report provenance and ignored output guards
+are unchanged. The selected saved model, fits and state hashes stay fixed.
+
+The first stem Conv uses explicit Pad/Slice/Unsqueeze/Concat patch extraction,
+Reshape/Transpose and float64 MatMul, followed by one float32 output cast. Its
+saved float32 weight bits are serialized and promoted at runtime. Tests check
+non-square kernels, stride, dilation, border zeros, channel ordering and bias
+against an independent direct convolution; grouped/nonzero-mode padding is
+rejected. Only this first Conv is promoted, never the depthwise Conv.
+
+Both selected BN nodes use the two existing float32 affine coefficient recipes,
+promoted multiply/add, and one float32 output cast. The expressions do not round
+the product to float32 before adding beta. A cancellation fixture asserts the
+distinction from ordinary float32 multiply/add. This is arithmetic emulation,
+not proof of native CPU FMA implementation or general hardware identity.
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-precision1.json) has status
+DIAGNOSTIC ONLY. Maximum same-input errors against native Python are:
+
+| Operator / promoted arithmetic | Python-origin input | ORT-origin input |
+| --- | ---: | ---: |
+| Stem Conv / float64 patch MatMul | 0.000000476837 | 0.000000476837 |
+| Stem BN / promoted affine rsqrt | 0.0000000596046 | 0.0000000596046 |
+| Stem BN / promoted affine divide | 0.000000178814 | 0.000000178814 |
+| First depthwise BN / promoted affine rsqrt | 0.00000381470 | 0.00000762939 |
+| First depthwise BN / promoted affine divide | 0.00000381470 | 0.00000762939 |
+
+Every promoted ONNX expression exactly matches its corresponding Python
+promoted implementation on these inputs. That implementation is distinct from
+the native saved float32 operator. Stem BN improves locally relative to native
+ORT's 0.000000953674 maximum on both origins. Promoted stem Conv still differs
+from native Python and has the same maximum as native ORT; higher precision
+does not recover native float32 rounding. First depthwise BN improves its
+Python-origin maximum but retains the prior ORT-origin maximum. No formula is
+an exact native-Python replacement. These are local comparisons on identical
+inputs, not propagated/full-model improvements.
+
+Original/tapped logits, Python/ONNX replay-fidelity errors and signed telescoping
+residuals are zero. The saved-state hashes match before/after; hooks clean up on
+failure. Actual disabled-optimisation runtime graphs retain the promoted MatMul
+or Mul/Add and their casts. Separate checksum audit verified the tracked/private
+aggregate equality, source/dependency/preparation/saved-model provenance,
+private details and 33 original/tapped/operator/formula/runtime graph records.
+All graphs, weights, tensors and ordered component details remain ignored.
+Float64 operator support/performance on Android remains unverified; these copies
+have no deployment authority.
+
 ## Remaining M4 work
 
-BatchNorm preservation alone does not meet parity, and the fixed primitive BN
-formulas do not eliminate local arithmetic differences. The next declared
-training-only experiment should test promoted-precision accumulation at the
-stem Conv and fused-affine BN emulation, retaining float32 stage boundaries and
-the native saved Python reference. Compare identical inputs before changing a
-complete graph; do not assume higher precision matches native float32 rounding.
-Choose the complete arithmetic/precision and quantised scope using training
-evidence before the next frozen evaluation. Keep every failure, original
-reference, fits/inputs and ADR-011 budgets. The toy model stays diagnostic only.
+BatchNorm preservation alone fails parity; promoted expressions improve some
+local BN arithmetic but leave native differences. Next predeclare a complete
+training-only preserved graph with all saved BN nodes replaced by the promoted
+rsqrt-affine expression, original Conv/head retained, and float32 stage
+boundaries. Measure complete-model raw/probability/decision parity and actual
+runtime graph before considering quantised scope. A selective static QDQ scope
+must be explicitly declared and justified from training evidence before any
+new frozen evaluation; float64 mobile compatibility also needs resolution.
+Keep every failure, original reference, fits/inputs and ADR-011 budgets. The toy
+model stays diagnostic only.
 No passing deployment artifact, runtime-metadata package or M4 review request
 exists. Android runtime/ABI/decode and device performance remain M5–M8 work.
 

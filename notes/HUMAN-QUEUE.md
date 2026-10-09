@@ -2,6 +2,9 @@
 
 Decisions made autonomously, blockers, and anything needing human review.
 
+- 2026-10-09 — ADR-016 predeclares training-only PLACEHOLDER promoted stem patch/MatMul accumulation and two promoted affine BN expressions, retaining saved float32 weight/coefficient bits and float32 stage boundaries. Same inputs/native reference/budgets; no quantisation fit, frozen evaluation or deployment selection. Review diagnostic protocol and subsequent evidence; M4 remains open.
+- 2026-10-09 — ADR-016 follow-through: 152 training inputs; promoted ONNX/Python expressions agree exactly. Stem BN local rsqrt-affine maximum improves to 0.0000000596046, but promoted stem Conv and both BNs still differ from native Python. No complete-model improvement, accepted export or Android float64 support established. Next declare full preserved-graph BN substitution before selecting quantisation scope or revisiting frozen evaluation; evidence in ml/reports/PLACEHOLDER-m4-precision1.json.
+
 - 2026-10-09 — ADR-011 fixes M4 pre-experiment float raw/probability budgets 0.0001/0.000001, quantised budgets 0.1/0.001, zero frozen-threshold flips and separate 0.001 conservative margin accounting. Original selected PLACEHOLDER retained for software-test reference; no ONNX export/device evidence yet. Human review required before replacing engineering budgets or any clinical use.
 
 - 2026-10-09 — M3 REVIEW-1 follow-through amends ADR-010: real-data model-selection split/nested CV before calibration, synthetic subgroup display suppression below 20/class, and raw-logit plus probability plus frozen-threshold-flip checks for M4. The M0 0.02-probability-only tolerance proposal is superseded. Display suppression is not a real-data privacy policy; review sparse-bin/disclosure controls before real cohorts.

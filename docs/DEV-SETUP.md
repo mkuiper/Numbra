@@ -269,6 +269,32 @@ Full check: **324 ML tests passed in 43.92s**, 50 legacy exporter deprecation
 warnings; Android skipped, RESULT PASS. Root checks: **6 passed in 0.066s**.
 M4 remains incomplete; no accepted deployment artifact or APK.
 
+## M4 promoted operator arithmetic — observed 2026-10-09 UTC
+
+No toolchain/dependency installation, checkpoint or dataset acquisition. The
+existing 42-package hash-locked environment ran from the repository root:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_precision.py ml/tests/test_export_replay.py
+ml/.venv/bin/python -m numbra_ml.export_precision --output data/exports/PLACEHOLDER-m4-precision1
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+First subset: **15 passed in 10.63s**, 24 exporter deprecation warnings and one
+test-only scalar/autograd warning. Added explicit detach to that test scalar;
+the full suite has only the exporter warnings. Diagnostic command exit 0 means
+**DIAGNOSTIC ONLY**, all 152 training components and no frozen evaluation or
+quantisation fit. Promoted ONNX expressions match corresponding Python
+expressions exactly, but native Python differences remain. Local stem BN error
+improves; no complete-model improvement or accepted bundle is claimed.
+
+Full check: **333 ML tests passed in 48.97s**, 58 legacy-export deprecation
+warnings; Android skipped, RESULT PASS. Root checks: **6 passed in 0.066s**.
+Independent report/graph/source/provenance audit passed after correcting the
+audit command's assumed `.pt` filename to the actual `.safetensors` artifact;
+no model or implementation change. See [export evidence](ML-EXPORT.md).
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

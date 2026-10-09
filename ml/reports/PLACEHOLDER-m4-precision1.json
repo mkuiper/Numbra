@@ -1,0 +1,2464 @@
+{
+  "created_utc": "2026-10-09T15:37:16.487208+00:00",
+  "diagnostic_details_sha256": "41b7f342a6ad11780e018ea46186c74326e765f9ddb30ff08c0e29fd1c10f8b3",
+  "diagnostics": {
+    "components": 152,
+    "instrumentation_absolute_logit_change": {
+      "max": 0.0,
+      "mean": 0.0
+    },
+    "instrumented_graph": {
+      "bytes": 6202828,
+      "int8_weight_qdq_operators": {},
+      "ir_version": 8,
+      "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+      "operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Constant": 1,
+        "Conv": 53,
+        "Div": 1,
+        "Flatten": 1,
+        "Gemm": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 9,
+        "HardSwish": 19,
+        "Mul": 9,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "opsets": {
+        "ai.onnx": 17
+      },
+      "other_float_or_structural_operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Constant": 1,
+        "Div": 1,
+        "Flatten": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 9,
+        "HardSwish": 19,
+        "Mul": 9,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "remaining_float_weight_operators": {
+        "Conv": 53,
+        "Gemm": 1
+      },
+      "sha256": "adc586247c255e9b344996c9f321d153e7571203af44629edbec57c50b5e90cd",
+      "size_pass": true,
+      "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+    },
+    "instrumented_runtime_graph": {
+      "bytes": 6206740,
+      "int8_weight_qdq_operators": {},
+      "ir_version": 8,
+      "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+      "operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Conv": 53,
+        "Div": 1,
+        "Flatten": 1,
+        "Gemm": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 28,
+        "Mul": 28,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "opsets": {
+        "ai.onnx": 17,
+        "ai.onnx.ml": 5,
+        "ai.onnx.preview.training": 1,
+        "ai.onnx.training": 1,
+        "com.microsoft": 1,
+        "com.microsoft.experimental": 1,
+        "com.microsoft.nchwc": 1,
+        "org.pytorch.aten": 1
+      },
+      "other_float_or_structural_operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Div": 1,
+        "Flatten": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 28,
+        "Mul": 28,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "remaining_float_weight_operators": {
+        "Conv": 53,
+        "Gemm": 1
+      },
+      "sha256": "9a3771b7a6ab62d7d6f546af4edb4f719530b2597eaced2463b66eb396ed2137",
+      "size_pass": true,
+      "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+    },
+    "notice": "PLACEHOLDER diagnostic graph; never bundle",
+    "operator_graphs": {
+      "backbone.blocks.0.0.bn1": {
+        "formula_graphs": {
+          "affine_divide": {
+            "graph": {
+              "bytes": 486,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "c139f07773825d5b3843dd841f0e05947c908e41f7ed1be70a5910b144b3e97b",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 652,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "381baae11f4efc086a1c9aa079201d7721775d1d3f9f6e1ba766e916936d55ba",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "affine_rsqrt": {
+            "graph": {
+              "bytes": 485,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "214fc13e10c0ab9700195e2cc16a09660414db52f8ddbd2605d46eceef0a8920",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 651,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "ead4e504340ab40212077e2c9e0e3f49c872b757f83073cf9effff3f95e64f34",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "subtract_divide": {
+            "graph": {
+              "bytes": 732,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "9a61dd5336cf14dac2071f9952950a7feb48afe716f7e58ef391d64d4e2c7fcd",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 898,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "2b75ffff68decfc9eeeb744e9fe6a0a3fa459df8229e6fe0a6406668bf137430",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          }
+        },
+        "graph": {
+          "bytes": 1439,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "BatchNormalization": 1
+          },
+          "opsets": {
+            "ai.onnx": 17
+          },
+          "other_float_or_structural_operators": {
+            "BatchNormalization": 1
+          },
+          "remaining_float_weight_operators": {},
+          "sha256": "d09fd6a7248971e49fe6f40bd521f0d93cf9778ab685207badd02426904fccd2",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        },
+        "input_shape": [
+          1,
+          16,
+          56,
+          56
+        ],
+        "original_operator": "BatchNormalization",
+        "output_shape": [
+          1,
+          16,
+          56,
+          56
+        ],
+        "promoted_graphs": {
+          "affine_divide": {
+            "graph": {
+              "bytes": 657,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "6fd7da5da919d9ea9de90f7609f92c961b5b9c24e56ce30ccff6e7f907cfc488",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 823,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "adb983cb8b82480d758ac015688c79c98f6523874de565634af3c11e81a08fdd",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "affine_rsqrt": {
+            "graph": {
+              "bytes": 656,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "4925cbcc0bc2e2b5663362ab7e0dfc1d8d8ae1c17bb88c1873c68412aff18efd",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 822,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "7966c690a3b43d7360e4889ad976d998fefe5a983a8d561d54e494b34c307f9c",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          }
+        },
+        "runtime_graph": {
+          "bytes": 1605,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "BatchNormalization": 1
+          },
+          "opsets": {
+            "ai.onnx": 17,
+            "ai.onnx.ml": 5,
+            "ai.onnx.preview.training": 1,
+            "ai.onnx.training": 1,
+            "com.microsoft": 1,
+            "com.microsoft.experimental": 1,
+            "com.microsoft.nchwc": 1,
+            "org.pytorch.aten": 1
+          },
+          "other_float_or_structural_operators": {
+            "BatchNormalization": 1
+          },
+          "remaining_float_weight_operators": {},
+          "sha256": "f4e8570303e144df6e378b66533f72cc3df3e127c1c443300673752ecf88f008",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        }
+      },
+      "backbone.blocks.0.0.conv_dw": {
+        "graph": {
+          "bytes": 1454,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "Conv": 1
+          },
+          "opsets": {
+            "ai.onnx": 17
+          },
+          "other_float_or_structural_operators": {},
+          "remaining_float_weight_operators": {
+            "Conv": 1
+          },
+          "sha256": "702d5ecead19b56f7c12ca4215a89716a1741cb305d6847c7cd9e892b8b7860f",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        },
+        "input_shape": [
+          1,
+          16,
+          112,
+          112
+        ],
+        "original_operator": "Conv",
+        "output_shape": [
+          1,
+          16,
+          56,
+          56
+        ],
+        "runtime_graph": {
+          "bytes": 1620,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "Conv": 1
+          },
+          "opsets": {
+            "ai.onnx": 17,
+            "ai.onnx.ml": 5,
+            "ai.onnx.preview.training": 1,
+            "ai.onnx.training": 1,
+            "com.microsoft": 1,
+            "com.microsoft.experimental": 1,
+            "com.microsoft.nchwc": 1,
+            "org.pytorch.aten": 1
+          },
+          "other_float_or_structural_operators": {},
+          "remaining_float_weight_operators": {
+            "Conv": 1
+          },
+          "sha256": "6c6ec809ad876fd7ccebf9d9e9237926d5a9fd5efe4609824373257ba804c703",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        }
+      },
+      "backbone.bn1": {
+        "formula_graphs": {
+          "affine_divide": {
+            "graph": {
+              "bytes": 486,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "9681cee508d03e684793bf38d766fa03428f9066e095ceb98d706aabe0027571",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 652,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "80b5f97a0295fa27e932ce530d05057a8ab74b891876d086090f8551021cd043",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "affine_rsqrt": {
+            "graph": {
+              "bytes": 485,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "6885de0255885c5d43b63bbab7e912fc88fa0384bba912446aab60477d1ba208",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 651,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "434553f88ff9ebed24d8bbbe7a5ab7a62522240231a6388f0ab8eb679693b304",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "subtract_divide": {
+            "graph": {
+              "bytes": 732,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "91daa300e448472962955b9102c10f64e0680f14c8e7390dc3bdf25b99a2be5d",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 898,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Div": 1,
+                "Mul": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "f74a157543e2ba33235d6b545bdc330a6a4291f7e7f5772bfe2b8652d9b3240e",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          }
+        },
+        "graph": {
+          "bytes": 1168,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "BatchNormalization": 1
+          },
+          "opsets": {
+            "ai.onnx": 17
+          },
+          "other_float_or_structural_operators": {
+            "BatchNormalization": 1
+          },
+          "remaining_float_weight_operators": {},
+          "sha256": "d9797cdc651abe48c633e8e8eeb69afc05522a6984ca0b6d3eb0c186c2e203ce",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        },
+        "input_shape": [
+          1,
+          16,
+          112,
+          112
+        ],
+        "original_operator": "BatchNormalization",
+        "output_shape": [
+          1,
+          16,
+          112,
+          112
+        ],
+        "promoted_graphs": {
+          "affine_divide": {
+            "graph": {
+              "bytes": 657,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "3db39108a3ab955f02737ace1d418466039fc728d3d904fd22c156506741c22d",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 823,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "f369a21c012929c7e1aaa41693abeced333d665c43e495754307ea0167edd370",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "affine_rsqrt": {
+            "graph": {
+              "bytes": 656,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "e5194721cfad51df48dbd4af2924ebeb60a0ce733fb6113776ade59e72b911d7",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 822,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 1,
+                "Cast": 4,
+                "Mul": 1
+              },
+              "remaining_float_weight_operators": {},
+              "sha256": "f1ad82687cf05e580feed1c1f272e05bc85879627e60fffffc17aaf901875efc",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          }
+        },
+        "runtime_graph": {
+          "bytes": 1334,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "BatchNormalization": 1
+          },
+          "opsets": {
+            "ai.onnx": 17,
+            "ai.onnx.ml": 5,
+            "ai.onnx.preview.training": 1,
+            "ai.onnx.training": 1,
+            "com.microsoft": 1,
+            "com.microsoft.experimental": 1,
+            "com.microsoft.nchwc": 1,
+            "org.pytorch.aten": 1
+          },
+          "other_float_or_structural_operators": {
+            "BatchNormalization": 1
+          },
+          "remaining_float_weight_operators": {},
+          "sha256": "def74f2b4fd9eaf156bc2d9a8e101152f7c7180d679e4c864a72b6e26b6913a9",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        }
+      },
+      "backbone.conv_stem": {
+        "graph": {
+          "bytes": 2393,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "Conv": 1
+          },
+          "opsets": {
+            "ai.onnx": 17
+          },
+          "other_float_or_structural_operators": {},
+          "remaining_float_weight_operators": {
+            "Conv": 1
+          },
+          "sha256": "b059388361a1bc40f527a78f955e7199cc8ccc5aef8dd6c5670c51f4caef1765",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        },
+        "input_shape": [
+          1,
+          3,
+          224,
+          224
+        ],
+        "original_operator": "Conv",
+        "output_shape": [
+          1,
+          16,
+          112,
+          112
+        ],
+        "promoted_graphs": {
+          "stem_matmul": {
+            "graph": {
+              "bytes": 6044,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Cast": 3,
+                "Concat": 1,
+                "MatMul": 1,
+                "Pad": 1,
+                "Reshape": 2,
+                "Slice": 9,
+                "Transpose": 2,
+                "Unsqueeze": 9
+              },
+              "opsets": {
+                "ai.onnx": 17
+              },
+              "other_float_or_structural_operators": {
+                "Cast": 3,
+                "Concat": 1,
+                "Pad": 1,
+                "Reshape": 2,
+                "Slice": 9,
+                "Transpose": 2,
+                "Unsqueeze": 9
+              },
+              "remaining_float_weight_operators": {
+                "MatMul": 1
+              },
+              "sha256": "62bd705b13adf493dce79361d5e32069db3b2778584b8d8b01da1d5e4dfe99e5",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "runtime_graph": {
+              "bytes": 6210,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Cast": 3,
+                "Concat": 1,
+                "MatMul": 1,
+                "Pad": 1,
+                "Reshape": 2,
+                "Slice": 9,
+                "Transpose": 2,
+                "Unsqueeze": 9
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Cast": 3,
+                "Concat": 1,
+                "Pad": 1,
+                "Reshape": 2,
+                "Slice": 9,
+                "Transpose": 2,
+                "Unsqueeze": 9
+              },
+              "remaining_float_weight_operators": {
+                "MatMul": 1
+              },
+              "sha256": "32487fc9f4c2f4426d75e4687536c65b3b6394920c0cab8d27840f85b1a89fb2",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          }
+        },
+        "runtime_graph": {
+          "bytes": 2559,
+          "int8_weight_qdq_operators": {},
+          "ir_version": 8,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "operators": {
+            "Conv": 1
+          },
+          "opsets": {
+            "ai.onnx": 17,
+            "ai.onnx.ml": 5,
+            "ai.onnx.preview.training": 1,
+            "ai.onnx.training": 1,
+            "com.microsoft": 1,
+            "com.microsoft.experimental": 1,
+            "com.microsoft.nchwc": 1,
+            "org.pytorch.aten": 1
+          },
+          "other_float_or_structural_operators": {},
+          "remaining_float_weight_operators": {
+            "Conv": 1
+          },
+          "sha256": "8e1e1366d3a6d0ec4443f72446a7b4384810d1d7a5f821001f121478103e61a1",
+          "size_pass": true,
+          "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+        }
+      }
+    },
+    "operators": {
+      "backbone.blocks.0.0.bn1": {
+        "formulas": {
+          "onnx_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.1998282984683387e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.3126756142838178e-07,
+                  "mean": 9.653867895631866e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.1998282984683387e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.3126756142838178e-07,
+                  "mean": 9.653867895631866e-08
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.1119898745888157e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.2891668467434602e-07,
+                  "mean": 8.557685194320523e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.1119898745888157e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.2891668467434602e-07,
+                  "mean": 8.557685194320523e-08
+                }
+              }
+            },
+            "float64_rounded_vs_native": {
+              "max_absolute_error": {
+                "max": 7.62939453125e-06,
+                "mean": 3.3880534924958883e-06
+              },
+              "mean_absolute_error": {
+                "max": 1.9964071654789112e-07,
+                "mean": 1.3583342938879717e-07
+              }
+            },
+            "subtract_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.962140334279914e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.5920997425637881e-07,
+                  "mean": 1.244210056911852e-07
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.962140334279914e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.5920997425637881e-07,
+                  "mean": 1.244210056911852e-07
+                }
+              }
+            }
+          },
+          "python_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.1747316059313323e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.3244417727621892e-07,
+                  "mean": 9.655233930226652e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.1747316059313323e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.3244417727621892e-07,
+                  "mean": 9.655233930226652e-08
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.074344835783306e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.2802047675921001e-07,
+                  "mean": 8.561263939512467e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 3.074344835783306e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.2802047675921001e-07,
+                  "mean": 8.561263939512467e-08
+                }
+              }
+            },
+            "float64_rounded_vs_native": {
+              "max_absolute_error": {
+                "max": 7.62939453125e-06,
+                "mean": 3.538633647717928e-06
+              },
+              "mean_absolute_error": {
+                "max": 1.9992231333459613e-07,
+                "mean": 1.3584451749433796e-07
+              }
+            },
+            "subtract_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 4.075075450696443e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.645337006956587e-07,
+                  "mean": 1.2578581782861047e-07
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 4.075075450696443e-06
+                },
+                "mean_absolute_error": {
+                  "max": 1.645337006956587e-07,
+                  "mean": 1.2578581782861047e-07
+                }
+              }
+            }
+          }
+        },
+        "input_drift": {
+          "max_absolute_error": {
+            "max": 9.5367431640625e-07,
+            "mean": 2.8788551724957006e-07
+          },
+          "mean_absolute_error": {
+            "max": 7.536634895460632e-09,
+            "mean": 5.613109156826819e-09
+          }
+        },
+        "local_kernel_on_onnx_input": {
+          "max_absolute_error": {
+            "max": 7.62939453125e-06,
+            "mean": 3.1119898745888157e-06
+          },
+          "mean_absolute_error": {
+            "max": 1.2891668467434602e-07,
+            "mean": 8.557685194320523e-08
+          }
+        },
+        "local_kernel_on_python_input": {
+          "max_absolute_error": {
+            "max": 7.62939453125e-06,
+            "mean": 3.074344835783306e-06
+          },
+          "mean_absolute_error": {
+            "max": 1.2802047675921001e-07,
+            "mean": 8.561263939512467e-08
+          }
+        },
+        "onnx_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "promoted": {
+          "onnx_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 2.584959331311678e-06
+                },
+                "mean_absolute_error": {
+                  "max": 8.838061167269336e-08,
+                  "mean": 4.871278071738665e-08
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 2.584959331311678e-06
+                },
+                "mean_absolute_error": {
+                  "max": 8.838061167269336e-08,
+                  "mean": 4.871278071738665e-08
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 2.4594758686266448e-06
+                },
+                "mean_absolute_error": {
+                  "max": 3.1581813735621315e-08,
+                  "mean": 2.980929306379037e-08
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 7.62939453125e-06,
+                  "mean": 2.4594758686266448e-06
+                },
+                "mean_absolute_error": {
+                  "max": 3.1581813735621315e-08,
+                  "mean": 2.980929306379037e-08
+                }
+              }
+            }
+          },
+          "python_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 3.814697265625e-06,
+                  "mean": 2.5222175999691613e-06
+                },
+                "mean_absolute_error": {
+                  "max": 8.855671954474279e-08,
+                  "mean": 4.8712519089216746e-08
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 3.814697265625e-06,
+                  "mean": 2.5222175999691613e-06
+                },
+                "mean_absolute_error": {
+                  "max": 8.855671954474279e-08,
+                  "mean": 4.8712519089216746e-08
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 3.814697265625e-06,
+                  "mean": 2.4281050029553865e-06
+                },
+                "mean_absolute_error": {
+                  "max": 3.1615075256143296e-08,
+                  "mean": 2.9796804851631283e-08
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 3.814697265625e-06,
+                  "mean": 2.4281050029553865e-06
+                },
+                "mean_absolute_error": {
+                  "max": 3.1615075256143296e-08,
+                  "mean": 2.9796804851631283e-08
+                }
+              }
+            }
+          }
+        },
+        "propagated_input_effect": {
+          "max_absolute_error": {
+            "max": 4.57763671875e-05,
+            "mean": 1.7787329852581024e-05
+          },
+          "mean_absolute_error": {
+            "max": 1.2509693934161384e-06,
+            "mean": 7.347620760983683e-07
+          }
+        },
+        "python_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "telescoping_max_residual": {
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "whole_graph_output_drift": {
+          "max_absolute_error": {
+            "max": 4.57763671875e-05,
+            "mean": 1.7980015591571207e-05
+          },
+          "mean_absolute_error": {
+            "max": 1.275757069726765e-06,
+            "mean": 7.529361081545648e-07
+          }
+        }
+      },
+      "backbone.blocks.0.0.conv_dw": {
+        "input_drift": {
+          "max_absolute_error": {
+            "max": 5.0067901611328125e-06,
+            "mean": 2.2448427779109854e-06
+          },
+          "mean_absolute_error": {
+            "max": 6.283244463980023e-08,
+            "mean": 4.366190801245796e-08
+          }
+        },
+        "local_kernel_on_onnx_input": {
+          "max_absolute_error": {
+            "max": 1.1920928955078125e-07,
+            "mean": 6.224696622475197e-08
+          },
+          "mean_absolute_error": {
+            "max": 2.5355385663085516e-09,
+            "mean": 1.8836861236411943e-09
+          }
+        },
+        "local_kernel_on_python_input": {
+          "max_absolute_error": {
+            "max": 1.1920928955078125e-07,
+            "mean": 6.138763733600315e-08
+          },
+          "mean_absolute_error": {
+            "max": 2.560225451072867e-09,
+            "mean": 1.8847813014363336e-09
+          }
+        },
+        "onnx_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "propagated_input_effect": {
+          "max_absolute_error": {
+            "max": 9.5367431640625e-07,
+            "mean": 2.8737888083254036e-07
+          },
+          "mean_absolute_error": {
+            "max": 7.255012768127487e-09,
+            "mean": 5.346372165010169e-09
+          }
+        },
+        "python_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "telescoping_max_residual": {
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "whole_graph_output_drift": {
+          "max_absolute_error": {
+            "max": 9.5367431640625e-07,
+            "mean": 2.8788551724957006e-07
+          },
+          "mean_absolute_error": {
+            "max": 7.536634895460632e-09,
+            "mean": 5.613109156826819e-09
+          }
+        }
+      },
+      "backbone.bn1": {
+        "formulas": {
+          "onnx_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.30167629844264e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.966541134866579e-08,
+                  "mean": 1.1982474360247619e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.30167629844264e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.966541134866579e-08,
+                  "mean": 1.1982474360247619e-08
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.30167629844264e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.7086092332357803e-08,
+                  "mean": 9.695562353968662e-09
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.30167629844264e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.7086092332357803e-08,
+                  "mean": 9.695562353968662e-09
+                }
+              }
+            },
+            "float64_rounded_vs_native": {
+              "max_absolute_error": {
+                "max": 9.5367431640625e-07,
+                "mean": 5.470294701425653e-07
+              },
+              "mean_absolute_error": {
+                "max": 2.9987085229909325e-08,
+                "mean": 2.2006212575605094e-08
+              }
+            },
+            "subtract_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.929093611867804e-07
+                },
+                "mean_absolute_error": {
+                  "max": 3.893173328721552e-08,
+                  "mean": 2.795235086306769e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.929093611867804e-07
+                },
+                "mean_absolute_error": {
+                  "max": 3.893173328721552e-08,
+                  "mean": 2.795235086306769e-08
+                }
+              }
+            }
+          },
+          "python_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.427159761127672e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.963084301067778e-08,
+                  "mean": 1.1991231258345944e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.427159761127672e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.963084301067778e-08,
+                  "mean": 1.1991231258345944e-08
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.427159761127672e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.731126199418543e-08,
+                  "mean": 9.706504030053197e-09
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.427159761127672e-07
+                },
+                "mean_absolute_error": {
+                  "max": 1.731126199418543e-08,
+                  "mean": 9.706504030053197e-09
+                }
+              }
+            },
+            "float64_rounded_vs_native": {
+              "max_absolute_error": {
+                "max": 9.5367431640625e-07,
+                "mean": 5.450687910381117e-07
+              },
+              "mean_absolute_error": {
+                "max": 3.0065307098800795e-08,
+                "mean": 2.2035516844935106e-08
+              }
+            },
+            "subtract_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.874194596943102e-07
+                },
+                "mean_absolute_error": {
+                  "max": 3.890927448454077e-08,
+                  "mean": 2.7976533756465613e-08
+                }
+              },
+              "onnx_vs_python_formula": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 9.5367431640625e-07,
+                  "mean": 5.874194596943102e-07
+                },
+                "mean_absolute_error": {
+                  "max": 3.890927448454077e-08,
+                  "mean": 2.7976533756465613e-08
+                }
+              }
+            }
+          }
+        },
+        "input_drift": {
+          "max_absolute_error": {
+            "max": 4.76837158203125e-07,
+            "mean": 3.0096424253363356e-07
+          },
+          "mean_absolute_error": {
+            "max": 3.4595860325030116e-08,
+            "mean": 1.79343031101235e-08
+          }
+        },
+        "local_kernel_on_onnx_input": {
+          "max_absolute_error": {
+            "max": 9.5367431640625e-07,
+            "mean": 5.30167629844264e-07
+          },
+          "mean_absolute_error": {
+            "max": 1.7086092332357803e-08,
+            "mean": 9.695562353968662e-09
+          }
+        },
+        "local_kernel_on_python_input": {
+          "max_absolute_error": {
+            "max": 9.5367431640625e-07,
+            "mean": 5.427159761127672e-07
+          },
+          "mean_absolute_error": {
+            "max": 1.731126199418543e-08,
+            "mean": 9.706504030053197e-09
+          }
+        },
+        "onnx_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "promoted": {
+          "onnx_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 1.7881393432617188e-07,
+                  "mean": 8.705415223774157e-08
+                },
+                "mean_absolute_error": {
+                  "max": 7.546755962781034e-09,
+                  "mean": 3.1288630730712175e-09
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 1.7881393432617188e-07,
+                  "mean": 8.705415223774157e-08
+                },
+                "mean_absolute_error": {
+                  "max": 7.546755962781034e-09,
+                  "mean": 3.1288630730712175e-09
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 5.960464477539063e-08,
+                  "mean": 2.8429847014577766e-08
+                },
+                "mean_absolute_error": {
+                  "max": 5.980855719975139e-11,
+                  "mean": 5.816660054914529e-11
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 5.960464477539063e-08,
+                  "mean": 2.8429847014577766e-08
+                },
+                "mean_absolute_error": {
+                  "max": 5.980855719975139e-11,
+                  "mean": 5.816660054914529e-11
+                }
+              }
+            }
+          },
+          "python_input": {
+            "affine_divide": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 1.7881393432617188e-07,
+                  "mean": 8.626988059596012e-08
+                },
+                "mean_absolute_error": {
+                  "max": 7.5531782631143e-09,
+                  "mean": 3.1285106886612164e-09
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 1.7881393432617188e-07,
+                  "mean": 8.626988059596012e-08
+                },
+                "mean_absolute_error": {
+                  "max": 7.5531782631143e-09,
+                  "mean": 3.1285106886612164e-09
+                }
+              }
+            },
+            "affine_rsqrt": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 5.960464477539063e-08,
+                  "mean": 2.818476212652106e-08
+                },
+                "mean_absolute_error": {
+                  "max": 6.049067822608108e-11,
+                  "mean": 5.824353149196442e-11
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 5.960464477539063e-08,
+                  "mean": 2.818476212652106e-08
+                },
+                "mean_absolute_error": {
+                  "max": 6.049067822608108e-11,
+                  "mean": 5.824353149196442e-11
+                }
+              }
+            }
+          }
+        },
+        "propagated_input_effect": {
+          "max_absolute_error": {
+            "max": 6.67572021484375e-06,
+            "mean": 3.5005964730915272e-06
+          },
+          "mean_absolute_error": {
+            "max": 1.296266347719227e-07,
+            "mean": 7.6011549967034e-08
+          }
+        },
+        "python_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "telescoping_max_residual": {
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "whole_graph_output_drift": {
+          "max_absolute_error": {
+            "max": 6.67572021484375e-06,
+            "mean": 3.50290027103926e-06
+          },
+          "mean_absolute_error": {
+            "max": 1.356852325875387e-07,
+            "mean": 7.876151888271991e-08
+          }
+        }
+      },
+      "backbone.conv_stem": {
+        "input_drift": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "local_kernel_on_onnx_input": {
+          "max_absolute_error": {
+            "max": 4.76837158203125e-07,
+            "mean": 3.0096424253363356e-07
+          },
+          "mean_absolute_error": {
+            "max": 3.4595860325030116e-08,
+            "mean": 1.79343031101235e-08
+          }
+        },
+        "local_kernel_on_python_input": {
+          "max_absolute_error": {
+            "max": 4.76837158203125e-07,
+            "mean": 3.0096424253363356e-07
+          },
+          "mean_absolute_error": {
+            "max": 3.4595860325030116e-08,
+            "mean": 1.79343031101235e-08
+          }
+        },
+        "onnx_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "promoted": {
+          "onnx_input": {
+            "stem_matmul": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 4.76837158203125e-07,
+                  "mean": 2.690051731310393e-07
+                },
+                "mean_absolute_error": {
+                  "max": 2.4323932565903316e-08,
+                  "mean": 1.4248690577269735e-08
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 4.76837158203125e-07,
+                  "mean": 2.690051731310393e-07
+                },
+                "mean_absolute_error": {
+                  "max": 2.4323932565903316e-08,
+                  "mean": 1.4248690577269735e-08
+                }
+              }
+            }
+          },
+          "python_input": {
+            "stem_matmul": {
+              "onnx_vs_native": {
+                "max_absolute_error": {
+                  "max": 4.76837158203125e-07,
+                  "mean": 2.690051731310393e-07
+                },
+                "mean_absolute_error": {
+                  "max": 2.4323932565903316e-08,
+                  "mean": 1.4248690577269735e-08
+                }
+              },
+              "onnx_vs_python_promoted": {
+                "max_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                },
+                "mean_absolute_error": {
+                  "max": 0.0,
+                  "mean": 0.0
+                }
+              },
+              "python_vs_native": {
+                "max_absolute_error": {
+                  "max": 4.76837158203125e-07,
+                  "mean": 2.690051731310393e-07
+                },
+                "mean_absolute_error": {
+                  "max": 2.4323932565903316e-08,
+                  "mean": 1.4248690577269735e-08
+                }
+              }
+            }
+          }
+        },
+        "propagated_input_effect": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "python_replay_fidelity": {
+          "max_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "mean_absolute_error": {
+            "max": 0.0,
+            "mean": 0.0
+          }
+        },
+        "telescoping_max_residual": {
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "whole_graph_output_drift": {
+          "max_absolute_error": {
+            "max": 4.76837158203125e-07,
+            "mean": 3.0096424253363356e-07
+          },
+          "mean_absolute_error": {
+            "max": 3.4595860325030116e-08,
+            "mean": 1.79343031101235e-08
+          }
+        }
+      }
+    },
+    "original_runtime_graph": {
+      "bytes": 6192406,
+      "int8_weight_qdq_operators": {},
+      "ir_version": 8,
+      "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+      "operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Conv": 53,
+        "Div": 1,
+        "Flatten": 1,
+        "Gemm": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 28,
+        "Mul": 28,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "opsets": {
+        "ai.onnx": 17,
+        "ai.onnx.ml": 5,
+        "ai.onnx.preview.training": 1,
+        "ai.onnx.training": 1,
+        "com.microsoft": 1,
+        "com.microsoft.experimental": 1,
+        "com.microsoft.nchwc": 1,
+        "org.pytorch.aten": 1
+      },
+      "other_float_or_structural_operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Div": 1,
+        "Flatten": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 28,
+        "Mul": 28,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "remaining_float_weight_operators": {
+        "Conv": 53,
+        "Gemm": 1
+      },
+      "sha256": "8d5ac32860bc978a8888a2948e68891bb536aebeca859064f29f6d297ad80c3c",
+      "size_pass": true,
+      "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+    },
+    "selection": [
+      "backbone.conv_stem",
+      "backbone.bn1",
+      "backbone.blocks.0.0.conv_dw",
+      "backbone.blocks.0.0.bn1"
+    ],
+    "status": "VALID DIAGNOSTIC ONLY",
+    "warning": "signed elementwise telescoping; separate maxima cannot be added; extraction/taps may change execution"
+  },
+  "environment": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 275HX",
+    "dependencies": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.19.2",
+      "attrs": "25.3.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.2",
+      "coloredlogs": "15.0.1",
+      "filelock": "4.0.12",
+      "flatbuffers": "25.12.19",
+      "fsspec": "2026.9.0",
+      "hf-xet": "1.7.0",
+      "huggingface-hub": "0.36.0",
+      "humanfriendly": "10.0",
+      "idna": "3.20",
+      "iniconfig": "2.1.0",
+      "jsonschema": "4.25.1",
+      "jsonschema-specifications": "2025.9.1",
+      "ml-dtypes": "0.6.0",
+      "mpmath": "1.3.0",
+      "networkx": "3.7",
+      "numpy": "2.2.6",
+      "onnx": "1.19.1",
+      "onnxruntime": "1.23.2",
+      "packaging": "25.0",
+      "pillow": "11.3.0",
+      "pluggy": "1.6.0",
+      "protobuf": "7.36.2",
+      "pytest": "8.4.2",
+      "referencing": "0.36.2",
+      "requests": "2.34.2",
+      "rpds-py": "0.27.1",
+      "safetensors": "0.6.2",
+      "setuptools": "80.9.0",
+      "sympy": "1.14.0",
+      "timm": "1.0.22",
+      "torch": "2.8.0+cpu",
+      "torchvision": "0.23.0+cpu",
+      "tqdm": "4.70.1",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.8.0",
+      "wheel": "0.45.1"
+    },
+    "dependency_lock_sha256": "54022e4eb1ab4fad6d90f65e2f21784411daf7e7875cf5b8f81a75d90f0309cd",
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "export_dependency_lock_sha256": "eb639013b6c6fca1b4cba2e77a19a1cbe098ddf688d13a58463df93714c1f396",
+    "git_commit": "dc61424a149b7c1420916ccf24b696839114bb42",
+    "git_dirty": true,
+    "logical_cpu_count": 24,
+    "machine": "x86_64",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.12.3",
+    "reproduction_scope": "same pinned environment/hardware; other platforms unverified",
+    "source_files_sha256": {
+      "ml/src/numbra_ml/__init__.py": "c437709a69fabe6a5d5fd2dbc742b1a43cee0056db7640394a397e7a0fba3a45",
+      "ml/src/numbra_ml/dataset.py": "5a6732734ef6198e37b4ea02ae217cd568925cd31209693b6bb0326cff382f79",
+      "ml/src/numbra_ml/evaluation.py": "493aa1be7c014b62ebd98af56c45bfc4aac0cf72d59077de91ff3bf1ed3a15b8",
+      "ml/src/numbra_ml/export.py": "a25f4b8076209edb1ac451e7f8fa0885c6e492934d07997a48c12f327ab57b5f",
+      "ml/src/numbra_ml/export_batchnorm.py": "091c38aff38beca6f95070f30303dfb9094549842e959a4f4ff49a517e4a24b3",
+      "ml/src/numbra_ml/export_diagnostics.py": "fbe36ab1c0a502c0be6c21be0f484a4a8101dd0b2de29c67ba878adf38f446c0",
+      "ml/src/numbra_ml/export_precision.py": "92c98e5b0aaf54f981909a34e1a55b896d134bce6b731539f320002cf1b79a9a",
+      "ml/src/numbra_ml/export_replay.py": "7160a1157862da0ed999a0ca76535c244f32935d15763adaa772a1ec03d881bc",
+      "ml/src/numbra_ml/manifest.py": "a68b6246dde24481dec928cd73bafc224b084e07873ff3caa9bbc3bae7d3f90b",
+      "ml/src/numbra_ml/parity.py": "185e1361d78be178020fafbbf3c7943a626230e01362b47c013d7e46f68be6d4",
+      "ml/src/numbra_ml/preparation.py": "0e72499c4208882780345f7c633224a18c140d803d57289b5db2e06527677dfd",
+      "ml/src/numbra_ml/prepare.py": "57cc5d9eabd8744419aef42f7616981d67c557d1f130714ec187752fbd567c97",
+      "ml/src/numbra_ml/preprocessing.py": "c9fbe31e531db054e8674d859f2c866ce91f3bbcc7e8b85be3a69147dbe1998a",
+      "ml/src/numbra_ml/pretrained.py": "570868b592338f678b9b83b6605beca9a8b85acdd5a0ebb59c4f29b3105c4bc6",
+      "ml/src/numbra_ml/schema.py": "8d45f5d4fc846508e372f527d87f193bf0f584b9f2a22a4f6a39f577ebaa0c40",
+      "ml/src/numbra_ml/synthetic.py": "a42c55d5c35c6d1406d307fc38a024601a2b7c307c5522dddd194da760e3c0b6",
+      "ml/src/numbra_ml/taxonomy.py": "842352e533ee6f5506e43fb07389a0d02f7e707c3f3a3acc07511a461713ebe5",
+      "ml/src/numbra_ml/train.py": "cff1073528080cdfb0ee2f76d60e14591d644fd4bd4d8fcc1599423f489975d4",
+      "ml/src/numbra_ml/training.py": "1067ca5a5212445369d3a9d6e2dc7e0587490b1054cb2fe454ffdb819ba196ed",
+      "ml/src/numbra_ml/verify.py": "7384905472a9ca5c3962bf4272252cebac6068ed9606f2b0b7e4546e80c09ead"
+    },
+    "source_tree_sha256": "58fc0f3b42c36410aef2deac18bb45ffc1a0bcf6f2a954f4c64f7681b25aa70f",
+    "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=a1cb3cc05d46d198467bebbb6e8fba50a325d4e7, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.8.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "torch_cpu_capability": "AVX2"
+  },
+  "manifest_sha256": "2d141bc62205d88b7116cbe410e9262a96d771dec34c30e88ae6ad9c4bee839e",
+  "model_state_after_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "model_state_before_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+  "preparation_report_sha256": "c8fb349db94a251e7f8c8b0a25335bff973819f2a44e00ba54b7869777883a22",
+  "protocol": {
+    "component_ids_sha256": "b867ec82627f947b268603a763d235dac0ab66444af26e283ba36ca2d802e908",
+    "components": 152,
+    "decision": "ADR-016",
+    "deployment_selection": false,
+    "execution": "sequential",
+    "formulas": [
+      "subtract_divide",
+      "affine_rsqrt",
+      "affine_divide"
+    ],
+    "frozen_evaluation_inputs_used": false,
+    "inter_op_threads": 1,
+    "intra_op_threads": 2,
+    "optimisation": "disabled",
+    "promoted_strategies": {
+      "batchnorm": [
+        "float32 coefficients, float64 multiply/add, float32 boundary: affine_rsqrt",
+        "float32 coefficients, float64 multiply/add, float32 boundary: affine_divide"
+      ],
+      "stem": "float64 patch MatMul, bias, float32 boundary"
+    },
+    "quantisation_fit": false,
+    "split": "train"
+  },
+  "retained_artifacts": {
+    "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b": {
+      "graph": {
+        "bytes": 1861702,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    },
+    "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa": {
+      "graph": {
+        "bytes": 1730515,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        }
+      ]
+    },
+    "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35": {
+      "graph": {
+        "bytes": 6095579,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "float",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        },
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    }
+  },
+  "saved_model_sha256": "734328e3568335b9f415b4ca06b813872a9e43bd432717908bc0f1d4c7e2ae43",
+  "saved_run_sha256": "1d729fba54ecee14b118124531f1c60d5bbe33ceb15e21b90d3182ba7b61fc11",
+  "scope": "PLACEHOLDER training-only operator replay; never bundle; no deployment/mobile/clinical evidence",
+  "source_graph": {
+    "bytes": 6188494,
+    "int8_weight_qdq_operators": {},
+    "ir_version": 8,
+    "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+    "operators": {
+      "Add": 6,
+      "BatchNormalization": 34,
+      "Constant": 1,
+      "Conv": 53,
+      "Div": 1,
+      "Flatten": 1,
+      "Gemm": 1,
+      "GlobalAveragePool": 1,
+      "HardSigmoid": 9,
+      "HardSwish": 19,
+      "Mul": 9,
+      "ReduceMean": 9,
+      "Relu": 14,
+      "Squeeze": 1,
+      "Sub": 1
+    },
+    "opsets": {
+      "ai.onnx": 17
+    },
+    "other_float_or_structural_operators": {
+      "Add": 6,
+      "BatchNormalization": 34,
+      "Constant": 1,
+      "Div": 1,
+      "Flatten": 1,
+      "GlobalAveragePool": 1,
+      "HardSigmoid": 9,
+      "HardSwish": 19,
+      "Mul": 9,
+      "ReduceMean": 9,
+      "Relu": 14,
+      "Squeeze": 1,
+      "Sub": 1
+    },
+    "remaining_float_weight_operators": {
+      "Conv": 53,
+      "Gemm": 1
+    },
+    "sha256": "fc064e7aceb82df1c449681bb94c9749a0da352d81f1576e759c4eeca1ee4054",
+    "size_pass": true,
+    "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+  },
+  "source_report_sha256": "51b07a5afdfe2fd7e85847980825c701b81ca208146f8e69503e8d74cf47b8fc",
+  "status": "DIAGNOSTIC ONLY",
+  "version": "1.0.0"
+}
