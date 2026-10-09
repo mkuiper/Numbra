@@ -130,6 +130,24 @@ Training/reproduction commands and results: [ML-TRAINING.md](ML-TRAINING.md).
 Existing synthetic-v2/default and selection fixtures are not regenerated/tuned
 in response to scores. No Android or clinical performance evidence.
 
+## M3 review / M4 reference foundation — observed 2026-10-09 UTC
+
+No additional toolchain, dependency, checkpoint or dataset installation.
+M3 follow-through and M4 reference/parity arithmetic use the existing 35-wheel
+CPU hash lock. Saved baseline/reproduction/default verification commands:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.verify
+ml/.venv/bin/python -m numbra_ml.verify --run data/models/PLACEHOLDER-m3-reproduction
+ml/.venv/bin/python -m numbra_ml.verify --prepared data/prepared/synthetic-v2 --run data/models/PLACEHOLDER-m3-default
+```
+
+Observed 768/768/384 components, raw-logit/probability max error 0, threshold
+flips 0. This verifies saved Python models; there is no ONNX conversion/runtime
+dependency installed or exported graph yet. M4 dependency setup is the next step;
+record exact verified pins/install commands here before claiming export acceptance.
+See [ML-EXPORT.md](ML-EXPORT.md) for the fixed preprocessing/parity contract.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

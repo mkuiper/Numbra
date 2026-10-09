@@ -1,80 +1,86 @@
 # Status
 
-Updated: 2026-10-09T14:11:27Z
+Updated: 2026-10-09T14:29:21Z
 
-Current milestone: **M3 — Baseline classifier**, implementation ready for harness
-review; **no M3 GATE yet**. NEXT_ACTION: REVIEW M3. M0/M1/M2 gates exist,
-PASS WITH CHANGES; human review pending. M4 export and Android/app/APK work have
-not started. All task models/results remain **PLACEHOLDER** under ADR-002.
+Current milestone: **M4 — On-device model export**, in progress. NEXT_ACTION:
+CONTINUE. M0–M3 gates exist, PASS WITH CHANGES; human review pending. M3 review
+follow-through committed as d0e594f. No M4 gate, ONNX graph, Android app or APK.
+Every task model/result remains **PLACEHOLDER**, synthetic-only under ADR-002.
 
-## Acceptance status
+## M4 acceptance status
 
-- **CPU transfer training / reproducible command: BUILT.** Pinned anonymously
-  retrieved publisher ImageNet MobileNetV3Small, frozen eval-mode features and
-  train-only standardisation/binary head. Fixed seeded full-batch AdamW; no metadata
-  fusion/search/early stopping. 35-wheel Python 3.12 Linux x86_64 hash lock.
-  Training is offline; checkpoint acquisition is separate and checksum verified.
-- **Script-generated evaluation: BUILT.** Baseline, identical reproduction and
-  default-fallback JSON in ml/reports/. Isolated calibration/threshold partitions,
-  unchanged component-count guards, high-sensitivity/secondary-specificity points,
-  exact intervals, AUC/Brier/log-loss/ECE/reliability bins, pre-calibration metrics,
-  source/synthetic-colour breakdowns/missingness and seeded conditional component
-  bootstrap. Human skin-tone labels absent, explicitly unavailable as evidence.
-  C is a single held-out source (one leave-one-source-out fold), no rotation.
-- **Model card: BUILT.** Script-generated PLACEHOLDER cards name synthetic circle/
-  square targets, data/intent/provenance/limits; no lesion, pure-neural, clinical
-  calibration/accuracy or field-safety evidence. Weights/predictions remain ignored.
-- **Review readiness: READY.** reviews/M3/HANDOFF.md supplies commands/evidence,
-  source commit fd93e34/checksums, known limitations and requested scrutiny.
-  New ADR-010 Accepted (autopilot) — pending human review, queued for humans.
+- **Quantised ONNX Runtime Mobile export: PENDING.** ADR-005 runtime retained;
+  conversion/runtime dependencies not installed yet. No conversion or quantisation
+  experiment attempted. ADR-011 fixes budgets before experiments and requires
+  training-only quantisation calibration, remaining-float operator inspection,
+  held-out exported evaluation and no silent tolerance widening.
+- **Exported/Python parity: FOUNDATION BUILT, ACCEPTANCE PENDING.** New saved-model
+  reference/verify entry point strictly restores bundled backbone/scaling/head,
+  checks artifact/preparation/state hashes and component metadata, and rescores.
+  Actual baseline/reproduction/default: 768/768/384 components, max raw/probability
+  errors 0, frozen-threshold flips 0. This is saved Python parity only.
+  New tested parity reporter independently checks raw/probability budgets and zero
+  flips, all failure cases, and separate conservative-margin added/lost referrals.
+  Float budgets 1e-4 raw / 1e-6 probability; quantised 0.1 raw / 0.001 probability,
+  zero original-threshold flips. Margin 0.001 cannot rescue a failed parity test.
+- **Size ≤20 MB / preprocessing written and tested: PARTIAL.** ML-EXPORT.md writes
+  the full RGB letterbox/rounding/normalisation contract; executable SPEC and tests
+  remain authoritative. Planned graph input 1×3×224×224 float32 NCHW, raw-logit
+  output. Original float safetensors 6,156,620 bytes is not an exported model.
+  Actual quantised size/operator/Android decode/ABI checks remain pending.
 
-## Observed results and verification
+## M3 post-gate follow-through
 
-- Final bash scripts/check.sh: exit 0, **254 ML tests PASS** in 25.67s,
-  Android SKIPPED, RESULT PASS. No APK claim.
-- Earlier full check: 254 PASS in 25.74s. Initial new subset: 45 PASS in 6.38s;
-  subsequently added fixture-to-written-report integration test, included in full
-  254. No ML failures/skips/xfails or weakened existing tests.
-- Root repository suite: 5 PASS (Builder-attested only). Initial root run reported
-  four missing source-register entries for new technical setup URLs; added access
-  bookkeeping to research/sources.md, then 5 PASS. No test changes.
-- pip check: no broken requirements. Full force-reinstall of all 35 locked wheels
-  used require-hashes; exact source/lock checksums still match baseline provenance.
-- Baseline/repeat: 10.663/10.605s on desktop Intel Core Ultra 9 275HX/two threads.
-  Model/prediction SHA-256 and reports match excluding four declared dynamic
-  provenance fields. Combined float safetensors is 6,156,620 bytes (not M4 export).
-  Strict saved-model reload matches backbone/head hashes; all 768 component logits
-  reproduced exactly. Default-fallback run: 5.661s, zero exclusions in both fixtures.
-- Baseline: train 76/class, calibration 52/class, threshold 102/class, test 26/class,
-  C 128/class. Temperature 19.150006, selected threshold 0.4007988174; empirical
-  selection sensitivity 97/102 with exact interval [0.889304,0.983894]. Internal
-  test sensitivity 1/specificity 0.153846/AUC 0.766272. C sensitivity 0.914063/
-  specificity 0.078125/AUC 0.592529: **below illustrative sensitivity target**.
-  Low specificity/high referral burden and overfit training loss remain disclosed.
-- Default: calibration 20/class sufficient, threshold 20/class insufficient:
-  primary/secondary unavailable, **unselected refer-all** threshold zero.
-  Sensitivity 1/specificity 0 describe fallback, never selected clinical performance.
+- RESPONSE-1 answers all 11 numbered issues. Issues 1–10 implemented/documented;
+  real-data disclosure policy and optional clean-checkout wrapper deferred to
+  HUMAN-QUEUE. All reviewer human questions relevant to Numbra queued.
+- Test of record now runs train_run end to end on a 16-group fixture with an
+  explicit toy backbone supplier, including artifacts/provenance/report/card,
+  saved-model verification, tamper rejection and overwrite guard. CLI production
+  supplier remains pinned/checksum verified; no mock/network/checkpoint in tests.
+- Cards now show empirical evidence, confusion/exact intervals, below-target
+  held-out sensitivity and per-row fallback markers. Evaluation 1.1.0 nulls
+  pre-calibration threshold fields and suppresses source/colour AUC/calibration/
+  bins/bootstrap below 20/class, with flags; identical bootstrap cohorts reuse
+  seeds/results. All three tracked aggregate reports/cards rebuilt from verified
+  stored logits, no retraining or fit changes. Original training provenance and
+  report hashes remain; separate reporting revision hashes record the rebuild.
+- ADR-010 amended for real-data model-selection/nested CV before calibration,
+  display suppression limits and raw/probability/flip checks. ADR-011 queued.
 
-## Open blockers and carried limits
+## Observed verification
 
-- No implementation blocker; M3 harness review pending. Clinical/legal/ethics/
-  native-language/weight-notice decisions still pending human review.
-- No real task dataset approved; ImageNet/patient images were not downloaded.
-  Publisher-declared Apache-2.0 checkpoint licence is not an image-rights warranty.
-- Conditional bootstrap excludes model/calibration/threshold-fit uncertainty;
-  exact post-selection intervals descriptive. Tiny/overlapping strata unstable.
-  Synthetic colour bands are not skin-tone/fairness labels. One source fold only.
-- Preparation visual links are trusted, unvalidated for real data. Training
-  defaults/scaling/geometry/count guards are engineering decisions, not approval.
-  High temperature is within bounds; frozen inputs/defaults were not tuned after
-  results. Hardware/other-platform reproduction is unverified.
-- M4 must quantise/export/check preprocessing and probability/threshold parity.
-  M6 retains all ADR-001 symptom/contact/concern/quality/missingness rules; image
-  score cannot establish disease absence. M7 needs encrypted consent/provenance.
-- No protected edits, review.sh, REVIEW/CHECK/GATE writes, publishing/messages/
-  pushes, secrets, tracked data/weights or APK. Harness owns tests/reviews/gates.
+- Final bash scripts/check.sh: exit 0, **290 ML tests PASS in 27.13s**, Android
+  SKIPPED, RESULT PASS. No debug APK claim. Earlier checks 258 PASS in 27.36s and
+  288 PASS in 27.09s. No existing tests skipped/weakened.
+- New targeted M3 suite: 108 PASS in 12.88s; saved-reference training subset
+  36 PASS in 8.17s. Initial new parity subset: 29 PASS / 1 failed because its
+  invented extreme fixture did not actually underflow at T=19.15; corrected to
+  ±1e6 while retaining the exact expected assertion. Then 30 PASS in 1.92s;
+  two additional float32-range guards included in final 290.
+- Root repository contract suite: 5 PASS in 0.104s (Builder-attested only).
+  pip check: no broken requirements. git diff --check clean before records.
+- Current training/reference/reporting code differs from original fd93e34 training
+  provenance by documented review changes; original saved weights/logits/fits and
+  ignored historical run JSON remain intact. No tolerance/performance tuning.
+
+## Open blockers and limits
+
+No current implementation blocker. Quantisation operator support/parity may fail;
+record two genuine attempts before a labelled workaround and amended ADR.
+Strict finite-fixture parity cannot establish unseen-input/mobile/clinical safety.
+No real task dataset approved; no patient/ImageNet images acquired. Clinical,
+legal, ethics, native-language and pretrained-weight notices review still pending.
+Synthetic source-C sensitivity remains 0.914063 below 0.95, specificity 0.078125;
+no clinical or fairness claim. Small-cell display guard is not a privacy policy.
+No publishing/pushes/messages/protected edits or committed data/weights/APK.
 
 ## Next concrete step
 
-Harness runs M3 check/review. Next Builder iteration reads its messages/review in
-full, answers every numbered issue and fixes them. Start M4 only after M3 gate.
+Read M4 folder/status/harness, verify primary ONNX/PyTorch export and runtime docs,
+pin/hash-lock conversion/runtime dependencies in ml/.venv and document installs.
+Export original selected PLACEHOLDER baseline float graph and run same-tensor raw/
+probability/threshold parity; then static INT8 QDQ with train-only calibration,
+independent generated stress inputs, all frozen test/held-out inputs, exported
+held-out evaluation, operator/size report. Keep fixed ADR-011 budgets. Request
+REVIEW M4 only when every M4 acceptance item has actual passing evidence.

@@ -2,6 +2,8 @@
 
 Decisions made autonomously, blockers, and anything needing human review.
 
+- 2026-10-09 — ADR-011 fixes M4 pre-experiment float raw/probability budgets 0.0001/0.000001, quantised budgets 0.1/0.001, zero frozen-threshold flips and separate 0.001 conservative margin accounting. Original selected PLACEHOLDER retained for software-test reference; no ONNX export/device evidence yet. Human review required before replacing engineering budgets or any clinical use.
+
 - 2026-10-09 — M3 REVIEW-1 follow-through amends ADR-010: real-data model-selection split/nested CV before calibration, synthetic subgroup display suppression below 20/class, and raw-logit plus probability plus frozen-threshold-flip checks for M4. The M0 0.02-probability-only tolerance proposal is superseded. Display suppression is not a real-data privacy policy; review sparse-bin/disclosure controls before real cohorts.
 - 2026-10-09 — M3 REVIEW-1 human questions: confirm optional metadata fusion reading, fixed-default frozen-feature baseline, pretrained derivative notices/rights, carrying the below-target selected PLACEHOLDER vs refer-all artifact downstream, and whether to rotate all three sources. Original selected artifact retained for software tests only; symptom referrals remain mandatory. Root tests-of-record decision remains queued. Optional clean-checkout wrapper (issue 11) deferred; explicit setup then one offline training command remains documented.
 
@@ -48,3 +50,5 @@ Decisions made autonomously, blockers, and anything needing human review.
 - 2026-10-09 — ADR-010 accepts pinned anonymously retrieved ImageNet MobileNetV3Small, 35-wheel CPU hash lock, train-only scaling/linear head with fixed AdamW defaults, explicit bilinear letterbox and conditional component bootstrap, pending human review. Every result remains PLACEHOLDER; approve weight notices/rights, geometry/fit/count choices, one-source fold and clinical replacement protocol before any real use. No patient/ImageNet images acquired.
 
 - 2026-10-09 — M3 PLACEHOLDER baseline: source-C synthetic sensitivity 0.914063 below illustrative 0.95, specificity 0.078125; internal test sensitivity 1 has only 26 artificial positives (exact lower bound 0.867725). High temperature 19.150006/overfit training loss and low specificity are reported without tuning frozen inputs. No clinical claim; bootstrap conditions on fixed fits and one-source holdout is not rotation. Review before any real replacement protocol.
+
+- 2026-10-09 — New M4 underflow-test fixture was initially wrong: ±1e4 at temperature 19.15 stays representable (1.64e-227). Corrected fixture to ±1e6 with exact expected assertion unchanged; no production test weakened/skipped. Recorded per disputed-test rule; no human action needed.

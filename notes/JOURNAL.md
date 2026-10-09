@@ -447,3 +447,57 @@ messages or pushes. Final diff/status validation precedes the logical-step commi
   No protected edits, review.sh/REVIEW/CHECK/GATE writes, tracked data/weights,
   messages/publishing/pushes or app/APK. Final whitespace/link/tracked-file checks
   performed before final commit. Next iteration responds to harness M3 review.
+
+## 2026-10-09T14:29:21Z — iteration
+
+- Oriented in required order; harness M3 GATE is PASS WITH CHANGES. Read all of
+  REVIEW-1, CHECK-1, HANDOFF, gate, AGENTS and relevant ADRs. No review.sh run.
+- Fixed inexpensive M3 follow-ups and wrote RESPONSE-1 for every numbered issue.
+  Explicit toy backbone supplier lets train_run execute end to end in tests of
+  record without external weights/network/mocks; test covers three ignored
+  artifacts, aggregate report/card, provenance, overwrite and tamper safeguards.
+  Added numbra_ml.verify to strictly reload full bundled Baseline with checksum,
+  preprocessing, state-hash, preparation and component-metadata checks; rescores
+  in original feature batches with 1e-5 raw tolerance and zero decision flips.
+- Actual verifier baseline/reproduction/default: 768/768/384 components; all raw
+  and calibrated max differences **0**, threshold flips **0**. Models unchanged;
+  original pretrained checkpoint/network not required for bundled reload.
+- Reporting evaluation v1.1.0 nulls pre-calibration threshold metrics, flags
+  source/colour small cells and suppresses AUC/calibration/bins/bootstrap below
+  20/class; identical bootstrap component sets reuse results/seeds. Cards expose
+  empirical-only evidence, exact intervals/counts, below-target held-out wording
+  and per-row fallback markers; rounded display, full-precision JSON. Rebuilt
+  all three tracked aggregates/cards from checksum-verified ignored predictions.
+  Preserved original training provenance/parameters, added reporting source and
+  original report hashes; ignored original run JSON stays historical.
+- CLI learning-rate/weight-decay switches added; guard test checks stderr. Amended
+  ADR-010/queued real-data model-selection split/nested CV, independent privacy
+  controls and stricter M4 parity. Deferred optional clean-checkout wrapper (11)
+  and relevant human questions; explicit setup then single offline train remains.
+- M3 targeted 108 PASS in 12.88s, reference subset 36 PASS in 8.17s; full check
+  258 PASS in 27.36s, Android SKIPPED, RESULT PASS. Committed logical M3 step
+  d0e594f. No fitted outputs/input tuning or relaxed existing tests.
+- Started M4 foundation: ADR-011 predeclares float max errors 1e-4 raw/1e-6
+  probability, quantised 0.1 raw/0.001 probability, zero frozen-threshold flips
+  and separate conservative 0.001 margin accounting. Added tested parity reporter
+  with independent budget checks, all failed components, directional flips,
+  margin-added/lost referrals, finite/matched/unique/float32-range guards.
+  Failure cases must remain ignored; no export/quantisation experiment attempted.
+- Wrote ML-EXPORT.md full preprocessing/planned interface, reference commands,
+  actual scope and remaining work; DEV-SETUP records no new installs. No ONNX
+  runtime/conversion dependency, quantised graph, app or APK claimed.
+- Initial new parity test was wrong about underflow at ±1e4/T19.15 (1.64e-227 is
+  representable). Corrected the invented fixture to ±1e6, retaining the same exact
+  expected assertion; 29 PASS/1 failure became 30 PASS in 1.92s. No production
+  test weakened/skipped. Initial reporting rebuild guessed a wrong default report
+  name after successfully rebuilding two; used actual default name for the third.
+  Initial default verification similarly used wrong run suffix; corrected to saved
+  provenance directory and then obtained exact PASS. All failures resolved.
+- Full check before extra range guards 288 PASS in 27.09s; final check after them
+  **290 ML tests PASS in 27.13s**, exit 0, Android SKIPPED, RESULT PASS.
+  Root contract suite 5 PASS in 0.104s (not in protected tests of record), pip check
+  clean, whitespace clean. No new research/network/toolchain acquisition.
+- Updated STATUS, appended JOURNAL and set NEXT_ACTION CONTINUE for M4 dependency
+  verification/pinning then float/static-INT8 export under fixed budgets. M4 not
+  ready for review; M0–M3 gates closed. No protected files, review.sh/REVIEW/CHECK/
+  GATE writes, committed data/weights/secrets, publishing/messages/pushes.
