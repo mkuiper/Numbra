@@ -128,7 +128,8 @@ def test_substitution_rejects_wrong_saved_state_and_unsupported_graph(tmp_path, 
     assert not target.exists()
 
 
-def test_complete_training_only_pipeline_and_rejection_before_inputs():
+@pytest.mark.parametrize('rounding_recipe', [None, 'e32-r32-a32-b64-o64'])
+def test_complete_training_only_pipeline_and_rejection_before_inputs(rounding_recipe):
     repo = repository_root()
     parent = repo / 'data/test-runs'
     parent.mkdir(parents=True, exist_ok=True)
@@ -152,7 +153,8 @@ def test_complete_training_only_pipeline_and_rejection_before_inputs():
                 if component.split != 'train':
                     (prepared / component.row.image_path).write_bytes(b'bad nontraining pixels')
             output = root / 'PLACEHOLDER-promoted-bn'
-            result = promoted_bn_run(repo, prepared, run, [experiment], preserved, output, backbone_factory=toy_backbone)
+            result = promoted_bn_run(repo, prepared, run, [experiment], preserved, output,
+                                     backbone_factory=toy_backbone, rounding_recipe=rounding_recipe)
             train_ids = [item.id for item in index.components if item.split == 'train']
             assert result['status'] == 'DIAGNOSTIC ONLY'
             assert result['protocol']['components'] == len(train_ids)
@@ -172,6 +174,38 @@ def test_complete_training_only_pipeline_and_rejection_before_inputs():
                 assert private not in json.dumps(result)
             assert {path: sha256(path) for path in hashes} == hashes
             assert json.loads((output / 'PLACEHOLDER-promoted-bn-report.json').read_text()) == result
+            if rounding_recipe is not None:
+                from copy import deepcopy
+                from numbra_ml.export_rounded_bn import audit_rounded_report
+                from numbra_ml.verify import load_reference
+                model, saved = load_reference(run, backbone_factory=toy_backbone)
+                source = preserved / 'PLACEHOLDER-preserved.onnx'
+                assert result['coefficient_audit']['status'] == result['evidence_audit']['status'] == 'PASS'
+                assert result['protocol']['decision'] == 'ADR-021'
+                assert audit_rounded_report(output, result, model, source, index, saved) == result['evidence_audit']
+                for corruption in ('budget', 'recipe', 'coefficient', 'scope', 'graph'):
+                    bad = deepcopy(result)
+                    if corruption == 'budget':
+                        bad['artifacts']['complete_promoted_bn']['diagnostics']['original_graph_training_parity']['budget']['raw_absolute'] = 1.
+                    elif corruption == 'recipe':
+                        bad['protocol']['rounding_recipe'] = 'adaptive'
+                    elif corruption == 'coefficient':
+                        bad['substitutions'][0]['rounding']['epsilon_bits']['float64'] = 'bad'
+                    elif corruption == 'scope':
+                        del bad['artifacts']['preserved_control']
+                    else:
+                        bad['artifacts']['complete_promoted_bn']['graph']['sha256'] = 'bad'
+                    with pytest.raises(ValueError):
+                        audit_rounded_report(output, bad, model, source, index, saved)
+                # A rehashed private row corruption still fails exact ordered scope.
+                original_details = detail_path.read_text()
+                details['artifacts']['complete_promoted_bn']['component_ids'].reverse()
+                detail_path.write_text(json.dumps(details))
+                bad = deepcopy(result)
+                bad['diagnostic_details_sha256'] = sha256(detail_path)
+                with pytest.raises(ValueError, match='ordered training'):
+                    audit_rounded_report(output, bad, model, source, index, saved)
+                detail_path.write_text(original_details)
             with pytest.raises(ValueError, match='new and named'):
                 promoted_bn_run(repo, prepared, run, [experiment], preserved, output, backbone_factory=toy_backbone)
             with pytest.raises(ValueError, match='ignored data'):

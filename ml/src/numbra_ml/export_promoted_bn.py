@@ -64,8 +64,12 @@ def coefficient_hash(array):
     return hashlib.sha256(np.ascontiguousarray(array).tobytes()).hexdigest()
 
 
-def substitute_batchnorm(model, source, target):
+def substitute_batchnorm(model, source, target, *, rounding_recipe=None):
     """Replace all saved BN nodes while preserving every other serialized node."""
+    if rounding_recipe is not None:
+        from .export_rounded_bn import RECIPE
+        if rounding_recipe != RECIPE:
+            raise ValueError('only the predeclared complete rounded BN recipe is allowed')
     if any(module.training for module in model.modules()):
         raise ValueError('complete substitution requires every module in eval mode')
     graph = onnx.load(source, load_external_data=False)
@@ -103,7 +107,12 @@ def substitute_batchnorm(model, source, target):
             if (array.dtype != np.float32 or expected.dtype != np.float32
                     or array.shape != expected.shape or not np.array_equal(array, expected)):
                 raise ValueError('saved BatchNorm parameter mismatch')
-        constants = bn_constants(module, 'affine_rsqrt')
+        rounding = None
+        if rounding_recipe is None:
+            constants = bn_constants(module, 'affine_rsqrt')
+        else:
+            from .export_rounded_bn import rounded_coefficients
+            constants, rounding = rounded_coefficients(module)
         if any(not np.isfinite(array).all() for array in constants.values()):
             raise ValueError('non-finite promoted BatchNorm coefficients')
         prefix = f'{PREFIX}{position}-'
@@ -112,6 +121,8 @@ def substitute_batchnorm(model, source, target):
         records.append({'module': name, 'position': position, 'input': node.input[0], 'output': tensor,
                         'coefficient_shape': list(constants['alpha'].shape),
                         'coefficients_sha256': {key: coefficient_hash(array) for key, array in constants.items()}})
+        if rounding is not None:
+            records[-1]['rounding'] = rounding
     nodes = [replacement[node.output[0]] if node.op_type == 'BatchNormalization' else [node]
              for node in graph.graph.node]
     del graph.graph.node[:]
@@ -166,7 +177,9 @@ def audit_promoted_graph(path, source, records, *, serialized=False):
 
 
 def promoted_bn_run(repo, prepared, run, experiments, source, output,
-                    *, backbone_factory=backbone_architecture, joint_stem=False):
+                    *, backbone_factory=backbone_architecture, joint_stem=False, rounding_recipe=None):
+    if joint_stem and rounding_recipe is not None:
+        raise ValueError('rounded BN protocol forbids joint stem substitution')
     prepared, run, source, output = [ignored_path(repo, path) for path in (prepared, run, source, output)]
     experiments = tuple(ignored_path(repo, path) for path in experiments)
     if not experiments:
@@ -186,7 +199,7 @@ def promoted_bn_run(repo, prepared, run, experiments, source, output,
     threshold = saved['primary_operating_point']['threshold']
     output.mkdir(parents=True, exist_ok=False)
     promoted = output / 'PLACEHOLDER-complete-promoted-bn.onnx'
-    records = substitute_batchnorm(model, preserved, promoted)
+    records = substitute_batchnorm(model, preserved, promoted, rounding_recipe=rounding_recipe)
     artifacts = [('preserved_control', preserved), ('complete_promoted_bn', promoted)]
     stem_record = None
     if joint_stem:
@@ -216,6 +229,12 @@ def promoted_bn_run(repo, prepared, run, experiments, source, output,
             'expected_batchnorm_substitutions': len(records)},
         'substitutions': records, 'artifacts': {},
         'scope': 'PLACEHOLDER complete training-only BN graph experiment; never bundle; no mobile/clinical/deployment evidence'}
+    if rounding_recipe is not None:
+        from .export_rounded_bn import audit_saved_coefficients
+        report['protocol'].update(decision='ADR-021', rounding_recipe=rounding_recipe,
+            formula='e32-r32-a32-b64 coefficients rounded to float32; double Mul/Add; float32 boundary')
+        report['coefficient_audit'] = audit_saved_coefficients(model, preserved, records)
+        report['scope'] = 'PLACEHOLDER training-only complete rounded BN graph; never bundle; no mobile/clinical/deployment evidence'
     if joint_stem:
         report['protocol'].update(decision='ADR-018', promoted_stem_convolutions=1,
             stem_formula='saved float32 weights; fixed patches; double MatMul; float32 boundary')
@@ -254,11 +273,14 @@ def promoted_bn_run(repo, prepared, run, experiments, source, output,
     detail_path = output / 'PLACEHOLDER-promoted-bn-details.json'
     detail_path.write_text(json_text(details))
     report['diagnostic_details_sha256'] = sha256(detail_path)
+    if rounding_recipe is not None:
+        from .export_rounded_bn import audit_rounded_report
+        report['evidence_audit'] = audit_rounded_report(output, report, model, preserved, index, saved)
     (output / 'PLACEHOLDER-promoted-bn-report.json').write_text(json_text(report))
     return report
 
 
-def main(argv=None, *, joint_stem=False):
+def main(argv=None, *, joint_stem=False, rounding_recipe=None):
     parser = argparse.ArgumentParser(description=f'{PLACEHOLDER_NOTICE}; complete training-only BN experiment')
     parser.add_argument('--prepared', type=Path, default=Path('data/prepared/synthetic-v2-selection'))
     parser.add_argument('--run', type=Path, default=Path('data/models/PLACEHOLDER-m3-baseline'))
@@ -276,7 +298,7 @@ def main(argv=None, *, joint_stem=False):
                 or not output.name.startswith('PLACEHOLDER-')):
             raise ValueError('aggregate target must be new, local and PLACEHOLDER-*')
         report = promoted_bn_run(repo, args.prepared, args.run, args.experiments, args.source, output,
-                                 joint_stem=joint_stem)
+                                 joint_stem=joint_stem, rounding_recipe=rounding_recipe)
         with target.open('x') as stream:
             stream.write(json_text(report))
     except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:
