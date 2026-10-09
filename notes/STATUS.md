@@ -1,81 +1,89 @@
 # Status
 
-Updated: 2026-10-09T16:59:54Z
+Updated: 2026-10-09T17:17:20Z
 
 Current milestone: **M4 — On-device model export**, in progress. NEXT_ACTION:
-CONTINUE. M0–M3 gates exist (PASS WITH CHANGES); no M4 gate, app or APK.
+CONTINUE. M0–M3 gates exist; no M4 gate, accepted export, app or APK.
 All task models/results remain **PLACEHOLDER**, synthetic-only under ADR-002.
-Every failed export remains rejected; ADR-012's toy diagnostic workaround stays
-in force and cannot substitute for accepted selected-baseline parity.
+Every failed export remains rejected. ADR-012's toy diagnostic workaround
+remains diagnostic only and cannot replace selected-baseline parity.
 
 ## M4 acceptance status
 
 - **Quantised ONNX Runtime Mobile export: BUILT, ACCEPTANCE INCOMPLETE.** Both
-  original INT8 QDQ graphs fail parity, calibrated on all/only 152 training
-  components. No new quantisation fit or scope/deployment selection this iteration.
-  Mobile double operator/ABI support and performance remain unverified.
-- **Exported/Python parity: FAIL, budgets unchanged.** All eight ADR-022 graph/
-  runtime-profile comparisons FAIL on every ordered training input. Rounded-BN
-  disabled/basic/extended maxima remain 0.000143051 raw / 0.00000183769 probability
-  (13/21 violations); all maxima increase to 0.000310421 / 0.00000394886 (11/15).
-  All profiles have zero flips. Preserved control and every prior failure retained.
-  No frozen evaluation, reference/model/fit/budget change or accepted bundle.
+  original INT8 QDQ graphs fail parity. No new quantisation fit, changed scope
+  or deployment selection this iteration. Mobile operator/ABI and performance
+  remain unverified.
+- **Exported/Python parity: FAIL, budgets unchanged.** Prior ADR-022 comparisons
+  still all fail; rounded BN disabled/basic/extended maxima remain 0.000143051
+  raw / 0.00000183769 probability, with 13/21 violations and zero flips.
+  No new baseline inference/parity result this iteration; no frozen inputs,
+  reference/model/fits/budget change or accepted bundle.
 - **Size ≤20 MB / preprocessing written and tested: BUILT.** Original float
-  6,095,579 bytes; INT8 1,730,515/1,861,702; unchanged rounded diagnostic 6,255,113.
-  All new runtime copies <20 MB. RGB letterbox, float32 1×3×224×224 → raw_logit [1]
-  unchanged. No accepted deployment metadata or Android decoding/preprocessing.
+  6,095,579 bytes; INT8 1,730,515/1,861,702; rounded diagnostic 6,255,113.
+  No new baseline graph produced. RGB letterbox, float32 1×3×224×224 →
+  raw_logit [1] unchanged. Android preprocessing/deployment metadata remain open.
 
 ## This iteration's evidence
 
-- Predeclared/committed ADR-022 before implementation/execution; queued human
-  review. Added fixed disabled/basic/extended/all comparison runner, original and
-  separate feature-tapped runtime graphs, exact folded-coefficient semantics
-  audits and independent no-inference evidence/provenance reconstruction.
-- ml/reports/PLACEHOLDER-m4-runtime-profiles1.json retains both unchanged graphs
-  × all four profiles × all 152 ordered training index images. Every numeric
-  failure retained. Basic/extended do not fix candidate errors; all increases
-  maxima. Every comparison has zero feature-tap changes and frozen-threshold flips.
-- All eight candidate runtime BN-expression audits PASS. Disabled retains 204
-  expression nodes/68 coefficient Casts; others fold all 68 Casts into exact
-  double coefficient bits and retain 136 expression nodes. Every double Mul/Add
-  and float32 boundary checked. Extended/all change Conv/fusion/layout operators
-  outside BN; their arithmetic equivalence and mobile support remain UNVERIFIED.
-- Independent audit PASS: 20 graph records, complete profile/input/reference
-  scope, coefficients, parity/failures/features/taps, saved model/preparation/
-  retained/source/prior/current-code/dependency provenance. Disabled details
-  reproduce ADR-021 exactly for both graphs. Private audit SHA-256:
-  ecde48f2f7b89dd3107b5b3908b2470102671983b6f45e634896b8b3bfbe351f.
+- Predeclared/committed ADR-023 before implementation, including staged complete
+  remaining-operator replay; queued human review. Stage one is implemented:
+  fail-closed no-inference preflight, saved head parameter bits, complete
+  topological graph scope, static shapes/dtypes, unchanged rounded-graph nodes
+  and constants, isolated multi-operand eager/ORT replay and runtime audits.
+  Stage two's native mapping/capture and full training replay are UNIMPLEMENTED.
+- ml/reports/PLACEHOLDER-m4-remaining-preflight2.json covers all 160 preserved
+  serialized nodes: 87 saved Conv/BN controls, 72 remaining replay operators,
+  one Constant, plus all 212 initializers. All remaining/control nodes are
+  byte-identical in the rounded graph. Explicit complete training scope is
+  152 ordered components; no images decoded or baseline inference performed.
+- Both baseline preflights executed with image decode, Module forward and
+  ORT session creation blocked by raising guards. Independent complete
+  no-inference reconstruction PASS, including saved model/preparation/prior/
+  graphs/code/dependencies. PASS means static scope only, never export parity.
+- Retained preflight1. Its post-commit audit failed because historical git
+  context was compared to current HEAD/dirty. Corrected auditor verifies the
+  recorded commit exists and dirty flag is boolean; all other fields are
+  reconstructed exactly. Preflight2 reproduces complete original plan/scope/
+  graph/model/preparation/prior evidence. Fresh post-commit audit PASS.
+  Independent preflight2 audit SHA-256:
+  f449c827bc230e14f0025dc5dbff3382273bed5155450670aa3966ebd7ae4245.
 
 ## Observed verification
 
-- Initial new subset: 25 PASS in 9.27s, 28 warnings. Strengthened same-boundary
-  test initially 4 FAIL in 2.15s because it assumed upstream native/ORT hard-swish
-  inputs were identical. Corrected to use actual runtime BN inputs; exact output
-  assertions and production budgets retained. Corrected subset: 25 PASS in 9.55s.
-- Added four stale-prior/empty-experiment rejection cases before opening inputs.
-  Full bash scripts/check.sh exit 0: **463 ML tests PASS** in 77.49s, 198 warnings;
-  Android SKIPPED, RESULT PASS. No APK claim. No existing test skipped/deleted/
-  weakened, and no parity tolerance widened.
-- Root contract suites: 6 PASS in 0.072s; git diff --check clean. Baseline
-  diagnostic and independent no-inference audit exit 0/PASS (evidence only).
-- No install/acquisition, protected edit, review.sh, REVIEW/CHECK/GATE write,
-  publishing/push, external message or app implementation.
+- Initial new subset: 16 FAIL/42 PASS (2.60s), exposing Identity-alias fixtures
+  and runtime unused domain imports; next 2 FAIL/56 PASS (2.51s), isolating
+  disabled-runtime HardSwish function expansion. Fixed alias resolution and
+  audited only the precise declared HardSigmoid/Mul expression. Corruption
+  regressions retained; no test expectations or production budgets weakened.
+- Corrected primitives: 58 PASS (2.32s); complete guarded pipeline and expansion
+  corruption suite: 66 PASS (8.31s). After historical-context fix: 69 PASS
+  (8.90s), including invalid metadata and current-checkout change regressions.
+- First full bash scripts/check.sh exit 0: 529 PASS (83.86s). Fresh final full
+  check after the audit fix exit 0: **532 ML tests PASS** (85.38s), 236 warnings;
+  Android SKIPPED, RESULT PASS. No APK claim. Six root contract tests PASS
+  (0.063s); git diff --check clean.
+- No existing test deleted/skipped/weakened, model/reference/fits change,
+  baseline retraining, frozen evaluation, install/acquisition, protected edit,
+  review.sh, REVIEW/CHECK/GATE write, publishing/push or external message.
 
 ## Open blockers and limits
 
-Selected-baseline whole-model float and INT8 parity remains the blocker. Runtime
-profiles cannot resolve it; exact BN expression alone is insufficient. Other
-activation/pooling/head arithmetic and Conv propagation remain to isolate.
-Mobile double support/performance, clinical data approval/validation, ethics/
-legal/native-language review and weight-notice approval remain unresolved.
+Selected-baseline float/INT8 parity remains the blocker. Static scope and
+isolated generated recipes cannot establish native whole-model agreement.
+Native remaining-boundary mapping and training-only replay are incomplete;
+Conv propagation, selective static QDQ and mobile double support/performance
+remain unresolved. Clinical data/validation, ethics/legal/native-language
+review and weight-notice approval still need humans.
 
 ## Next concrete step
 
-Predeclare a bounded complete training-only same-input replay of remaining
-activations, pooling and head boundaries, including saved/tapped runtime inputs,
-local arithmetic versus propagation, actual serialized/runtime operator audits
-and complete scope reconstruction. Preserve all existing Conv/BN controls and
-fixed budgets; do not repeat failed profiles or select a favourable layer/input
-subset. Declare selective static QDQ scope from training evidence before a new
-quantisation fit/frozen evaluation; resolve mobile support before bundling.
-REVIEW M4 only after acceptance; roadmap order prevents starting M5.
+Implement ADR-023 stage two: map every saved remaining module/functional boundary,
+copy native inputs/outputs before in-place mutation, tap every runtime operand
+and output on both unchanged graphs, retain all original/tapped logits and
+Conv/BN controls, and replay the complete scope on all ordered training inputs.
+Report native replay fidelity, local arithmetic versus propagation, four-term
+signed accounting and independent complete reconstruction/exact ADR-022 disabled
+logits. No favourable subset, frozen inference, changed budgets or new fit.
+Then declare selective QDQ scope from training evidence before fitting; resolve
+mobile support before bundling. REVIEW M4 only after acceptance; do not start M5.

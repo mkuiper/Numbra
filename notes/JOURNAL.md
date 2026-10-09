@@ -1104,3 +1104,67 @@ Next predeclare complete bounded same-input activation/pooling/head replay;
 quantisation scope and mobile double support remain separate blockers. No frozen
 inputs, new fit, model/reference change, protected edit, review.sh, review/check/
 gate write, install, acquisition, external message, publication or push.
+
+## 2026-10-09T17:17:20Z — iteration
+
+M4 only; read roadmap, STATUS, HARNESS, absent M4 review folder, AGENTS and
+relevant decisions. No new harness message/review/gate. Predeclared ADR-023
+complete remaining-operator replay in two stages and committed before code.
+Queued the decision for humans. Implemented first-stage no-inference preflight
+and isolated multi-input remaining-op replay/audits, with complete saved Conv/BN
+controls, exact saved head bits, static shapes/dtypes, topological coverage and
+unchanged remaining/control nodes and original constants across both graphs.
+Native boundary mapping/capture and full baseline training replay remain
+explicitly UNIMPLEMENTED; recipes are not captured native model outputs.
+
+All 160 preserved serialized nodes accounted for: 87 Conv/BN controls,
+72 remaining replay operators, one Constant; all 212 initializers. Remaining
+scope includes 19 HardSwish, 14 Relu, nine each HardSigmoid/ReduceMean/Mul,
+six Add and one each GlobalAveragePool/Flatten/Sub/Div/Gemm/Squeeze. No input
+subset or omitted residual/SE arithmetic. Baseline preflight1/2 both ran with
+image decoding, Module forward and ORT session creation blocked by raising
+guards. Complete independent no-inference scope/model/preparation/prior/graph/
+source/dependency reconstruction PASS. Static scope only, not native arithmetic
+or M4 acceptance; no baseline inference, new quantisation or frozen evaluation.
+
+Initial new tests: 16 FAIL/42 PASS in 2.60s, due to assuming head.mean was an
+initializer instead of Identity alias and rejecting runtime-added unused domain
+imports. Corrected fixture resolution and audit to retain exact original node
+while inventorying unused imports. Next 2 FAIL/56 PASS in 2.51s isolated runtime
+HardSwish function expansion despite disabled optimisation. Before baseline
+preflight, amended/committed ADR-023 to allow only the exact two-node
+HardSigmoid(alpha=float32(1/6), beta=0.5)/Mul expression and unchanged float32
+connections/shapes. Every other rewrite remains rejected; added all corruption
+cases. Same-input eager native hard-swish versus ORT has nonzero local rounding
+drift on fixed generated inputs, retained without extrapolation to baseline.
+Corrected subset 58 PASS in 2.32s; full new guarded pipeline suite 66 PASS in
+8.31s. No exact assertions removed or numerical budgets widened.
+
+First full check: bash scripts/check.sh exit 0, 529 PASS in 83.86s, 236 warnings,
+app SKIPPED, RESULT PASS. Committed stage one and original preflight evidence.
+A subsequent no-inference post-commit audit exposed an incorrect comparison of
+historical git commit/dirty fields against the current checkout. Fixed auditor
+to validate the recorded commit exists and dirty flag is boolean, retaining all
+other complete exact reconstruction checks, including live code/dependency
+hashes. Added historical/current/invalid metadata regressions; new suite 69 PASS
+in 8.90s. Regenerated preflight2 after the source change; plan/scope/graphs/saved
+model/preparation/prior records exactly match preflight1. Original report/code
+retained in the first-stage commit. No inference-expression change.
+
+Fresh final full check exit 0: **532 ML tests PASS in 85.38s**, 236 warnings,
+app SKIPPED, RESULT PASS. Six root contract tests PASS in 0.063s;
+git diff --check clean. Committed corrected stage; fresh guarded post-commit
+no-inference audit PASS. Independent preflight2 audit SHA-256:
+`f449c827bc230e14f0025dc5dbff3382273bed5155450670aa3966ebd7ae4245`.
+Logs/audits/generated graphs remain ignored under data/. Only aggregate static
+scope evidence tracked. No existing test weakened/deleted/skipped.
+
+Updated ML-EXPORT, ADR observed outcomes and HUMAN-QUEUE; overwrite STATUS and
+NEXT_ACTION=CONTINUE and commit iteration notes. Every failed baseline export
+remains rejected; ADR-012 labelled toy workaround stays diagnostic only.
+M4 remains incomplete, no HANDOFF/review request or APK. Next implement ADR-023
+native/tapped capture and complete training replay with prior-logit and signed
+accounting controls; selective QDQ and mobile support remain blockers. No
+model/reference/fits/budgets change, baseline retraining, frozen inputs, install,
+acquisition, protected edit, review.sh, REVIEW/CHECK/GATE write, external message,
+publication or push.
