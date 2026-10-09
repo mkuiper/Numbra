@@ -679,3 +679,47 @@ clinical data/validation, weight notices and mobile execution remain open.
 - M4 remains open, no HANDOFF/review request or APK. ADR-012 labelled toy pipeline
   workaround remains in force. NEXT_ACTION CONTINUE. No protected files edited,
   reviews/tests-of-record logs/gates written, publishing, pushing or messaging.
+
+## 2026-10-09T15:30:37Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent M4 review folder,
+  AGENTS and relevant ADRs. No new harness message. Worked only on open M4.
+- Predeclared ADR-015 and queued human review before executing same-input
+  stem/first depthwise Conv/BN replay. Added numbra_ml.export_replay with strict
+  saved/preparation/retained/preserved provenance, fixed layer selection, copied
+  Python/ONNX inputs and raw pre-activation outputs, hook cleanup, exact operator
+  extraction, actual runtime graph audits and three fixed primitive BN formulas.
+- First subset: 5 PASS, 1 FAIL in 5.59s. Builder provenance code incorrectly
+  required boundary diagnostics for a passing toy graph; ADR-014 creates taps
+  only on failure. Fixed guard to permit legitimate absence when all profiles
+  pass, require valid evidence on failed profiles and always reject explicitly
+  invalid evidence. Tests unchanged; no disputed/weakened assertion. Next subset
+  6 PASS in 5.99s, 16 warnings. Added invalid-boundary/swapped-graph rejection
+  branches to the same fixture before the full suite.
+- Replay command exit 0: DIAGNOSTIC ONLY. Tracked aggregate
+  ml/reports/PLACEHOLDER-m4-replay1.json, all 152 existing training components,
+  no frozen test/held-out/stress inference or quantisation fitting. Original
+  model/fits/inputs/budgets preserved; saved state hashes before/after match.
+- Python and ONNX replay fidelity, original/instrumented logits and signed
+  telescoping residuals are zero. Same-input local kernel maxima: stem Conv
+  0.000000476837, stem BN 0.000000953674, first depthwise Conv 0.000000119209,
+  its BN 0.00000762939. Propagated maxima respectively 0, 0.00000667572,
+  0.000000953674, 0.0000457764. Maxima may occur on different components/elements
+  and cannot be added as an exact worst-case decomposition. This narrows local
+  propagation/arithmetic; no full-backbone causal or model improvement claim.
+- Each predeclared BN primitive formula exactly matches its Python equivalent,
+  but none matches native Python BN exactly. Rounded float64 formula also
+  differs. No graph/deployment selected; next declare promoted stem accumulation
+  and fused-affine BN emulation, retaining native saved float32 reference.
+- Independently checked aggregate source/graph/runtime/private-detail hashes
+  and equality of tracked/private aggregate reports. Updated ML-EXPORT, ML README,
+  DEV-SETUP, ADR-015 and HUMAN-QUEUE. Original failed experiments remain intact;
+  graphs/weights and component evidence are ignored, not committed.
+- bash scripts/check.sh exit 0: 324 ML tests PASS in 43.92s, 50 exporter
+  deprecation warnings; Android SKIPPED, RESULT PASS. Root repository checks
+  6 PASS in 0.066s before final docs/records. No existing test skipped/weakened.
+- M4 remains open, no HANDOFF/review request or APK. ADR-012 labelled toy pipeline
+  workaround remains in force; NEXT_ACTION CONTINUE. No toolchain/dependency,
+  checkpoint or dataset acquisition; no protected edits, review.sh invocation,
+  REVIEW/CHECK/GATE files written, publishing, pushing or messaging.
+- Final repository-contract rerun after docs/records: 6 PASS in 0.065s. Saved model/run, preparation and both dependency-lock hashes match the aggregate; NEXT_ACTION contract verified. git diff --check clean.

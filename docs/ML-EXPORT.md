@@ -266,14 +266,75 @@ copy adds a reporting erratum and original-report hash. Its original-graph
 parity and head-feature diagnostics remain valid and match the corrected run.
 No budget, model, fit or input was changed for the corrected rerun.
 
+## Same-input operator replay — 2026-10-09 UTC
+
+[ADR-015](../decisions/ADR-015-same-input-operator-replay.md) predeclares first
+stem/first depthwise Conv and immediately following saved BN pairs, selected by
+module order/connectivity rather than observed error. Reproduce with a new output:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_replay --output data/exports/PLACEHOLDER-m4-replay1
+```
+
+The command exits 0 for **DIAGNOSTIC ONLY**, not accepted parity. Its
+[aggregate evidence](../ml/reports/PLACEHOLDER-m4-replay1.json) covers all and only
+152 existing training index images. Original saved model/fits/budgets, retained
+experiments and corrected preserved graph/report/details hashes are checked
+before inference. No test/held-out/stress inference, quantisation fit or
+deployment selection. Generated fixtures exercise both combined BN activations,
+depthwise selection, extraction, hook cleanup, training-only pixel isolation and
+rejection of stale fits, graph bytes, details and invalid boundary evidence.
+
+Each operator is extracted with its original parameters/attributes and run at
+disabled ORT optimisation, with actual serialized runtime graphs audited. Hooks
+copy Python inputs and raw pre-activation outputs; a separate ONNX graph taps
+the equivalent inputs/outputs. Both exact input origins are replayed through
+native Python and ONNX. Python replay, ONNX replay vs tapped whole graph,
+instrumented vs original logits and signed telescoping residual are all exactly
+zero on these training inputs. This supports the local comparison on these
+fixtures; it does not prove equivalence on unseen inputs or mobile runtimes.
+
+| Operator | Same Python input: local kernel max | Same ONNX input: local kernel max | Propagated input effect max | Whole graph boundary max |
+| --- | ---: | ---: | ---: | ---: |
+| Stem Conv | 0.000000476837 | 0.000000476837 | 0 | 0.000000476837 |
+| Stem BN | 0.000000953674 | 0.000000953674 | 0.00000667572 | 0.00000667572 |
+| First depthwise Conv | 0.000000119209 | 0.000000119209 | 0.000000953674 | 0.000000953674 |
+| First depthwise BN | 0.00000762939 | 0.00000762939 | 0.0000457764 | 0.0000457764 |
+
+Propagation is native Python on the ONNX input minus captured Python output;
+kernel drift is isolated ONNX minus native Python on the same ONNX input;
+extraction effect is whole ONNX output minus isolated ONNX on that input. Their
+**signed elementwise** sum equals the accumulated whole-graph difference.
+Separate absolute maxima may occur at different elements/components and cannot
+be added as an exact decomposition. At these early pairs, propagation reaches
+larger maxima than local arithmetic; this is not a full-backbone causal account.
+
+Three predeclared float32 BN alternatives use the exact saved buffers:
+subtract/divide/scale/add, precomputed affine coefficients via rsqrt, and
+precomputed affine coefficients via division by sqrt. At both BN layers and
+both input origins, each primitive ONNX graph exactly matches its corresponding
+Python formula. **None exactly matches native Python BN**: maxima remain
+0.000000953674 at the stem and 0.00000762939 at the first depthwise BN. The
+rounded float64 mathematical formula also has these nonzero maxima. The rsqrt
+affine graph matches the local native-ORT error aggregates; this does not prove
+implementation identity or that replacing BN fixes baseline parity. No new
+complete-model parity run or numerical improvement claim is made.
+
+Every full/tapped/extracted/formula/runtime graph is labelled **PLACEHOLDER
+diagnostic, never bundle** and stays under ignored data/. Ordered component
+details are private; tracked evidence contains only aggregates and hashes.
+
 ## Remaining M4 work
 
-BatchNorm preservation alone does not meet parity. Predeclare same-input
-Conv/BatchNorm operator replay to distinguish local arithmetic from propagated
-drift, starting at the stem/first depthwise block identified by training taps.
-Choose any arithmetic or mixed-precision/quantised scope using training evidence
-before the next frozen evaluation. Keep every failure, the original reference,
-fits/inputs and ADR-011 budgets. The generated toy model remains diagnostic only.
+BatchNorm preservation alone does not meet parity, and the fixed primitive BN
+formulas do not eliminate local arithmetic differences. The next declared
+training-only experiment should test promoted-precision accumulation at the
+stem Conv and fused-affine BN emulation, retaining float32 stage boundaries and
+the native saved Python reference. Compare identical inputs before changing a
+complete graph; do not assume higher precision matches native float32 rounding.
+Choose the complete arithmetic/precision and quantised scope using training
+evidence before the next frozen evaluation. Keep every failure, original
+reference, fits/inputs and ADR-011 budgets. The toy model stays diagnostic only.
 No passing deployment artifact, runtime-metadata package or M4 review request
 exists. Android runtime/ABI/decode and device performance remain M5–M8 work.
 

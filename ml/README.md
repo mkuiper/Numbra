@@ -86,3 +86,9 @@ It also documents BatchNorm-preserving graphs, audits of actual ORT graphs and
 corrected pre-activation boundary taps. These still fail the unchanged baseline
 parity contract. All exports remain **PLACEHOLDER**; diagnostic success does not
 close M4.
+
+Same-input stem/depthwise Conv/BN replay is available as
+`python -m numbra_ml.export_replay --output data/exports/PLACEHOLDER-<new-name>`.
+It uses training images only, reports propagation separately from local kernel
+arithmetic, and compares three fixed BN primitive formulas. See the export
+document and ADR-015 for measured evidence; these copies are never app bundles.

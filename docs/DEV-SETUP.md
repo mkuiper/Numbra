@@ -238,6 +238,37 @@ ORT warns that all-profile serialized optimized graphs may be hardware-specific;
 these are diagnostic copies labelled never bundle, not Android artifacts.
 See [export evidence](ML-EXPORT.md) and ADR-014. No M4 completion or APK claim.
 
+## M4 same-input operator replay — observed 2026-10-09 UTC
+
+No toolchain/dependency installation, checkpoint or dataset acquisition. The
+existing 42-package hash-locked environment ran from the repository root:
+
+```bash
+ml/.venv/bin/python -m pytest ml/tests/test_export_replay.py -q
+ml/.venv/bin/python -m numbra_ml.export_replay --output data/exports/PLACEHOLDER-m4-replay1
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+First subset run: 5 passed, 1 failed (5.59s). The provenance guard incorrectly
+required boundary diagnostics on a passing toy export, although ADR-014 only
+generates those when parity fails. Fixed the guard to accept passing profiles
+without taps, require valid boundary evidence on failures, and always reject
+explicit invalid evidence. No test expectation was removed/weakened. The next
+subset run: **6 passed in 5.99s**, 16 exporter deprecation warnings. Added further
+invalid-boundary/swapped-graph rejection cases before the full suite.
+
+Replay command exit 0 means **DIAGNOSTIC ONLY**: all 152 training components,
+four first stem/depthwise Conv/BN operators, two exact input origins and three
+fixed BN formulas. No frozen evaluation, new fit or deployment selection.
+Source, preserved/extracted/formula/runtime graphs and private-detail hashes
+were separately checked against the aggregate. All generated models/graphs and
+ordered component diagnostics stay ignored. See [ML-EXPORT.md](ML-EXPORT.md).
+
+Full check: **324 ML tests passed in 43.92s**, 50 legacy exporter deprecation
+warnings; Android skipped, RESULT PASS. Root checks: **6 passed in 0.066s**.
+M4 remains incomplete; no accepted deployment artifact or APK.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?
