@@ -396,3 +396,54 @@ Next verify/install hashed CPU dependencies/checkpoint access, then integrate th
 reproducible frozen-feature baseline with this library. No new toolchain, patient
 data/weights, protected edits, review.sh or reviewer/check/gate writes, publication,
 messages or pushes. Final diff/status validation precedes the logical-step commit.
+
+## 2026-10-09T14:11:27Z — iteration
+
+- Oriented roadmap -> STATUS -> HARNESS -> absent M3 review folder -> AGENTS/ADRs;
+  M3 only. No new harness blockers. Read M2 closed-review follow-through.
+- Firecrawl skill applied for selected-checkpoint/toolchain verification; status
+  still zero credits, reused recorded web/direct-anonymous-HTTP workaround.
+  Publisher public/ungated revision/card licence checked; anonymous safetensors
+  acquisition succeeded, matched pinned size/SHA-256. No account/agreement or
+  ImageNet/patient images. README/config/weights and wheels ignored under data/.
+- Added full 35-wheel runtime/test/build CPython 3.12 Linux x86_64 hash lock.
+  Initial resolver chose hub 2.2.0; pinned hub 0.36.0 before installation for timm
+  compatibility. All 35 wheels force-reinstalled with require-hashes, including
+  M1 packages. CPU torch 2.8.0+cpu / torchvision 0.23.0+cpu / timm 1.0.22 /
+  safetensors 0.6.2. Setup commands documented. No JDK/SDK/system installs.
+- Implemented pinned offline frozen-backbone extraction, train-only scaling and
+  fixed linear-head AdamW; deterministic explicit letterbox preprocessing;
+  nonfinite/checksum/state/output guards; aggregate JSON/model-card generation
+  and per-component prediction/combined-model files confined to ignored data/.
+  Added fixed-score ordinary whole-component bootstrap with independent cohort
+  seeds, tied AUC and valid-replicate/unavailable reporting. No fit uncertainty.
+- ADR-010 records autonomous training/geometry/bootstrap/platform decisions with
+  required status; queued it and poor synthetic generalisation for humans.
+  Committed logical implementation step fd93e34 before actual baseline runs.
+- Observed new subset 45 PASS in 6.38s; additional generated-fixture-to-report test
+  included in full check: 254 PASS in 25.74s initially and **254 PASS in 25.67s**
+  final; check.sh exit 0, Android SKIPPED, RESULT PASS. No ML failures/skips/xfails.
+  Root suite initially failed four missing setup URL source-register entries;
+  fixed bookkeeping (no new clinical survey), then 5 PASS; final root run
+  5 PASS in 0.127s. No existing tests changed/skipped/weakened. pip check clean.
+- Baseline 10.663s / repeat 10.605s, same desktop two-thread environment.
+  Byte hashes/model weights/predictions and all evaluation fields identical after
+  excluding declared dynamic provenance (created_utc/elapsed_seconds/git_dirty/
+  output_directory). Model 6,156,620 bytes float safetensors, ignored, not M4 export.
+  Strict real saved-model reload state hashes PASS; all 768 raw logits reproduced
+  exactly. Current source/lock hashes match archived provenance.
+- Baseline calibration 52/class T=19.150006, selection 102/class threshold
+  0.4007988174, 97/102 sensitivity, exact interval [0.889304,0.983894], empirical
+  target only. Test TP/FN/TN/FP=26/0/4/22, sensitivity1/specificity0.153846,
+  AUC0.766272. C=117/11/10/118, sensitivity0.914063/specificity0.078125,
+  AUC0.592529. C misses illustrative0.95 target; no frozen-input/default tuning.
+  Training loss0.721871->0.002350 demonstrates overfit artificial head. All
+  outputs PLACEHOLDER, synthetic circle/square, colour bands and one held-out fold.
+- Default run 5.661s: calibration20/class fitted, threshold20/class insufficient,
+  both endpoints unavailable/unselected refer-all0; sensitivity1/specificity0
+  describe fallback. Zero exclusions both fixtures. Synthetic-only/no clinical
+  claim preserved; metrics/provenance/model cards committed as aggregate reports.
+- Wrote M3 HANDOFF/STATUS, requested REVIEW M3. No M3 gate/reviewer result yet.
+  No protected edits, review.sh/REVIEW/CHECK/GATE writes, tracked data/weights,
+  messages/publishing/pushes or app/APK. Final whitespace/link/tracked-file checks
+  performed before final commit. Next iteration responds to harness M3 review.

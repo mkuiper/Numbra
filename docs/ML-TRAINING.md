@@ -27,8 +27,12 @@ ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v2-sel
 One offline CPU command trains the head and writes evaluation/model card:
 
 ```bash
-ml/.venv/bin/python -m numbra_ml.train
+ml/.venv/bin/python -m numbra_ml.train --output data/models/PLACEHOLDER-m3-verification --report-name PLACEHOLDER-m3-verification
 ```
+
+The verification names avoid overwriting archived tracked reports. Pick a new
+output/report name for each repeat. The original observed baseline invoked
+train with no arguments; the remaining defaults are identical.
 
 Defaults: seed 20261009, two CPU threads, 16-image feature batches, 300 full-batch
 AdamW steps, learning rate 0.03, weight decay 0.01, 1,000 conditional bootstrap
@@ -78,7 +82,7 @@ only already-verified local safetensors with strict state-key matching.
 A second run uses the same inputs/config, new output/report names:
 
 ```bash
-ml/.venv/bin/python -m numbra_ml.train --output data/models/PLACEHOLDER-m3-reproduction --report-name PLACEHOLDER-m3-reproduction
+ml/.venv/bin/python -m numbra_ml.train --output data/models/PLACEHOLDER-m3-verification-reproduction --report-name PLACEHOLDER-m3-verification-reproduction
 ```
 
 Compare saved model/prediction byte hashes, training hashes and aggregate
@@ -91,7 +95,7 @@ already exists) and explicitly exercise unavailable threshold selection:
 
 ```bash
 ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v2 --groups-per-source 128 --seed 20261009
-ml/.venv/bin/python -m numbra_ml.train --prepared data/prepared/synthetic-v2 --output data/models/PLACEHOLDER-m3-default --report-name PLACEHOLDER-m3-default
+ml/.venv/bin/python -m numbra_ml.train --prepared data/prepared/synthetic-v2 --output data/models/PLACEHOLDER-m3-verification-default --report-name PLACEHOLDER-m3-verification-default
 ```
 
 ## Observed verification
@@ -101,8 +105,41 @@ RESULT PASS. New tests use generated fixture pixels/invented feature arithmetic
 and real toy neural modules; no network, patient images, skips or downloaded
 weights are needed. They test isolation, frozen buffers, reproduction, geometry,
 serialization, output/checkpoint safeguards, tied bootstrap arithmetic and a
-fixture-to-head-to-written-report path. Actual pinned-weight training/reproduction
-results will be recorded after the commands complete.
+fixture-to-head-to-written-report path. Actual pinned-weight runs completed with source commit fd93e34, unchanged source
+files and declared defaults: baseline 10.663s, repeat 10.605s, default fixture
+5.661s on Intel Core Ultra 9 275HX / two CPU threads. These are desktop timings,
+not low-end-device benchmarks. Baseline and repeat model/prediction SHA-256 and
+all report fields match after excluding four declared dynamic provenance fields.
+Saved combined model is 6,156,620 bytes; this is float safetensors, not M4 export.
+Zero exclusions in either fixture. Baseline train 76/class, calibration 52/class,
+threshold 102/class, test 26/class, source-C 128/class.
+
+Baseline temperature 19.150006 (within bounds, near maximum), threshold
+0.4007988174, primary/secondary endpoints selected. Selection sensitivity
+97/102=0.950980, exact interval [0.889304,0.983894]; **empirical target only**,
+not independent assurance of sensitivity >=0.95. Training loss 0.721871 to
+0.002350 shows an overfit artificial head; report the observed generalisation.
+
+| PLACEHOLDER partition | TP/FN/TN/FP | Synthetic sensitivity | Synthetic specificity | AUC | Brier | ECE |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| test | 26/0/4/22 | 1.000000 | 0.153846 | 0.766272 | 0.211035 | 0.131328 |
+| held-out C | 117/11/10/118 | 0.914063 | 0.078125 | 0.592529 | 0.248321 | 0.087975 |
+
+**Source-C sensitivity is below the illustrative 0.95 target**, with low
+specificity/high artificial referral burden. Do not tune the frozen inputs to
+improve this. The bootstrap/exact intervals and source/colour breakdowns are
+in the generated JSON; none establish clinical performance.
+
+Default fixture calibration 20/class fits temperature 16.296730; threshold
+20/class correctly leaves both endpoints unavailable, threshold zero and
+**unselected refer-all**. Test sensitivity 1/specificity 0 and source-C sensitivity
+1/specificity 0 describe that fallback, never a selected operating point.
+Actual saved-model strict re-load matched backbone/head state hashes; rescoring
+all 768 components in the same feature batches reproduced raw logits exactly
+(max absolute difference 0). This is serialization evidence, not M4 export parity.
+
+Original generated baseline/repeat/default report and model-card filenames are
+archived in ml/reports/. New verification commands above use fresh names.
 
 ## Open questions
 
