@@ -1,0 +1,1255 @@
+{
+  "all_signed_telescoping_residuals_zero": true,
+  "head_signed_accounting": {
+    "preserved": {
+      "telescoping_max_residual": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0
+      },
+      "terms": {
+        "extraction": {
+          "max_absolute": {
+            "max": 1.52587890625e-05,
+            "mean": 2.296347367136102e-06,
+            "min": 0.0
+          },
+          "mean_absolute": {
+            "max": 1.52587890625e-05,
+            "mean": 2.296347367136102e-06,
+            "min": 0.0
+          },
+          "signed_max": {
+            "max": 1.1444091796875e-05,
+            "mean": -2.384185791015625e-07,
+            "min": -1.52587890625e-05
+          },
+          "signed_mean": {
+            "max": 1.1444091796875e-05,
+            "mean": -2.384185791015625e-07,
+            "min": -1.52587890625e-05
+          },
+          "signed_min": {
+            "max": 1.1444091796875e-05,
+            "mean": -2.384185791015625e-07,
+            "min": -1.52587890625e-05
+          }
+        },
+        "kernel": {
+          "max_absolute": {
+            "max": 3.814697265625e-06,
+            "mean": 7.779974686472039e-07,
+            "min": 0.0
+          },
+          "mean_absolute": {
+            "max": 3.814697265625e-06,
+            "mean": 7.779974686472039e-07,
+            "min": 0.0
+          },
+          "signed_max": {
+            "max": 3.814697265625e-06,
+            "mean": -1.3175763581928455e-07,
+            "min": -3.814697265625e-06
+          },
+          "signed_mean": {
+            "max": 3.814697265625e-06,
+            "mean": -1.3175763581928455e-07,
+            "min": -3.814697265625e-06
+          },
+          "signed_min": {
+            "max": 3.814697265625e-06,
+            "mean": -1.3175763581928455e-07,
+            "min": -3.814697265625e-06
+          }
+        },
+        "propagation": {
+          "max_absolute": {
+            "max": 0.0002288818359375,
+            "mean": 5.544800507394891e-05,
+            "min": 4.76837158203125e-07
+          },
+          "mean_absolute": {
+            "max": 0.0002288818359375,
+            "mean": 5.544800507394891e-05,
+            "min": 4.76837158203125e-07
+          },
+          "signed_max": {
+            "max": 0.0002288818359375,
+            "mean": -2.4453589790745784e-05,
+            "min": -0.00016689300537109375
+          },
+          "signed_mean": {
+            "max": 0.0002288818359375,
+            "mean": -2.4453589790745784e-05,
+            "min": -0.00016689300537109375
+          },
+          "signed_min": {
+            "max": 0.0002288818359375,
+            "mean": -2.4453589790745784e-05,
+            "min": -0.00016689300537109375
+          }
+        },
+        "python_replay": {
+          "max_absolute": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "mean_absolute": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "signed_max": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "signed_mean": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "signed_min": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          }
+        }
+      },
+      "total": {
+        "max_absolute": {
+          "max": 0.000240325927734375,
+          "mean": 5.586837467394377e-05,
+          "min": 9.5367431640625e-07
+        },
+        "mean_absolute": {
+          "max": 0.000240325927734375,
+          "mean": 5.586837467394377e-05,
+          "min": 9.5367431640625e-07
+        },
+        "signed_max": {
+          "max": 0.000240325927734375,
+          "mean": -2.482376600566663e-05,
+          "min": -0.00016880035400390625
+        },
+        "signed_mean": {
+          "max": 0.000240325927734375,
+          "mean": -2.482376600566663e-05,
+          "min": -0.00016880035400390625
+        },
+        "signed_min": {
+          "max": 0.000240325927734375,
+          "mean": -2.482376600566663e-05,
+          "min": -0.00016880035400390625
+        }
+      }
+    },
+    "rounded": {
+      "telescoping_max_residual": {
+        "max": 0.0,
+        "mean": 0.0,
+        "min": 0.0
+      },
+      "terms": {
+        "extraction": {
+          "max_absolute": {
+            "max": 1.1444091796875e-05,
+            "mean": 2.2304685492264596e-06,
+            "min": 0.0
+          },
+          "mean_absolute": {
+            "max": 1.1444091796875e-05,
+            "mean": 2.2304685492264596e-06,
+            "min": 0.0
+          },
+          "signed_max": {
+            "max": 1.1444091796875e-05,
+            "mean": 1.850881074604235e-07,
+            "min": -1.1444091796875e-05
+          },
+          "signed_mean": {
+            "max": 1.1444091796875e-05,
+            "mean": 1.850881074604235e-07,
+            "min": -1.1444091796875e-05
+          },
+          "signed_min": {
+            "max": 1.1444091796875e-05,
+            "mean": 1.850881074604235e-07,
+            "min": -1.1444091796875e-05
+          }
+        },
+        "kernel": {
+          "max_absolute": {
+            "max": 7.62939453125e-06,
+            "mean": 8.626988059596011e-07,
+            "min": 0.0
+          },
+          "mean_absolute": {
+            "max": 7.62939453125e-06,
+            "mean": 8.626988059596011e-07,
+            "min": 0.0
+          },
+          "signed_max": {
+            "max": 3.814697265625e-06,
+            "mean": -2.5410401193719163e-07,
+            "min": -7.62939453125e-06
+          },
+          "signed_mean": {
+            "max": 3.814697265625e-06,
+            "mean": -2.5410401193719163e-07,
+            "min": -7.62939453125e-06
+          },
+          "signed_min": {
+            "max": 3.814697265625e-06,
+            "mean": -2.5410401193719163e-07,
+            "min": -7.62939453125e-06
+          }
+        },
+        "propagation": {
+          "max_absolute": {
+            "max": 0.00014257431030273438,
+            "mean": 4.123072875173468e-05,
+            "min": 0.0
+          },
+          "mean_absolute": {
+            "max": 0.00014257431030273438,
+            "mean": 4.123072875173468e-05,
+            "min": 0.0
+          },
+          "signed_max": {
+            "max": 0.00014257431030273438,
+            "mean": -7.557241540206106e-06,
+            "min": -0.00010633468627929688
+          },
+          "signed_mean": {
+            "max": 0.00014257431030273438,
+            "mean": -7.557241540206106e-06,
+            "min": -0.00010633468627929688
+          },
+          "signed_min": {
+            "max": 0.00014257431030273438,
+            "mean": -7.557241540206106e-06,
+            "min": -0.00010633468627929688
+          }
+        },
+        "python_replay": {
+          "max_absolute": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "mean_absolute": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "signed_max": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "signed_mean": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          },
+          "signed_min": {
+            "max": 0.0,
+            "mean": 0.0,
+            "min": 0.0
+          }
+        }
+      },
+      "total": {
+        "max_absolute": {
+          "max": 0.0001430511474609375,
+          "mean": 4.159463079352128e-05,
+          "min": 9.5367431640625e-07
+        },
+        "mean_absolute": {
+          "max": 0.0001430511474609375,
+          "mean": 4.159463079352128e-05,
+          "min": 9.5367431640625e-07
+        },
+        "signed_max": {
+          "max": 0.0001430511474609375,
+          "mean": -7.626257444682874e-06,
+          "min": -0.00010728836059570312
+        },
+        "signed_mean": {
+          "max": 0.0001430511474609375,
+          "mean": -7.626257444682874e-06,
+          "min": -0.00010728836059570312
+        },
+        "signed_min": {
+          "max": 0.0001430511474609375,
+          "mean": -7.626257444682874e-06,
+          "min": -0.00010728836059570312
+        }
+      }
+    }
+  },
+  "limits": "Derived from complete recorded aggregates/index; no new inference, historical authentication, whole-model repair, quantisation fit or mobile acceptance.",
+  "native_instrumentation": {
+    "exact_bits": {
+      "all": true,
+      "true_count": 152
+    },
+    "max_absolute": {
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0
+    },
+    "mean_absolute": {
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0
+    },
+    "signed_max": {
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0
+    },
+    "signed_mean": {
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0
+    },
+    "signed_min": {
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0
+    }
+  },
+  "notice": "PLACEHOLDER complete training replay diagnostic only; never bundle",
+  "operator_summary": {
+    "Add": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 7.295608520507812e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 6,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 8.225440979003906e-05
+          }
+        }
+      },
+      "layers": 6
+    },
+    "BatchNormalization": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 34,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 7.62939453125e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 7.62939453125e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 34,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.000339508056640625
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 34,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 34,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 34,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 34,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.000362396240234375
+          }
+        }
+      },
+      "layers": 34
+    },
+    "Conv": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 53,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 5,
+            "max_absolute": 1.9073486328125e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 5,
+            "max_absolute": 1.5497207641601562e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 53,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.0994415283203125e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 53,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 5,
+            "max_absolute": 1.9073486328125e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 5,
+            "max_absolute": 1.430511474609375e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 53,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.0279159545898438e-05
+          }
+        }
+      },
+      "layers": 53
+    },
+    "Div": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.00039768218994140625
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.0002918243408203125
+          }
+        }
+      },
+      "layers": 1
+    },
+    "Flatten": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.4185905456542969e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.2159347534179688e-05
+          }
+        }
+      },
+      "layers": 1
+    },
+    "Gemm": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.52587890625e-05
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.814697265625e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.814697265625e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.000240325927734375
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.1444091796875e-05
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.814697265625e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 7.62939453125e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.0001430511474609375
+          }
+        }
+      },
+      "layers": 1
+    },
+    "GlobalAveragePool": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 2.86102294921875e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 2.86102294921875e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.147125244140625e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 2.86102294921875e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 2.86102294921875e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 2.8371810913085938e-05
+          }
+        }
+      },
+      "layers": 1
+    },
+    "HardSigmoid": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 5.960464477539063e-08
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 5.960464477539063e-08
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 2.8312206268310547e-06
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 5.960464477539063e-08
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 5.960464477539063e-08
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 2.950429916381836e-06
+          }
+        }
+      },
+      "layers": 9
+    },
+    "HardSwish": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 19,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.814697265625e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.814697265625e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 19,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.000339508056640625
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 19,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.814697265625e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 3.814697265625e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 19,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.000362396240234375
+          }
+        }
+      },
+      "layers": 19
+    },
+    "Mul": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.621246337890625e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.7642974853515625e-05
+          }
+        }
+      },
+      "layers": 9
+    },
+    "ReduceMean": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 5.7220458984375e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 5.7220458984375e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 4.291534423828125e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 5.7220458984375e-06
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 7.62939453125e-06
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 9,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 4.2438507080078125e-05
+          }
+        }
+      },
+      "layers": 9
+    },
+    "Relu": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 7.152557373046875e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 14,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 6.008148193359375e-05
+          }
+        }
+      },
+      "layers": 14
+    },
+    "Squeeze": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.000240325927734375
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 0.0001430511474609375
+          }
+        }
+      },
+      "layers": 1
+    },
+    "Sub": {
+      "graphs": {
+        "preserved": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.4185905456542969e-05
+          }
+        },
+        "rounded": {
+          "isolated_extraction": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_native_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "local_kernel_runtime_input": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "native_replay_fidelity": {
+            "layers_exact_all_152_inputs": 1,
+            "max_absolute": 0.0
+          },
+          "whole_boundary_drift": {
+            "layers_exact_all_152_inputs": 0,
+            "max_absolute": 1.2159347534179688e-05
+          }
+        }
+      },
+      "layers": 1
+    }
+  },
+  "original_graph_training_parity": {
+    "preserved": {
+      "below_threshold_to_positive_count": 0,
+      "budget": {
+        "conservative_margin": 0.0,
+        "probability_absolute": 1e-06,
+        "raw_absolute": 0.0001
+      },
+      "comparison": "calibrated score >= frozen threshold",
+      "conservative_margin_added_referrals": 0,
+      "conservative_margin_lost_reference_referrals": 0,
+      "frozen_threshold_flip_count": 0,
+      "max_calibrated_probability_absolute_error": 2.7932031085864395e-06,
+      "max_raw_logit_absolute_error": 0.000240325927734375,
+      "mean_calibrated_probability_absolute_error": 6.531008448442099e-07,
+      "mean_raw_logit_absolute_error": 5.586837467394377e-05,
+      "n": 152,
+      "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+      "positive_to_below_threshold_count": 0,
+      "probability_budget_exceeded_count": 29,
+      "raw_budget_exceeded_count": 26,
+      "scope": "numerical parity of same tensors; not clinical validation or device performance",
+      "status": "FAIL",
+      "temperature": 19.150006376043688,
+      "threshold": 0.40079881738785716,
+      "version": "1.0.0"
+    },
+    "rounded": {
+      "below_threshold_to_positive_count": 0,
+      "budget": {
+        "conservative_margin": 0.0,
+        "probability_absolute": 1e-06,
+        "raw_absolute": 0.0001
+      },
+      "comparison": "calibrated score >= frozen threshold",
+      "conservative_margin_added_referrals": 0,
+      "conservative_margin_lost_reference_referrals": 0,
+      "frozen_threshold_flip_count": 0,
+      "max_calibrated_probability_absolute_error": 1.837688337558152e-06,
+      "max_raw_logit_absolute_error": 0.0001430511474609375,
+      "mean_calibrated_probability_absolute_error": 4.856509249754658e-07,
+      "mean_raw_logit_absolute_error": 4.159463079352128e-05,
+      "n": 152,
+      "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+      "positive_to_below_threshold_count": 0,
+      "probability_budget_exceeded_count": 21,
+      "raw_budget_exceeded_count": 13,
+      "scope": "numerical parity of same tensors; not clinical validation or device performance",
+      "status": "FAIL",
+      "temperature": 19.150006376043688,
+      "threshold": 0.40079881738785716,
+      "version": "1.0.0"
+    }
+  },
+  "scope": {
+    "component_ids_sha256": "b867ec82627f947b268603a763d235dac0ab66444af26e283ba36ca2d802e908",
+    "components": 152,
+    "decision": "ADR-023",
+    "deployment_selection": false,
+    "execution": "sequential",
+    "frozen_evaluation_inputs_used": false,
+    "inter_op_threads": 1,
+    "intra_op_threads": 2,
+    "optimisation": "disabled",
+    "preprocessing": {
+      "dimensions": "scale=min(224/w,224/h); half-up rounding; clamp 1..224",
+      "geometry_warning": "letterbox differs from publisher bicubic centre-crop",
+      "input": "oriented uint8 HWC RGB, nonempty dimensions <=4096, <=16777216 pixels",
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "notice": "PLACEHOLDER \u2014 not clinically validated",
+      "output": "contiguous float32 CHW; batch externally to NCHW",
+      "padding": "centred; odd extra right/bottom",
+      "padding_rgb": [
+        128,
+        128,
+        128
+      ],
+      "resize": "bilinear half-pixel centres, edge clamp, no antialias",
+      "rounding": "interpolated RGB half-up to uint8 before normalisation",
+      "size": 224,
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ],
+      "version": "1.0.0"
+    },
+    "quantisation_fit": false,
+    "shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "split": "train",
+    "stage": "complete training replay",
+    "temperature": 19.150006376043688,
+    "threshold": 0.40079881738785716
+  },
+  "source_evidence_index_sha256": "f68f247109e3cc638c11f32c2cec827cf9dd119ec197f345998534d2cda36843",
+  "source_report_sha256": "ce8ade4d296a801b85e21662ac0dbaa6763ee39d38b15b6de89a0796eb7a8fad",
+  "storage": {
+    "archive_file_bytes": 68554263856,
+    "decoded_array_bytes": 68427202504,
+    "rows": 152,
+    "unique_arrays": 481293
+  },
+  "whole_graphs": {
+    "preserved": {
+      "instrumentation": {
+        "exact_bits": {
+          "all": true,
+          "true_count": 152
+        },
+        "max_absolute": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "mean_absolute": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "signed_max": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "signed_mean": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "signed_min": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        }
+      },
+      "whole_model_drift": {
+        "exact_bits": {
+          "all": false,
+          "true_count": 0
+        },
+        "max_absolute": {
+          "max": 0.000240325927734375,
+          "mean": 5.586837467394377e-05,
+          "min": 9.5367431640625e-07
+        },
+        "mean_absolute": {
+          "max": 0.000240325927734375,
+          "mean": 5.586837467394377e-05,
+          "min": 9.5367431640625e-07
+        },
+        "signed_max": {
+          "max": 0.000240325927734375,
+          "mean": -2.482376600566663e-05,
+          "min": -0.00016880035400390625
+        },
+        "signed_mean": {
+          "max": 0.000240325927734375,
+          "mean": -2.482376600566663e-05,
+          "min": -0.00016880035400390625
+        },
+        "signed_min": {
+          "max": 0.000240325927734375,
+          "mean": -2.482376600566663e-05,
+          "min": -0.00016880035400390625
+        }
+      }
+    },
+    "rounded": {
+      "instrumentation": {
+        "exact_bits": {
+          "all": true,
+          "true_count": 152
+        },
+        "max_absolute": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "mean_absolute": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "signed_max": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "signed_mean": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "signed_min": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        }
+      },
+      "whole_model_drift": {
+        "exact_bits": {
+          "all": false,
+          "true_count": 0
+        },
+        "max_absolute": {
+          "max": 0.0001430511474609375,
+          "mean": 4.159463079352128e-05,
+          "min": 9.5367431640625e-07
+        },
+        "mean_absolute": {
+          "max": 0.0001430511474609375,
+          "mean": 4.159463079352128e-05,
+          "min": 9.5367431640625e-07
+        },
+        "signed_max": {
+          "max": 0.0001430511474609375,
+          "mean": -7.626257444682874e-06,
+          "min": -0.00010728836059570312
+        },
+        "signed_mean": {
+          "max": 0.0001430511474609375,
+          "mean": -7.626257444682874e-06,
+          "min": -0.00010728836059570312
+        },
+        "signed_min": {
+          "max": 0.0001430511474609375,
+          "mean": -7.626257444682874e-06,
+          "min": -0.00010728836059570312
+        }
+      }
+    }
+  }
+}

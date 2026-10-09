@@ -305,6 +305,49 @@ and 3,379 arrays: 456,434,104 decoded bytes, 457,326,160 archive bytes compared
 with 412,322,311 compressed bytes. No inference or full-audit claim. Available
 272 GB at the decision point exceeds the approximate 70 GB complete raw run.
 
+## Observed complete selected replay — 2026-10-09 UTC
+
+[Complete report](../ml/reports/PLACEHOLDER-m4-remaining-training3.json) and
+[derived summary](../ml/reports/PLACEHOLDER-m4-remaining-training3-summary.json)
+cover all 152 ordered training components, all 159 computational nodes, both
+unchanged whole graphs and exact input origins, all Conv/BN controls and 904
+serialized/runtime graph records. Final runner reconstruction PASS precedes
+publication. Exact original ADR-022 native/runtime bits and unchanged model
+state/fits/preprocessing/profile/budgets remain. [Separate guarded audit](../ml/reports/PLACEHOLDER-m4-remaining-training3-audit.json)
+PASS for complete context/setup/ordered observations/metrics/parity/prior bits
+with decode/native calls/sessions/eager recipes/evidence writes blocked.
+No additional inference or historical authentication. All report/summary/audit
+fingerprints match; current source snapshot
+`50f7c65e7b6a6168a17d498be4d663c89b11742f` independently matches all 33 source
+files/full tree with live dependency pins exact. No prior field is overwritten.
+
+All native replay fidelity, original/captured native and original/tapped whole
+runtime logits are exact; every signed telescoping residual is zero. Same-input
+drift is present at all 19 HardSwish, nine HardSigmoid, nine ReduceMean, final
+pool and head, plus 48/53 Conv and all preserved BNs. Rounded BNs match native
+exactly at all 34 layers on both origins. Remaining elementwise/layout operators
+are exact locally. Full measurements and both origins remain in the reports.
+
+Extraction drift is zero at 158 nodes but nonzero at the head Gemm: max
+0.0000152588 preserved / 0.0000114441 rounded. Isolated head parameters are
+explicit inputs while whole-graph parameters are constants; constant-preserved
+head isolation is an actionable next check. Kernel-packing causality is
+**UNVERIFIED**. Head propagation maxima 0.000228882 / 0.000142574 cannot be
+summed with separate kernel/extraction maxima as whole-model accounting.
+
+Both original graph comparisons still **FAIL**: control raw/probability
+0.000240326/0.00000279320, 26/29 violations; rounded
+0.000143051/0.00000183769, 13/21 violations; zero flips for both. No new
+selected fit/frozen evaluation/reference/budget change or accepted export.
+The 481,293 unique arrays (68,554,263,856 archive bytes) stay ignored with every
+private observation/graph/weight; only aggregate evidence is tracked.
+
+Next separately predeclare complete activation/reduction arithmetic and
+constant-preserved head checks with all existing controls before any new fit
+or frozen inference. No repair recipe, selective QDQ scope or mobile deployment
+is selected by this observation. The original diagnostic toy workaround remains
+in force and every failed export remains rejected; M4 is incomplete.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?
@@ -313,5 +356,6 @@ with 412,322,311 compressed bytes. No inference or full-audit claim. Available
 
 ## Confidence
 
-High for the bounded protocol; arithmetic outcomes, accepted export, mobile
-execution and clinical validity remain unverified.
+High for bounded finite-training recorded observations and reconstruction;
+accepted export, mobile execution, historical inference authentication and
+clinical validity remain unverified.

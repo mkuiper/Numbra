@@ -935,8 +935,9 @@ generated tensors and a new random miniature architecture containing Conv/BN,
 activation, residual, SE, pooling and head arithmetic. Their prior observations
 come from that same fixture, rather than the saved M3 model. The tests establish
 persistence/checking mechanics, never selected-baseline numerical parity or
-historical inference authentication. No existing ordered training image or saved
-M3 forward was opened. Observed test results are in JOURNAL.
+historical inference authentication. During that foundation iteration, no existing
+ordered training image or saved M3 forward was opened. Observed test results are
+in JOURNAL; the later selected full replay is described below.
 
 ## Remaining M4 work
 
@@ -963,36 +964,77 @@ benchmark is 2.336s, 457,326,160 archive bytes vs 412,322,311 compressed bytes;
 this is resource evidence only, not complete-run parity or provenance acceptance.
 All earlier partial runs remain diagnostic and incomplete.
 
-Optimisation profiles do not fix selected-baseline parity. ADR-023's complete
-training runner now connects native mapping, pre-mutation capture, complete
-runtime expression audits, validated taps and ordered persistence.
-The supplied-tensor integration now includes both-origin isolated replay,
-original/captured native logits, both original/tapped runtime logits, complete
-remaining scope and every Conv/BN control. Ordered persistence, complete metric
-aggregate reconstruction and supplied exact prior-logit checks now have generated
-regressions. The new independent setup auditor reconstructs every serialized
-whole/tapped/isolated/control graph from the saved parameters and fixed
-expressions, verifies exact file scope, and audits all actual runtime expressions
-without creating sessions or running observations. Generated full-pipeline tests
-retain both graphs and every ordered training component; additional miniature
-residual/SE fixtures reject changed constants, connections, records, extra files
-and symlinks. These fixtures use invented data and toy/random weights.
+[Complete selected training evidence](../ml/reports/PLACEHOLDER-m4-remaining-training3.json)
+now covers all 152 ordered training components, 159 computational nodes (53
+Conv, 34 BN, 72 remaining), both unchanged preserved/rounded graphs and both
+input origins. All Conv/BN primitive/promoted/32-recipe/two-engine controls
+remain. Actual setup reconstructs 904 serialized/runtime graphs before image
+decoding; final runner reconstruction PASS precedes report publication. All
+original native and original runtime logits exactly reproduce the ADR-022
+prior bits. Model state/fits/preprocessing/profile/budgets are unchanged.
+[Separate guarded audit](../ml/reports/PLACEHOLDER-m4-remaining-training3-audit.json)
+PASS: complete saved/preparation/retained/source/dependency/prior context,
+904 setup graphs, every ordered array/metric/lineage, original parity and exact
+prior-logit bits reconstructed with image decode, native module calls, ORT
+sessions, eager recipes and evidence writes blocked. It runs no inference and
+does not authenticate historical execution. Audit/summary/ignored and tracked
+report fingerprints agree exactly. Current runner source snapshot
+`50f7c65e7b6a6168a17d498be4d663c89b11742f` independently matches all 33 Python
+source hashes and the full tree; live dependency pins remain exact.
 
-[Selected static context](../ml/reports/PLACEHOLDER-m4-training-context1.json)
-reconstructs all 152 ordered training components, saved/preparation/retained/
-source provenance and the complete ADR-022 report twice, with image decoding,
-native forward and runtime session creation blocked. No selected training image
-is decoded and no new selected-baseline parity is measured by that check.
-Historical ADR-022 source fields bind exactly to local commit
-`808cc3393ccf1cce95c2feeef91e5a8608b481e4`; all current dependency pins remain
-required, and all current runner source/hardware fields remain recorded. No
-historical report field is overwritten. This is provenance reconstruction of
-recorded observations, never authentication of past numerical execution.
+[Readable aggregate summary](../ml/reports/PLACEHOLDER-m4-remaining-training3-summary.json)
+is derived from the complete report and checksum-bound index, never additional
+inference. All 159 native replay fidelities and uncaptured/captured native logits
+are exact; both whole original/tapped logits are exact; every four-term signed
+telescoping residual is zero. Isolated-versus-whole execution is exact at 158
+nodes; Gemm alone differs (max 0.0000152588 preserved / 0.0000114441 rounded).
+Isolated head operands include explicit parameters; whole-graph parameters are
+constants. A constant-preserving head isolation check should examine this
+execution-context difference. A kernel-packing explanation is **UNVERIFIED**.
 
-Next execute the complete guarded runner on every ordered training component
-with unchanged reference, fits, preprocessing and budgets, then independently
-audit the saved report without decoding or inference. Do not
-keep rerunning the failed profiles or choose a favourable subset.
+Same-native-input maxima across every declared layer and all 152 inputs:
+
+| Operator | Layers | Preserved max error | Rounded max error |
+| --- | ---: | ---: | ---: |
+| Conv | 53 | 0.00000190735 | 0.00000190735 |
+| BatchNormalization | 34 | 0.00000762939 | 0 |
+| HardSwish | 19 | 0.00000381470 | 0.00000381470 |
+| Relu | 14 | 0 | 0 |
+| ReduceMean | 9 | 0.00000572205 | 0.00000572205 |
+| HardSigmoid | 9 | 0.0000000596046 | 0.0000000596046 |
+| Mul | 9 | 0 | 0 |
+| Add | 6 | 0 | 0 |
+| GlobalAveragePool | 1 | 0.00000286102 | 0.00000286102 |
+| Flatten / Sub / Div / Squeeze | 1 each | 0 | 0 |
+| Gemm | 1 | 0.00000381470 | 0.00000381470 |
+
+All 34 rounded BNs match native exactly on both origins. Every HardSwish,
+HardSigmoid, ReduceMean, final pool and Gemm has nonzero same-input drift;
+48/53 Conv also do. Relu/Mul/Add/Flatten/Sub/Div/Squeeze are exact on both
+origins. These finite local measurements do not establish a whole-model fix.
+Head four-term propagation maxima are 0.000228882 preserved / 0.000142574
+rounded, with separate same-runtime-input kernel maxima 0.00000381470 /
+0.00000762939 and extraction maxima above. **Do not add these separate maxima**
+as an exact worst-case accounting; full signed per-component decomposition is
+retained under ignored data/.
+
+Original graph parity still **FAILS**: preserved max raw/probability
+0.000240326/0.00000279320 (26/29 violations); rounded
+0.000143051/0.00000183769 (13/21 violations). Zero threshold flips for both.
+Native reference, full-precision temperature/threshold and ADR-011 budgets
+remain unchanged. No new selected quantisation fit or frozen evaluation.
+
+The completed index retains 481,293 unique arrays: 68,554,263,856 archive bytes
+and 68,427,202,504 decoded array bytes. Arrays, private observations, graphs,
+weights and setup records remain ignored. Only aggregate reports are tracked.
+Historical ADR-022 source still binds to
+`808cc3393ccf1cce95c2feeef91e5a8608b481e4`; current runner source/dependencies/
+hardware remain exact. Local reconstruction never authenticates past inference.
+
+Next predeclare bounded complete activation/reduction arithmetic experiments
+and constant-preserved head isolation, keeping every existing Conv/BN and other
+operator control and all ordered training inputs. Resolve float arithmetic
+before choosing a selective QDQ scope, fitting or using frozen acceptance inputs.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

@@ -1492,3 +1492,67 @@ publication or push.
   PLACEHOLDER-m4-uncompressed-check.log and PLACEHOLDER-m4-uncompressed-timing.log.
 - Committing the independently tested lossless storage step. Complete replay
   and no-inference selected evidence audit continue; no accepted export/M5/APK.
+- Checkpoint STATUS refresh initially raised NameError after queue/journal
+  append; corrected immediately before amending the storage commit. No source/
+  inference effect. Logical commits: 7770fb3 (unused-initializer audit) and
+  50f7c65 (lossless uncompressed persistence).
+- Full third selected run observed exit 0 and published complete aggregate only
+  after final independent reconstruction PASS. All 152 ordered training inputs,
+  159 computational nodes (53 Conv/34 BN/72 remaining), both unchanged whole
+  graphs/input origins, every Conv/BN primitive/promoted/32-recipe/two-engine
+  control and 904 serialized/runtime graphs retained. Original native/runtime
+  prior ADR-022 bits exact; original state/fits/preprocessing/profile/budgets
+  unchanged. No additional frozen test/held-out/stress inference or selected fit.
+- All native replay fidelities, original/captured native and original/tapped
+  whole runtime logits exact; all four-term telescoping residuals zero. Native
+  same-input drift at all 19 HardSwish/9 HardSigmoid/9 ReduceMean/final pool/head
+  and 48/53 Conv. Rounded BN exact at every 34 BN on both origins. Remaining
+  Relu/Mul/Add/Flatten/Sub/Div/Squeeze exact locally. Complete report retains all
+  metrics/origins, including propagation rather than favourable layer summaries.
+- Extraction exact at 158 nodes, Gemm alone nonzero: max 0.0000152588 preserved /
+  0.0000114441 rounded. Explicit isolated head parameter inputs vs whole-graph
+  constants motivate constant-preserved isolation; packing causality UNVERIFIED.
+  Head propagation maxima 0.000228882 / 0.000142574 remain distinct from kernel/
+  extraction extrema; separate maxima are never added as exact causal accounting.
+- Both original comparisons remain FAIL at unchanged budgets: preserved max
+  raw/probability 0.000240326/0.00000279320, 26/29 violations; rounded
+  0.000143051/0.00000183769, 13/21 violations. Both zero threshold flips.
+  This exactly reproduces ADR-022, not a repaired/accepted model.
+- Ignored full index: 152 rows, 481,293 unique arrays, 68,554,263,856 archive
+  bytes and 68,427,202,504 decoded array bytes. Source report plus readable
+  checksum-bound derived summary are aggregate-only tracked evidence; no
+  weights/arrays/private IDs/logits/failure observations tracked. Summary
+  generation reads complete aggregates/index and performs no inference.
+- Started separate audit_training of the saved complete report with decode,
+  native module calls, ORT session construction, eager recipes and Path/builtin
+  evidence writes blocked. Its result remains pending at this checkpoint.
+- Updated ADR-023 observed evidence, ML README, export document and STATUS.
+  Six root contracts PASS (0.070s) after report documentation; whitespace clean.
+  M0–M3 GATE files verified; no M4 gate or acceptance/HANDOFF/review request.
+  NEXT_ACTION remains CONTINUE. Guarded audit/final records follow below.
+- Final selected independent audit observed exit 0, PASS for all 152 ordered
+  inputs, complete context/dependencies/prior, 159 operators/904 setup graphs,
+  ordered tensors/metrics/lineage/parity and exact original prior bits. Actual
+  guards block image decoding, native module calls, ORT session construction,
+  eager recipes and Path/builtin evidence writes throughout reconstruction.
+  No new inference or historical-authentication claim. Audit aggregate tracked
+  as ml/reports/PLACEHOLDER-m4-remaining-training3-audit.json; detailed script/log
+  stay ignored. Primary/ignored report, summary and audit fingerprints identical.
+- Independent source-snapshot audit PASS for full commit
+  50f7c65e7b6a6168a17d498be4d663c89b11742f: all 33 Python file hashes/full tree
+  match recorded current runner fields, live dependencies/lock hashes exact.
+  ADR-022 historical snapshot remains 808cc3393ccf1cce95c2feeef91e5a8608b481e4.
+  These establish local source provenance, never authenticate past inference.
+- Final closeout at 2026-10-09T19:46:12Z: update STATUS, JOURNAL, HUMAN-QUEUE and
+  NEXT_ACTION=CONTINUE. Next predeclare complete activation/reduction arithmetic
+  and constant-preserved head isolation from full retained observations, with
+  all existing controls. No repaired model/QDQ scope/fit/frozen evaluation or
+  mobile deployment selected, accepted export or M4 review request.
+- No selected-baseline retraining, state/reference/fits/budget change, new data/
+  toolchain acquisition, protected edit, review.sh, REVIEW/CHECK/GATE write,
+  external message, publication or push. All models/results remain PLACEHOLDER;
+  clinical/ethics/legal/native-language/weight rights and mobile support pending.
+- Final verification: six root repository contracts PASS (0.080s),
+  git diff --check clean; all three complete/summary/audit reports parse and
+  omit individual component IDs/logits/failure cases. Only allowed files changed.
+  Committing aggregate evidence and final records; NEXT_ACTION=CONTINUE.

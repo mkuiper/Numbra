@@ -146,10 +146,11 @@ It performs no image decoding or model inference. The companion
 `export_remaining_native` module provides complete native owner mapping,
 pre-mutation multi-operand capture, full static taps and separate eager-fidelity
 metrics. Its generated-only tests cover the full random mobile architecture;
-saved-baseline mapping is static only. `export_remaining_runtime` adds complete
+the initial saved-baseline mapping report was static only. `export_remaining_runtime` adds complete
 original/tapped disabled-runtime graph audits, validated multi-operand taps and
 unsuppressed instrumentation measurements for both graphs. Generated fixtures
-also cover both complete random mobile graphs; no saved-baseline replay is run.
+also cover both complete random mobile graphs; selected replay is exposed only
+through the guarded training runner.
 `export_remaining_replay` integrates both graphs and exact input origins on a
 supplied tensor, including separate original/captured native logits, every
 remaining operator, complete Conv/BN formula/promoted/rounding controls, and
@@ -167,14 +168,15 @@ complete static saved/preparation/retained/source checks, the ADR-022 report
 audit, actual runtime setup reconstruction and ordered observations. It audits
 every expression before decoding the first ordered training image and streams
 the full final evidence audit without inference. Generated pipeline tests cover
-these guards; the selected baseline has only a static context check so far.
+these guards. The complete selected 152-input training replay has now run,
+with all original prior-logit bits exact and final reconstruction PASS.
 
 The guarded training command is:
 
 ```bash
 python -m numbra_ml.export_remaining_run \
   --profile-source-commit 808cc3393ccf1cce95c2feeef91e5a8608b481e4 \
-  --output data/exports/PLACEHOLDER-m4-remaining-training1
+  --output data/exports/PLACEHOLDER-m4-remaining-training3
 ```
 
 The explicit source commit must exactly match every historical ADR-022 source
@@ -183,5 +185,19 @@ the current installed pins. This preserves historical report bytes and all
 original logits; it does not authenticate historical inference. Output must be
 new, and all graphs/tensors/individual observations remain ignored. Exit 0 means
 complete diagnostic evidence, including parity failures, rather than M4 acceptance.
-No selected-baseline training replay has been executed or new export accepted.
+The observed third output already exists; a rerun needs a fresh PLACEHOLDER-*
+name. [Complete replay](reports/PLACEHOLDER-m4-remaining-training3.json) and
+[readable summary](reports/PLACEHOLDER-m4-remaining-training3-summary.json) retain
+all 159 computational nodes, both graphs/input origins and every Conv/BN
+control. All native replay/capture and whole-graph tap checks are exact; the
+original numerical failures remain. All 19 HardSwish, nine HardSigmoid/nine
+ReduceMean, final pool and head show same-input drift. Head isolation also
+changes arithmetic relative to the whole graph and remains measured separately.
+[Separate complete guarded audit](reports/PLACEHOLDER-m4-remaining-training3-audit.json)
+PASS without decode/model calls/runtime sessions/eager recipes/evidence writes.
+It reconstructs recorded observations, not independent inference or historical
+authentication. No new export is accepted; this remains PLACEHOLDER diagnostic
+evidence.
+New arrays use lossless uncompressed NPZ to bound CPU cost; legacy compressed
+archives remain readable with their original file/decoded-bit checks.
 See [the export document](../docs/ML-EXPORT.md) for scope and evidence limits.
