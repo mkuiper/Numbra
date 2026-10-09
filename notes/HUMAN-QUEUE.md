@@ -2,6 +2,8 @@
 
 Decisions made autonomously, blockers, and anything needing human review.
 
+- 2026-10-10 — ADR-017 predeclares training-only complete promoted rsqrt-affine substitution of all saved BN nodes, original Conv/head/float32 boundaries retained, disabled runtime graph audits and native-reference parity. No quantisation fit, frozen evaluation, selection or budget changes. Review protocol and subsequent evidence; M4 remains open and float64 mobile compatibility unresolved.
+
 - 2026-10-09 — ADR-016 predeclares training-only PLACEHOLDER promoted stem patch/MatMul accumulation and two promoted affine BN expressions, retaining saved float32 weight/coefficient bits and float32 stage boundaries. Same inputs/native reference/budgets; no quantisation fit, frozen evaluation or deployment selection. Review diagnostic protocol and subsequent evidence; M4 remains open.
 - 2026-10-09 — ADR-016 follow-through: 152 training inputs; promoted ONNX/Python expressions agree exactly. Stem BN local rsqrt-affine maximum improves to 0.0000000596046, but promoted stem Conv and both BNs still differ from native Python. No complete-model improvement, accepted export or Android float64 support established. Next declare full preserved-graph BN substitution before selecting quantisation scope or revisiting frozen evaluation; evidence in ml/reports/PLACEHOLDER-m4-precision1.json.
 
