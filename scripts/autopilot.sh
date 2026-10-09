@@ -26,7 +26,8 @@
 #   AUTOPILOT_BRANCH         default autopilot/<YYYYMMDD-HHMM>
 #   AUTOPILOT_PUSH           1 to push after each iteration (default 1)
 #   CODEX_MODEL              passed to codex as -m if set
-#   CODEX_FLAGS              default: --sandbox danger-full-access --ask-for-approval never
+#   CODEX_FLAGS              default: --sandbox danger-full-access
+#                            (codex exec is non-interactive, so it never asks for approval)
 #   plus NUMBRA_REVIEW_* (see scripts/review.sh)
 
 set -uo pipefail
@@ -39,7 +40,7 @@ MAX_ITER="${AUTOPILOT_MAX_ITER:-40}"
 ITER_TIMEOUT="${AUTOPILOT_ITER_TIMEOUT:-90m}"
 BRANCH="${AUTOPILOT_BRANCH:-autopilot/$(date +%Y%m%d-%H%M)}"
 PUSH="${AUTOPILOT_PUSH:-1}"
-read -r -a CODEX_ARGS <<< "${CODEX_FLAGS:---sandbox danger-full-access --ask-for-approval never}"
+read -r -a CODEX_ARGS <<< "${CODEX_FLAGS:---sandbox danger-full-access}"
 [[ -n "${CODEX_MODEL:-}" ]] && CODEX_ARGS+=(-m "$CODEX_MODEL")
 
 DEADLINE=$(( $(date +%s) + ${HOURS%.*} * 3600 ))
@@ -148,7 +149,18 @@ while :; do
     > "$RUN_DIR/iter-$(printf %03d "$iter").log" 2>&1
   rc=$?
   (( rc == 124 )) && harness "Iteration $iter hit the ${ITER_TIMEOUT} timeout; uncommitted work was committed. Work in smaller steps."
-  (( rc != 0 && rc != 124 )) && log "codex exited $rc (see $RUN_DIR/iter-$(printf %03d "$iter").log)"
+  ITER_LOG="$RUN_DIR/iter-$(printf %03d "$iter").log"
+  if (( rc != 0 && rc != 124 )); then
+    log "codex exited $rc (see $ITER_LOG)"
+    if [[ -z "$(git status --porcelain)" && "$(git rev-parse HEAD)" == "$base" ]]; then
+      fails=$(( ${fails:-0} + 1 ))
+      log "Codex failed without doing any work. Last lines of its output:"
+      tail -n 15 "$ITER_LOG" | sed 's/^/    | /' | tee -a "$LOG"
+      (( fails >= 2 )) && { log "Codex failed twice in a row — stopping. Fix the error above (often CODEX_FLAGS or sign-in) and rerun."; break; }
+      continue
+    fi
+  fi
+  fails=0
 
   commit "autopilot: iteration $iter (uncommitted work captured by harness)"
   guard_protected "$base"
