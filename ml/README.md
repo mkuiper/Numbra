@@ -129,3 +129,13 @@ independent NumPy/eager-PyTorch expressions against every native BN on both
 training input origins, records coefficient bits and audits full scope. All
 existing Conv/BN replay controls remain; no replacement graph or deployable
 model is produced. M4 acceptance still requires whole-model quantised parity.
+
+Complete rounded-affine BN substitution is available as
+`python -m numbra_ml.export_rounded_bn --output data/exports/PLACEHOLDER-<new-name>`.
+[ADR-021](../decisions/ADR-021-rounded-affine-whole-model.md) fixes one complete
+`e32-r32-a32-b64-o64` candidate and preserved control before execution. It rejects
+independent coefficient-bit disagreement, audits every saved BN and actual runtime
+expression, and reconstructs fixed-budget parity from ignored ordered details.
+The complete candidate reduces training errors but still fails both numeric budgets.
+All copies remain **PLACEHOLDER diagnostic only, never bundle**; no quantisation,
+frozen evaluation or deployment selection occurred.

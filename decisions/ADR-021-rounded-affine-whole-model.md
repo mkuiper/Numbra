@@ -47,6 +47,34 @@ without tuning against frozen inputs. Conv arithmetic may still defeat parity;
 double output arithmetic is not a claim of hardware float32 FMA. It does not
 authorise bundling or change the roadmap order.
 
+## Observed follow-through — 2026-10-09 UTC
+
+[Complete aggregate evidence](../ml/reports/PLACEHOLDER-m4-rounded-bn2.json):
+all 34 BNs replaced; all 152 ordered training inputs; unchanged control/model/
+fits/budgets. Independent engines agree on every coefficient bit, and all
+serialized/runtime expressions pass audits. Candidate max raw/probability
+errors 0.000143051/0.00000183769 **FAIL** budgets 0.0001/0.000001, with 13/21
+violations and zero flips. Preserved control reproduces maxima
+0.000240326/0.00000279320 and 26/29 violations. Every failed graph stays rejected.
+
+Independent no-inference audit PASS: eight graph records, ordered input scope,
+coefficient bits and runtime arithmetic, fixed-budget parity/failure aggregates,
+features/tap accounting, saved-model/preparation/source/retained/dependency/code
+provenance, and exact ADR-020 Python/control ordered logits. Zero feature-tap
+changes. Candidate 6,255,113 bytes; size does not cancel failed parity.
+
+The first run remains retained. Its subsequent prior-control audit assumed
+temperature/threshold fields in ADR-020's replay protocol and raised KeyError.
+Corrected it to bind the fits through the identical saved-run hash and added an
+actual-schema regression. Regenerated evidence after the source change: graph,
+detail and artifact aggregates reproduce exactly. No inference expression changed.
+The diagnostic exit status still does not imply acceptance.
+
+Next predeclare complete training-only fixed ORT optimisation profiles on the
+rounded-affine graph and preserved control, auditing any folded constants and
+operator semantics. Quantisation scope and mobile double support remain separate
+blockers; no frozen inference or deployment selection occurred.
+
 ## Open questions
 
 - Does the declared complete graph meet the unchanged training-only budgets?
@@ -55,5 +83,5 @@ authorise bundling or change the roadmap order.
 
 ## Confidence
 
-High for the predeclared finite protocol; whole-model parity, mobile execution
-and clinical validity remain unverified before the experiment.
+High for the finite training-only protocol and observed failed whole-model parity.
+Unseen-input/mobile execution and clinical validity remain unverified.

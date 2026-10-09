@@ -470,3 +470,39 @@ controls and their original fixed-budget parity, without new inference.
 ## Confidence
 
 High for observed research/Python/export setup; Android toolchain setup is pending.
+
+## M4 complete rounded-affine BN — observed 2026-10-09 UTC
+
+No installation, dependency, data or checkpoint acquisition. Existing hash-locked
+42-package environment ran from repository root:
+
+```bash
+ml/.venv/bin/python -m pytest ml/tests/test_export_rounded_bn.py ml/tests/test_export_promoted_bn.py -q
+ml/.venv/bin/python -m pytest ml/tests/test_export_rounded_bn.py ml/tests/test_export_promoted_bn.py ml/tests/test_export_joint.py -q
+ml/.venv/bin/python -m numbra_ml.export_rounded_bn --output data/exports/PLACEHOLDER-m4-rounded-bn1
+ml/.venv/bin/python -m pytest ml/tests/test_export_rounded_bn.py -q
+ml/.venv/bin/python -m numbra_ml.export_rounded_bn --output data/exports/PLACEHOLDER-m4-rounded-bn2
+ml/.venv/bin/python data/exports/PLACEHOLDER-m4-rounded-bn-audit.py
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+Initial new subset had 20 PASS / 1 FAIL: a diagnostic multi-output graph was passed
+to the strict single-output production helper. Fixed the fixture's session/input
+name and used integer centre-pixel Conv weights for isolated BN comparisons;
+retained exact assertions and production guard. Combined subset 34 PASS; expanded
+rounded subset 14 PASS, including independent coefficient-bit disagreement and
+prior ordered-control corruption rejection. Prior audit of first run raised
+KeyError for missing ADR-020 protocol fit fields; fixed saved-run hash binding
+with actual-schema regression. Retained first evidence and regenerated second
+run after the source change; all graphs/details/aggregates reproduce exactly.
+
+Independent audit script is ignored local evidence, calling the tracked
+`audit_rounded_report`, `audit_prior_control`, saved reference/preparation/preserved/
+retained verification and current environment/source hashes without input inference.
+Its PASS result/hash is documented in ML-EXPORT.md. Both diagnostic commands exit 0
+while unchanged numerical acceptance FAILS; neither permits app bundling. Full
+check before schema fix: 434 PASS in 70.03s; fresh check after fix: 434 PASS in
+70.00s, 170 warnings. Android skipped; no APK. Initial root suite 6 PASS in 0.092s;
+final documentation check is recorded in JOURNAL. All logs/graphs/details stay
+under ignored data/; aggregate reports only are tracked.

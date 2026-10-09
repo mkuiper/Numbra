@@ -604,15 +604,64 @@ without changing the observed rounded float32 output. Complete individual recipe
 and layer aggregates remain in the linked report. Preserved control remains FAIL:
 raw/probability maxima 0.000240326/0.00000279320, 26/29 violations, zero flips.
 
+## Complete rounded-affine BN candidate — ADR-021
+
+The predeclared `e32-r32-a32-b64-o64` recipe replaces all 34 saved BNs in one
+complete **PLACEHOLDER diagnostic** candidate. Each BN keeps original float32
+input/output boundaries and float32 alpha/beta coefficients, with double Mul/Add.
+Every other serialized node, initializer and connection remains intact. Independent
+NumPy/eager-PyTorch coefficient bits must agree; missing layers, altered saved bits,
+recipe/order changes and runtime expression corruption are rejected.
+
+Command (repository root, existing environment and retained inputs):
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_rounded_bn --output data/exports/PLACEHOLDER-m4-rounded-bn2
+```
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-rounded-bn2.json) covers all 152
+ordered training component index images, preserved control and candidate only.
+No test/held-out/stress inference or new quantisation fit. Model, calibration,
+threshold and ADR-011 budgets remain unchanged. Separate feature taps produce
+zero logit changes; original-graph parity is checked independently.
+
+| Graph | Max raw error | Max probability error | Raw / probability violations | Flips | Bytes |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Preserved control | 0.000240326 | 0.00000279320 | 26 / 29 | 0 | 6,188,494 |
+| Complete rounded BN | 0.000143051 | 0.00000183769 | 13 / 21 | 0 | 6,255,113 |
+
+Both **FAIL** fixed raw/probability budgets 0.0001/0.000001. Candidate mean raw/
+probability errors are 0.0000415946/0.000000485651. Better errors and zero flips
+do not cancel numerical failures. Feature error max is 0.0000121593; induced
+Python-head max error is 0.000142574. Remaining differences are not attributed
+solely to Conv: activations, pooling/head and propagation also remain unchanged.
+
+Coefficient audits PASS for all 34 saved BNs; serialized/runtime audits PASS for
+204 declared arithmetic nodes, 136 Casts, 53 retained Conv and one Gemm. The
+independent no-inference audit rechecks eight graph records, complete ordered
+input scope, parity/failure/feature aggregates, tap accounting and saved-model/
+preparation/source/retained/dependency/source-code provenance. Native Python and
+preserved-control ordered logits reproduce ADR-020 exactly. Private audit:
+`data/exports/PLACEHOLDER-m4-rounded-bn2/PLACEHOLDER-independent-audit.json`, SHA-256
+`1388700ac2588a7a4334f4145303f5f59e99650fbb65ba4ae3e23bcd80c3b825`.
+
+The first complete run remains retained in
+[its aggregate report](../ml/reports/PLACEHOLDER-m4-rounded-bn1.json). A subsequent
+prior-control audit failed because it assumed ADR-020's protocol had temperature/
+threshold fields. Corrected the audit to bind fits via the exact saved-run hash,
+with a regression matching the actual schema; regenerated the second run with
+current source hashes. Both runs' graphs, details and artifact aggregates match
+exactly. This fix changes no inference arithmetic or acceptance budget.
+
 ## Remaining M4 work
 
-Complete rounding replay identifies two locally exact BN recipes on all tested
-training inputs. Next predeclare a single all-BN `e32-r32-a32-b64-o64` candidate
-and preserved control, then test complete-model training parity with actual
-runtime coefficient/arithmetic audits. Local agreement is not an assumed fix:
-Conv kernel drift remains unresolved. Keep every failed export, reference, fit,
-input and ADR-011 budget; never adapt to frozen evaluation or select a favourable
-layer subset. No whole-model candidate was built or selected in this iteration.
+Local exact BN agreement improves whole-model errors but does not close parity.
+Next predeclare fixed ORT optimisation profiles on this rounded-affine graph and
+the preserved control, with complete training-only scope and semantic audits of
+any folded constants/operators. Profile every declared setting; keep every failed
+export, reference, fit, input and ADR-011 budget. No new candidate may be chosen
+against frozen evaluation or a favourable layer subset. Conv arithmetic and other
+remaining float operators may still require further work.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

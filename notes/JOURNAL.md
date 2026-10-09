@@ -1008,3 +1008,49 @@ clinical data/validation, weight notices and mobile execution remain open.
   PLACEHOLDER/private-field and exact NEXT_ACTION checks PASS. git diff --check
   clean; no protected changed path and no data/ file tracked. Final source commit
   for experiment reproduction: 908dbdd; documentation/evidence committed separately.
+
+## 2026-10-09T16:49:23Z — iteration
+
+- Oriented in mandated order: ROADMAP, STATUS, HARNESS, current review folder
+  (M4 absent), AGENTS and relevant export ADRs. No new harness messages; M0–M3
+  closed, M4 still incomplete. No review requested without accepted export.
+- Predeclared ADR-021 and queued human review, committed 3cb94ab before execution.
+  Implemented complete e32-r32-a32-b64-o64 BN candidate plus unchanged preserved
+  control; independent NumPy/PyTorch coefficient bits, all saved parameter/epsilon/
+  order audits, actual runtime expression/boundary audits and no-inference ordered
+  parity/failure/feature reconstruction. Implementation commit 4970c3d.
+- Both experiments: every 34 BN, 152 ordered training inputs, 53 original Conv/one
+  Gemm retained, 204 replacement expression nodes/136 Casts; unchanged saved model,
+  fits, reference/budgets. Candidate raw/probability maxima 0.000143051/0.00000183769
+  FAIL original 0.0001/0.000001 budgets; 13/21 violations, zero flips. Preserved
+  control still FAILS (0.000240326/0.00000279320, 26/29 violations). Size 6,255,113
+  bytes passes size only. Feature taps change no logits. All graphs remain rejected
+  PLACEHOLDER diagnostics, never bundle; no frozen inference/new quantisation fit.
+- Initial subset 20 PASS/1 FAIL in 10.37s, 46 warnings: new multi-output fixture
+  incorrectly called the strict single-output production helper. Corrected fixture
+  session/input and integer centre-pixel Conv parameters; exact assertions/production
+  guard unchanged. Combined rounded/promoted/joint subset 34 PASS in 14.13s,
+  76 warnings; expanded rounded subset 14 PASS in 2.15s, 12 warnings.
+- First full check exit 0: 434 PASS in 70.03s, 170 warnings; Android skipped.
+  Subsequent independent prior audit failed KeyError because ADR-020 protocol lacks
+  temperature/threshold fields. Corrected binding through the identical saved-run
+  hash, added an actual-schema regression (14 PASS in 2.15s) and committed 46aa22c.
+  First diagnostic report retained; second regenerated with corrected source hashes.
+  Both runs' graphs, artifact aggregates and private detail hashes match exactly.
+- Final independent no-inference audit exit 0/PASS: eight graph records, coefficient
+  bits/runtime arithmetic, ordered input scope, fixed-budget parity/failure/feature
+  reconstruction/tap accounting, model/preparation/source/retained/dependency/code
+  provenance, and exact ADR-020 ordered Python/control logits. Private audit SHA-256:
+  1388700ac2588a7a4334f4145303f5f59e99650fbb65ba4ae3e23bcd80c3b825.
+- Fresh final bash scripts/check.sh exit 0: 434 PASS in 70.00s, 170 warnings;
+  Android SKIPPED, RESULT PASS. Initial root contract suite 6 PASS in 0.092s.
+  Updated export/setup/README/ADR evidence, HUMAN-QUEUE, STATUS and NEXT_ACTION.
+- Next step: predeclare fixed complete training-only ORT profiles for rounded BN
+  candidate/control, audit folded constants/operator semantics before considering
+  selective QDQ. Model/fit/budget unchanged; no frozen-input tuning. No accepted
+  export or M4 HANDOFF/review request. NEXT_ACTION CONTINUE.
+- No install/acquisition, patient data, protected edits, review.sh, harness-owned
+  REVIEW/CHECK/GATE writes, external messages, publishing or push. ADR-012's labelled
+  toy workaround remains diagnostic only; M4 cannot close on these failures.
+- Final documentation verification: root contract suite 6 PASS in 0.080s;
+  git diff --check clean. All changes committed before returning to harness.

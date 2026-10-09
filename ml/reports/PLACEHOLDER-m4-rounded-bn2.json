@@ -1,0 +1,6063 @@
+{
+  "artifacts": {
+    "complete_promoted_bn": {
+      "diagnostics": {
+        "instrumented_attribution": {
+          "affine_feature_error_bound": {
+            "max": 0.0010109749716830793,
+            "mean": 0.0005242732881599254
+          },
+          "induced_python_head_absolute_error": {
+            "max": 0.00014257431030273438,
+            "mean": 4.123072875173468e-05
+          },
+          "instrumentation_absolute_logit_change": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "max_feature_absolute_error": {
+            "max": 1.2159347534179688e-05,
+            "mean": 5.399906321575767e-06
+          },
+          "mean_feature_absolute_error": {
+            "max": 1.4658589861937799e-06,
+            "mean": 6.790592208538726e-07
+          },
+          "tapped_runtime_vs_python_head_absolute_error": {
+            "max": 1.1444091796875e-05,
+            "mean": 2.1771380775853208e-06
+          }
+        },
+        "original_graph_training_parity": {
+          "below_threshold_to_positive_count": 0,
+          "budget": {
+            "conservative_margin": 0.0,
+            "probability_absolute": 1e-06,
+            "raw_absolute": 0.0001
+          },
+          "comparison": "calibrated score >= frozen threshold",
+          "conservative_margin_added_referrals": 0,
+          "conservative_margin_lost_reference_referrals": 0,
+          "frozen_threshold_flip_count": 0,
+          "max_calibrated_probability_absolute_error": 1.837688337558152e-06,
+          "max_raw_logit_absolute_error": 0.0001430511474609375,
+          "mean_calibrated_probability_absolute_error": 4.856509249754658e-07,
+          "mean_raw_logit_absolute_error": 4.159463079352128e-05,
+          "n": 152,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "positive_to_below_threshold_count": 0,
+          "probability_budget_exceeded_count": 21,
+          "raw_budget_exceeded_count": 13,
+          "scope": "numerical parity of same tensors; not clinical validation or device performance",
+          "status": "FAIL",
+          "temperature": 19.150006376043688,
+          "threshold": 0.40079881738785716,
+          "version": "1.0.0"
+        },
+        "runtime_graphs": {
+          "instrumented": {
+            "bytes": 6156192,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "2a8390e513e449327219f26e43d5c48daabe08a0ec6f0f26d202fac6fcf95e7f",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          },
+          "original": {
+            "bytes": 6156135,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "755fd3c6ebe528340cbc838f49c047af00356720fbc2e71b6dbc21325a23c72b",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          }
+        },
+        "warning": "attribution uses an extra graph output; original parity is measured separately"
+      },
+      "graph": {
+        "bytes": 6255113,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "0cad399d9b25986c09dbffcaac02a8989aa60d5159c27d59cae4af57671537a2",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "instrumented_graph": {
+        "bytes": 6255170,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "2329a7cc45cc7a343f8b01ad7c3535df1b60d74db108a5be4751f3ddfa584baf",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "runtime_audits": {
+        "features": {
+          "float32_coefficients_and_output_boundaries": true,
+          "notice": "PLACEHOLDER diagnostic graph; never bundle",
+          "original_conv_head_counts_retained": true,
+          "original_other_nodes_and_initializers_retained": false,
+          "promoted_expression_nodes": 204,
+          "replaced_batchnorm_nodes": 34,
+          "status": "PASS"
+        },
+        "original": {
+          "float32_coefficients_and_output_boundaries": true,
+          "notice": "PLACEHOLDER diagnostic graph; never bundle",
+          "original_conv_head_counts_retained": true,
+          "original_other_nodes_and_initializers_retained": false,
+          "promoted_expression_nodes": 204,
+          "replaced_batchnorm_nodes": 34,
+          "status": "PASS"
+        }
+      }
+    },
+    "preserved_control": {
+      "diagnostics": {
+        "instrumented_attribution": {
+          "affine_feature_error_bound": {
+            "max": 0.001314776330424805,
+            "mean": 0.0007021716725609136
+          },
+          "induced_python_head_absolute_error": {
+            "max": 0.0002288818359375,
+            "mean": 5.544800507394891e-05
+          },
+          "instrumentation_absolute_logit_change": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "max_feature_absolute_error": {
+            "max": 1.4185905456542969e-05,
+            "mean": 7.165497855136269e-06
+          },
+          "mean_feature_absolute_error": {
+            "max": 1.7523760078574924e-06,
+            "mean": 9.133259050223143e-07
+          },
+          "tapped_runtime_vs_python_head_absolute_error": {
+            "max": 1.52587890625e-05,
+            "mean": 2.5033950805664062e-06
+          }
+        },
+        "original_graph_training_parity": {
+          "below_threshold_to_positive_count": 0,
+          "budget": {
+            "conservative_margin": 0.0,
+            "probability_absolute": 1e-06,
+            "raw_absolute": 0.0001
+          },
+          "comparison": "calibrated score >= frozen threshold",
+          "conservative_margin_added_referrals": 0,
+          "conservative_margin_lost_reference_referrals": 0,
+          "frozen_threshold_flip_count": 0,
+          "max_calibrated_probability_absolute_error": 2.7932031085864395e-06,
+          "max_raw_logit_absolute_error": 0.000240325927734375,
+          "mean_calibrated_probability_absolute_error": 6.531008448442099e-07,
+          "mean_raw_logit_absolute_error": 5.586837467394377e-05,
+          "n": 152,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "positive_to_below_threshold_count": 0,
+          "probability_budget_exceeded_count": 29,
+          "raw_budget_exceeded_count": 26,
+          "scope": "numerical parity of same tensors; not clinical validation or device performance",
+          "status": "FAIL",
+          "temperature": 19.150006376043688,
+          "threshold": 0.40079881738785716,
+          "version": "1.0.0"
+        },
+        "runtime_graphs": {
+          "instrumented": {
+            "bytes": 6192463,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "6cbd2d81e265cb2153ce7972784feed4771c291c5550e90200893dcd716b1669",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          },
+          "original": {
+            "bytes": 6192406,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "8d5ac32860bc978a8888a2948e68891bb536aebeca859064f29f6d297ad80c3c",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          }
+        },
+        "warning": "attribution uses an extra graph output; original parity is measured separately"
+      },
+      "graph": {
+        "bytes": 6188494,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "fc064e7aceb82df1c449681bb94c9749a0da352d81f1576e759c4eeca1ee4054",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "instrumented_graph": {
+        "bytes": 6188551,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "d0b23dd539a61e7d98703fd9b3bc504dcfd85227bf9f7f8c257cc7dd13e2d3c5",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "runtime_audits": {
+        "features": {
+          "batchnorm_nodes": 34,
+          "status": "PASS"
+        },
+        "original": {
+          "batchnorm_nodes": 34,
+          "status": "PASS"
+        }
+      }
+    }
+  },
+  "coefficient_audit": {
+    "all_saved_parameter_epsilon_and_coefficient_bits": true,
+    "independent_engines": [
+      "numpy",
+      "torch"
+    ],
+    "layers": 34,
+    "module_order": true,
+    "notice": "PLACEHOLDER diagnostic only; never bundle",
+    "recipe": "e32-r32-a32-b64-o64",
+    "status": "PASS"
+  },
+  "created_utc": "2026-10-09T16:45:59.955509+00:00",
+  "diagnostic_details_sha256": "a50ad9aa2bf3442da32a945ab7210cc46d9598f6ef2b386dd00d4fae2ce131b2",
+  "environment": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 275HX",
+    "dependencies": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.19.2",
+      "attrs": "25.3.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.2",
+      "coloredlogs": "15.0.1",
+      "filelock": "4.0.12",
+      "flatbuffers": "25.12.19",
+      "fsspec": "2026.9.0",
+      "hf-xet": "1.7.0",
+      "huggingface-hub": "0.36.0",
+      "humanfriendly": "10.0",
+      "idna": "3.20",
+      "iniconfig": "2.1.0",
+      "jsonschema": "4.25.1",
+      "jsonschema-specifications": "2025.9.1",
+      "ml-dtypes": "0.6.0",
+      "mpmath": "1.3.0",
+      "networkx": "3.7",
+      "numpy": "2.2.6",
+      "onnx": "1.19.1",
+      "onnxruntime": "1.23.2",
+      "packaging": "25.0",
+      "pillow": "11.3.0",
+      "pluggy": "1.6.0",
+      "protobuf": "7.36.2",
+      "pytest": "8.4.2",
+      "referencing": "0.36.2",
+      "requests": "2.34.2",
+      "rpds-py": "0.27.1",
+      "safetensors": "0.6.2",
+      "setuptools": "80.9.0",
+      "sympy": "1.14.0",
+      "timm": "1.0.22",
+      "torch": "2.8.0+cpu",
+      "torchvision": "0.23.0+cpu",
+      "tqdm": "4.70.1",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.8.0",
+      "wheel": "0.45.1"
+    },
+    "dependency_lock_sha256": "54022e4eb1ab4fad6d90f65e2f21784411daf7e7875cf5b8f81a75d90f0309cd",
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "export_dependency_lock_sha256": "eb639013b6c6fca1b4cba2e77a19a1cbe098ddf688d13a58463df93714c1f396",
+    "git_commit": "46aa22c0ae5de1020f2f315d1695cb43136a3f34",
+    "git_dirty": true,
+    "logical_cpu_count": 24,
+    "machine": "x86_64",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.12.3",
+    "reproduction_scope": "same pinned environment/hardware; other platforms unverified",
+    "source_files_sha256": {
+      "ml/src/numbra_ml/__init__.py": "c437709a69fabe6a5d5fd2dbc742b1a43cee0056db7640394a397e7a0fba3a45",
+      "ml/src/numbra_ml/dataset.py": "5a6732734ef6198e37b4ea02ae217cd568925cd31209693b6bb0326cff382f79",
+      "ml/src/numbra_ml/evaluation.py": "493aa1be7c014b62ebd98af56c45bfc4aac0cf72d59077de91ff3bf1ed3a15b8",
+      "ml/src/numbra_ml/export.py": "a25f4b8076209edb1ac451e7f8fa0885c6e492934d07997a48c12f327ab57b5f",
+      "ml/src/numbra_ml/export_batchnorm.py": "091c38aff38beca6f95070f30303dfb9094549842e959a4f4ff49a517e4a24b3",
+      "ml/src/numbra_ml/export_bn_rounding.py": "298876cdee20ada36375ed51c5be514dbb7d0e05298d595fbe0fb0cec42f1a81",
+      "ml/src/numbra_ml/export_complete_replay.py": "923a5af09807c9c785bc396c7c7564ea2b149a3b9b173dc47b8eef7060452d7b",
+      "ml/src/numbra_ml/export_diagnostics.py": "fbe36ab1c0a502c0be6c21be0f484a4a8101dd0b2de29c67ba878adf38f446c0",
+      "ml/src/numbra_ml/export_joint.py": "ed6c8b3f14a871c88513de8da660706a2b038116657c74f9d17464d832b1fe1b",
+      "ml/src/numbra_ml/export_precision.py": "92c98e5b0aaf54f981909a34e1a55b896d134bce6b731539f320002cf1b79a9a",
+      "ml/src/numbra_ml/export_promoted_bn.py": "fba9f9319e202587a327f610686225540c72ce977390073a0c05c92b32f53343",
+      "ml/src/numbra_ml/export_replay.py": "c8f410f3566f0db65a58a8507bf3963f259779ee8ef5c52fa4baff48c37750f0",
+      "ml/src/numbra_ml/export_rounded_bn.py": "2e80d432d11c55bc0bc24d14bb95fd4e86601f96c6be3e3b29bed1eccc89c04a",
+      "ml/src/numbra_ml/manifest.py": "a68b6246dde24481dec928cd73bafc224b084e07873ff3caa9bbc3bae7d3f90b",
+      "ml/src/numbra_ml/parity.py": "185e1361d78be178020fafbbf3c7943a626230e01362b47c013d7e46f68be6d4",
+      "ml/src/numbra_ml/preparation.py": "0e72499c4208882780345f7c633224a18c140d803d57289b5db2e06527677dfd",
+      "ml/src/numbra_ml/prepare.py": "57cc5d9eabd8744419aef42f7616981d67c557d1f130714ec187752fbd567c97",
+      "ml/src/numbra_ml/preprocessing.py": "c9fbe31e531db054e8674d859f2c866ce91f3bbcc7e8b85be3a69147dbe1998a",
+      "ml/src/numbra_ml/pretrained.py": "570868b592338f678b9b83b6605beca9a8b85acdd5a0ebb59c4f29b3105c4bc6",
+      "ml/src/numbra_ml/schema.py": "8d45f5d4fc846508e372f527d87f193bf0f584b9f2a22a4f6a39f577ebaa0c40",
+      "ml/src/numbra_ml/synthetic.py": "a42c55d5c35c6d1406d307fc38a024601a2b7c307c5522dddd194da760e3c0b6",
+      "ml/src/numbra_ml/taxonomy.py": "842352e533ee6f5506e43fb07389a0d02f7e707c3f3a3acc07511a461713ebe5",
+      "ml/src/numbra_ml/train.py": "cff1073528080cdfb0ee2f76d60e14591d644fd4bd4d8fcc1599423f489975d4",
+      "ml/src/numbra_ml/training.py": "1067ca5a5212445369d3a9d6e2dc7e0587490b1054cb2fe454ffdb819ba196ed",
+      "ml/src/numbra_ml/verify.py": "7384905472a9ca5c3962bf4272252cebac6068ed9606f2b0b7e4546e80c09ead"
+    },
+    "source_tree_sha256": "f4f3abb1049d74f8b630e4278021fe25d41b2e12e995f7a78ae06383b6410ac3",
+    "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=a1cb3cc05d46d198467bebbb6e8fba50a325d4e7, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.8.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "torch_cpu_capability": "AVX2"
+  },
+  "evidence_audit": {
+    "artifacts": 2,
+    "coefficient_bits_and_runtime_expressions": true,
+    "feature_aggregates_and_tap_accounting": true,
+    "fixed_budget_parity_reconstructed": true,
+    "graphs_checked": 8,
+    "notice": "PLACEHOLDER diagnostic only; never bundle",
+    "ordered_training_components": 152,
+    "status": "PASS"
+  },
+  "head_sensitivity": {
+    "effective_coefficient_l1": 1362.4646539532419,
+    "features": 1024,
+    "maximum_absolute_effective_coefficient": 59.662623509726096,
+    "maximum_scale": 1.0,
+    "minimum_scale": 0.004729056730866432,
+    "warning": "real-arithmetic affine sensitivity; does not bound float rounding"
+  },
+  "manifest_sha256": "2d141bc62205d88b7116cbe410e9262a96d771dec34c30e88ae6ad9c4bee839e",
+  "model_state_after_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "model_state_before_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+  "preparation_report_sha256": "c8fb349db94a251e7f8c8b0a25335bff973819f2a44e00ba54b7869777883a22",
+  "protocol": {
+    "component_ids_sha256": "b867ec82627f947b268603a763d235dac0ab66444af26e283ba36ca2d802e908",
+    "components": 152,
+    "decision": "ADR-021",
+    "deployment_selection": false,
+    "execution": "sequential",
+    "expected_batchnorm_substitutions": 34,
+    "formula": "e32-r32-a32-b64 coefficients rounded to float32; double Mul/Add; float32 boundary",
+    "frozen_evaluation_inputs_used": false,
+    "inter_op_threads": 1,
+    "intra_op_threads": 2,
+    "optimisation": "disabled",
+    "quantisation_fit": false,
+    "rounding_recipe": "e32-r32-a32-b64-o64",
+    "shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "split": "train",
+    "temperature": 19.150006376043688,
+    "threshold": 0.40079881738785716
+  },
+  "retained_artifacts": {
+    "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b": {
+      "graph": {
+        "bytes": 1861702,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    },
+    "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa": {
+      "graph": {
+        "bytes": 1730515,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        }
+      ]
+    },
+    "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35": {
+      "graph": {
+        "bytes": 6095579,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "float",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        },
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    }
+  },
+  "saved_model_sha256": "734328e3568335b9f415b4ca06b813872a9e43bd432717908bc0f1d4c7e2ae43",
+  "saved_run_sha256": "1d729fba54ecee14b118124531f1c60d5bbe33ceb15e21b90d3182ba7b61fc11",
+  "scope": "PLACEHOLDER training-only complete rounded BN graph; never bundle; no mobile/clinical/deployment evidence",
+  "source_graph": {
+    "bytes": 6188494,
+    "int8_weight_qdq_operators": {},
+    "ir_version": 8,
+    "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+    "operators": {
+      "Add": 6,
+      "BatchNormalization": 34,
+      "Constant": 1,
+      "Conv": 53,
+      "Div": 1,
+      "Flatten": 1,
+      "Gemm": 1,
+      "GlobalAveragePool": 1,
+      "HardSigmoid": 9,
+      "HardSwish": 19,
+      "Mul": 9,
+      "ReduceMean": 9,
+      "Relu": 14,
+      "Squeeze": 1,
+      "Sub": 1
+    },
+    "opsets": {
+      "ai.onnx": 17
+    },
+    "other_float_or_structural_operators": {
+      "Add": 6,
+      "BatchNormalization": 34,
+      "Constant": 1,
+      "Div": 1,
+      "Flatten": 1,
+      "GlobalAveragePool": 1,
+      "HardSigmoid": 9,
+      "HardSwish": 19,
+      "Mul": 9,
+      "ReduceMean": 9,
+      "Relu": 14,
+      "Squeeze": 1,
+      "Sub": 1
+    },
+    "remaining_float_weight_operators": {
+      "Conv": 53,
+      "Gemm": 1
+    },
+    "sha256": "fc064e7aceb82df1c449681bb94c9749a0da352d81f1576e759c4eeca1ee4054",
+    "size_pass": true,
+    "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+  },
+  "source_report_sha256": "51b07a5afdfe2fd7e85847980825c701b81ca208146f8e69503e8d74cf47b8fc",
+  "status": "DIAGNOSTIC ONLY",
+  "substitutions": [
+    {
+      "coefficient_shape": [
+        1,
+        16,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "30d78e1aeb039f4cb1567bee9c8b0e2854b406c017d2657cef2faca259db1bdf",
+        "beta": "0ca41c2fdc0f9b226bcd2ce81586f5e2558c83cfa985f4f5ecea022ac29f0c62"
+      },
+      "input": "/backbone/conv_stem/Conv_output_0",
+      "module": "backbone.bn1",
+      "output": "/backbone/bn1/BatchNormalization_output_0",
+      "position": 0,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "30d78e1aeb039f4cb1567bee9c8b0e2854b406c017d2657cef2faca259db1bdf",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "0ca41c2fdc0f9b226bcd2ce81586f5e2558c83cfa985f4f5ecea022ac29f0c62",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "a2f5a30ea36d79852b28a91b57613579eefacd1de0a65b9c9df5162277d2916a",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "9920a406597efa37d233c5ae38a28b0e2082efb1ea057f88ecde8bb5ce75549b",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "30d78e1aeb039f4cb1567bee9c8b0e2854b406c017d2657cef2faca259db1bdf",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "0ca41c2fdc0f9b226bcd2ce81586f5e2558c83cfa985f4f5ecea022ac29f0c62",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "a2f5a30ea36d79852b28a91b57613579eefacd1de0a65b9c9df5162277d2916a",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "9920a406597efa37d233c5ae38a28b0e2082efb1ea057f88ecde8bb5ce75549b",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "90bc414a8cee79e2b00da2f3237d89884892f3b26ee12a8e787ce1d9d6234b5c",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "050373166479a794e4ccfdfac0132366990eb857713bbf78f6c2ba34b34b4e03",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "5eae3e120482507c94a12164c4e14a191063307d5f0ac737c476e7ef68627e1b",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "e9e80e64a2bdfcef94f5ecf5b589c088fc266dcb3d7a142d4644ab1a29acc96e",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        16,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "4a1a7451c5755731ca039bc7157bcbb34087d597cfe73facd3894dfa27751166",
+        "beta": "766ac107602450f9e12bacaf3c65072a10fec8711b1ef2e9989b641b4f353e56"
+      },
+      "input": "/backbone/blocks/blocks.0/blocks.0.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.0.0.bn1",
+      "output": "/backbone/blocks/blocks.0/blocks.0.0/bn1/BatchNormalization_output_0",
+      "position": 1,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "4a1a7451c5755731ca039bc7157bcbb34087d597cfe73facd3894dfa27751166",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "766ac107602450f9e12bacaf3c65072a10fec8711b1ef2e9989b641b4f353e56",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "b4c5f68472f5e23e4defbffeab34e063bd00809248e7daef9fb6d401d10aaf02",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "71609a9b9d877f6ff589a8b317a531a7b502538f704505ef0934045767935ccd",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "4a1a7451c5755731ca039bc7157bcbb34087d597cfe73facd3894dfa27751166",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "766ac107602450f9e12bacaf3c65072a10fec8711b1ef2e9989b641b4f353e56",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "b4c5f68472f5e23e4defbffeab34e063bd00809248e7daef9fb6d401d10aaf02",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "71609a9b9d877f6ff589a8b317a531a7b502538f704505ef0934045767935ccd",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "ffa5319a1730316b050f50735946618a03d6b797bbc224deba90326991e134d3",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "be8db5d553dcc4642abbe665917df626002ff94b63287d0666858f9dd05e60be",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "1fe68fbf5a7e63c22cdf64b3e3526e1c495b1e5d24c2a203340ccab719eba111",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "74743c4781c1f38b5bc01b23243dc5d9e58f641a3b9e0239c1eabef8e6d58fff",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        16,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "132246c1bcb424d63766656c6b90829151403c60010909a629cabc86338cea0c",
+        "beta": "1ea5099f51e47cdf1b195c198426f8d09c9caa3c7eadf3501878245da4a76552"
+      },
+      "input": "/backbone/blocks/blocks.0/blocks.0.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.0.0.bn2",
+      "output": "/backbone/blocks/blocks.0/blocks.0.0/bn2/BatchNormalization_output_0",
+      "position": 2,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "132246c1bcb424d63766656c6b90829151403c60010909a629cabc86338cea0c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "1ea5099f51e47cdf1b195c198426f8d09c9caa3c7eadf3501878245da4a76552",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "4d8cc84836e22a93f0317faf1ae1e41abab947b3b8b91cd7b195e80d396a5533",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "8e17cc5ddd73ecdc15dd8c311b05b2e4d9d683119dc5e87e47e59c749b067284",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "132246c1bcb424d63766656c6b90829151403c60010909a629cabc86338cea0c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "1ea5099f51e47cdf1b195c198426f8d09c9caa3c7eadf3501878245da4a76552",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "4d8cc84836e22a93f0317faf1ae1e41abab947b3b8b91cd7b195e80d396a5533",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "8e17cc5ddd73ecdc15dd8c311b05b2e4d9d683119dc5e87e47e59c749b067284",
+              "dtype": "float32",
+              "shape": [
+                1,
+                16,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "de5743574b6024138b231f923d5a3e063ebeb6c5327c1294dc0984bf5f3dae8b",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "b54594d868954ff1a99791179f7ad1e1205f36614d59a92c69c652ff19652ce6",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "8762f214a1885da2713d34b75f7c17f267123e92c6557cabae1129e73bd1daee",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "3823ca469396d27b470e6af0717cdf91b27a36fe842798914f0b937e0da3f17f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              16,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        72,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "9e68492debe204710b0c52a69e206188c545ff7e32313fbea8d0063f6f683b3c",
+        "beta": "a1200fcecc3a358cf044d090db35ff779475ee8d7d441055773fa6cb8a5602f7"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.1.0.bn1",
+      "output": "/backbone/blocks/blocks.1/blocks.1.0/bn1/BatchNormalization_output_0",
+      "position": 3,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "9e68492debe204710b0c52a69e206188c545ff7e32313fbea8d0063f6f683b3c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "a1200fcecc3a358cf044d090db35ff779475ee8d7d441055773fa6cb8a5602f7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "6c9a94f089328456d36c1d12451ea5b69dcb627a0c8607a873e0a2198c3f7626",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "30e5acc1d8cf121d8e873c9eadd93e7f2604528e10e748d673798b7d17517bb8",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "9e68492debe204710b0c52a69e206188c545ff7e32313fbea8d0063f6f683b3c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "a1200fcecc3a358cf044d090db35ff779475ee8d7d441055773fa6cb8a5602f7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "6c9a94f089328456d36c1d12451ea5b69dcb627a0c8607a873e0a2198c3f7626",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "30e5acc1d8cf121d8e873c9eadd93e7f2604528e10e748d673798b7d17517bb8",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "80b9a3bd8d2405417cbf47d9da5a18a9fa1bc3a3f83033ddaf7d2dd641952e94",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "1a4bcd2cb36f998ec8329ba46da523ea2a48a156f0e2c4e98853346c52a20e5e",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "7024532c10227a3d6d067226f1525f9d4221f0a65a270056078fc6918afd8499",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "764b53986132b369884e3eaca0562e181855bf3ef4ab7a69a94b132d33c186c4",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        72,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "9dbb865f77956ba544099d1d7c139fe8e42f5ad7cf1929e4407d4760cb687b16",
+        "beta": "5766ec6db2de01145fdd50228276413016b76d26c64b48664453ee198c95b3bc"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.1.0.bn2",
+      "output": "/backbone/blocks/blocks.1/blocks.1.0/bn2/BatchNormalization_output_0",
+      "position": 4,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "9dbb865f77956ba544099d1d7c139fe8e42f5ad7cf1929e4407d4760cb687b16",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "5766ec6db2de01145fdd50228276413016b76d26c64b48664453ee198c95b3bc",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "e89a9e39ebc275e307b98fbce6f5c6fabe183c0bd5397df479fbee73d458b2b5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "06132e428fee0cd7cc72918c2a0c3c444ba3a8cabde6e9b5276291aca56a23ff",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "9dbb865f77956ba544099d1d7c139fe8e42f5ad7cf1929e4407d4760cb687b16",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "5766ec6db2de01145fdd50228276413016b76d26c64b48664453ee198c95b3bc",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "e89a9e39ebc275e307b98fbce6f5c6fabe183c0bd5397df479fbee73d458b2b5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "06132e428fee0cd7cc72918c2a0c3c444ba3a8cabde6e9b5276291aca56a23ff",
+              "dtype": "float32",
+              "shape": [
+                1,
+                72,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "d02384743993b7686029c139da4e9998337df6e7c930a408aa95b3846ea972d4",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "f8ab5a48a8d83639e9eca08a2946e9ef54af17cfd818e83932153a28c42bf179",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "a11215e7f0d73c32b25a76f17d13a542af4f63dc4dfa3b84d4fd31f54adddd68",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "1e75b3520d415d86d037e7af32d6787480bbb149502abc05e5b152ccea1a5057",
+            "dtype": "float32",
+            "shape": [
+              1,
+              72,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        24,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "fb7c8ee355803c5a31bd448df0ad0766ca420bda4c7f9982eaf420e262632af5",
+        "beta": "565bd83d4014dbcd79b35d7856a0c005aa8922bccc4261a8da37fad4af5db739"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.1.0.bn3",
+      "output": "/backbone/blocks/blocks.1/blocks.1.0/bn3/BatchNormalization_output_0",
+      "position": 5,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "fb7c8ee355803c5a31bd448df0ad0766ca420bda4c7f9982eaf420e262632af5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "565bd83d4014dbcd79b35d7856a0c005aa8922bccc4261a8da37fad4af5db739",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "0c5962dfa903aea36b08e1b81f7a6e68b7e6573cd4563d87e84b1bd8741516ab",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "6fe35c0bba30d0595515a3cb56cf6c7bfd2f6891d5bad5a964cdce29f0354b5e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "fb7c8ee355803c5a31bd448df0ad0766ca420bda4c7f9982eaf420e262632af5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "565bd83d4014dbcd79b35d7856a0c005aa8922bccc4261a8da37fad4af5db739",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "0c5962dfa903aea36b08e1b81f7a6e68b7e6573cd4563d87e84b1bd8741516ab",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "6fe35c0bba30d0595515a3cb56cf6c7bfd2f6891d5bad5a964cdce29f0354b5e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "a0212335801f0d837e635851c03b7c92928a949b449a4762faa99a90e871e600",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "22fa664bc5e07b3e4e3737861da27e23f5ee53abe211d5bcde2eac5eb9bce306",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "47cb0576615bf6dfe5ebd495fd88dfd2a7331d0e93de9636ffa599039d1d1a76",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "f5eebe07d315ad0a6f826625d20325f9e4566b2ab48ad80a0401bdbfebcc5bf3",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        88,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "f5912e07e3b732d3b48bbb75c986c2cabbf5d35b8f12a290f4d7109e518f97f7",
+        "beta": "cb44a5e238d0e532a83d399cb1cc7348c5026dee24d0f84a6e86efdf755643de"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.1.1.bn1",
+      "output": "/backbone/blocks/blocks.1/blocks.1.1/bn1/BatchNormalization_output_0",
+      "position": 6,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "f5912e07e3b732d3b48bbb75c986c2cabbf5d35b8f12a290f4d7109e518f97f7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "cb44a5e238d0e532a83d399cb1cc7348c5026dee24d0f84a6e86efdf755643de",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "af6a1ab629d5f3089d1e1fe1343f7f8bdbc1da9def837594eebd107c78190f2c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "6d10b8222988aad67db0269d8b3fd91aad7420ab1a1df0e332d99390432b4c1e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "f5912e07e3b732d3b48bbb75c986c2cabbf5d35b8f12a290f4d7109e518f97f7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "cb44a5e238d0e532a83d399cb1cc7348c5026dee24d0f84a6e86efdf755643de",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "af6a1ab629d5f3089d1e1fe1343f7f8bdbc1da9def837594eebd107c78190f2c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "6d10b8222988aad67db0269d8b3fd91aad7420ab1a1df0e332d99390432b4c1e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "a051c0f3e4d668c6ec5af26bd6a2b4b9404b5587353b88060a7f1a2e2ad8fb7f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "059c0b2f68c4e770087ce32ac5db36d4c4f9ddd7737ce4fd78153cc122756e70",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "2e41a7adc1602b22069eaa5be7b2417d12ab27799d6d8d04f4e134d07acaedec",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "87ae710d3d213a9a9295fcd585aeb137a56d1d8f47aca7f8d1173ca90a976697",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        88,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "6f3ae3a4ebc8c23dc2ae2a3a262f15441ab13ed8cc9d10999658aeadf1cb6072",
+        "beta": "4ca8db2496dbb8bca137ffaa28519079070f5bb55507a54b9684c7931c87c065"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.1.1.bn2",
+      "output": "/backbone/blocks/blocks.1/blocks.1.1/bn2/BatchNormalization_output_0",
+      "position": 7,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "6f3ae3a4ebc8c23dc2ae2a3a262f15441ab13ed8cc9d10999658aeadf1cb6072",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "4ca8db2496dbb8bca137ffaa28519079070f5bb55507a54b9684c7931c87c065",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "e4eae569cbfe7353962929a68fb80dc939d669e606d406be86d8dee6c9a38edd",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "8b95f4e8abd208857a437d4f39a0fd9ab81d274935876c8f74036fc2be179d03",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "6f3ae3a4ebc8c23dc2ae2a3a262f15441ab13ed8cc9d10999658aeadf1cb6072",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "4ca8db2496dbb8bca137ffaa28519079070f5bb55507a54b9684c7931c87c065",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "e4eae569cbfe7353962929a68fb80dc939d669e606d406be86d8dee6c9a38edd",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "8b95f4e8abd208857a437d4f39a0fd9ab81d274935876c8f74036fc2be179d03",
+              "dtype": "float32",
+              "shape": [
+                1,
+                88,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "c650cd76079d248a7fbf0e16c95bf35ec408c2af0c1e1d4a91ca8db882d02250",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "d152f8219e128451a412b5d974a541a225eeba8b4fc51463fa2dd5a5a01ba2a4",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "cc88d676fe1e8b452fa78daa3b1e9ce6e4e20c99f8acc688885a9ea3126225a5",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "7c97d9b36eb4719e9279f0eeb8bcabd855767d84698726d1ff4ef3e358d858de",
+            "dtype": "float32",
+            "shape": [
+              1,
+              88,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        24,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "667ee463e468e123ea2841448ad5272f3fc489823732aa4460a6a25948e066f3",
+        "beta": "5c4396348d0c64bfdac31d72ebf58da28a61d83688436b18b8d3e4786be3c66f"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.1.1.bn3",
+      "output": "/backbone/blocks/blocks.1/blocks.1.1/bn3/BatchNormalization_output_0",
+      "position": 8,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "667ee463e468e123ea2841448ad5272f3fc489823732aa4460a6a25948e066f3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "5c4396348d0c64bfdac31d72ebf58da28a61d83688436b18b8d3e4786be3c66f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "66544fb06b1a9c2c96ed5e4895e0e532fc808b8f70b491c744cdcbc5de773843",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "044ea80563c54e951b416956534bf2d93e1abaa01c2811646a939e3e9f2571c1",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "667ee463e468e123ea2841448ad5272f3fc489823732aa4460a6a25948e066f3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "5c4396348d0c64bfdac31d72ebf58da28a61d83688436b18b8d3e4786be3c66f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "66544fb06b1a9c2c96ed5e4895e0e532fc808b8f70b491c744cdcbc5de773843",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "044ea80563c54e951b416956534bf2d93e1abaa01c2811646a939e3e9f2571c1",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "6c319169430440800234c03c09c135583826e1dfa4c8a5cd92f95e1cf92d556e",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "79f59f08781a85b8d308a414c461d63853306aa279d2ace5f02a1252a1622f56",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "a0c7057bdc68afb1bc211a7ddc29839f90b04a41b3758b50ab41537d45d700bd",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "c34ca321d5a70a67030ee5844aba5aede3c6c75bdb85d8333f324f5620b04d90",
+            "dtype": "float32",
+            "shape": [
+              1,
+              24,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "3eee0877cf7b61fd8c263587a28af0580fc567be4d9b2e703ca5537cbee187b0",
+        "beta": "88023bdc22d9e440a50a3d7d79942c3d00b6ab8606da39781e7543e2f592afde"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.2.0.bn1",
+      "output": "/backbone/blocks/blocks.2/blocks.2.0/bn1/BatchNormalization_output_0",
+      "position": 9,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "3eee0877cf7b61fd8c263587a28af0580fc567be4d9b2e703ca5537cbee187b0",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "88023bdc22d9e440a50a3d7d79942c3d00b6ab8606da39781e7543e2f592afde",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "7f99e533e8c13f260dd58c412aab392d14072822ee5bafc8f8c3dee988052f94",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "b74f534f24911846e0a88e8a57562d3c8c78d288fe89d98c3e2c95c4ca22ff5f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "3eee0877cf7b61fd8c263587a28af0580fc567be4d9b2e703ca5537cbee187b0",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "88023bdc22d9e440a50a3d7d79942c3d00b6ab8606da39781e7543e2f592afde",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "7f99e533e8c13f260dd58c412aab392d14072822ee5bafc8f8c3dee988052f94",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "b74f534f24911846e0a88e8a57562d3c8c78d288fe89d98c3e2c95c4ca22ff5f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "a24035811ad7706684b5a66ddfb6e54e98a947d4af9d48b2537c7e69e783bf2e",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "318d7a1a58bdbd4c5a03d5d977d4ecf729bce4f1226a6b6673ac7b7dff2b306a",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "4e57b60c8455b457853071aa73d6ac8ac9912d24eb1a5ec702f71690062ff705",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "0da12fdf062f431537cf1878b1d2e33aada893279f68d017d143bd3252289b4a",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "7f2f657adf7b147e386314cbd2ca2f53243f819026cf4c67e89af969dd54f3ed",
+        "beta": "20f133156fd8a5777b42827b48b499a70539c1e03152a18ab1715fceae7127da"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.2.0.bn2",
+      "output": "/backbone/blocks/blocks.2/blocks.2.0/bn2/BatchNormalization_output_0",
+      "position": 10,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "7f2f657adf7b147e386314cbd2ca2f53243f819026cf4c67e89af969dd54f3ed",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "20f133156fd8a5777b42827b48b499a70539c1e03152a18ab1715fceae7127da",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "c2037b6d6d384d5169ddbd072c0ffbb778794efa86a602f34be02ae41ec8d262",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "76a90c91d4724393105b5b56ec6c5d321d60ced53eb56201f708d496fc3b616e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "7f2f657adf7b147e386314cbd2ca2f53243f819026cf4c67e89af969dd54f3ed",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "20f133156fd8a5777b42827b48b499a70539c1e03152a18ab1715fceae7127da",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "c2037b6d6d384d5169ddbd072c0ffbb778794efa86a602f34be02ae41ec8d262",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "76a90c91d4724393105b5b56ec6c5d321d60ced53eb56201f708d496fc3b616e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "6818a0fcefd4e44bf7864a73072ecce3c8379a73a57591281670e2f1335c9187",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "777455f7ca7556ecd159472db5d18257cb75a4fe972f2143e1f691681236f732",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "3945f6fae01326e92b88fb30c6d860c931a5547d56fc127083c8ce010d001f5e",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "9a3bb87c2b8ea7849f16113b3bc042c3d55119da99ecd77d52c9fa1b18cb9ba3",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        40,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "742aa982fcf228280166e2d31b427d3e8a890ce4d3d77feb65b49601823a1eab",
+        "beta": "c12051b75870cd50f59483bf333b3f95bbe6ac5fbcc73548b03cea399529e2ea"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.2.0.bn3",
+      "output": "/backbone/blocks/blocks.2/blocks.2.0/bn3/BatchNormalization_output_0",
+      "position": 11,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "742aa982fcf228280166e2d31b427d3e8a890ce4d3d77feb65b49601823a1eab",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "c12051b75870cd50f59483bf333b3f95bbe6ac5fbcc73548b03cea399529e2ea",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "12b2186c0baedc5e6f6948a796240fce9005ead431cdef208c5e3393bf74580f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "847a23e6f90f2189e848c5e2e32be07dc97e681054c00c669cfbe5966cdb0e59",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "742aa982fcf228280166e2d31b427d3e8a890ce4d3d77feb65b49601823a1eab",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "c12051b75870cd50f59483bf333b3f95bbe6ac5fbcc73548b03cea399529e2ea",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "12b2186c0baedc5e6f6948a796240fce9005ead431cdef208c5e3393bf74580f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "847a23e6f90f2189e848c5e2e32be07dc97e681054c00c669cfbe5966cdb0e59",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "28647d5107bf55d0442831fb952c07d3d4eadd931e142015a670046cb75a2e61",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "4892a4530c7a9ca960cf59699b4a1f026954c312d9195eeb8d5f0d50323ef37c",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "034f15d7f73ed90072f29cde5d266e54b4d40273bb490ef67e06d6f8c5f2dc97",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "5fbee099e1e178c15029889c01e7bd72a62b4b56cd0d863b1f713362004304c0",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "c31c9b4e02159a1293a747cc83ec2c706692b3c0b2855a9bf559fce8dfff1c65",
+        "beta": "296cf1947e36b4a62da7cbbb0568614fdd9c1ca43dc705ece250c65416803700"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.2.1.bn1",
+      "output": "/backbone/blocks/blocks.2/blocks.2.1/bn1/BatchNormalization_output_0",
+      "position": 12,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "c31c9b4e02159a1293a747cc83ec2c706692b3c0b2855a9bf559fce8dfff1c65",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "296cf1947e36b4a62da7cbbb0568614fdd9c1ca43dc705ece250c65416803700",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "23c9a8d39318c3b8e32116c35871073af367afbae37d8248ae1fa283dbf05bd5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "a58a00d3e41a1a1928d1dff645f1b18b373d22d7dedbc1a3c7bfda5d1b5c9a40",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "c31c9b4e02159a1293a747cc83ec2c706692b3c0b2855a9bf559fce8dfff1c65",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "296cf1947e36b4a62da7cbbb0568614fdd9c1ca43dc705ece250c65416803700",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "23c9a8d39318c3b8e32116c35871073af367afbae37d8248ae1fa283dbf05bd5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "a58a00d3e41a1a1928d1dff645f1b18b373d22d7dedbc1a3c7bfda5d1b5c9a40",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "77ea1166392dcee0a2c82603a2f4e4fe31764e636f0b3a45ef9e1a1f5afb772f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "92912820ec4155459d450d7e2534369cb89e70d033508f8d2f5c3c4c6f3f7b52",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "97d4f4de95935fbf24a5bb909bd6e7fb815b48750ddbcaf39369234fc76ed89a",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "ac0bc7589f342ea84722808306d0ac9e0becf8e0d6962873a71380c44b77181f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "af8526302fc3d81b104c05f10aaf794f7baf26e26c4c2824bf17c0e96310bf7d",
+        "beta": "dd0ac6792ea47faa1298491e022146347c9669aeeb4254fc55263cde5457b988"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.2.1.bn2",
+      "output": "/backbone/blocks/blocks.2/blocks.2.1/bn2/BatchNormalization_output_0",
+      "position": 13,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "af8526302fc3d81b104c05f10aaf794f7baf26e26c4c2824bf17c0e96310bf7d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "dd0ac6792ea47faa1298491e022146347c9669aeeb4254fc55263cde5457b988",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "7a78f344976d79e71c747397e74a5fcf662f8ec38f491d6f5da06cbf505bce05",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "f078c29ef12362b2b0b11aa30ce1388ad8995398865ea755d9038575487cdac3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "af8526302fc3d81b104c05f10aaf794f7baf26e26c4c2824bf17c0e96310bf7d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "dd0ac6792ea47faa1298491e022146347c9669aeeb4254fc55263cde5457b988",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "7a78f344976d79e71c747397e74a5fcf662f8ec38f491d6f5da06cbf505bce05",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "f078c29ef12362b2b0b11aa30ce1388ad8995398865ea755d9038575487cdac3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "a7b7b8def86be30ffd4b994b5d031f5d075ae542e608a460fd2b8c4e5c29d6a3",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "e9f2fe86d5e560947759616f501767cd5bfe15f733bb26a7532797bfb0939e17",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "7fa3b080d8465d063ecdf51c9f42f5119da8eabfa78fc8180d1f4c6eb0c42e87",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "bb6f64865f61e7ed928dd08c020c3a728c1bffa4bea8321c7072335d6e26c056",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        40,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "4dc6b5997661ca6c696c4f9ed81d0a06955c8df2188731dc5be1b52c0eabb2ea",
+        "beta": "4bfbf77d4fae4abe1c873f53d998039e4633a76c3ad49f88925b94b643dbffaf"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.2.1.bn3",
+      "output": "/backbone/blocks/blocks.2/blocks.2.1/bn3/BatchNormalization_output_0",
+      "position": 14,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "4dc6b5997661ca6c696c4f9ed81d0a06955c8df2188731dc5be1b52c0eabb2ea",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "4bfbf77d4fae4abe1c873f53d998039e4633a76c3ad49f88925b94b643dbffaf",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "2113d531867f5497c19be9215ec313727b8c39a645adf22c401e4f329abe9322",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "c078795a4ed90f76778ffb8218330b6518ffc6e4a4af4eede5f63ed245f6eab4",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "4dc6b5997661ca6c696c4f9ed81d0a06955c8df2188731dc5be1b52c0eabb2ea",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "4bfbf77d4fae4abe1c873f53d998039e4633a76c3ad49f88925b94b643dbffaf",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "2113d531867f5497c19be9215ec313727b8c39a645adf22c401e4f329abe9322",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "c078795a4ed90f76778ffb8218330b6518ffc6e4a4af4eede5f63ed245f6eab4",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "bceb98b3753c92e5fd8e3831b964661f682c56dce3b5bf023b1e9c84df1d2919",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "a0dc15ae2c2b6b69de0666d576df278210f44b3cde5ed156517cae5548108d2d",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "ae27ae70adcf4ed3fe3342b500b5252534aa16ce1767546009e6c71edcb34d79",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "128a3b8594f36ab439da2acd7723204d7b1c215ff024f43bc66a2ee1dbe40926",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "ea23e6214036217e8cf2c5c35f2656294dc7969d72cf6d60caaa7d5c5b58b40d",
+        "beta": "cabe2ac80225c634bf4e03c72fc531159e659cf6064f1c21540379511ee994b9"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.2/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.2.2.bn1",
+      "output": "/backbone/blocks/blocks.2/blocks.2.2/bn1/BatchNormalization_output_0",
+      "position": 15,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "ea23e6214036217e8cf2c5c35f2656294dc7969d72cf6d60caaa7d5c5b58b40d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "cabe2ac80225c634bf4e03c72fc531159e659cf6064f1c21540379511ee994b9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "42c1ba64258633a031390e08c353913019b5d9f28b5496c02075b46dbb3b793d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "324094e1a300322276ed4a0b4d3afeea873910a2115cc1c2b018b7accc4e16c5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "ea23e6214036217e8cf2c5c35f2656294dc7969d72cf6d60caaa7d5c5b58b40d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "cabe2ac80225c634bf4e03c72fc531159e659cf6064f1c21540379511ee994b9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "42c1ba64258633a031390e08c353913019b5d9f28b5496c02075b46dbb3b793d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "324094e1a300322276ed4a0b4d3afeea873910a2115cc1c2b018b7accc4e16c5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "bc80eb23b34b5296189befef63792f6c7f3910d2d18408a12a2f64410f827d3e",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "725c704f649ae8d5b6914ff644fce72ea4fc308b1744d5497796182546c81f04",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "2d5196864592bda3a5f390653d6ce78f53b4f3b1b79c65cfce43ab493cec63cb",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "98d33c5a6285e1512631d266cd6484b0f4b48b503674fe2cea7c5214b2bc3d8f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "91e2936d60d8cd4cf860e13626d7c3d3f38b0dbcbf29d9039cd09d41dd144d52",
+        "beta": "1ffbe3587b474c193f6d48f55a2e2a32b0779f4cff5beba72770e1cfc238f5d9"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.2/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.2.2.bn2",
+      "output": "/backbone/blocks/blocks.2/blocks.2.2/bn2/BatchNormalization_output_0",
+      "position": 16,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "91e2936d60d8cd4cf860e13626d7c3d3f38b0dbcbf29d9039cd09d41dd144d52",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "1ffbe3587b474c193f6d48f55a2e2a32b0779f4cff5beba72770e1cfc238f5d9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "92018bdf442d731f39ffbf8bea3964e379ad65ff750f6a1ea6c56890225a987c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "08cafc957231b3174b94d8ba78e94378e6f0092b866ff3adc5e376d8cdeb7b7b",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "91e2936d60d8cd4cf860e13626d7c3d3f38b0dbcbf29d9039cd09d41dd144d52",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "1ffbe3587b474c193f6d48f55a2e2a32b0779f4cff5beba72770e1cfc238f5d9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "92018bdf442d731f39ffbf8bea3964e379ad65ff750f6a1ea6c56890225a987c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "08cafc957231b3174b94d8ba78e94378e6f0092b866ff3adc5e376d8cdeb7b7b",
+              "dtype": "float32",
+              "shape": [
+                1,
+                240,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "96f8f0c89c122fd2c06e0168f6867d35800e2643e89dc23679d6d85a5d9a8131",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "aa90affacfb6489b1bba9c8351ac1ab67d8ac626c68208de26d72566a7e3daa6",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "0253391038180bc5a4abdc104489fba302aed25be45a4b294addbcf07970de18",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "72605880719c2e037e78222afc695c94ccd9d8979e1524d6193a19df18762595",
+            "dtype": "float32",
+            "shape": [
+              1,
+              240,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        40,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "ff1eb61103b46fcdcb1b0bdb834a780526639d046b3a6ffab6ddcef7348302e9",
+        "beta": "f9359ebe3df085aa9fa09c0007fdcd576fd76a9883290f490ace41274d9aaecd"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.2/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.2.2.bn3",
+      "output": "/backbone/blocks/blocks.2/blocks.2.2/bn3/BatchNormalization_output_0",
+      "position": 17,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "ff1eb61103b46fcdcb1b0bdb834a780526639d046b3a6ffab6ddcef7348302e9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "f9359ebe3df085aa9fa09c0007fdcd576fd76a9883290f490ace41274d9aaecd",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "564c4a24170aec7dcf6b0cab2103caa1b00ca3b8254b8d44d6a8b682a7097928",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4e84edbe7e934bb5f384bc52764a0a1bc8161b587140df062042e4bb69323729",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "ff1eb61103b46fcdcb1b0bdb834a780526639d046b3a6ffab6ddcef7348302e9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "f9359ebe3df085aa9fa09c0007fdcd576fd76a9883290f490ace41274d9aaecd",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "564c4a24170aec7dcf6b0cab2103caa1b00ca3b8254b8d44d6a8b682a7097928",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4e84edbe7e934bb5f384bc52764a0a1bc8161b587140df062042e4bb69323729",
+              "dtype": "float32",
+              "shape": [
+                1,
+                40,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "73a9ebd81748e2fb02cbbcf7ff870bc9da98d226b71ecb13b69360ba01131ffd",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "c660d0930f21a36512cc97dcdf9471c2d28806eb58cb95085c14273225c1dad2",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "71dba6c3068823c66a670a7b4744382bbe001f4853ca63c2f2d6d7420fe184c2",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "4a639a78a9dca63b51c6a3a91cae800cd48b196e0676c98bd9b98bc87292bb82",
+            "dtype": "float32",
+            "shape": [
+              1,
+              40,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        120,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "4bd6d512827b03c3d38cdf53f8f075c74a5b7601f11eafe834f7e084b86b9bad",
+        "beta": "59e06016fa98b5210fc7e70a126d1115662fd9edf92154fbbfff724606dbc6d5"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.3.0.bn1",
+      "output": "/backbone/blocks/blocks.3/blocks.3.0/bn1/BatchNormalization_output_0",
+      "position": 18,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "4bd6d512827b03c3d38cdf53f8f075c74a5b7601f11eafe834f7e084b86b9bad",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "59e06016fa98b5210fc7e70a126d1115662fd9edf92154fbbfff724606dbc6d5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "95b1fc42a62c8b8835b327ef1960d329c0c4ba5f8985e59b073d68be31dba431",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "9e1abf22aa8ae14c185a21277a0e6fcacc120ef93c6d89d94086d396dcb37591",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "4bd6d512827b03c3d38cdf53f8f075c74a5b7601f11eafe834f7e084b86b9bad",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "59e06016fa98b5210fc7e70a126d1115662fd9edf92154fbbfff724606dbc6d5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "95b1fc42a62c8b8835b327ef1960d329c0c4ba5f8985e59b073d68be31dba431",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "9e1abf22aa8ae14c185a21277a0e6fcacc120ef93c6d89d94086d396dcb37591",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "cc62de057a3ecf482a89880bca15a662210dabcaa2bbefcade87f0201cedd479",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "90047fe24d5a2fe6a9d6d07ba4334c848263697e3511ec98337df785cb0d6d7d",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "738c56bbcf0d6422023e10ca1e5f2bc0fd09a9f87801797a62a5aa86c825ec73",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "f4589707382ba94b18d145fdb20520b0cff6012c3cbf3aa8e14be02b105dce91",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        120,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "87b6ee17e95cabbcc1c1ddf1c5f6fb1cdb3262791cda29089eaf82acae58a0e0",
+        "beta": "2f44b4d3c47084a08c8db5d6cc2ab61f32e2beda63d9900454147bc256046444"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.3.0.bn2",
+      "output": "/backbone/blocks/blocks.3/blocks.3.0/bn2/BatchNormalization_output_0",
+      "position": 19,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "87b6ee17e95cabbcc1c1ddf1c5f6fb1cdb3262791cda29089eaf82acae58a0e0",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "2f44b4d3c47084a08c8db5d6cc2ab61f32e2beda63d9900454147bc256046444",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "a1d312387417bbda0e9aa43697651f945aa2f84b1664ae7e33df7b697cc5a6a4",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "fac132009c634a747d127929691830fbae745977b8d163a2459fdac9f250284a",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "87b6ee17e95cabbcc1c1ddf1c5f6fb1cdb3262791cda29089eaf82acae58a0e0",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "2f44b4d3c47084a08c8db5d6cc2ab61f32e2beda63d9900454147bc256046444",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "a1d312387417bbda0e9aa43697651f945aa2f84b1664ae7e33df7b697cc5a6a4",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "fac132009c634a747d127929691830fbae745977b8d163a2459fdac9f250284a",
+              "dtype": "float32",
+              "shape": [
+                1,
+                120,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "fd622b425dfd377c43cb7e6c0da6aeb437f2f723030ed8ae5681b1db1ad21c59",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "db6bcce738dcc7fea77da73c0b0c4b452e4a99dafa310b42dc35f3d3e4ad10ff",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "f75d4522f6955fb599a276a2daffb7fc1d418e130584cc437b0cd9bf2a46c166",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "855680636a37ec1b1283e050a26d680153e851764bbeac37c8a2951abd8d8190",
+            "dtype": "float32",
+            "shape": [
+              1,
+              120,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        48,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "2c90adaa2399d1e6b15f27fcd151721c6420eb894a95779873d2ac8b39f23dde",
+        "beta": "79087a15fd7989ebb0fe3417d54c0c9f7af1231eed9c6cd2b4a3b9af67e1ce5c"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.3.0.bn3",
+      "output": "/backbone/blocks/blocks.3/blocks.3.0/bn3/BatchNormalization_output_0",
+      "position": 20,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "2c90adaa2399d1e6b15f27fcd151721c6420eb894a95779873d2ac8b39f23dde",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "79087a15fd7989ebb0fe3417d54c0c9f7af1231eed9c6cd2b4a3b9af67e1ce5c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "443edd984d3700e77df5a8187302eb9b17c4de5cb5eb023182a52503b246844b",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4887cfae2ab06cc6b2b1e4fa0e34e4776ef6b9496b3234f5de938bb4dcf3ee94",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "2c90adaa2399d1e6b15f27fcd151721c6420eb894a95779873d2ac8b39f23dde",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "79087a15fd7989ebb0fe3417d54c0c9f7af1231eed9c6cd2b4a3b9af67e1ce5c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "443edd984d3700e77df5a8187302eb9b17c4de5cb5eb023182a52503b246844b",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4887cfae2ab06cc6b2b1e4fa0e34e4776ef6b9496b3234f5de938bb4dcf3ee94",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "e8a8d00eed6f7e447bb59d682fa5a49fa35084b24b068b9f2d985baac87500c4",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "501b50364748ac39ea8754a0736d11acf877d1ba063fd9f3da4d178f5295b4b0",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "e4ee84cc189f13b0592260558b52103fc19a69468119e188153d93d2824a0c2f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "44b2e18c6c3f9db050247d3720610d9f5bc2a9c57dcd66dd2f0aaa0a35659dde",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        144,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "98585f9fb9b91e39b9a51687ee1e2c6fed902c74ec9bcabafa004a123c341cb5",
+        "beta": "dc3cda80ef29286c4bbcf1b2de18dbfe9e2612c748d3400d4d52d8baf280f249"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.3.1.bn1",
+      "output": "/backbone/blocks/blocks.3/blocks.3.1/bn1/BatchNormalization_output_0",
+      "position": 21,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "98585f9fb9b91e39b9a51687ee1e2c6fed902c74ec9bcabafa004a123c341cb5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "dc3cda80ef29286c4bbcf1b2de18dbfe9e2612c748d3400d4d52d8baf280f249",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "486b7ab9ea549b8abe9aee5c95fc363a37e1dab340537e9ef0af888b2c1f8728",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "d91a5d6f43eed37cbfcee7ef6f9d255284ee111056cedc2cfafbd56f4a664d69",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "98585f9fb9b91e39b9a51687ee1e2c6fed902c74ec9bcabafa004a123c341cb5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "dc3cda80ef29286c4bbcf1b2de18dbfe9e2612c748d3400d4d52d8baf280f249",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "486b7ab9ea549b8abe9aee5c95fc363a37e1dab340537e9ef0af888b2c1f8728",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "d91a5d6f43eed37cbfcee7ef6f9d255284ee111056cedc2cfafbd56f4a664d69",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "7aa6a5c1399095aa1ff1c0974b46c5e031a3e7d9c7bf50736a1addb6912edba7",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "e6e3c4d58329410964974b2ee1f92b48671b1c4c451e87f21d5e436eae940626",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "6c8324f419c9d6db5bb3834037d33d27c7d8bfe09ebcaed26e7cff54207e69a3",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "319a7a7d2a3ea1a32e3693316bf5cc3af322124fc42dbb5b53529631037d1161",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        144,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "32a579cbd65ca8fb82e0f034b3b443e2cc73af0d1fb50d94747a84376b5e8596",
+        "beta": "22e3478886be5e2e34c3047ce08fc72530cff57afc3c2b5cf544f82d6d07ce49"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.3.1.bn2",
+      "output": "/backbone/blocks/blocks.3/blocks.3.1/bn2/BatchNormalization_output_0",
+      "position": 22,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "32a579cbd65ca8fb82e0f034b3b443e2cc73af0d1fb50d94747a84376b5e8596",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "22e3478886be5e2e34c3047ce08fc72530cff57afc3c2b5cf544f82d6d07ce49",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "6826fee8d199bb9a5eb3304b8c25e846aa96d3103a3365e344767b0b4c4784ba",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "e0e94f263ce5dbae45a3ce40643f8a72ec8fdf16c7c2e7be9db86378cf7b9edc",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "32a579cbd65ca8fb82e0f034b3b443e2cc73af0d1fb50d94747a84376b5e8596",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "22e3478886be5e2e34c3047ce08fc72530cff57afc3c2b5cf544f82d6d07ce49",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "6826fee8d199bb9a5eb3304b8c25e846aa96d3103a3365e344767b0b4c4784ba",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "e0e94f263ce5dbae45a3ce40643f8a72ec8fdf16c7c2e7be9db86378cf7b9edc",
+              "dtype": "float32",
+              "shape": [
+                1,
+                144,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "f6706e2583c50484c2a4ba4760ab0e2abd62ed3154308a8dc72a779df8114b25",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "b70ffd56eedea38e3822b2d20bdc60ad072e91d2024541d0d89064b2d4c258f0",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "7c0e62163bc91810211f4d1576c9d2485125a9b5c7fa27a3411b377efed3d695",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "dc6091208f0072f4a8a3d9dafe80b126df2dd5808be5a03d7b8cd508cdb17b69",
+            "dtype": "float32",
+            "shape": [
+              1,
+              144,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        48,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "a40312c7701899d26546bd7e09fa3bd7a23b5f550b61dfca045b5b6c107abc35",
+        "beta": "d37a6e174b298770ddd875801282c2283eb878528628e6241db9b1d72b458a5a"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.3.1.bn3",
+      "output": "/backbone/blocks/blocks.3/blocks.3.1/bn3/BatchNormalization_output_0",
+      "position": 23,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "a40312c7701899d26546bd7e09fa3bd7a23b5f550b61dfca045b5b6c107abc35",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "d37a6e174b298770ddd875801282c2283eb878528628e6241db9b1d72b458a5a",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "c619e70ca56d7c71b0391a79e787c9b4bf54183cbfc2c072d8e4c07399a0040d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "99031f3a211b8951fe983f1f1ad516dd3d056e5c297c268874812f40e02498b3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "a40312c7701899d26546bd7e09fa3bd7a23b5f550b61dfca045b5b6c107abc35",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "d37a6e174b298770ddd875801282c2283eb878528628e6241db9b1d72b458a5a",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "c619e70ca56d7c71b0391a79e787c9b4bf54183cbfc2c072d8e4c07399a0040d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "99031f3a211b8951fe983f1f1ad516dd3d056e5c297c268874812f40e02498b3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                48,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "e8d44717539e137e2ca7c90d7db3e5f6cb769b6e394b896964b94f0301a60bc2",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "2a808b381fbd8b460061c628a81d302bb8f4aaa92e75525136c1f1e61945900b",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "c8a84292ed2d58818e379d93cb244de1035a58f8cd727a117ce608ded048af4b",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "004151dd9840dd827815ccf5ce646c2087203a720143d4dffdfc45770a38e92c",
+            "dtype": "float32",
+            "shape": [
+              1,
+              48,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        288,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "8e9222eaf7c17a1233b4b2110707cef16d459ed16bf95c2c8126c6b252ac1da3",
+        "beta": "981b35ec033dc31ca4c9f359f84104a74948e515befa2d1469540d3c199d7ca7"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.4.0.bn1",
+      "output": "/backbone/blocks/blocks.4/blocks.4.0/bn1/BatchNormalization_output_0",
+      "position": 24,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "8e9222eaf7c17a1233b4b2110707cef16d459ed16bf95c2c8126c6b252ac1da3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "981b35ec033dc31ca4c9f359f84104a74948e515befa2d1469540d3c199d7ca7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "89ed59718308bd2e4bce854d21aac61f73c9959645b78c85b5bc17b1df66d246",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4eb2a178a76241096da46fd152f451858bfc129c6e7b994c4bcd779ae97b54e2",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "8e9222eaf7c17a1233b4b2110707cef16d459ed16bf95c2c8126c6b252ac1da3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "981b35ec033dc31ca4c9f359f84104a74948e515befa2d1469540d3c199d7ca7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "89ed59718308bd2e4bce854d21aac61f73c9959645b78c85b5bc17b1df66d246",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4eb2a178a76241096da46fd152f451858bfc129c6e7b994c4bcd779ae97b54e2",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "7cbf5fd6f3d29bb072fe47415edeb7bcfdc08cc26454b17b9861aca5a6978a6c",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "50db26efa294ce18014e6dfb31cccbf191bac171ad2fe36360057842d3437e76",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "826a6dfa89c27723ba0fe22487c768e8160826cdc4207a9472b0d4e42e61e9ee",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "cd58b774980bfe2d846aac4ccf1b7df751cf446e9b11962bd64c86e10aaf323e",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        288,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "54ad9b110498bfe36573e817923e10077f9ba355dd726886d666d1ff6a36bbbc",
+        "beta": "96cc22c56e622c49bd590ec25191a1ada58a916d13a65a8f8e713f41cc0829d3"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.4.0.bn2",
+      "output": "/backbone/blocks/blocks.4/blocks.4.0/bn2/BatchNormalization_output_0",
+      "position": 25,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "54ad9b110498bfe36573e817923e10077f9ba355dd726886d666d1ff6a36bbbc",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "96cc22c56e622c49bd590ec25191a1ada58a916d13a65a8f8e713f41cc0829d3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "40899b99c20bda5d768f818d2c0a5004ccfbd0daaa978667ccbcd19cb53204a9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "aabe532a527018d21fbb1d67e3cdb90c6d050d160becff1173f134713e9da11e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "54ad9b110498bfe36573e817923e10077f9ba355dd726886d666d1ff6a36bbbc",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "96cc22c56e622c49bd590ec25191a1ada58a916d13a65a8f8e713f41cc0829d3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "40899b99c20bda5d768f818d2c0a5004ccfbd0daaa978667ccbcd19cb53204a9",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "aabe532a527018d21fbb1d67e3cdb90c6d050d160becff1173f134713e9da11e",
+              "dtype": "float32",
+              "shape": [
+                1,
+                288,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "d1c7816c2c8eb20ce35afa90404fd1960267536296c083769b32fe5f9f169ea9",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "7e32dc26dc4565c17514c32094047f3f2f5197d44525992a28e1a5e73ed6acfc",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "4e500d1257f305b5903ef8abf2852aab3963c2133480c0d32c0df5288f006cf4",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "f2b7a8e5b926e41171813c9909d3cfb42cf7e5a52dd5f9b4ac2683d7aac60aa1",
+            "dtype": "float32",
+            "shape": [
+              1,
+              288,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "c71ddbbed7793698ca105494d77de7cd3582481ecedd4dfc5828f672941686a3",
+        "beta": "5c659f184714d3e258cec5630cbff4c13d6d861914594b374249a04f1d2baad6"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.4.0.bn3",
+      "output": "/backbone/blocks/blocks.4/blocks.4.0/bn3/BatchNormalization_output_0",
+      "position": 26,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "c71ddbbed7793698ca105494d77de7cd3582481ecedd4dfc5828f672941686a3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "5c659f184714d3e258cec5630cbff4c13d6d861914594b374249a04f1d2baad6",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "04cc9347810e9a840303beb3b35662ef11a65527d0bb1dfddea8ddbe8e6b3903",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "379d3b46b683cf2c647d72efd8219a37ec3b3b9114fca53733d78c17dedd718f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "c71ddbbed7793698ca105494d77de7cd3582481ecedd4dfc5828f672941686a3",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "5c659f184714d3e258cec5630cbff4c13d6d861914594b374249a04f1d2baad6",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "04cc9347810e9a840303beb3b35662ef11a65527d0bb1dfddea8ddbe8e6b3903",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "379d3b46b683cf2c647d72efd8219a37ec3b3b9114fca53733d78c17dedd718f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "20e447bb5a0843e0f53bb0d968c67bbbdeb5cb236dda40347de2b0aabf3a367d",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "0c2a3946f0d4648fb97a5689b17823f418707d886832f8f9c7b1aecce41a8736",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "2346fb987b207c7087b75e9367bfd2299313fc42a6c2801802a1730a7e19f5c6",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "cfc4e67c017108051b1fadd8e9079b14f0ed342b17d48ddb8aa9aadb29ac91ed",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "aa60ad9ce8dad6736d1c0f9b9c5ae044935fcfe19011d954e92998169f393e75",
+        "beta": "6b02b03e1f7750885bf6768a52a0c34062bcd998073d2530d37b5222746f1840"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.4.1.bn1",
+      "output": "/backbone/blocks/blocks.4/blocks.4.1/bn1/BatchNormalization_output_0",
+      "position": 27,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "aa60ad9ce8dad6736d1c0f9b9c5ae044935fcfe19011d954e92998169f393e75",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "6b02b03e1f7750885bf6768a52a0c34062bcd998073d2530d37b5222746f1840",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "280453a7862186ad6435d961eed0c2180a9453743a71ccdd43d771da6cf9c926",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "cb584495a48876f15574025cf115c8e7b4f68cb149d2b96b34dc2934c34758b2",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "aa60ad9ce8dad6736d1c0f9b9c5ae044935fcfe19011d954e92998169f393e75",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "6b02b03e1f7750885bf6768a52a0c34062bcd998073d2530d37b5222746f1840",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "280453a7862186ad6435d961eed0c2180a9453743a71ccdd43d771da6cf9c926",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "cb584495a48876f15574025cf115c8e7b4f68cb149d2b96b34dc2934c34758b2",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "d60a75ed5923eaa269b3db93e623e2506511ab6432efbc7af6ac28c31dd0f7cb",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "620b6a3577ac9f275fac7f2d3d05094f76326b0a81e7b621a373da8141a3e87d",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "c14baae5711617d925fb572727c8d71d41f10955db71d5403c5973e412aee9ab",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "ccbd8e6bc520cf0db15625b37a4abab1c7a3d47a0914193ea2431dcd84c540a4",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "b087e447396c344fae8974f95c67311b5facb8728ba725829d3f328a942c0d3f",
+        "beta": "8265d5019988e603d68e9f88e3a6a66edf5dc85bdf2fcbcc77f387d6e4d70bbb"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.4.1.bn2",
+      "output": "/backbone/blocks/blocks.4/blocks.4.1/bn2/BatchNormalization_output_0",
+      "position": 28,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "b087e447396c344fae8974f95c67311b5facb8728ba725829d3f328a942c0d3f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "8265d5019988e603d68e9f88e3a6a66edf5dc85bdf2fcbcc77f387d6e4d70bbb",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "fe132aacb14b35e1b7dc327bf55baf8491702a13ab23f36fc5dbab025d540694",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "6b4fa6fc8b53cce238e1769b9f171a30754a85ddd5c2dfdfc1025a6b9dad4493",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "b087e447396c344fae8974f95c67311b5facb8728ba725829d3f328a942c0d3f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "8265d5019988e603d68e9f88e3a6a66edf5dc85bdf2fcbcc77f387d6e4d70bbb",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "fe132aacb14b35e1b7dc327bf55baf8491702a13ab23f36fc5dbab025d540694",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "6b4fa6fc8b53cce238e1769b9f171a30754a85ddd5c2dfdfc1025a6b9dad4493",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "029ed6c8d9535796d9214f68cd42066b982d281fe14a7b2cc30729ecb8c50375",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "cd30de4b0a75e6abe060c8364460bb0d0aa82f88e81a8e1f48129bcd82eeaa50",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "e944a558419ef973b9a7c1a9390c3334853f6c9be528dbaee1a188223ce67fb0",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "eca3c52c23b8ee0e96ef2ef4451804552eb909d10513de62cda837ce6ff3a8a0",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "99639395d2520d56949277ea12612afb919f0226d38fedecd83e35d913c2c3ac",
+        "beta": "e1bd26cba88e1d577db9331e2afca0c1ca7a98d9cde5ea1db59d9d6ae857e696"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.4.1.bn3",
+      "output": "/backbone/blocks/blocks.4/blocks.4.1/bn3/BatchNormalization_output_0",
+      "position": 29,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "99639395d2520d56949277ea12612afb919f0226d38fedecd83e35d913c2c3ac",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "e1bd26cba88e1d577db9331e2afca0c1ca7a98d9cde5ea1db59d9d6ae857e696",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "3a8274ce4f3dddd44cd034ebc5977b523a76350c015cb947ce891431df05a22f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "3ec9f842adc6e156fdfbee70f4010fdbe47e2319434770365bd025bf26b5c9fa",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "99639395d2520d56949277ea12612afb919f0226d38fedecd83e35d913c2c3ac",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "e1bd26cba88e1d577db9331e2afca0c1ca7a98d9cde5ea1db59d9d6ae857e696",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "3a8274ce4f3dddd44cd034ebc5977b523a76350c015cb947ce891431df05a22f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "3ec9f842adc6e156fdfbee70f4010fdbe47e2319434770365bd025bf26b5c9fa",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "cb5b88310d6dca9c83947d59bcf5c782b81f0005e963aab070930d1703a11b15",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "6bd1919284ea1055c6192535c527794cf469c321720db622408fbc3a455f99a3",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "b35a64d534d3db99f4538fc4d0549d8b922499153c37ec49496990ebf59a10e8",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "f6b472a880801c0049d613238c23337e1a73b069ed716a33632b251f04f537de",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "30eef7ebb8903ee0642f70f3687e224cdb941882d3fce929467c992d4d691d06",
+        "beta": "e0143c7eb51d724ce3a31a90253f52176e91cccdd1efc9fd25021e615189a89d"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.2/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.4.2.bn1",
+      "output": "/backbone/blocks/blocks.4/blocks.4.2/bn1/BatchNormalization_output_0",
+      "position": 30,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "30eef7ebb8903ee0642f70f3687e224cdb941882d3fce929467c992d4d691d06",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "e0143c7eb51d724ce3a31a90253f52176e91cccdd1efc9fd25021e615189a89d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "e0dc45cee36fa908c4884b3de386260cde0111184e90882ae006becfd8cd75cb",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "2475537a6431aa78a24986f36bcbd18f51926280a5c66fb6ea117257aa272455",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "30eef7ebb8903ee0642f70f3687e224cdb941882d3fce929467c992d4d691d06",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "e0143c7eb51d724ce3a31a90253f52176e91cccdd1efc9fd25021e615189a89d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "e0dc45cee36fa908c4884b3de386260cde0111184e90882ae006becfd8cd75cb",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "2475537a6431aa78a24986f36bcbd18f51926280a5c66fb6ea117257aa272455",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "6aa7546cef88e2c66c52bf8129082d64dd0f1f492b447b9c1dc66a47b7461902",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "8ac7805f01af74eb7cdd45ee4218c3628e5d48425302d0c6463dd43130d2c692",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "913de32a7ca66032a2eb25f9e4ad178889d7efc3eab99fcc7b58f4ad1ed603e2",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "c378085bd29678c0f73e193350a5ae545c8c3a132551513352c83e805d2d26a0",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "763542b04c7120cb4799700d8830895d0787eb3f9f74d07145e6e54c665826ef",
+        "beta": "915bffe8b72021c531a1f1cff0f0cb1e9f36c0d7f07df608b9621d49e857389f"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.2/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.4.2.bn2",
+      "output": "/backbone/blocks/blocks.4/blocks.4.2/bn2/BatchNormalization_output_0",
+      "position": 31,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "763542b04c7120cb4799700d8830895d0787eb3f9f74d07145e6e54c665826ef",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "915bffe8b72021c531a1f1cff0f0cb1e9f36c0d7f07df608b9621d49e857389f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "ca7f65b493b231ac433c232a6b352aa2c63456e36b07192e8bcf99059a6c317c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4ca5bcdaa955247cd1cb1f489ebb8606276cea7fc09eff823629cda240486b3d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "763542b04c7120cb4799700d8830895d0787eb3f9f74d07145e6e54c665826ef",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "915bffe8b72021c531a1f1cff0f0cb1e9f36c0d7f07df608b9621d49e857389f",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "ca7f65b493b231ac433c232a6b352aa2c63456e36b07192e8bcf99059a6c317c",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "4ca5bcdaa955247cd1cb1f489ebb8606276cea7fc09eff823629cda240486b3d",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "fb0cceb0444523e47ed545394bbdd52ea7c010b16a7ce890ed0d10124e3f14d6",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "a1375d24c67e2c53e4e2a6f57c19fcb0a9885b715b9e9a290032520ca1a2718f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "497947a78de68568371662ba3b3e4008485eb8617ef018c30dce8aec6e3dd09f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "be0dcc466468f21faa77ae4e0216c74a562001dd1a85bb000b7fb170e230e2a2",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "d8b6fe3a9276c1c358c3f269f4acf19497ad88c36b93e761a65e611ee0f697a1",
+        "beta": "ae55948efcd1e335d4429618270e1ccfd6c85f511121b22eb8c0aee71d1fede7"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.2/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.4.2.bn3",
+      "output": "/backbone/blocks/blocks.4/blocks.4.2/bn3/BatchNormalization_output_0",
+      "position": 32,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "d8b6fe3a9276c1c358c3f269f4acf19497ad88c36b93e761a65e611ee0f697a1",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "ae55948efcd1e335d4429618270e1ccfd6c85f511121b22eb8c0aee71d1fede7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "1972ea7c14e38e9d6934b52e7a55a7359839ea244de2f92d0d03df1debff6a34",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "1b49b0252b224f34c83b0bfc13d1e71f92d9444699b70d7bc5c2b6c5b683ab04",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "d8b6fe3a9276c1c358c3f269f4acf19497ad88c36b93e761a65e611ee0f697a1",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "ae55948efcd1e335d4429618270e1ccfd6c85f511121b22eb8c0aee71d1fede7",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "1972ea7c14e38e9d6934b52e7a55a7359839ea244de2f92d0d03df1debff6a34",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "1b49b0252b224f34c83b0bfc13d1e71f92d9444699b70d7bc5c2b6c5b683ab04",
+              "dtype": "float32",
+              "shape": [
+                1,
+                96,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "2069ecb4cf388acd678cee3b3e2c22017198bda274030489ca09a0973bb6e89b",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "31e6d4a7a209f04d264acebf2d91a648c1f69d7e45da89e8132846e2f675d4da",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "ac988320d719902f094d4a83ddb24ad7faaeb1b98dfea99d1cea46fd3043be90",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "8869776714448882fec946dd2a815c4e3ce64574fbfb4ba285d8a1fb22961e9f",
+            "dtype": "float32",
+            "shape": [
+              1,
+              96,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "dc6625e36e5ebc7f89bfc202f4b99a983e159ea0a5e5d0d38f57f43c911da424",
+        "beta": "7722f953dc4294d80a6b900bcb1dd85891cbe65d9d7917689bf4a53ef31f1b56"
+      },
+      "input": "/backbone/blocks/blocks.5/blocks.5.0/conv/Conv_output_0",
+      "module": "backbone.blocks.5.0.bn1",
+      "output": "/backbone/blocks/blocks.5/blocks.5.0/bn1/BatchNormalization_output_0",
+      "position": 33,
+      "rounding": {
+        "engines": {
+          "numpy": {
+            "alpha": {
+              "bits_sha256": "dc6625e36e5ebc7f89bfc202f4b99a983e159ea0a5e5d0d38f57f43c911da424",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "7722f953dc4294d80a6b900bcb1dd85891cbe65d9d7917689bf4a53ef31f1b56",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "86fadaa25844d0dcc8d0a9c93ca215597c30cf4b86ea3e876630b6ec96473630",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "776a6678dd82694aecc5118ab4b349b2ee64ac874c0333e31c546f587fd153b5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          },
+          "torch": {
+            "alpha": {
+              "bits_sha256": "dc6625e36e5ebc7f89bfc202f4b99a983e159ea0a5e5d0d38f57f43c911da424",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "beta": {
+              "bits_sha256": "7722f953dc4294d80a6b900bcb1dd85891cbe65d9d7917689bf4a53ef31f1b56",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "denominator": {
+              "bits_sha256": "86fadaa25844d0dcc8d0a9c93ca215597c30cf4b86ea3e876630b6ec96473630",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            },
+            "reciprocal": {
+              "bits_sha256": "776a6678dd82694aecc5118ab4b349b2ee64ac874c0333e31c546f587fd153b5",
+              "dtype": "float32",
+              "shape": [
+                1,
+                576,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "epsilon_bits": {
+          "float32": "acc52737",
+          "float64": "f168e388b5f8e43e"
+        },
+        "recipe": "e32-r32-a32-b64-o64",
+        "saved_parameters": {
+          "bias": {
+            "bits_sha256": "0d0e792837f644bdc1f83e0c4fe29f6a83184f141e2f42be0aa977449e105830",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "mean": {
+            "bits_sha256": "1f657ee7acfd8865bbbd34088427e3a7a4b293e5a4651757291016a7cc650af4",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "variance": {
+            "bits_sha256": "384b7f3f032ebc5024e6d3f2acb3b993ab6145f926c061acf5b8be4bccd6e4dc",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          },
+          "weight": {
+            "bits_sha256": "23c36084ee9ba4a4e98f36146e6c6d21b2e186e16be9d8669142ce788482e3d7",
+            "dtype": "float32",
+            "shape": [
+              1,
+              576,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "version": "1.0.0"
+}
