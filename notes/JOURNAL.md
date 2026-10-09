@@ -45,3 +45,46 @@ Append-only log of Builder iterations.
 - Next: finish the remaining six research documents, two ADRs and synthesis, then
   write a concrete M0 handoff. No review request made this iteration.
 
+## 2026-10-09T12:03:06Z — iteration
+
+- Read roadmap, STATUS, HARNESS, current M0 folder, AGENTS, existing ADRs and the
+  phase-0 brief. No new harness failure, review or gate. Stayed in M0 research;
+  no ML/app implementation, review.sh, harness-owned files, push or messages.
+- Applied Firecrawl research/search skills. CLI status confirms zero credits;
+  used the previous iteration's labelled web-tool workaround without new
+  accounts, terms acceptance, billing changes or toolchain installation.
+- Wrote research/01-clinical-background.md: WHO cardinal signs/PB-MB, photo limits,
+  national clinical differential vocabulary, reactions, proposed non-image capture
+  fields and symptom precedence, Nepal context, historical FCHV evidence and
+  explicit current protocol/pathway gaps. Clinical proposals are not an approved
+  field protocol. No negative diagnosis or photo-derived treatment classification.
+- Wrote research/02-prior-work.md: AI4Leprosy; WHO public education vs AI beta;
+  Kenya preliminary field study; independent PAHO 2026 top-5 leprosy evaluation;
+  UOC Ghana/Kenya training usability; NLR SkinApp; Philippine LEARNS; 2023 JMIR
+  scoping review; IEEE/CMU, arXiv and published PLOS image studies; eSkinHealth and
+  CO2Wounds; DDI/SCIN/PAD design evidence. Compared tasks/denominators and provided
+  proposed human contact priorities. No contacts made; no artifact reuse assumed.
+- Expanded dataset survey and source register. eSkinHealth release remains delayed
+  for ethical/privacy/legal review; Yotsu pilot images explicitly not public;
+  CO2Wounds paper/record conflict (CC BY-NC-ND vs CC BY-NC 3.0) plus task mismatch.
+  Independent WHO cohort is positive-only. ADR-002 synthetic-only remains unchanged.
+- Added sourced clinical morphology/reaction and evaluation notation to glossary;
+  updated research README. All new research documents end with Open questions and
+  Confidence. No clinical photos, archives, patient-level metadata or weights
+  downloaded. Only publication/documentation text was inspected.
+- Several full official Nepal report opens failed (HMIS/government errors,
+  NHRC timeout, Bagmati 25 MB size limit). After genuine failures, documented the
+  labelled indexed-primary-text workaround; current burden figures remain
+  UNVERIFIED against full report and current district list is not asserted.
+  AI4 full text and independent PMC access were also blocked; abstract-supported
+  claims are bounded and unavailable architecture/rights/details marked UNVERIFIED.
+- All 4 unchanged repository unittest checks passed, including after final glossary
+  edits. bash scripts/check.sh returned exit 0 and RESULT PASS after final research
+  edits; ML and Android SKIPPED (projects absent), no APK/clinical validation claimed.
+  Documentation only; no functional implementation requiring new unit tests.
+  git diff --check passed before c6ef558 (M0 clinical/prior-work logical commit).
+- Queued current clinical/pathway, report-access, additional-data rights and WHO
+  distribution ambiguities for humans. No new accepted ADR this iteration;
+  symptom precedence and field procedures remain clearly labelled proposals.
+- Remaining M0 work: methods, deployment, contribution governance, Nepal ethics/
+  regulatory research, ADR-001/004 and synthesis. Set CONTINUE, not a review request.
