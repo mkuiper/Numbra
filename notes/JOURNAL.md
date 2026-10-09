@@ -342,3 +342,57 @@ new toolchains, protected edits, review/check/gate writes, publishing or pushes.
 M3 remains incomplete: next implement tested component evaluation, then verify CPU
 dependencies/checkpoint permission and build reproducible transfer training/model card.
 NEXT_ACTION CONTINUE; committing the logical fixture/evaluation-preparation step.
+
+## 2026-10-09T13:50:03Z — iteration
+
+Oriented from ROADMAP, STATUS, HARNESS, absent M3 review folder, AGENTS and relevant
+ADRs. No new harness action; M0/M1/M2 gates remain closed. Worked only on M3's
+carried component/evaluation step. No review requested; NEXT_ACTION CONTINUE.
+
+Implemented evaluation.py with deterministic first-sorted-record index images
+chosen before scoring, exact manifest/report coverage and checksum validation,
+source/split/target checks, quarantine exclusion reasons and known patient/group/
+byte-hash component consistency. One finite logit per active component is required;
+views cannot inflate independent counts. Partial/conflicting colour labels remain
+explicit. Evaluation trusts the existing decoded/near-visual preparation audit;
+no real-data grouping claim or re-splitting.
+
+Implemented bounded temperature scaling fit only on calibration with 20/class,
+threshold fit only on threshold_validation with 100/class and separate sufficient
+calibration, guarded unselected refer-all, primary sensitivity >=0.95 and secondary
+specificity >=0.80 selection, inclusive ties and above-one all-negative sentinel.
+Reports freeze settings for test/one held-out-source fold, retain fit score hashes,
+exact two-sided 95% Clopper–Pearson intervals, tied AUC, Brier/stable loss/reliability/
+ECE, unavailable metrics and source/synthetic-colour summaries. Selection intervals
+are explicitly descriptive; fitted calibration is in-sample; every metric block
+says PLACEHOLDER. ADR-009 records index/temperature/summary choices with required
+Accepted (autopilot) — pending human review status; queued for humans.
+
+Initial new suite observed 34 pass, 1 failure and 10 setup errors. New fixture used
+8 groups below the existing generator's 16 minimum. Changed the new fixture to
+16 and asserted its actual 48 components/96 rows. The new report exposed integer
+Python keys where the test expected JSON string keys; changed production report
+target names to explicit string keys. No existing tests deleted/skipped/weakened.
+Final expanded evaluation suite: 58 passed in 5.11s. Tests cover independent class
+count boundaries, wrong fitting splits, frozen test/holdout independence, known
+linked-unit inflation, component/checksum/quarantine integrity, calibration optimum,
+threshold ties/sentinel, exact closed-form binomial endpoints/interior, one-class/
+empty/missing strata, tied AUC and stable extreme logits.
+
+Observed scripts/check.sh exit 0: 208 ML tests passed in 18.94s, Android SKIPPED,
+RESULT PASS. Root suite 5 passed (Builder-attested); pip check no broken requirements.
+Existing default/larger shapes-v2 manifests passed index/checksum/partition checks:
+384/768 active components, zero exclusions. Constant invented-logit mechanical
+exercise: default 20 threshold groups/class yields unavailable unselected refer-all;
+larger 102/class with separate 52/class calibration exercises selected primary
+0.5 degenerate refer_all and selected secondary above-one degenerate all_negative.
+No model was involved; these numbers are code paths, not model/clinical performance.
+No generated report/image/manifest was tracked. README, setup and new evaluation
+contract document completed primitives and outstanding work.
+
+M3 still lacks training, pretrained/dependency permission/lock evidence, bootstrap
+uncertainty, script-written model reports, full runtime provenance and model card.
+Next verify/install hashed CPU dependencies/checkpoint access, then integrate the
+reproducible frozen-feature baseline with this library. No new toolchain, patient
+data/weights, protected edits, review.sh or reviewer/check/gate writes, publication,
+messages or pushes. Final diff/status validation precedes the logical-step commit.

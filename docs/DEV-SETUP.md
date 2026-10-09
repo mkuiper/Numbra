@@ -69,6 +69,24 @@ threshold-count exercise described in [data preparation](DATA-PREPARATION.md).
 These commands do not train or download a model. M3 dependencies, weight licence/
 revision/checksum verification, training and evaluation are still pending.
 
+## M3 component evaluation — observed 2026-10-09
+
+No additional toolchain/dependency installation or pretrained acquisition.
+Evaluation uses the existing pinned NumPy plus standard-library arithmetic.
+Observed verification from the repository root:
+
+```bash
+ml/.venv/bin/python -m pytest ml/tests/test_evaluation.py -q
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+ml/.venv/bin/python -m pip check
+```
+
+Evaluation subset: 58 passed. Full check: 208 ML tests passed; Android skipped,
+RESULT PASS. Root contract suite: 5 passed. No broken Python requirements.
+See [evaluation contract](ML-EVALUATION.md). Training/checkpoint/dependency-lock
+setup remains pending; these checks do not establish a trained model or APK.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

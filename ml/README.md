@@ -1,9 +1,10 @@
 # Numbra ML — PLACEHOLDER data pipeline
 
 **PLACEHOLDER — synthetic demonstration, not clinically validated.**
-M0–M2 harness gates are closed. M3 preparation updates generated data, duplicate
-components and frozen splits. No training, real-data acquisition, model export or
-Android implementation occurs here.
+M0–M2 harness gates are closed. M3 preparation/evaluation provides generated data,
+duplicate components, frozen splits and tested component-level evaluation
+primitives. Training, real-data acquisition, model export and Android implementation
+remain later work.
 [ADR-002](../decisions/ADR-002-dataset-selection.md) approves generated fixtures
 only. Every future synthetic model, report and app result must say PLACEHOLDER.
 
@@ -69,4 +70,6 @@ run to exercise sufficient threshold-selection counts (102/class) under ADR-008.
 Both profiles remain PLACEHOLDER. Future reports/cards must name the targets
 synthetic circle / synthetic square, never clinical classes; describe source C
 as a single held-out-source fold. Synthetic metrics are not clinical performance.
-No training/evaluation code or model weights exist yet.
+The [evaluation library](../docs/ML-EVALUATION.md) now implements component index
+selection, calibration/threshold isolation, count guards and metric summaries.
+No training command, trained model, script-written model report or weights exist yet.

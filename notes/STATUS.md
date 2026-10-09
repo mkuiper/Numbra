@@ -1,95 +1,88 @@
 # Status
 
-Updated: 2026-10-09T13:38:44Z
+Updated: 2026-10-09T13:50:03Z
 
 Current milestone: **M3 — Baseline classifier**, in progress; **not ready for review**.
 NEXT_ACTION: CONTINUE. M0/M1/M2 harness GATE files exist, PASS WITH CHANGES;
-human review pending. M2 Review-1 is answered in reviews/M2/RESPONSE-1.md.
-No M3 gate, trained model, evaluation report, exported model, app or APK exists.
+human review pending. No M3 review folder/gate, trained baseline, script-written
+model evaluation report, model card, export, app or APK exists.
 
 ## Acceptance status
 
-- **CPU transfer-learning / reproducible training: NOT BUILT.** This iteration
-  prepares M3 fixtures and resolves M2 follow-through only. ADR-005 still selects
-  frozen pretrained MobileNetV3Small features plus a binary head. No torch/timm
-  dependency installation or pretrained-weight acquisition yet. Before download,
-  verify anonymous access, declared permission, revision/checksum and use ignored
-  data/pretrained/. Exact/hashed dependency locking remains required M3 work.
-- **Script-generated evaluation: NOT BUILT.** shapes-v2 and preparation 1.1.0
-  now support source-membership × class splits, labelled threshold-count exercise,
-  honest target names, background-derived synthetic colour strata and nearest
-  unlinked-component distance audit. Default fixture requires unselected refer-all;
-  explicit selection_exercise fixture has 102 threshold and 52 separate calibration
-  components/class. Actual calibration, count guards, selection, exact intervals,
-  sensitivity/specificity/AUC, breakdowns and held-out-source metrics remain work.
+- **CPU transfer-learning / reproducible training: NOT BUILT.** ADR-005 still selects
+  frozen pretrained MobileNetV3Small features plus a binary head. No new torch/timm
+  dependency installation or pretrained acquisition this iteration. Verify anonymous
+  access and publisher permission, pin revision/checksum and use ignored
+  data/pretrained/ before acquisition. Hashed dependency locking remains required.
+- **Script-generated evaluation: PARTIAL, NOT COMPLETE.** evaluation.py now implements
+  one prespecified index image/component, manifest/report consistency/checksum checks,
+  separate bounded temperature scaling, calibration 20/class and threshold 100/class
+  guards, unselected refer-all fallback, high-sensitivity and secondary-specificity
+  threshold selection, exact 95% binomial intervals, confusion/AUC/calibration metrics,
+  source/synthetic-colour breakdowns and frozen single held-out-source reporting.
+  No trained scores or script-written ml/reports artifact. Seeded component bootstrap,
+  training integration and full run/checkpoint/dependency/hardware provenance remain.
 - **Model card: NOT BUILT.** Must say PLACEHOLDER, synthetic circle/square targets,
-  synthetic colour strata, no clinical validation, no pure-neural/skin-lesion
-  representation, and no clinically calibrated probability. Source C alone must
-  be described as single held-out source (one leave-one-source-out fold).
-- **Review readiness: NOT READY.** No M3 HANDOFF/review requested. ADR-008 carries
-  Accepted (autopilot) — pending human review and is queued for humans.
+  synthetic colour strata, no clinical validation/calibrated probability and no
+  pure-neural/skin-lesion representation. C-only is one held-out-source fold.
+- **Review readiness: NOT READY.** No M3 HANDOFF or review request. ADR-009 is
+  Accepted (autopilot) — pending human review and queued in HUMAN-QUEUE.
 
 ## Completed this iteration
 
-- Addressed all ten M2 non-blocking review items in RESPONSE-1, with M3-specific
-  report/card enforcement and source-fold reporting explicitly carried forward.
-- shapes-v2: matched exact circle/square pixel areas, overlapping signed contrasts,
-  group-level 0.10 Bernoulli rendered-shape flips, stronger procedural source styles.
-  Diagnoses now synthetic_circle/synthetic_square; audit names the artificial targets.
-- Source-membership × target stratification keeps linked groups whole and reports
-  explicit per-split/source/class counts. New selection_exercise 30/20/40/10 profile
-  reaches the existing ADR-001 guard within generator 256-group / 2000-row caps.
-- Boundary tests at/below/above RMS 2, unrelated component counts, nearest unlinked
-  pair, symlink-parent escape, checkout root discovery and alternate holdout isolation.
-- Updated preparation/setup/data-contract/README documentation and M2 handoff;
-  original shapes-v1 evidence remains historical and local runs untouched.
+- Added component index/image selection by first sorted record ID before scores;
+  exactly one score/active component, retained quarantine exclusions, rejected
+  source/split/target/mapping disagreement and known linked-unit inflation.
+- Isolated calibration and threshold fit splits; recorded fitting score hashes.
+  Bounded temperature fit records boundary optima. Selected/fallback/degenerate
+  statuses distinguish insufficient counts from actual selection.
+- Added exact sensitivity/specificity intervals, stable-logit loss, tied-rank AUC,
+  Brier, equal-width reliability bins/ECE, null unavailable metrics, source/colour
+  counts/intervals and missing/conflicting component colour categories.
+- Added 58 synthetic arithmetic/generated-fixture tests; documented implementation
+  choices/limits in ADR-009 and docs/ML-EVALUATION.md; updated README/setup/queue.
 
 ## Observed verification
 
-- bash scripts/check.sh: exit 0, **150 ML tests PASS**, Android SKIPPED, RESULT PASS.
+- bash scripts/check.sh: exit 0, **208 ML tests PASS** in 18.94s;
+  Android SKIPPED, RESULT PASS. No APK or completed-M3 claim.
+- Evaluation-specific suite: **58 PASS** in 5.11s.
 - python3 -m unittest discover -s tests -v: **5 PASS** (Builder-attested only).
-- ml/.venv/bin/python -m pip check: no broken requirements; git diff --check PASS.
-- Preparation-specific suite: **40 PASS**. Initial new nested-root negative test
-  failed because a valid outer checkout existed; corrected to assert discovery
-  of that checkout and failure without any checkout ancestor. Rationale is queued.
-- Default 128 groups/source: 384 components / 768 image rows; train/calibration/
-  threshold-validation/test/held-out components 148/40/40/28/128. Threshold 20/class,
-  calibration 20/class, test 14/class. Source A/B counts equal in each partition/class.
-- selection_exercise 256 groups/source: 768 components / 1536 image rows;
-  components 152/104/204/52/256. Threshold 102/class, calibration 52/class,
-  test 26/class, held-out 128/class. No exclusions/quarantine in either observed run.
-- Default reproduction: all **771 generated files byte-identical**.
-  Default manifest SHA-256:
-  0a4adb62e625bed27271c42abbc8aef27bb28a05f5bd9ea018a14471738d7b58.
-  Selection-exercise manifest SHA-256:
-  2d141bc62205d88b7116cbe410e9262a96d771dec34c30e88ae6ad9c4bee839e.
-- Nearest unlinked RMS 8.586645 default / 8.204261 larger, vs link cutoff 2.
-  Default best mean-intensity threshold balanced accuracy 0.541667 (fixture check).
-  None of these numbers are model performance or clinical results.
-- No protected edits, review.sh, reviewer/check/gate writes, patient data, weights,
-  publishing, messages or pushes. Harness owns tests of record/review/gates/pushes.
+- pip check: no broken requirements. git diff --check PASS before final records;
+  final whitespace/status validation performed before commit.
+- Initial evaluation suite: 34 passed, 1 failed, 10 setup errors. New fixture used
+  8 groups below the existing 16 minimum; corrected fixture/count assertions.
+  New report emitted integer target-name keys; implementation now uses explicit
+  string keys matching its JSON output contract. Existing tests were preserved.
+- Existing shapes-v2 default and selection_exercise manifests loaded with checksum
+  and partition checks: 384/768 active components, zero exclusions. Mechanical
+  smoke exercise used constant invented logits, **no trained model**. Default
+  calibration 20/class, threshold 20/class => both endpoints unavailable with
+  unselected refer-all threshold 0. Larger calibration 52/class, threshold 102/class
+  => primary selected threshold 0.5 explicitly degenerate refer_all, secondary
+  above-one sentinel explicitly degenerate all_negative. These are code-path
+  checks, not model/clinical performance. No report or generated data committed.
 
-## Carried requirements and limitations
+## Open blockers and carried limits
 
-- No immediate implementation blocker. Clinical/legal/ethics/native-language
-  review remains pending; pretrained checkpoint access/permission not yet attempted.
-- Real data remains unapproved under ADR-002. All models/UI/reports stay PLACEHOLDER.
-- Component IDs are evaluation units; choose a deterministic index image before
-  scores, never treat views as independent or tune on frozen test/held-out rows.
-- Fixture difficulty and label noise do not prove clinical realism. Colour strata
-  are generated background luminance, never fairness evidence. Visual heuristic,
-  one-label-per-component quarantine and invented source/group IDs remain unfit
-  for unaudited real cohorts. Quadratic duplicate search cap remains 2000.
-- M6 must implement full ADR-001 question superset, explicit volunteer concern
-  and contact-yes referral; missingness never means normal. M7 retains trigger
-  answers and detailed consent/confirmation/custodian provenance in encrypted
-  local storage. No negative diagnosis wording is permitted.
+- No immediate implementation blocker. Checkpoint access/permission not yet attempted.
+  Clinical/legal/ethics/native-language approvals remain pending.
+- ADR-002 remains synthetic-only. Every downstream model/report/UI is PLACEHOLDER.
+- Evaluation trusts preparation's decoded/near-visual links; real patient/source
+  independence and duplicate adjudication remain unestablished. Temperature bounds
+  and count guards are engineering choices; synthetic colour strata are not fairness.
+- Future training must fit features/head/preprocessing only on permitted training
+  components and never tune on frozen test/held-out scores. Fit-isolation tests
+  cover the evaluation layer only, not a yet-unbuilt model producer.
+- M6/M7 retain full ADR-001 symptom/concern/contact/missingness rules and consent/
+  provenance/encrypted local storage requirements. No negative diagnosis wording.
+- No protected edits, review.sh, review/check/gate writes, patient data, weights,
+  publishing, messages or pushes. Harness owns reviews/gates/pushes.
 
 ## Next concrete step
 
-Implement M3 component/index-image selection and evaluation primitives with tests:
-calibration/threshold-fit isolation, count-guard refer-all fallback, sufficient-count
-selection, tie boundaries, exact sensitivity intervals, AUC/calibration summaries,
-missing/single-class subgroup handling and frozen held-out-source reporting.
-Then verify/install hashed CPU model dependencies and check ADR-005 weight access
-before adding reproducible frozen-feature transfer training and a model card.
+Verify/install hashed CPU model dependencies and ADR-005 anonymous pretrained
+checkpoint permission/access/revision/checksum. Implement the reproducible frozen-
+feature training command using the component index and evaluation library; add
+seeded component bootstrap uncertainty, script-written reports with run provenance,
+training-isolation/reproduction tests and an honest PLACEHOLDER model card.
