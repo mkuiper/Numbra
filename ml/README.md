@@ -218,7 +218,8 @@ ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_arithmetic.py
 
 Full random mobile scope covers 39 target nodes/77 recipe graphs with identical
 bits across both generated contexts. The retained-training reader below provides
-complete provenance/evidence reconstruction; recipe execution/persistence and
+complete provenance/evidence reconstruction. Supplied retained-tensor recipe
+execution is now built; its guarded training runner, ordered persistence and
 any whole-model candidate remain unimplemented. No M4 acceptance, quantisation fit or mobile claim. See
 [ADR-024](../decisions/ADR-024-bounded-remaining-arithmetic.md).
 
@@ -246,4 +247,31 @@ ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_retained.py
 PASS for all 152 retained rows and 904 setup graphs, with actual decode/native/
 session/eager/write guards. Exact original report fingerprints and prior bits
 are preserved. This is recorded-evidence reconstruction; selected arithmetic
-replay remains unimplemented and M4 remains incomplete.
+replay has not been executed and M4 remains incomplete.
+
+`numbra_ml.export_arithmetic_replay.ArithmeticReplay` constructs and independently
+audits every fixed recipe on both unchanged graph contexts before supplied
+retained tensors can run. Full generated-mobile scope is 154 recipe sessions
+and 308 serialized/runtime graph files. `run` validates the complete original
+159-node control/lineage tree first, reuses its native/runtime operands on both
+origins, and returns all eager/runtime recipe arrays and signed comparisons.
+It never calls the native model, decodes an image or reruns original controls.
+Original control arrays stay shared and unmodified; new outputs stay in memory.
+
+`reconstruct_arithmetic` rebuilds complete recipe/origin/target scope, every
+original control and all signed metrics/accounting without executing a recipe
+or creating a session. `audit_arithmetic_setup` independently rebuilds complete
+serialized/runtime expressions, constants, boundaries and file/record scope.
+These are recorded-observation checks, never independent numerical truth or
+historical execution authentication. Generated regressions include full mobile
+coverage, stale state/expression rejection and every ordered reader fixture row:
+
+```sh
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_arithmetic_replay.py
+```
+
+This supplied-tensor API has no selected-baseline entry point or completion
+report. Next implement lossless arithmetic observation persistence and its
+streaming audit, then the guarded runner that exhausts `training_rows` and
+checks exact prior bits across all 152 ordered training components. No selected
+arithmetic replay is authorised by generated primitive success alone.

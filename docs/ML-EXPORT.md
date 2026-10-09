@@ -1035,7 +1035,8 @@ hardware remain exact. Local reconstruction never authenticates past inference.
 bounded complete activation/reduction recipes and constant-preserved head
 isolation. The supplied-graph primitives in `export_remaining_arithmetic`
 are built and generated-only tests pass. The guarded retained training reader
-is built; **recipe replay/persistence is still unimplemented**. There is no new
+and supplied retained-tensor recipe replay are built; **ordered arithmetic
+persistence and the selected training runner remain unimplemented**. There is no new
 selected-baseline parity result.
 
 Each HardSigmoid uses float32 `clamp(x+3,0,6)` followed by either division by
@@ -1084,7 +1085,7 @@ runtime session or evidence write is needed. Exhausting it checks complete
 array use; an early-stopped iterator creates no completed replay evidence.
 Generated regressions cover historical source/dependency/hardware drift, a
 corrupt final row blocking the first yield, and index/row/tensor changes after
-the complete audit. Recipe execution and new persistence remain separate work.
+the complete audit. Selected recipe execution and new persistence remain separate work.
 
 [Separate historical-source audit](../ml/reports/PLACEHOLDER-m4-remaining-training3-snapshot-audit.json)
 of the selected evidence now PASS: all 152 retained rows, all 159 operators,
@@ -1095,10 +1096,36 @@ agree exactly; tracked/ignored original report fingerprints remain identical.
 No selected-model inference, retained recipe experiment or historical execution
 authentication occurred.
 
-Next integrate the fixed arithmetic primitives with these complete verified
-ADR-023 retained observations. Keep every existing Conv/BN/remaining control and all ordered training
-inputs on both graph/input origins. Resolve float arithmetic before choosing a
-selective QDQ scope, fitting or using frozen acceptance inputs.
+`export_arithmetic_replay` now integrates fixed recipes with supplied complete
+retained tensor trees. Before any supplied inputs run, it checks saved rounded
+binding and constructs/audits all recipes independently in both graph contexts.
+The full generated-mobile fixture covers 39 targets/77 fixed expressions,
+154 sessions and 308 serialized/runtime files. Exact file scope, serialized
+expressions and disabled-runtime arithmetic/constants/boundaries are separately
+rebuilt. There is no whole-model inference or session in this replay layer.
+
+Each supplied row must first pass the existing complete control/native/runtime
+lineage reconstruction. All original Conv/BN/remaining controls stay present;
+only the new declared eager/runtime recipes run on both retained origins.
+Original arrays are shared and unmodified; all new recipe arrays are returned
+in memory. Signed comparisons retain eager-recipe/native-operator differences,
+runtime/eager differences, original isolated controls and native/tapped boundary
+differences. Four-term signed accounting labels its final term as the difference
+against the original tapped boundary, without implying replacement extraction
+equivalence. No numerical difference or signed-zero bit disagreement is suppressed.
+
+Independent `reconstruct_arithmetic` checks complete target/recipe/origin/engine
+scope and every original control, reconstructing all signed metrics without
+sessions or recipe execution. Generated tests also exhaust the real guarded
+reader API on all generated training rows, with native-model calls/decode/original
+control recipes blocked. This is software evidence only: no selected model
+inference or retained selected arithmetic replay has occurred.
+
+Next add lossless new arithmetic observation persistence, its complete streaming
+audit and a guarded training runner. It must exhaust the verified retained reader
+over all and only the 152 training components, preserving exact prior bits and
+all original controls. Resolve float arithmetic before choosing a selective
+QDQ scope, fitting or using frozen acceptance inputs.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

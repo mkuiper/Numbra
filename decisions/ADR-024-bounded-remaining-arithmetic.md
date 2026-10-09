@@ -129,6 +129,42 @@ snapshot matches all 33 source files/tree; dependencies remain live and exact.
 Tracked and ignored original report fingerprints agree and remain unchanged.
 No selected arithmetic experiment or new model inference occurred.
 
+## Observed supplied retained-tensor integration — 2026-10-09 UTC
+
+`export_arithmetic_replay.ArithmeticReplay` now builds every fixed recipe in
+both unchanged graph contexts and independently reconstructs all serialized/
+runtime expressions, constants, boundaries, records and files before any supplied
+retained operands run. The generated full-mobile fixture covers every 39 target
+node/77 fixed recipe, 154 sessions and 308 graph files. Original saved rounded
+binding and all existing control/node scope checks precede recipe setup.
+
+Each supplied retained row first passes complete original native/runtime lineage
+and control reconstruction. All new recipes run on both exact origins without
+decoding images, calling the native model, constructing whole-model sessions or
+rerunning original controls. Original arrays remain shared and unmodified;
+new eager/runtime arrays remain in memory. All signed native/eager/runtime/
+isolated/tapped comparisons and complete four-term accounting are reconstructed
+independently without inference. The final accounting term is explicitly the
+difference against the original tapped boundary, never a claim of equivalent
+replacement extraction. Recorded outputs are observations, not authenticated
+historical inference or independently rerun numerical truth.
+
+Initial generated-only suite: 32 PASS, 12 exporter deprecation warnings, 68.94s.
+Coverage includes full random mobile arithmetic, complete guarded-reader fixture
+exhaustion with new native calls/decode/original control recipes blocked, complete
+file/runtime reconstruction, partial/corrupt evidence rejection, stale state/
+graph/expression/hooks, and unsuppressed nonzero/signed-zero differences. Four
+additional fresh-output rejection cases passed in the required full check:
+872 ML PASS, 586 warnings, 263.96s, exit 0; Android SKIPPED, RESULT PASS.
+All 36 new tests included; no APK claim. No failing test was weakened or skipped.
+
+This completes the supplied-tensor primitive, not a selected training experiment.
+Lossless arithmetic observation persistence, streaming complete audit and the
+guarded selected runner remain unfinished. No retained selected recipe execution,
+selected native inference, whole-model candidate, fit, frozen evaluation, mobile
+compatibility result or accepted export occurred. M4 remains incomplete and
+M5 must wait for its gate.
+
 ## Open questions
 
 - Which fixed recipes reduce native drift across the complete retained scope?

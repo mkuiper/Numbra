@@ -1679,3 +1679,51 @@ publication or push.
 - Final root repository contracts: six PASS (0.080s); whitespace clean.
   Only allowed code/tests/aggregate reports/ADRs/docs/iteration records changed.
   No protected edits or tracked data/weights; committing this M4 logical step.
+
+## 2026-10-09T20:28:40Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, current M4 review folder
+  (absent), AGENTS and ADR-023/024. M0–M3 gates already exist; no new harness
+  instruction. Stayed on M4; no review request or M5 implementation.
+- Implemented ADR-024 supplied retained-tensor arithmetic integration. Every
+  fixed activation/reduction recipe and original-constant head graph is built
+  in both unchanged contexts. Complete serialized/runtime setup audit precedes
+  supplied inputs, including saved rounded binding, original controls, exact
+  expressions/constants/boundaries, file inventory and record reconstruction.
+- Generated full-mobile verification covers all 39 targets/77 fixed recipes,
+  154 sessions/308 graph files and original 159-node controls. Both exact
+  retained operand origins are used; original control arrays remain shared and
+  unmodified. New eager/runtime arrays are returned in memory. No native-model
+  call, image decode, whole-model session or old control replay in this layer.
+- Independent reconstruction checks every target/recipe/origin/engine and all
+  original controls/lineage; retains signed native/eager/runtime/isolated/tapped
+  comparisons and complete signed accounting. The original tapped-boundary
+  difference is not labelled extraction equivalence. Recorded observations do
+  not authenticate past inference or independently recompute numerical truth.
+- Initial focused generated-only suite observed 32 PASS, 12 exporter deprecation
+  warnings, 68.94s. Includes full random mobile coverage, complete generated
+  guarded-reader exhaustion, corruption/partial scope rejection, stale state/
+  expressions/hooks and nonzero/signed-zero drift. Four further output-refusal
+  cases added before required full check. No test failure, weakening or skip.
+- Root contracts observed six PASS (0.071s); git diff --check clean. Required
+  scripts/check.sh is running; final result follows below before commit.
+- Updated ML README/export documentation and ADR-024 observations. No new
+  decision or selected experiment. New lossless ordered arithmetic persistence,
+  streaming audit and guarded selected runner remain explicit unfinished work.
+  Next build those before replaying all 152 selected retained components.
+- No selected native inference/retained recipe execution, new fit, frozen
+  evaluation, candidate/reference/budget change, dataset/toolchain install,
+  protected edit, review.sh, REVIEW/CHECK/GATE write, external message,
+  publication or push. All prior failed exports remain rejected; no APK.
+  NEXT_ACTION CONTINUE.
+- Required scripts/check.sh observed exit 0: 872 ML PASS, 586 exporter
+  deprecation warnings, 263.96s; Android SKIPPED (no app/gradlew), RESULT PASS.
+  Includes all 36 new tests. No accepted export or APK claim.
+- Final iteration records updated at 2026-10-09T20:30:19Z; NEXT_ACTION CONTINUE. Next
+  implement complete lossless arithmetic evidence persistence/streaming audit
+  and the guarded selected training runner before any selected recipe replay.
+  Full check confirms the existing historical audits/control/parity tests remain
+  intact. No failed or skipped ML tests; protected files/data/weights untouched.
+- Final root contracts: six PASS (0.081s); whitespace clean. Staging only
+  the new replay code/tests, ADR/docs and iteration records for the M4 logical
+  step commit. No protected edits, tracked data/weights, publication or push.
