@@ -1031,10 +1031,44 @@ Historical ADR-022 source still binds to
 `808cc3393ccf1cce95c2feeef91e5a8608b481e4`; current runner source/dependencies/
 hardware remain exact. Local reconstruction never authenticates past inference.
 
-Next predeclare bounded complete activation/reduction arithmetic experiments
-and constant-preserved head isolation, keeping every existing Conv/BN and other
-operator control and all ordered training inputs. Resolve float arithmetic
-before choosing a selective QDQ scope, fitting or using frozen acceptance inputs.
+[ADR-024](../decisions/ADR-024-bounded-remaining-arithmetic.md) now predeclares
+bounded complete activation/reduction recipes and constant-preserved head
+isolation. The supplied-graph primitives in `export_remaining_arithmetic`
+are built and generated-only tests pass. **Guarded retained training replay
+is still unimplemented**; there is no new selected-baseline parity result.
+
+Each HardSigmoid uses float32 `clamp(x+3,0,6)` followed by either division by
+six or multiplication by the rounded float32 reciprocal. Each HardSwish first
+multiplies that clamp by x, then applies the same two fixed alternatives. Every
+operation retains its own float32 boundary. ReduceMean/GlobalAveragePool use
+either float32 ReduceSum/divide or double ReduceMean with one final float32
+cast. These recipes are diagnostic hypotheses, never native reference replacements.
+Gemm retains its exact original initializer/Constant/Identity dependency closure,
+only the activation as an input, and its original node/attributes. Existing
+all-input isolation remains a separate control.
+
+`complete_arithmetic_scope` first runs existing complete saved/control/head
+validation and returns every target in original order. A full random mobile
+fixture has 39 target nodes and 77 recipe graphs, identical across its preserved
+and rounded contexts, with all 87 Conv/BN controls still validated. Static scope
+construction blocks decode, model forward and runtime session construction in
+tests. Serialized audits independently rebuild complete recipe bits/interfaces;
+actual disabled-runtime audits reuse ADR-023's unchanged complete auditor.
+Generated fixtures check clamp/signed-zero boundaries, distinct division and
+reciprocal arithmetic, double-reduction cancellation, original head/alias bits,
+invalid operands/overflow, and serialized/runtime corruption rejection.
+
+The generated constant-head fixture has nonzero ORT/eager linear drift;
+`expression_metrics` retains signed/max/mean discrepancies with no suppression
+or equivalence assertion. Exact isolated-versus-original constant-context ONNX
+equality is verified for that fixture. This does not resolve the selected head's
+extraction discrepancy or establish kernel-packing causality.
+
+Next integrate these primitives with complete verified ADR-023 retained
+observations, including an explicit exact historical source snapshot after code
+changes. Keep every existing Conv/BN/remaining control and all ordered training
+inputs on both graph/input origins. Resolve float arithmetic before choosing a
+selective QDQ scope, fitting or using frozen acceptance inputs.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

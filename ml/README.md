@@ -201,3 +201,23 @@ evidence.
 New arrays use lossless uncompressed NPZ to bound CPU cost; legacy compressed
 archives remain readable with their original file/decoded-bit checks.
 See [the export document](../docs/ML-EXPORT.md) for scope and evidence limits.
+
+## ADR-024 bounded PLACEHOLDER arithmetic primitives
+
+`numbra_ml.export_remaining_arithmetic` is a supplied-graph API with no saved
+baseline inference or dataset entry point. It builds the two fixed recipes for
+every HardSwish/HardSigmoid/reduction/pool and a constant-preserved Gemm isolation,
+reconstructs serialized expressions and audits actual disabled runtime graphs.
+Complete scope retains original node order and validates all existing controls.
+Signed runtime/eager discrepancies are diagnostic; eager recipes never replace
+captured native outputs. Generated-only verification:
+
+```sh
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_arithmetic.py
+```
+
+Full random mobile scope covers 39 target nodes/77 recipe graphs with identical
+bits across both generated contexts. Retained selected training integration,
+provenance/evidence reconstruction and any whole-model candidate remain
+unimplemented. No M4 acceptance, quantisation fit or mobile claim. See
+[ADR-024](../decisions/ADR-024-bounded-remaining-arithmetic.md).

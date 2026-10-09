@@ -1556,3 +1556,64 @@ publication or push.
   git diff --check clean; all three complete/summary/audit reports parse and
   omit individual component IDs/logits/failure cases. Only allowed files changed.
   Committing aggregate evidence and final records; NEXT_ACTION=CONTINUE.
+
+## 2026-10-09T19:55:54Z — iteration
+
+- Read ROADMAP, STATUS, HARNESS, current review-folder availability, AGENTS and
+  relevant ADRs in order. No M4 review folder/gate or new harness action; M0–M3
+  gate files verified. Continue M4 only. All failed artifacts remain rejected.
+- Declared ADR-024 before implementation: exactly two recipes per HardSwish,
+  HardSigmoid, ReduceMean and GlobalAveragePool; original-constant Gemm context
+  isolation. Fixed all prior references/fits/budgets/controls and all ordered
+  training scope; no adaptive recipe, complete candidate, new QDQ fit or frozen
+  inputs. Accepted (autopilot), pending human review; queued for humans.
+- Added export_remaining_arithmetic supplied-graph primitives. Every float32
+  operation has its declared rounding boundary; reduction alternatives are
+  sum/divide and double mean/final cast. Unique head retains original ordered
+  initializer/Constant/Identity closure and exact Gemm node/attributes, with
+  only activation fed. Reject overridable parameters, nonfinite inputs/outputs,
+  unsupported geometry/attributes/recipes and inexact/overflowing spatial counts.
+- Complete generated random MobileNetV3 scope: 19 HardSwish, nine HardSigmoid,
+  nine ReduceMean, final pool, one Gemm; 39 targets, 77 recipe graphs. Original
+  order and exact bits agree across generated preserved/rounded contexts. All
+  87 original Conv/BN controls validated before building recipes; no optional
+  subset. Static guards block decode, model forward and runtime construction.
+- Serialized audit rebuilds complete graph bits/interfaces/constants. Actual
+  disabled-runtime audit reuses unchanged ADR-023 full auditor. Signed metric
+  checks retain every runtime/eager discrepancy; independent eager expressions
+  are explicitly not captured native saved-reference outputs.
+- First focused run: six FAIL, 42 PASS, four warnings, 12.13s. Five failures
+  came from unsupported protobuf repeated-field slice assignment in the alias
+  fixture; use ordered insertion instead. One disputed test presumed exact
+  constant-head ORT/eager Gemm equality, despite this diagnostic's intent to
+  measure kernel/context drift. Generated error 0.0000019073486. Recorded the
+  disputed test in HUMAN-QUEUE; corrected verification to require exact original
+  constant-context ONNX equality and independently reconstruct every signed/
+  max/mean metric, retaining nonzero eager drift. No production tolerance or
+  native reference change; original parity and activation/reduction equality
+  tests unchanged. Fixture context equality cannot establish selected-head
+  extraction fidelity or kernel-packing causality (still UNVERIFIED).
+- Follow-through focused suite: 48 PASS, four warnings, 12.04s. Expanded
+  serialized/runtime head-corruption and invalid-output/overflow regressions:
+  56 PASS, four deprecation warnings, 12.02s. Scope, clamp/signed-zero boundaries,
+  distinct division/reciprocal, cancellation, alias/constant bits, operands,
+  geometry and every declared primitive/runtime expression are tested.
+- Updated export documentation, ML README, STATUS and HUMAN-QUEUE. Root
+  repository contracts six PASS (0.08s); git diff --check clean before final
+  records. Required scripts/check.sh running with full observed result to follow.
+  Its log is ignored at data/exports/PLACEHOLDER-m4-arithmetic-check.log.
+- No selected saved-model execution, retained-observation replay, new baseline
+  parity/evaluation, weight acquisition/toolchain install, protected edit,
+  review.sh, REVIEW/CHECK/GATE write, remote message, publication or push.
+  Guarded retained integration/persistence remains unimplemented; next bind
+  ADR-023 historical source exactly, reconstruct complete prior observations,
+  then replay all fixed expressions on both contexts/input origins alongside
+  every existing control. M4 acceptance remains incomplete; NEXT_ACTION CONTINUE.
+- Final required check observed exit 0: 822 ML PASS, 568 warnings, 172.81s;
+  Android SKIPPED (no app/gradlew), RESULT PASS. No APK claim. Latest STATUS
+  updated at 2026-10-09T19:57:14Z; NEXT_ACTION remains CONTINUE. Protected files
+  untouched and M4 still lacks float/quantised acceptance/mobile compatibility.
+- Final root repository contracts six PASS (0.081s); git diff --check clean.
+  Test-generated temporary report files have been cleaned up by their fixtures.
+  Only allowed code/tests/ADRs/documentation/iteration records remain changed;
+  committing this logical M4 primitive foundation without requesting review.
