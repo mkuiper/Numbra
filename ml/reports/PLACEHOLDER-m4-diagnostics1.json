@@ -1,0 +1,969 @@
+{
+  "artifacts": {
+    "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b": {
+      "instrumented_graph_sha256": "cc785270e496c04d8cda2e693cafda5b5928f0bc2b60979d87e7357d8f2cf9eb",
+      "kind": "int8",
+      "original_graph": {
+        "bytes": 1861702,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "profiles": {
+        "all": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 552.4814084548719,
+              "mean": 440.6052596931021
+            },
+            "induced_python_head_absolute_error": {
+              "max": 132.30242729187012,
+              "mean": 51.74660595388789
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.3468281999230385,
+              "mean": 3.3734152873879983
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.5844798080777878,
+              "mean": 0.4852447543510805
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 57.480896949768066,
+              "mean": 25.616621757024213
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 4,
+            "frozen_threshold_flip_count": 36,
+            "max_calibrated_probability_absolute_error": 0.7874630888758324,
+            "max_raw_logit_absolute_error": 82.7891731262207,
+            "mean_calibrated_probability_absolute_error": 0.2918280750766412,
+            "mean_raw_logit_absolute_error": 27.40956369356105,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 4,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "basic": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 552.4814084548719,
+              "mean": 440.53687766560705
+            },
+            "induced_python_head_absolute_error": {
+              "max": 132.30242729187012,
+              "mean": 51.60968846317969
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.3468281999230385,
+              "mean": 3.371122099851307
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.5844798080777878,
+              "mean": 0.4852349171450343
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 57.480896949768066,
+              "mean": 25.526984264191828
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 4,
+            "frozen_threshold_flip_count": 36,
+            "max_calibrated_probability_absolute_error": 0.7874630888758324,
+            "max_raw_logit_absolute_error": 82.7891731262207,
+            "mean_calibrated_probability_absolute_error": 0.2914547629387394,
+            "mean_raw_logit_absolute_error": 27.343967721650476,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 4,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "disabled": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 552.4814084548719,
+              "mean": 440.53687766560705
+            },
+            "induced_python_head_absolute_error": {
+              "max": 132.30242729187012,
+              "mean": 51.60968846317969
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.3468281999230385,
+              "mean": 3.371122099851307
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.5844798080777878,
+              "mean": 0.4852349171450343
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 57.480896949768066,
+              "mean": 25.526984264191828
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 4,
+            "frozen_threshold_flip_count": 36,
+            "max_calibrated_probability_absolute_error": 0.7874630888758324,
+            "max_raw_logit_absolute_error": 82.7891731262207,
+            "mean_calibrated_probability_absolute_error": 0.2914547629387394,
+            "mean_raw_logit_absolute_error": 27.343967721650476,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 4,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "extended": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 552.4814084548719,
+              "mean": 440.5957971268809
+            },
+            "induced_python_head_absolute_error": {
+              "max": 132.30242729187012,
+              "mean": 51.702700243968714
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.3468281999230385,
+              "mean": 3.372797626413797
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.5844798080777878,
+              "mean": 0.48523849262578134
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 57.480896949768066,
+              "mean": 25.604236074968387
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 4,
+            "frozen_threshold_flip_count": 36,
+            "max_calibrated_probability_absolute_error": 0.7874630888758324,
+            "max_raw_logit_absolute_error": 82.7891731262207,
+            "mean_calibrated_probability_absolute_error": 0.29167749391101677,
+            "mean_raw_logit_absolute_error": 27.3780436656977,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 4,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        }
+      },
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    },
+    "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa": {
+      "instrumented_graph_sha256": "7e46f03a85082d29a48bf8813eb3c0e0d503500bb50d7690d4df82a4d7454ec7",
+      "kind": "int8",
+      "original_graph": {
+        "bytes": 1730515,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "profiles": {
+        "all": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 1135.7605253314507,
+              "mean": 671.2605952080918
+            },
+            "induced_python_head_absolute_error": {
+              "max": 159.27698516845703,
+              "mean": 70.93321189127471
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.6936765015125275,
+              "mean": 4.390926794348113
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.8678973037976903,
+              "mean": 0.6498944074779107
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 104.17194080352783,
+              "mean": 48.35722549965507
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 32,
+            "max_calibrated_probability_absolute_error": 0.6444904289577164,
+            "max_raw_logit_absolute_error": 59.86061477661133,
+            "mean_calibrated_probability_absolute_error": 0.26754667291205125,
+            "mean_raw_logit_absolute_error": 24.099795805780513,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "basic": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 1136.3897692405722,
+              "mean": 671.4171139338667
+            },
+            "induced_python_head_absolute_error": {
+              "max": 159.27698516845703,
+              "mean": 70.94977777882626
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.6936765015125275,
+              "mean": 4.3909002297441475
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.868126024916009,
+              "mean": 0.6500526959687495
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 104.17194080352783,
+              "mean": 48.39857927121614
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 32,
+            "max_calibrated_probability_absolute_error": 0.6444904289577164,
+            "max_raw_logit_absolute_error": 59.86061477661133,
+            "mean_calibrated_probability_absolute_error": 0.26729991752366217,
+            "mean_raw_logit_absolute_error": 24.073773923673127,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "disabled": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 1136.3897692405722,
+              "mean": 671.4171139338667
+            },
+            "induced_python_head_absolute_error": {
+              "max": 159.27698516845703,
+              "mean": 70.94977777882626
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.6936765015125275,
+              "mean": 4.3909002297441475
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.868126024916009,
+              "mean": 0.6500526959687495
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 104.17194080352783,
+              "mean": 48.39857927121614
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 32,
+            "max_calibrated_probability_absolute_error": 0.6444904289577164,
+            "max_raw_logit_absolute_error": 59.86061477661133,
+            "mean_calibrated_probability_absolute_error": 0.26729991752366217,
+            "mean_raw_logit_absolute_error": 24.073773923673127,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "extended": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 1135.7605253314507,
+              "mean": 671.2836250140983
+            },
+            "induced_python_head_absolute_error": {
+              "max": 159.27698516845703,
+              "mean": 70.92861410191185
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 4.6936765015125275,
+              "mean": 4.390617963861012
+            },
+            "mean_feature_absolute_error": {
+              "max": 0.8678973037976903,
+              "mean": 0.6499101863164984
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 104.17194080352783,
+              "mean": 48.35487914085388
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 32,
+            "budget": {
+              "conservative_margin": 0.001,
+              "probability_absolute": 0.001,
+              "raw_absolute": 0.1
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 32,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 32,
+            "max_calibrated_probability_absolute_error": 0.6444904289577164,
+            "max_raw_logit_absolute_error": 59.86061477661133,
+            "mean_calibrated_probability_absolute_error": 0.2675200506648599,
+            "mean_raw_logit_absolute_error": 24.097544375218842,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 152,
+            "raw_budget_exceeded_count": 152,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        }
+      },
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        }
+      ]
+    },
+    "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35": {
+      "instrumented_graph_sha256": "017885f26484ce8cfd69e6f902a50796a7890ad9c2f048d3b776ded11ff8ba6a",
+      "kind": "float",
+      "original_graph": {
+        "bytes": 6095579,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "profiles": {
+        "all": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.0022076231154864357,
+              "mean": 0.0008765847406120073
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.0003223419189453125,
+              "mean": 7.005428013048674e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 2.1219253540039062e-05,
+              "mean": 8.990105829740825e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 2.911679160888525e-06,
+              "mean": 1.1425555993363041e-06
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.1444091796875e-05,
+              "mean": 1.976364537289268e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 4.11753037443674e-06,
+            "max_raw_logit_absolute_error": 0.00032329559326171875,
+            "mean_calibrated_probability_absolute_error": 8.093640325889851e-07,
+            "mean_raw_logit_absolute_error": 7.000408674541272e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 44,
+            "raw_budget_exceeded_count": 36,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "basic": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.002552905328133571,
+              "mean": 0.0008614343653311204
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.00036144256591796875,
+              "mean": 6.856102692453485e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 2.3365020751953125e-05,
+              "mean": 8.909914054368672e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 3.397317527742416e-06,
+              "mean": 1.1329552308361308e-06
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.1444091796875e-05,
+              "mean": 2.2398798089278373e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 4.651959891854851e-06,
+            "max_raw_logit_absolute_error": 0.00036525726318359375,
+            "mean_calibrated_probability_absolute_error": 8.019644706412534e-07,
+            "mean_raw_logit_absolute_error": 6.856102692453485e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 50,
+            "raw_budget_exceeded_count": 40,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "disabled": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.002552905328133571,
+              "mean": 0.0008614343653311204
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.00036144256591796875,
+              "mean": 6.856102692453485e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 2.3365020751953125e-05,
+              "mean": 8.909914054368672e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 3.397317527742416e-06,
+              "mean": 1.1329552308361308e-06
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.1444091796875e-05,
+              "mean": 2.2398798089278373e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 4.651959891854851e-06,
+            "max_raw_logit_absolute_error": 0.00036525726318359375,
+            "mean_calibrated_probability_absolute_error": 8.019644706412534e-07,
+            "mean_raw_logit_absolute_error": 6.856102692453485e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 50,
+            "raw_budget_exceeded_count": 40,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "extended": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.002552905328133571,
+              "mean": 0.0008614343653311204
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.00036144256591796875,
+              "mean": 6.856102692453485e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 2.3365020751953125e-05,
+              "mean": 8.909914054368672e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 3.397317527742416e-06,
+              "mean": 1.1329552308361308e-06
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.1444091796875e-05,
+              "mean": 2.2398798089278373e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 4.651959891854851e-06,
+            "max_raw_logit_absolute_error": 0.00036525726318359375,
+            "mean_calibrated_probability_absolute_error": 8.019644706412534e-07,
+            "mean_raw_logit_absolute_error": 6.856102692453485e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 50,
+            "raw_budget_exceeded_count": 40,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        }
+      },
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        },
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    }
+  },
+  "created_utc": "2026-10-09T14:56:53.095657+00:00",
+  "diagnostic_details_sha256": "0ff716f883e3af64d84c73766f944d35bf57cd7f0f27922ac897a2f5afde6df6",
+  "environment": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 275HX",
+    "dependencies": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.19.2",
+      "attrs": "25.3.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.2",
+      "coloredlogs": "15.0.1",
+      "filelock": "4.0.12",
+      "flatbuffers": "25.12.19",
+      "fsspec": "2026.9.0",
+      "hf-xet": "1.7.0",
+      "huggingface-hub": "0.36.0",
+      "humanfriendly": "10.0",
+      "idna": "3.20",
+      "iniconfig": "2.1.0",
+      "jsonschema": "4.25.1",
+      "jsonschema-specifications": "2025.9.1",
+      "ml-dtypes": "0.6.0",
+      "mpmath": "1.3.0",
+      "networkx": "3.7",
+      "numpy": "2.2.6",
+      "onnx": "1.19.1",
+      "onnxruntime": "1.23.2",
+      "packaging": "25.0",
+      "pillow": "11.3.0",
+      "pluggy": "1.6.0",
+      "protobuf": "7.36.2",
+      "pytest": "8.4.2",
+      "referencing": "0.36.2",
+      "requests": "2.34.2",
+      "rpds-py": "0.27.1",
+      "safetensors": "0.6.2",
+      "setuptools": "80.9.0",
+      "sympy": "1.14.0",
+      "timm": "1.0.22",
+      "torch": "2.8.0+cpu",
+      "torchvision": "0.23.0+cpu",
+      "tqdm": "4.70.1",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.8.0",
+      "wheel": "0.45.1"
+    },
+    "dependency_lock_sha256": "54022e4eb1ab4fad6d90f65e2f21784411daf7e7875cf5b8f81a75d90f0309cd",
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "export_dependency_lock_sha256": "eb639013b6c6fca1b4cba2e77a19a1cbe098ddf688d13a58463df93714c1f396",
+    "git_commit": "a1256b689265dd5e7f86879d11fe251e0bab0eed",
+    "git_dirty": true,
+    "logical_cpu_count": 24,
+    "machine": "x86_64",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.12.3",
+    "reproduction_scope": "same pinned environment/hardware; other platforms unverified",
+    "source_files_sha256": {
+      "ml/src/numbra_ml/__init__.py": "c437709a69fabe6a5d5fd2dbc742b1a43cee0056db7640394a397e7a0fba3a45",
+      "ml/src/numbra_ml/dataset.py": "5a6732734ef6198e37b4ea02ae217cd568925cd31209693b6bb0326cff382f79",
+      "ml/src/numbra_ml/evaluation.py": "493aa1be7c014b62ebd98af56c45bfc4aac0cf72d59077de91ff3bf1ed3a15b8",
+      "ml/src/numbra_ml/export.py": "0efdf5fe22152fa3294267a7ce27a61944bf3a40931116df23026f0e8c92d1c7",
+      "ml/src/numbra_ml/export_diagnostics.py": "1c5779f00158239458b82c19970b8e533174531ca74bcbabf58544ecae587253",
+      "ml/src/numbra_ml/manifest.py": "a68b6246dde24481dec928cd73bafc224b084e07873ff3caa9bbc3bae7d3f90b",
+      "ml/src/numbra_ml/parity.py": "185e1361d78be178020fafbbf3c7943a626230e01362b47c013d7e46f68be6d4",
+      "ml/src/numbra_ml/preparation.py": "0e72499c4208882780345f7c633224a18c140d803d57289b5db2e06527677dfd",
+      "ml/src/numbra_ml/prepare.py": "57cc5d9eabd8744419aef42f7616981d67c557d1f130714ec187752fbd567c97",
+      "ml/src/numbra_ml/preprocessing.py": "c9fbe31e531db054e8674d859f2c866ce91f3bbcc7e8b85be3a69147dbe1998a",
+      "ml/src/numbra_ml/pretrained.py": "570868b592338f678b9b83b6605beca9a8b85acdd5a0ebb59c4f29b3105c4bc6",
+      "ml/src/numbra_ml/schema.py": "8d45f5d4fc846508e372f527d87f193bf0f584b9f2a22a4f6a39f577ebaa0c40",
+      "ml/src/numbra_ml/synthetic.py": "a42c55d5c35c6d1406d307fc38a024601a2b7c307c5522dddd194da760e3c0b6",
+      "ml/src/numbra_ml/taxonomy.py": "842352e533ee6f5506e43fb07389a0d02f7e707c3f3a3acc07511a461713ebe5",
+      "ml/src/numbra_ml/train.py": "cff1073528080cdfb0ee2f76d60e14591d644fd4bd4d8fcc1599423f489975d4",
+      "ml/src/numbra_ml/training.py": "1067ca5a5212445369d3a9d6e2dc7e0587490b1054cb2fe454ffdb819ba196ed",
+      "ml/src/numbra_ml/verify.py": "7384905472a9ca5c3962bf4272252cebac6068ed9606f2b0b7e4546e80c09ead"
+    },
+    "source_tree_sha256": "00463f5b73086ea9336d41e0ba128cf832908df78b16116090498b2556ee868f",
+    "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=a1cb3cc05d46d198467bebbb6e8fba50a325d4e7, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.8.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "torch_cpu_capability": "AVX2"
+  },
+  "head_sensitivity": {
+    "effective_coefficient_l1": 1362.4646539532419,
+    "features": 1024,
+    "maximum_absolute_effective_coefficient": 59.662623509726096,
+    "maximum_scale": 1.0,
+    "minimum_scale": 0.004729056730866432,
+    "warning": "real-arithmetic affine sensitivity; does not bound float rounding"
+  },
+  "manifest_sha256": "2d141bc62205d88b7116cbe410e9262a96d771dec34c30e88ae6ad9c4bee839e",
+  "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+  "preparation_report_sha256": "c8fb349db94a251e7f8c8b0a25335bff973819f2a44e00ba54b7869777883a22",
+  "protocol": {
+    "component_ids_sha256": "b867ec82627f947b268603a763d235dac0ab66444af26e283ba36ca2d802e908",
+    "components": 152,
+    "decision": "ADR-013",
+    "execution": "sequential",
+    "frozen_evaluation_inputs_used": false,
+    "inter_op_threads": 1,
+    "intra_op_threads": 2,
+    "optimisation_levels": [
+      "disabled",
+      "basic",
+      "extended",
+      "all"
+    ],
+    "shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "split": "train",
+    "temperature": 19.150006376043688,
+    "threshold": 0.40079881738785716
+  },
+  "saved_model_sha256": "734328e3568335b9f415b4ca06b813872a9e43bd432717908bc0f1d4c7e2ae43",
+  "saved_run_sha256": "1d729fba54ecee14b118124531f1c60d5bbe33ceb15e21b90d3182ba7b61fc11",
+  "scope": "PLACEHOLDER training-only attribution; no deployment acceptance or clinical/mobile evidence",
+  "status": "DIAGNOSTIC ONLY",
+  "version": "1.0.0"
+}

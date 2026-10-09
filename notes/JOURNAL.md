@@ -569,3 +569,71 @@ Next: original-baseline float runtime/fusion and INT8 activation/weight precisio
 diagnostics on training inputs; predeclare next graph strategy, preserve all
 failures and original budgets. NEXT_ACTION CONTINUE. Commit iteration records
 and all Builder changes before finishing.
+
+## 2026-10-09T15:02:55Z — iteration
+
+Current milestone M4; M0–M3 gates already exist. Read ROADMAP, STATUS, HARNESS,
+confirmed no M4 review folder, then AGENTS and relevant ADRs. No new harness
+message or review to answer. Both original baseline exports remain rejected.
+
+Added ADR-013 (Accepted (autopilot) — pending human review) and HUMAN-QUEUE entry
+before running new training-only export diagnostics. Added explicit validated
+ORT disabled/basic/extended/all session options while preserving the existing
+all/default runtime behavior. New numbra_ml.export_diagnostics verifies retained
+experiment/model/preparation/graph hashes and installed lock versions; uses every
+training component index image and no non-training/stress pixels; deduplicates
+identical float graphs, retaining both source-report hashes. Separate diagnostic
+copies expose features at the saved head boundary, carry PLACEHOLDER/never-bundle
+metadata and fail the strict deployment interface. Original and instrumented
+graphs run independently to expose instrumentation-induced changes. Full outputs,
+feature attribution and graph copies remain ignored data/; aggregates alone tracked.
+
+Observed command:
+ml/.venv/bin/python -m numbra_ml.export_diagnostics --output data/exports/PLACEHOLDER-m4-diagnostics1
+returned 0 and generated ml/reports/PLACEHOLDER-m4-diagnostics1.json, explicitly
+DIAGNOSTIC ONLY. All 152 training components × three original graphs × four ORT
+profiles fail original ADR-011 budgets. Float/all max raw/probability error
+0.000323295593/0.00000411753037; disabled/basic/extended each
+0.000365257263/0.00000465195989; zero flips. Every per-tensor INT8 profile has
+59.8606148/0.6444904 errors and 32 flips; every per-channel profile
+82.7891731/0.7874631 and 36 flips. This is training evidence, distinct from the
+retained frozen-test/held-out reports. No fits/inputs/reference execution changed.
+
+Float/all maximum feature error 0.0000212192535 induces saved-Python-head error
+0.000322341919; remaining head/runtime discrepancy max 0.0000114440918. Effective
+head coefficient max 59.6626235, L1 sum 1,362.464654. Evidence points mainly to
+feature drift amplified by head scaling, not yet to a particular backbone operator.
+Maxima can belong to different components; no exact worst-case sum claimed.
+INT8 has substantial feature and head-path discrepancy. Instrumentation logit
+change is exactly zero for every measured graph/profile; broader equivalence
+unverified. Runtime optimisation changes alone do not resolve parity.
+
+Local inspection: saved Python backbone contains 34 BatchNorm2d modules; retained
+float ONNX has no BatchNormalization nodes after folding. Next concrete strategy
+is to predeclare and test a BatchNorm-preserving export, verify actual graph nodes,
+prevent runtime re-fusion, and measure training-only first. This is a hypothesis,
+not an observed remedy. Keep original saved model/fits/budgets and declare
+quantised/mixed-precision operator scope before the next frozen evaluation.
+ADR-012's generated toy-model workaround remains diagnostic-only. No M4 review
+request/HANDOFF or deployment model approval; NEXT_ACTION overwritten CONTINUE.
+
+Verification observed:
+- New diagnostic subset: 8 PASS in 5.92s, 12 legacy-export warnings. Tests include
+  corrupting all non-training image bytes, source-graph immutability, graph/fit
+  tamper rejection before output creation, explicit runtime profiles, affine
+  bound/signed-effect arithmetic, input validation and instrumented-graph rejection.
+- bash scripts/check.sh: exit 0; 312 ML tests PASS in 35.90s, 18 legacy-export
+  deprecation warnings; Android SKIPPED (no app/gradlew), RESULT PASS. No APK claim.
+- Root contract suite: initial 6 PASS in 0.062s; final after documentation updates
+  6 PASS in 0.071s. Builder links and source register remain valid.
+- git diff --check clean before final records; staged verification before commit.
+  No tests failed, skipped or weakened by Builder. One initial notes patch was
+  rejected for duplicate target operations before any file changed; corrected
+  using explicit repository-local file writes.
+
+Updated ML-EXPORT, DEV-SETUP, ml/README and ADR-013 with observed results and
+interpretation limits. STATUS overwritten, JOURNAL appended and NEXT_ACTION
+CONTINUE. No new dependency/toolchain/dataset/checkpoint acquisition; existing
+42-package export lock unchanged. No patient data, weights or graph copies in git;
+no protected edits, review.sh run, publishing, push or messages. Baseline parity,
+clinical data/validation, weight notices and mobile execution remain open.

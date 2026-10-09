@@ -79,3 +79,7 @@ See [CPU training](../docs/ML-TRAINING.md) for checkpoint acquisition, the one-c
 training run, provenance, reproduction and limitations. Only the checkpoint command
 uses the network; task training/evaluation is offline. Weights/predictions stay
 under ignored data/, aggregate reports/model cards under ml/reports/.
+
+See [export and diagnostics](../docs/ML-EXPORT.md) for the fixed M4 budgets,
+retained failed ONNX/INT8 attempts and training-only runtime/head attribution.
+All exports remain **PLACEHOLDER**; diagnostic success does not close M4.

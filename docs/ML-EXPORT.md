@@ -136,14 +136,77 @@ Single-image Python vs saved batched logits has max raw difference 0.000383378,
 zero threshold flips. Export budgets compare **the same single-image tensor**;
 the batching difference is independently disclosed, never subtracted from error.
 
+## Training-only drift diagnostics
+
+[ADR-013](../decisions/ADR-013-training-only-export-diagnostics.md) declares the
+diagnostic comparison before execution. Reproduce with a new output directory:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_diagnostics --output data/exports/PLACEHOLDER-m4-diagnostics1
+```
+
+The command checks retained graph/report/saved-model/preparation provenance and
+the pinned export environment. It runs only all training component index images
+at ORT disabled/basic/extended/all optimisation levels, preserving two intra-op
+threads, one inter-op thread and sequential CPU execution. Identical float graphs
+are deduplicated; both source-report hashes remain recorded. Non-training pixels
+and the stress suite are not opened. Original weights, fits and budgets remain
+unchanged. Tests corrupt every non-training image to demonstrate isolation.
+
+A separate diagnostic copy exposes the feature tensor entering the head. Its
+features are compared to saved Python backbone execution, and the saved Python
+head runs on those features to measure induced head error. A float64 affine
+coefficient-weighted bound is reported alongside the actual float32 head error
+and remaining runtime/head discrepancy. Instrumentation can affect optimisation:
+both graphs run independently and any original/instrumented logit difference is
+reported. Instrumented graphs have an extra output and fail the strict deployment
+interface; they carry a **PLACEHOLDER diagnostic, never bundle** metadata notice.
+
+Aggregate JSON is written to ignored output and a new `ml/reports/` target;
+per-component diagnostics and graph copies stay ignored. Command exit 0 means
+diagnostic evidence was generated, not parity acceptance. The top-level status
+is always **DIAGNOSTIC ONLY**; original-graph training parity keeps all failures.
+
+### Observed diagnostic results — 2026-10-09 UTC
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-diagnostics1.json): 152 original
+training components, three distinct original graphs × four runtime profiles.
+The frozen evaluation images/stress inputs were not used. Every profile fails.
+
+| Original graph / profile | Max raw error | Max probability error | Threshold flips |
+| --- | ---: | ---: | ---: |
+| Float / all | 0.000323296 | 0.00000411753 | 0 |
+| Float / disabled, basic, extended (each) | 0.000365257 | 0.00000465196 | 0 |
+| INT8 per tensor / all four (each) | 59.860615 | 0.644490 | 32 |
+| INT8 per channel / all four (each) | 82.789173 | 0.787463 | 36 |
+
+The affine head has 1,024 features, minimum scale 0.0047290567, maximum effective
+absolute coefficient 59.6626235 and coefficient L1 sum 1,362.464654. Float/all
+maximum feature error 0.0000212193 induces maximum saved-Python-head error
+0.000322342; the remaining runtime/head discrepancy is at most 0.0000114441.
+These maxima can belong to different components and must not be added as an
+exact decomposition of the worst case. The evidence points mainly to feature
+drift amplified by the head; it does not identify which backbone operator causes
+it. Across all profiles/graphs, original/instrumented logit difference is exactly
+zero on these inputs; instrumentation equivalence beyond them remains unverified.
+
+Per-tensor/channel maximum feature errors are 4.693677/4.346828. Running the
+saved Python head on those features produces maximum errors 159.276985/132.302427;
+remaining runtime/head discrepancies reach 104.171941/57.480897. Both feature
+and head paths need attention; optimisation settings alone do not solve INT8 drift.
+No new quantisation fit, export acceptance or deployment selection was made.
+
 ## Remaining M4 work
 
-Diagnose float graph/runtime rounding and INT8 activation/weight drift using
-training-only operator diagnostics. Record graph/runtime changes before running
-them; retain every failure and fixed budgets. A generated toy model exercises the
-export/runtime path in tests; it cannot substitute for the selected baseline's
-acceptance. No passing deployable model, runtime-metadata package or M4 review
-request yet. Android runtime/ABI/decode and device performance remain M5–M8 work.
+Declare and investigate an export preserving the saved backbone's 34 eval-mode
+BatchNorm2d operations: the retained float graph has none, following export-time
+folding. Verify actual graph node presence and prevent runtime re-fusion. This
+is a causal hypothesis, not an observed fix. Use training-only parity first;
+decide precision/quantised operator scope from training evidence before the next
+frozen evaluation. Keep every failure, original fits/inputs and ADR-011 budgets.
+The generated toy model remains diagnostic only. No passing deployment artifact,
+runtime-metadata package or M4 review request exists. Android runtime/ABI/decode
+and device performance remain M5–M8 work.
 
 ## Open questions
 

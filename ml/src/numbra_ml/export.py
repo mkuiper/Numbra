@@ -33,6 +33,12 @@ OUTPUT_NAME = 'raw_logit'
 INPUT_SHAPE = (1, 3, 224, 224)
 MAX_MODEL_BYTES = 20_000_000
 ATTEMPTS = ('minmax-per-tensor', 'minmax-per-channel')
+OPTIMISATION_LEVELS = {
+    'disabled': ort.GraphOptimizationLevel.ORT_DISABLE_ALL,
+    'basic': ort.GraphOptimizationLevel.ORT_ENABLE_BASIC,
+    'extended': ort.GraphOptimizationLevel.ORT_ENABLE_EXTENDED,
+    'all': ort.GraphOptimizationLevel.ORT_ENABLE_ALL,
+}
 
 
 @contextmanager
@@ -150,11 +156,19 @@ def graph_report(path):
             'warning': 'QDQ graph inspection; not proof of all-integer execution or Android support'}
 
 
-def runtime(path):
+def session_options(optimisation='all'):
+    if optimisation not in OPTIMISATION_LEVELS:
+        raise ValueError('unknown predeclared runtime optimisation level')
     options = ort.SessionOptions()
     options.intra_op_num_threads = 2
     options.inter_op_num_threads = 1
     options.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
+    options.graph_optimization_level = OPTIMISATION_LEVELS[optimisation]
+    return options
+
+
+def runtime(path, *, optimisation='all'):
+    options = session_options(optimisation)
     session = ort.InferenceSession(str(path), sess_options=options, providers=['CPUExecutionProvider'])
     inputs, outputs = session.get_inputs(), session.get_outputs()
     if (len(inputs) != 1 or inputs[0].name != INPUT_NAME or inputs[0].type != 'tensor(float)'

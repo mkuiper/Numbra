@@ -191,6 +191,25 @@ used library defaults before this confinement was added. No unrelated files
 manually modified. Firecrawl still has zero credits; official documentation read
 through the prior labelled web-tool workaround without credentials/auth changes.
 
+## M4 training-only diagnostics — observed 2026-10-09 UTC
+
+No toolchain/dependency installation, checkpoint or dataset acquisition.
+The existing 42-package hash-locked environment ran:
+
+```bash
+ml/.venv/bin/python -m pytest ml/tests/test_export_diagnostics.py -q
+ml/.venv/bin/python -m numbra_ml.export_diagnostics --output data/exports/PLACEHOLDER-m4-diagnostics1
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+Observed diagnostic subset: 8 passed in 5.92s. Diagnostic command exit 0 produced
+**DIAGNOSTIC ONLY** evidence; all original-graph training profiles fail parity.
+Full check: 312 ML tests passed in 35.90s, 18 legacy-export deprecation warnings;
+Android skipped, RESULT PASS. Root checks: 6 passed in 0.062s. Graph copies,
+per-component diagnostics and library artifacts stay under ignored data/.
+See [ML-EXPORT.md](ML-EXPORT.md); no M4 completion or APK evidence.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?
