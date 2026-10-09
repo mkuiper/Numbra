@@ -710,14 +710,59 @@ unchanged production arithmetic/budgets. Corrupted constant bits/types, Casts,
 Mul order, alias cycles, omitted layers/profiles, stale prior evidence and
 rehashed ordered details must still fail. Original evidence remains unchanged.
 
+## ADR-023 remaining-operator preflight (no baseline inference)
+
+[ADR-023](../decisions/ADR-023-remaining-operator-replay.md) declares two stages:
+complete static scope and tested isolated primitives, followed by complete native/
+tapped training replay. The first stage is implemented in
+`numbra_ml.export_remaining`; **the second stage is still unimplemented**.
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_remaining \
+  --output data/exports/PLACEHOLDER-m4-remaining-preflight1
+```
+
+The command refuses an existing output or aggregate report. Use a new
+PLACEHOLDER name for a fresh reconstruction. No image decoding, model forward
+call or baseline ONNX runtime session occurs. Observed execution additionally
+blocked all three paths with raising guards. Saved weights/fits, prior graphs,
+preparation/ordered training scope and dependency/code provenance are verified.
+
+[Preflight evidence](../ml/reports/PLACEHOLDER-m4-remaining-preflight1.json)
+accounts for every 160 serialized preserved-graph node: 87 saved Conv/BN controls,
+72 remaining operators and one Constant. All 212 initializers are checked against
+the unchanged rounded graph. The complete remaining scope is 19 HardSwish,
+14 Relu, nine each HardSigmoid/ReduceMean/Mul, six Add, and one each
+GlobalAveragePool/Flatten/Sub/Div/Gemm/Squeeze. Every remaining/control node is
+byte-identical across the two graphs; saved head constants are checked against
+native saved bits, including signed zero. Ordered positions, connectivity,
+static dtype/shapes, attributes and hashes are explicit. Independent complete
+no-inference reconstruction PASS means **static preflight only**, not parity.
+
+Generated-fixture tests exercise every isolated remaining primitive, both binary
+operands, broadcasting, repeated operands, negative squeeze axes, and exact
+serialized/runtime expressions. Disabled ORT adds unused domain imports and
+expands HardSwish into HardSigmoid/Mul even with optimisation disabled. Audits
+allow only that precise declared expression with alpha=float32(1/6), beta=0.5,
+unchanged connections and float32 boundaries; other rewrites fail. Native eager
+hard-swish rounding drift is retained as measured signed errors. Independent
+recipes are explicitly **not captured native model outputs**.
+
+Initial new tests exposed Identity-alias fixtures and unused imports; the next
+run isolated the HardSwish function expansion. These tooling errors were fixed
+in code and fixture constant resolution, with corruption regressions. Existing
+tests and ADR-011 budgets remain unchanged. Reports contain no baseline replay
+results or clinical claim; every failed export remains rejected.
+
 ## Remaining M4 work
 
-Optimisation profiles do not fix selected-baseline parity. Next predeclare a
-bounded, complete training-only same-input replay of the remaining activations,
-pooling and head boundaries, using saved/tapped inputs and actual runtime graphs.
-This must distinguish local arithmetic from propagation and preserve all Conv/BN
-controls; no assumption that residual error belongs solely to Conv. Do not keep
-rerunning the failed profiles or choose a favourable subset.
+Optimisation profiles do not fix selected-baseline parity. Next implement
+ADR-023's native boundary mapping, pre-mutation capture, original/tapped logits
+and full training-only replay on both unchanged graphs. Use every ordered
+training component and complete remaining scope; distinguish local arithmetic
+from propagation, including both binary operands, and preserve all Conv/BN
+controls and exact prior disabled logits. Do not keep rerunning the failed
+profiles or choose a favourable subset.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

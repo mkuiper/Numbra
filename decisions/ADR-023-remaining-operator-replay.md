@@ -80,6 +80,24 @@ they cannot authorise a custom-domain computation. This is a runtime expression
 audit, not an arithmetic-equivalence claim against native PyTorch. Preserve all
 measured rounding differences. No baseline inference has occurred.
 
+## Observed first stage — 2026-10-10 UTC
+
+[Static preflight](../ml/reports/PLACEHOLDER-m4-remaining-preflight1.json) accounts
+for all 160 preserved-graph nodes: 87 Conv/BN controls, 72 remaining replay nodes
+and one Constant; all 212 initializer records. Remaining/control serialized
+nodes and original constants are unchanged in the rounded graph. Saved head
+bits, shapes/dtypes, attributes, connectivity, complete ordered training scope
+and saved/prior/source/dependency provenance pass independent reconstruction.
+Actual execution blocked image decoding, model forward and baseline ORT sessions
+with raising guards. No baseline inference or new parity result occurred.
+
+All 66 generated-fixture tests pass, including full artifact/preparation/prior
+reconstruction with unreadable images and inference blocked. Native HardSwish
+versus its ORT function expansion has nonzero measured local drift on the fixed
+generated fixture; no baseline extrapolation or equivalence claim. Stage two's
+native capture and complete training replay remain unimplemented. M4 remains
+incomplete and all failed graphs remain rejected.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?
