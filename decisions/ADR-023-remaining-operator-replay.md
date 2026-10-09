@@ -221,6 +221,42 @@ No existing ordered training image, selected saved-model forward, new fit, froze
 evaluation, mobile execution or accepted export occurred. M4 stays incomplete.
 Test results are recorded in JOURNAL.
 
+## Guarded runner provenance rule and follow-through — 2026-10-09 UTC
+
+The complete runner now connects verified saved/preparation/retained/source
+scope, native capture, both whole runtime pairs, every isolated/control
+expression and ordered persistence. All serialized and actual runtime expressions
+are independently reconstructed before the first training decode. The final
+read-only audit reconstructs complete context, runtime records, ordered arrays,
+metrics, fixed-budget parity and exact original ADR-022 disabled logit bits.
+Incomplete runs do not publish a completed report. No profile or formula changes.
+
+Historical ADR-022 reports predate the new runner code. Keep their recorded
+source fields intact and require an explicit full local commit whose complete
+Python source-file map and tree hash exactly equal those fields. The default
+prior-report auditor still requires current code; only an explicitly supplied
+snapshot enables historical source binding. Live installed dependencies and both
+lock hashes remain exact requirements. Recorded checkout commit/dirty flags
+are validated independently; a later commit can contain the recorded dirty
+source. This establishes local source provenance, never historical inference
+authentication or equivalence between changed source versions. Current runner
+source/hardware provenance remains independently recorded and reconstructed.
+
+Generated-only full pipeline and corruption suite: 32 tests PASS. Toy saved
+models/generated shapes exercise the complete runner and no-inference final
+audit; miniature residual/SE fixtures cover complete runtime record rebuilding.
+These are software fixtures, never selected M3 numerical evidence.
+
+[Selected static context](../ml/reports/PLACEHOLDER-m4-training-context1.json)
+reconstructed twice with decoding, forward calls and runtime session creation
+blocked: all 152 training components, unchanged saved state/fits/preprocessing,
+retained/source artifacts and complete ADR-022 report. Its historical source
+snapshot matches `808cc3393ccf1cce95c2feeef91e5a8608b481e4` exactly. No saved
+training image was decoded, selected-baseline forward run, new fit or parity
+measured. Full selected training replay remains the next step. M4 is incomplete;
+all failed exports remain rejected, selective QDQ/mobile compatibility unresolved.
+Full check outcomes are recorded in JOURNAL.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?

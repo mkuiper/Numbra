@@ -61,7 +61,9 @@ def save_graph(nodes, constants, shape, out_shape, source, path, name):
     model = helper.make_model(graph, opset_imports=list(source.opset_import), ir_version=source.ir_version)
     mark_diagnostic(model)
     onnx.checker.check_model(model, full_check=True)
-    onnx.save(model, path)
+    if path is not None:
+        onnx.save(model, path)
+    return model
 
 
 def promoted_conv_graph(module, shape, source, path):
@@ -110,7 +112,7 @@ def promoted_conv_graph(module, shape, source, path):
     save_graph(nodes, constants, shape, out_shape, source, path, 'promoted-stem-conv')
 
 
-def promoted_affine_graph(module, shape, formula, source, path):
+def promoted_affine_graph(module, shape, formula, source, path=None):
     if formula not in AFFINE_FORMULAS:
         raise ValueError('unknown promoted affine formula')
     constants = bn_constants(module, formula)
@@ -119,7 +121,7 @@ def promoted_affine_graph(module, shape, formula, source, path):
     nodes.extend([helper.make_node('Mul', ['double-x', 'double-alpha'], ['product']),
                   helper.make_node('Add', ['product', 'double-beta'], ['sum']),
                   helper.make_node('Cast', ['sum'], ['y'], to=onnx.TensorProto.FLOAT)])
-    save_graph(nodes, constants, shape, shape, source, path, f'promoted-{formula}')
+    return save_graph(nodes, constants, shape, shape, source, path, f'promoted-{formula}')
 
 
 def main(argv=None):

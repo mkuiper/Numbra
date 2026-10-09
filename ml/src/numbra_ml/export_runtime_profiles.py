@@ -17,6 +17,7 @@ from .evaluation import read_component_index
 from .export import INPUT_SHAPE, OPTIMISATION_LEVELS, aggregate_parity, component_input, export_environment, graph_report
 from .export_diagnostics import diagnose_profile, tap_features, verified_artifacts
 from .export_promoted_bn import PREFIX, constant_array
+from .export_provenance import audit_environment
 from .export_replay import verified_preserved
 from .export_rounded_bn import RECIPE, audit_rounded_report, audit_saved_coefficients
 from .parity import FLOAT_BUDGET, parity_report
@@ -138,7 +139,7 @@ def verified_prior(repo, prepared, run, experiments, source, prior, model, saved
 
 
 def audit_profile_report(repo, output, report, prepared, run, experiments, source, prior,
-                         *, backbone_factory=backbone_architecture):
+                         *, backbone_factory=backbone_architecture, source_commit=None):
     """Independent no-inference reconstruction of scope, provenance and evidence."""
     model, saved = load_reference(run, backbone_factory=backbone_factory)
     index = read_component_index(prepared / 'manifest.jsonl', prepared / 'preparation-report.json')
@@ -164,10 +165,10 @@ def audit_profile_report(repo, output, report, prepared, run, experiments, sourc
             or report['substitutions'] != old['substitutions']
             or set(report['artifacts']) != set(ARTIFACTS)):
         raise ValueError('runtime profiles protocol/model/provenance mismatch')
-    for key in ('source_files_sha256', 'source_tree_sha256', 'dependencies',
-                'dependency_lock_sha256', 'export_dependency_lock_sha256'):
-        if environment[key] != report['environment'][key]:
-            raise ValueError('runtime profiles source/dependency provenance mismatch')
+    try:
+        audit_environment(repo, report['environment'], environment, source_commit=source_commit)
+    except ValueError as exc:
+        raise ValueError('runtime profiles source/dependency provenance mismatch') from exc
     audit_saved_coefficients(model, preserved, report['substitutions'])
     detail_path = output / DETAILS
     if sha256(detail_path) != report['diagnostic_details_sha256']:

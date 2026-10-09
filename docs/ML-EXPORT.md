@@ -940,19 +940,35 @@ M3 forward was opened. Observed test results are in JOURNAL.
 
 ## Remaining M4 work
 
-Optimisation profiles do not fix selected-baseline parity. Next implement
-ADR-023's complete training runner using the implemented native mapping,
-pre-mutation capture, complete runtime expression audits and validated taps.
+Optimisation profiles do not fix selected-baseline parity. ADR-023's complete
+training runner now connects native mapping, pre-mutation capture, complete
+runtime expression audits, validated taps and ordered persistence.
 The supplied-tensor integration now includes both-origin isolated replay,
 original/captured native logits, both original/tapped runtime logits, complete
 remaining scope and every Conv/BN control. Ordered persistence, complete metric
 aggregate reconstruction and supplied exact prior-logit checks now have generated
-regressions. Next connect them to the guarded training-scope runner and complete
-independent saved/preparation/source/current-code/dependency/prior report and
-runtime-expression reconstruction. Before opening any existing training image,
-verify complete provenance, scope, graph audits and the evidence audit on
-generated fixtures. Then use every ordered training
-component with unchanged reference, fits, preprocessing and budgets. Do not
+regressions. The new independent setup auditor reconstructs every serialized
+whole/tapped/isolated/control graph from the saved parameters and fixed
+expressions, verifies exact file scope, and audits all actual runtime expressions
+without creating sessions or running observations. Generated full-pipeline tests
+retain both graphs and every ordered training component; additional miniature
+residual/SE fixtures reject changed constants, connections, records, extra files
+and symlinks. These fixtures use invented data and toy/random weights.
+
+[Selected static context](../ml/reports/PLACEHOLDER-m4-training-context1.json)
+reconstructs all 152 ordered training components, saved/preparation/retained/
+source provenance and the complete ADR-022 report twice, with image decoding,
+native forward and runtime session creation blocked. No selected training image
+is decoded and no new selected-baseline parity is measured by that check.
+Historical ADR-022 source fields bind exactly to local commit
+`808cc3393ccf1cce95c2feeef91e5a8608b481e4`; all current dependency pins remain
+required, and all current runner source/hardware fields remain recorded. No
+historical report field is overwritten. This is provenance reconstruction of
+recorded observations, never authentication of past numerical execution.
+
+Next execute the complete guarded runner on every ordered training component
+with unchanged reference, fits, preprocessing and budgets, then independently
+audit the saved report without decoding or inference. Do not
 keep rerunning the failed profiles or choose a favourable subset.
 
 An explicit selective static QDQ scope must still be declared from training

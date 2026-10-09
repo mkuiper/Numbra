@@ -1389,3 +1389,50 @@ publication or push.
 - Final documentation/iteration-record verification: repository contracts six
   PASS (0.081s), git diff --check clean. Committing the logical persistence step
   and iteration records as M4: persist complete ordered replay evidence.
+
+## 2026-10-09T18:18:06Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent M4 review folder,
+  AGENTS and relevant ADRs. No new harness action; M4 remains current.
+- Implemented ADR-023 guarded complete training runner connecting verified
+  saved/preparation/retained/source/current dependency and ADR-022 prior report
+  context, complete native mapping/runtime setup, OrderedEvidence and read-only
+  final audit. Actual setup is reconstructed before the first image decode;
+  incomplete runs have no completed report. No selected-baseline inference yet.
+- Independently reconstruct every serialized whole/tapped/isolated/control graph
+  from saved parameters and fixed expressions, then every actual disabled runtime
+  expression, constant, boundary, record and exact file/directory scope. Factories
+  can return the same graph without writing; existing inference formulas unchanged.
+- Historical ADR-022 source hashes differ from newly implemented current code.
+  Added explicit exact full local commit snapshot binding while retaining live
+  pinned dependencies/lock hashes, default current-code checks and all recorded
+  fields. Source snapshot 808cc3393ccf1cce95c2feeef91e5a8608b481e4 matches completely.
+  This verifies local source provenance, never past numerical authenticity. Recorded
+  the bounded rule in ADR-023 and HUMAN-QUEUE; no arithmetic/budget/profile changes.
+- New generated full-pipeline/corruption suite: 32 PASS, 20 warnings, 29.37s on
+  first run. Covers toy saved-model training-only scope with undecodable frozen
+  images, read-only audits with forward/recipe/decode/session guards, stale prior
+  rejection before output/image/session, setup-before-decode, partial interruption,
+  exact fixed budgets, private observations, rehashed report/graph/constant/
+  operand/record/scope/symlink corruption and exact historical source binding.
+  No existing test weakened/skipped/deleted and no failed attempt to reconcile.
+- Selected static context independently reconstructed twice with native forward,
+  image decoding and runtime session creation blocked: PASS for all 152 ordered
+  training components and saved/preparation/retained/source/current dependencies/
+  complete ADR-022 prior evidence. Aggregate tracked as
+  ml/reports/PLACEHOLDER-m4-training-context1.json; no individual IDs/logits/weights.
+  No selected training image decoded or saved M3 forward call performed.
+- bash scripts/check.sh: exit 0, 755 ML PASS, 544 warnings, 171.03s. Android SKIPPED,
+  RESULT PASS; no APK produced. Evidence under ignored data/exports:
+  PLACEHOLDER-m4-runner-tests1.log, PLACEHOLDER-m4-runner-check.log,
+  PLACEHOLDER-m4-runner-static-check.log. Root contracts before final records:
+  six PASS, 0.074s. Final root/whitespace verification follows below.
+- Updated README, ML-EXPORT, ADR-023, HUMAN-QUEUE, STATUS and NEXT_ACTION=CONTINUE.
+  Next execute all selected training inputs with exact prior bits and independent
+  no-inference complete audit, then predeclare selective QDQ scope from complete
+  evidence. M4 remains blocked on accepted parity/mobile support; no M5 work.
+- No protected edits, reviewer/check/gate files, review.sh, remote action/push,
+  publishing, new data/toolchain acquisition, selected inference/retraining,
+  quantisation fitting, frozen evaluation, accepted export or clinical claims.
+- Final records verified: six root contract tests PASS (0.064s),
+  git diff --check clean; only allowed code/documentation/aggregate files changed.

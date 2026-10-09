@@ -162,8 +162,26 @@ explicit ordered component/operator trees, partial-run rejection, and independen
 streaming reconstruction of every row metric, full aggregates and fixed-budget
 original-graph parity. It checks original native/runtime logit bits against
 supplied ADR-022 disabled observations. Generated two-component tests exercise
-these checks without saved M3 inference. The guarded training-scope runner and
-complete saved/preparation/source/prior provenance integration remain unfinished;
-the persistence API requires verified prior observations from its caller. There
-is no saved-baseline replay CLI or new accepted export.
+these checks without saved M3 inference. `export_remaining_run` now connects
+complete static saved/preparation/retained/source checks, the ADR-022 report
+audit, actual runtime setup reconstruction and ordered observations. It audits
+every expression before decoding the first ordered training image and streams
+the full final evidence audit without inference. Generated pipeline tests cover
+these guards; the selected baseline has only a static context check so far.
+
+The guarded training command is:
+
+```bash
+python -m numbra_ml.export_remaining_run \
+  --profile-source-commit 808cc3393ccf1cce95c2feeef91e5a8608b481e4 \
+  --output data/exports/PLACEHOLDER-m4-remaining-training1
+```
+
+The explicit source commit must exactly match every historical ADR-022 source
+file hash and its complete source-tree hash. Dependencies remain checked against
+the current installed pins. This preserves historical report bytes and all
+original logits; it does not authenticate historical inference. Output must be
+new, and all graphs/tensors/individual observations remain ignored. Exit 0 means
+complete diagnostic evidence, including parity failures, rather than M4 acceptance.
+No selected-baseline training replay has been executed or new export accepted.
 See [the export document](../docs/ML-EXPORT.md) for scope and evidence limits.

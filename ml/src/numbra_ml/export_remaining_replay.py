@@ -8,6 +8,7 @@ The independent evidence reconstruction performs no model/operator inference.
 import copy
 from collections import Counter
 import hashlib
+from pathlib import Path
 
 import numpy as np
 import onnx
@@ -25,7 +26,8 @@ from .export_precision import (AFFINE_FORMULAS, promoted_affine_graph,
                                python_promoted_affine)
 from .export_promoted_bn import PREFIX, expression_nodes
 from .export_remaining import constant, recipe, tensor_specs
-from .export_remaining_native import capture_native, native_plan, same_bits
+from .export_remaining_native import capture_native, native_plan, same_bits, tap_complete_graph
+from .export_provenance import checked_file
 from .export_remaining_runtime import CompleteRuntime, audit_complete_runtime, specs
 from .export_replay import (FORMULAS, double_formula, formula_graph,
                             python_formula, python_operator)
@@ -39,6 +41,84 @@ CONTROL_KEYS = ('native_onnx', 'float64_formula',
                 *('formula_' + f + '_' + e for f in FORMULAS for e in ('python', 'onnx')),
                 *('promoted_' + f + '_' + e for f in AFFINE_FORMULAS for e in ('python', 'onnx')),
                 *('rounding_' + r + '_' + e for r in RECIPES for e in ('numpy', 'torch')))
+
+
+def audit_replay_setup(model, source, rounded, output, records):
+    """Rebuild every saved expression and runtime record without any sessions.
+
+    The graph factories construct constants/expressions only. No forward call,
+    operator recipe on observations, image decoding, or evidence writes occur.
+    Exact serialized binding precedes bounded runtime expression auditing.
+    """
+    plan = native_plan(model, source, rounded)
+    expected = {'notice': NOTICE, 'rounded_saved_binding': audit_rounded_binding(model, source, rounded),
+                'whole_graphs': {}, 'operators': {},
+                'operator_counts': dict(Counter(r['operator'] for r in plan['nodes']))}
+    files = set()
+
+    def graph_file(relative, graph):
+        files.add(relative)
+        path = checked_file(output, relative)
+        actual = onnx.load(path, load_external_data=False)
+        if actual.SerializeToString() != graph.SerializeToString():
+            raise ValueError('complete setup serialized saved expression mismatch')
+        return path
+
+    def isolated(graph, relative):
+        graph = copy.deepcopy(graph)
+        mark_diagnostic(graph)
+        path = graph_file(relative + '/PLACEHOLDER-expression.onnx', graph)
+        runtime_relative = relative + '/PLACEHOLDER-runtime.onnx'
+        files.add(runtime_relative)
+        runtime_path = checked_file(output, runtime_relative)
+        return {'notice': NOTICE, 'serialized': graph_report(path), 'runtime': graph_report(runtime_path),
+                'audit': audit_complete_runtime(graph, onnx.load(runtime_path, load_external_data=False))}
+
+    for kind, graph in zip(KINDS, (source, rounded)):
+        tapped, _ = tap_complete_graph(graph, plan)
+        expected['whole_graphs'][kind] = {}
+        for tag, original in (('original', graph), ('tapped', tapped)):
+            graph_file(f'PLACEHOLDER-{kind}/PLACEHOLDER-{tag}.onnx', original)
+            relative = f'PLACEHOLDER-{kind}/PLACEHOLDER-{tag}-runtime.onnx'
+            files.add(relative)
+            expected['whole_graphs'][kind][tag] = audit_complete_runtime(original,
+                onnx.load(checked_file(output, relative), load_external_data=False))
+    nodes = {node.name: node for node in source.graph.node}
+    modules = {node.name: module for _, module, node in complete_operators(model, source)}
+    for position, record in enumerate(plan['nodes']):
+        node = nodes[record['name']]
+        kernel = isolated(explicit_graph(source, node, record), f'PLACEHOLDER-operator-{position}')
+        graphs = {'preserved': kernel, 'rounded': kernel}
+        if node.op_type == 'BatchNormalization':
+            inferred = onnx.shape_inference.infer_shapes(rounded, strict_mode=True, data_prop=True)
+            extracted = onnx.utils.Extractor(inferred).extract_model([node.input[0]], [node.output[0]])
+            extracted.ir_version = source.ir_version
+            graphs['rounded'] = isolated(extracted, f'PLACEHOLDER-rounded-bn-{position}')
+            module, shape = modules[node.name], record['boundaries'][node.input[0]]['shape']
+            controls = {}
+            for label, formulas, factory in (('formula', FORMULAS, formula_graph),
+                                            ('promoted', AFFINE_FORMULAS, promoted_affine_graph)):
+                for formula in formulas:
+                    graph = factory(module, shape, formula, source)
+                    graph_file(f'PLACEHOLDER-{position}-{label}-{formula}.onnx', graph)
+                    controls[label + '_' + formula] = isolated(graph, f'PLACEHOLDER-{position}-{label}-{formula}')
+            graphs['controls'] = controls
+            graphs['rounding_coefficients'] = coefficient_records(module, coefficient_cache(module))
+        expected['operators'][node.name] = graphs
+    # Recursively check exact directory/file scope and reject symlinks, including
+    # empty unexpected directories. All output paths come from fixed templates.
+    directories = {str(Path(name).parent) for name in files if str(Path(name).parent) != '.'}
+    observed_files, observed_directories = set(), set()
+    for path in output.rglob('*'):
+        if path.is_symlink():
+            raise ValueError('complete setup unsafe evidence path')
+        relative = str(path.relative_to(output))
+        (observed_directories if path.is_dir() else observed_files).add(relative)
+    if (observed_files != files or observed_directories != directories or records != expected):
+        raise ValueError('complete setup scope/record reconstruction mismatch')
+    return {'notice': NOTICE, 'status': 'PASS', 'serialized_and_runtime_graphs': len(files),
+            'operators': len(plan['nodes']), 'complete_saved_expressions_constants_and_records': True,
+            'baseline_inference': False, 'historical_inference_authentication': False}
 
 
 def validate(value, spec):
