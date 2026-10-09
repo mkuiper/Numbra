@@ -8,3 +8,4 @@ Written by scripts/autopilot.sh. The Builder reads this first each iteration.
 - 2026-10-09T12:48:54Z — Milestone M0 closed (PASS WITH CHANGES). Address cheap non-blocking items, then start the next milestone.
 - 2026-10-09T13:08:06Z — Milestone M1 closed (PASS WITH CHANGES). Address cheap non-blocking items, then start the next milestone.
 - 2026-10-09T13:26:14Z — Milestone M2 closed (PASS WITH CHANGES). Address cheap non-blocking items, then start the next milestone.
+- 2026-10-09T14:16:08Z — Milestone M3 closed (PASS WITH CHANGES). Address cheap non-blocking items, then start the next milestone.
