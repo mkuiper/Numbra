@@ -1,7 +1,30 @@
 # M3 HANDOFF — CPU transfer baseline, always PLACEHOLDER
 
 Date: 2026-10-09 UTC
-Request: REVIEW M3. No M3 review/gate yet; harness owns tests of record/review.
+M3 gate closed PASS WITH CHANGES by harness 2026-10-09T14:16:08Z.
+Review follow-through is recorded in RESPONSE-1.md; no M3 rereview requested.
+
+## Post-gate follow-through
+
+Training orchestration now has an end-to-end toy-backbone test of record with
+saved-model verification and tamper/overwrite checks. `python -m numbra_ml.verify`
+provides the reproducible Python reference previously only attested manually.
+Observed on original saved baseline/reproduction/default: 768/768/384 components,
+max raw-logit and calibrated probability errors **0**, frozen-threshold flips **0**.
+No pretrained checkpoint/network needed for full bundled-model reload.
+
+Aggregate reports/cards now use evaluation 1.1.0: explicit operating-point evidence,
+confusion/exact intervals/fallback markers, pre-calibration threshold fields null,
+source/colour small-cell flags and AUC/calibration/bootstrap suppression below
+20/class, identical bootstrap cohorts reuse one seed/result. Reporting-only rebuild
+retains original training provenance/fits and records separate reporting hashes.
+Original ignored training run JSON remains historical. Real-data model-selection
+split and M4 raw/probability/decision-flip checks are recorded in ADR-010.
+
+Observed post-gate check: **258 ML tests PASS in 27.36s**, Android SKIPPED,
+RESULT PASS. Root repository suite: **5 PASS** (Builder-attested only).
+Original acceptance/training evidence below remains historical M3 evidence;
+updated tests/reporting code is later than its fd93e34 training source revision.
 
 ## Acceptance evidence
 

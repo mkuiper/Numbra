@@ -72,22 +72,47 @@ def add_bootstrap(report: dict, predictions, *, seed: int, replicates: int) -> N
         cohorts.update({f"colour:{colour}": tuple(item for item in subset if item.colour_stratum == colour)
                         for colour in sorted({item.colour_stratum for item in subset})})
         result = {}
+        cached = {}
         for name, values in cohorts.items():
+            ids = tuple(sorted(item.component_id for item in values))
             derived = int.from_bytes(hashlib.sha256(f"{seed}:{split}:{name}".encode()).digest()[:4], "big")
-            result[name] = bootstrap_intervals(values, temp, threshold, seed=derived, replicates=replicates)
+            if name != "overall" and min(sum(item.target == target for item in values) for target in (0, 1)) < 20:
+                result[name] = {"notice": PLACEHOLDER_NOTICE, "status": "suppressed_small_cell",
+                                "minimum_per_class": 20, "n": len(values), "metrics": None}
+            elif ids in cached:
+                result[name] = cached[ids]
+                continue
+            else:
+                result[name] = bootstrap_intervals(values, temp, threshold, seed=derived, replicates=replicates)
+                cached[ids] = result[name]
         report["splits"][split]["bootstrap"] = result
     report["bootstrap_protocol"] = {"seed": seed, "replicates": replicates,
                                     "cohort_seed": "first four SHA256 bytes of seed:split:cohort, big endian",
-                                    "scope": "test and held_out, primary frozen endpoint, overlapping source/colour cohorts"}
+                                    "scope": "test and held_out, primary frozen endpoint, overlapping source/colour cohorts",
+                                    "identical_cohorts": "reuse first cohort's result and seed",
+                                    "subgroup_minimum_per_class": 20}
 
 
 def model_card(report: dict, name: str) -> str:
     point = report["primary_operating_point"]
     train = report["training"]
     rows = []
+    def number(value):
+        return "unavailable" if value is None else f"{value:.4f}"
+    def interval(value):
+        return "unavailable" if value is None else f"[{number(value[0])}, {number(value[1])}]"
+    fallback = point.get("fallback") or "none"
+    below_target = []
     for split in ("test", "held_out"):
         m = report["splits"][split]["primary"]
-        rows.append(f"| {split} | {m['n']} | {m['sensitivity']} | {m['specificity']} | {m['auc']} | {m['brier']} |")
+        marker = "refer-all fallback" if point.get("fallback") else "frozen selected point"
+        rows.append(f"| {split} ({marker}) | {m['n']} | {m['tp']}/{m['fn']}/{m['tn']}/{m['fp']} | "
+                    f"{number(m['sensitivity'])} {interval(m['sensitivity_interval_95'])} | "
+                    f"{number(m['specificity'])} {interval(m['specificity_interval_95'])} | {number(m['auc'])} | {number(m['brier'])} |")
+        if m['sensitivity'] is not None and m['sensitivity'] < point['target']:
+            below_target.append(split)
+    target_note = (f"**Observed sensitivity below the illustrative target in: {', '.join(below_target)}.**"
+                   if below_target else "Observed synthetic sensitivity does not guarantee the target on independent data.")
     return f"""# PLACEHOLDER model card — {name}
 
 **{PLACEHOLDER_NOTICE}.** Intended use: software pipeline/offline integration
@@ -106,24 +131,27 @@ Training components: {train['components']}; scaling and head fitting use train
 only. Calibration and threshold selection use separate frozen partitions.
 No early stopping, hyperparameter search or test/source-C tuning.
 
-Primary endpoint status: **{point['status']}**; threshold {point['threshold']},
+Primary endpoint status: **{point['status']}**; evidence **{point['target_evidence']}**;
+threshold {number(point['threshold'])} (full precision in JSON),
 inclusive score >= threshold. Target sensitivity 0.95 is illustrative, never a
-clinical promise. Fallback: {point.get('fallback')}. Calibration status:
-{report['calibration']['status']}; temperature {report['calibration']['temperature']},
-boundary {report['calibration'].get('boundary')}. Scores are not calibrated
+clinical promise. Fallback: {fallback}. {target_note} Calibration status:
+{report['calibration']['status']}; temperature {number(report['calibration']['temperature'])},
+boundary {report['calibration'].get('boundary') or 'none'}. Scores are not calibrated
 clinical risk. JSON includes secondary specificity endpoint, exact binomial
 intervals, reliability bins, ECE, Brier, pre-calibration metrics and component
 bootstrap percentile intervals conditional on the fixed model/operating point.
 
-| PLACEHOLDER partition | Components | Synthetic sensitivity | Synthetic specificity | AUC | Brier |
-| --- | ---: | ---: | ---: | ---: | ---: |
+| PLACEHOLDER partition | Components | TP/FN/TN/FP | Synthetic sensitivity [95% exact interval] | Synthetic specificity [95% exact interval] | AUC | Brier |
+| --- | ---: | --- | --- | --- | ---: | ---: |
 {chr(10).join(rows)}
 
 **Single held-out source (one leave-one-source-out fold):**
 {report['source_fold']['held_out_source']}. No source rotation or independent
 clinical external validation. Per-source and **synthetic colour strata** results
 are in JSON; they overlap and cannot establish skin-tone fairness. Human skin-tone
-labels are absent. Small strata/single-class bootstrap draws have explicit valid
+labels are absent. Source/colour cells below 20/class suppress AUC, calibration bins
+and bootstrap; this is an engineering display guard, not a real-data privacy policy.
+Small strata/single-class bootstrap draws have explicit valid
 counts or unavailable metrics. Calibration-fit metrics are in-sample; threshold-
 selection intervals are descriptive after search. Bootstrap excludes training,
 calibration and threshold-fitting uncertainty.
@@ -169,8 +197,13 @@ def write_reports(report: dict, directory: Path, name: str) -> None:
     paths[1].write_text(model_card(report, name), encoding="utf-8")
 
 
+def verified_backbone(checkpoint: Path):
+    return load_backbone(checkpoint), verify_checkpoint(checkpoint)
+
+
 def train_run(repo: Path, prepared: Path, checkpoint: Path, output: Path, *,
-              name: str, config: TrainingConfig, bootstrap_replicates: int = 1000) -> dict:
+              name: str, config: TrainingConfig, bootstrap_replicates: int = 1000,
+              backbone_loader=verified_backbone) -> dict:
     started = time.monotonic()
     prepared, checkpoint, output = [ignored_path(repo, path) for path in (prepared, checkpoint, output)]
     reports = repo / "ml/reports"
@@ -187,9 +220,8 @@ def train_run(repo: Path, prepared: Path, checkpoint: Path, output: Path, *,
     index = read_component_index(manifest, preparation)
     preparation_digest = sha256(preparation)
     env = environment(repo)
-    weight_evidence = verify_checkpoint(checkpoint)
     initialise(config)
-    backbone = load_backbone(checkpoint)
+    backbone, weight_evidence = backbone_loader(checkpoint)
     backbone_digest = tensor_hash(backbone.state_dict())
     features = extract_features(index, prepared, backbone, batch_size=config.batch_size)
     head, training = fit_head(index, features, config)
@@ -237,10 +269,13 @@ def main(argv=None) -> int:
     parser.add_argument("--epochs", type=int, default=300)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--threads", type=int, default=2)
+    parser.add_argument("--learning-rate", type=float, default=0.03)
+    parser.add_argument("--weight-decay", type=float, default=0.01)
     parser.add_argument("--bootstrap-replicates", type=int, default=1000)
     args = parser.parse_args(argv)
     try:
-        config = TrainingConfig(seed=args.seed, epochs=args.epochs, batch_size=args.batch_size, threads=args.threads)
+        config = TrainingConfig(seed=args.seed, epochs=args.epochs, batch_size=args.batch_size, threads=args.threads,
+                                learning_rate=args.learning_rate, weight_decay=args.weight_decay)
         report = train_run(repository_root(), args.prepared, args.checkpoint, args.output,
                            name=args.report_name, config=config, bootstrap_replicates=args.bootstrap_replicates)
     except (ValueError, OSError, RuntimeError) as exc:

@@ -94,6 +94,27 @@ Revisit if independent licensed real data becomes available, a fit hits numerica
 bounds, conversion fails, or device tests require a different implementation.
 Never tune frozen test/source-C inputs to improve a report or silently widen parity.
 
+## M3 review follow-through — amended 2026-10-09
+
+Real-data experiments require a dedicated model-selection split or nested
+cross-validation **before** calibration/threshold selection. The fixed synthetic
+exercise lacks this split and cannot justify hyperparameter tuning or deployment.
+Retain its overfit loss/high temperature and below-target held-out performance.
+
+Evaluation version 1.1.0 removes pre-calibration confusion/sensitivity/specificity
+because its threshold was fitted after calibration. Source/colour cells below
+20/class flag the small cell and suppress AUC, calibration summaries/bins and
+bootstrap. Counts and exact sensitivity/specificity intervals remain descriptive.
+This display guard is not a patient-data privacy policy: future real-data releases
+require independent disclosure control, including sparse bins in larger cohorts.
+Identical overall/source bootstrap cohorts reuse one result/seed. Archived report
+rebuilds retain original training provenance and name reporting-only source hashes.
+
+M4 must test raw-logit errors **and** calibrated probabilities, count every flip
+at the full-precision frozen threshold, and separately assess conservative margin
+referrals. The M0 proposal of 0.02 probability error alone is superseded; exact
+float/quantised budgets must be fixed in M4's ADR before export experiments.
+
 ## Open questions
 
 - Do humans accept fixed training defaults, letterbox geometry and conditional bootstrap?

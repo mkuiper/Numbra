@@ -41,6 +41,12 @@ pixel transform. These engineering defaults were declared before running the
 baseline, not optimised for observed test scores. Overrides are explicit and
 recorded. No data preparation or acquisition is hidden inside training.
 
+Learning-rate and decay overrides are available as `--learning-rate` and
+`--weight-decay`, alongside the documented epoch/seed/batch/thread switches.
+One-command training assumes the environment, checkpoint and prepared fixture
+already exist. A clean checkout requires the explicit setup/acquisition/preparation
+commands above; there is no clean-checkout wrapper.
+
 ## Outputs and provenance
 
 - Ignored data/models/PLACEHOLDER-m3-baseline/: combined backbone/scaling/head
@@ -57,6 +63,19 @@ Source C is one predeclared held-out source (one leave-one-source-out fold); no
 rotation. Below count guards, calibration/selection remain unavailable and the
 primary threshold is an **unselected refer-all** zero, not a selected target.
 No clinical interpretation of synthetic sensitivity/specificity/AUC follows.
+
+M3 REVIEW-1 reporting revision: archived JSON/card names above now contain
+evaluation version 1.1.0. These are reporting-only rebuilds from the checksum-
+verified saved prediction files through `evaluation_report`, `add_bootstrap` and
+`model_card`; no retraining, input or fitted temperature/threshold changes.
+`reporting_revision` records original report hashes and generating source hashes;
+`provenance` still records the original training run, not the later reporting code.
+Pre-calibration threshold metrics are null. Source/colour cells below 20/class
+flag the small cell and suppress AUC, calibration summaries/bins and bootstrap;
+this is an engineering display guard, not real-data privacy protection. Identical
+bootstrap cohorts reuse their first seed/result. Cards include empirical evidence,
+confusion counts, exact intervals and explicit per-row refer-all fallback markers.
+The ignored original run JSON remains intact as historical training evidence.
 
 Reports retain manifest/preparation/checkpoint/lock/source-file hashes, actual
 installed versions, CPU/build information, git revision/dirty flag, config and
@@ -137,6 +156,29 @@ Default fixture calibration 20/class fits temperature 16.296730; threshold
 Actual saved-model strict re-load matched backbone/head state hashes; rescoring
 all 768 components in the same feature batches reproduced raw logits exactly
 (max absolute difference 0). This is serialization evidence, not M4 export parity.
+
+The reload claim now has a repository entry point, using the saved full model
+without the original pretrained checkpoint or network:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.verify
+ml/.venv/bin/python -m numbra_ml.verify --run data/models/PLACEHOLDER-m3-reproduction
+ml/.venv/bin/python -m numbra_ml.verify --prepared data/prepared/synthetic-v2 --run data/models/PLACEHOLDER-m3-default
+```
+
+It verifies artifact/preparation/state hashes and component prediction metadata,
+strictly restores the bundled backbone/scaling/head, rescores in original batches,
+and fails on raw-logit error above 1e-5 or any frozen-threshold decision flip.
+The test of record also runs `train_run` end to end on the 16-group fixture using
+an explicitly injected toy backbone supplier, including saving, provenance,
+report/card writing, reload parity, tamper rejection and overwrite guards. This
+test requires no external weights/network; publisher-weight verification is an
+additional Builder-attested command, not downloaded by the test suite.
+
+Real-data tuning requires a model-selection split or nested cross-validation
+before calibration; this synthetic exercise has neither and must not be tuned on
+the held-out partitions. M4 raw/probability/threshold parity must replace the M0
+0.02-probability-only proposal before any export acceptance.
 
 Original generated baseline/repeat/default report and model-card filenames are
 archived in ml/reports/. New verification commands above use fresh names.

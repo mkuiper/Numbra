@@ -16,25 +16,28 @@ Training components: 148; scaling and head fitting use train
 only. Calibration and threshold selection use separate frozen partitions.
 No early stopping, hyperparameter search or test/source-C tuning.
 
-Primary endpoint status: **unavailable_insufficient_groups**; threshold 0.0,
+Primary endpoint status: **unavailable_insufficient_groups**; evidence **unavailable**;
+threshold 0.0000 (full precision in JSON),
 inclusive score >= threshold. Target sensitivity 0.95 is illustrative, never a
-clinical promise. Fallback: unselected refer-all. Calibration status:
-fitted; temperature 16.296730463780285,
-boundary None. Scores are not calibrated
+clinical promise. Fallback: unselected refer-all. Observed synthetic sensitivity does not guarantee the target on independent data. Calibration status:
+fitted; temperature 16.2967,
+boundary none. Scores are not calibrated
 clinical risk. JSON includes secondary specificity endpoint, exact binomial
 intervals, reliability bins, ECE, Brier, pre-calibration metrics and component
 bootstrap percentile intervals conditional on the fixed model/operating point.
 
-| PLACEHOLDER partition | Components | Synthetic sensitivity | Synthetic specificity | AUC | Brier |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| test | 28 | 1.0 | 0.0 | 0.7857142857142857 | 0.20068643710257117 |
-| held_out | 128 | 1.0 | 0.0 | 0.6064453125 | 0.24944937029233766 |
+| PLACEHOLDER partition | Components | TP/FN/TN/FP | Synthetic sensitivity [95% exact interval] | Synthetic specificity [95% exact interval] | AUC | Brier |
+| --- | ---: | --- | --- | --- | ---: | ---: |
+| test (refer-all fallback) | 28 | 14/0/0/14 | 1.0000 [0.7684, 1.0000] | 0.0000 [0.0000, 0.2316] | 0.7857 | 0.2007 |
+| held_out (refer-all fallback) | 128 | 64/0/0/64 | 1.0000 [0.9440, 1.0000] | 0.0000 [0.0000, 0.0560] | 0.6064 | 0.2494 |
 
 **Single held-out source (one leave-one-source-out fold):**
 synthetic-source-c. No source rotation or independent
 clinical external validation. Per-source and **synthetic colour strata** results
 are in JSON; they overlap and cannot establish skin-tone fairness. Human skin-tone
-labels are absent. Small strata/single-class bootstrap draws have explicit valid
+labels are absent. Source/colour cells below 20/class suppress AUC, calibration bins
+and bootstrap; this is an engineering display guard, not a real-data privacy policy.
+Small strata/single-class bootstrap draws have explicit valid
 counts or unavailable metrics. Calibration-fit metrics are in-sample; threshold-
 selection intervals are descriptive after search. Bootstrap excludes training,
 calibration and threshold-fitting uncertainty.

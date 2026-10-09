@@ -3,6 +3,8 @@ from dataclasses import replace
 import numpy as np
 import pytest
 from numbra_ml.evaluation import Prediction, bootstrap_intervals
+from numbra_ml.evaluation import evaluation_report
+from numbra_ml.train import add_bootstrap
 
 def values():
     return tuple(Prediction(str(i), "test", target, logit) for i, (target, logit) in
@@ -54,3 +56,18 @@ def test_bootstrap_rejects_pooled_splits_and_duplicate_components():
 def test_bootstrap_rejects_invalid_config(kwargs):
     with pytest.raises(ValueError, match="bootstrap"):
         bootstrap_intervals(values(), 1, 0.5, **kwargs)
+
+
+def test_report_bootstrap_reuses_identical_cohorts_and_suppresses_tiny_subgroups():
+    predictions = tuple(Prediction(f'{split}-{i}', split, i % 2, float(i % 3),
+                                   ('synthetic-source-c',) if split == 'held_out' else ('synthetic-source-a',),
+                                   'tiny' if i < 4 else 'large')
+                        for split in ('calibration', 'threshold_validation', 'test', 'held_out') for i in range(40))
+    report = evaluation_report(predictions, held_out_source='synthetic-source-c')
+    add_bootstrap(report, predictions, seed=20, replicates=100)
+    for split, source in (('test', 'synthetic-source-a'), ('held_out', 'synthetic-source-c')):
+        boot = report['splits'][split]['bootstrap']
+        assert boot['overall'] == boot[f'source:{source}']
+        assert boot['colour:tiny']['status'] == 'suppressed_small_cell'
+        assert boot['colour:tiny']['metrics'] is None
+        assert boot['colour:large']['status'] == 'suppressed_small_cell'

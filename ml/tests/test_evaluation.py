@@ -311,6 +311,31 @@ def test_report_missing_colour_and_multi_source_membership():
     assert test["primary"]["specificity"] == 0
 
 
+def test_report_removes_precalibration_threshold_metrics_and_suppresses_small_cells():
+    values = sum((cohort(split, 2) for split in ("calibration", "threshold_validation", "test", "held_out")), ())
+    report = evaluation_report(values, held_out_source="synthetic-source-c")
+    before = report['splits']['test']['before_calibration']
+    for key in ('tp', 'fn', 'tn', 'fp', 'sensitivity', 'specificity',
+                'sensitivity_interval_95', 'specificity_interval_95'):
+        assert before[key] is None
+    assert before['auc'] is not None and before['brier'] is not None
+    assert before['reliability_bins']
+    assert before['threshold_metrics_unavailable_reason']
+    for group in ('by_source', 'synthetic_colour_strata'):
+        for cell in report['splits']['test'][group].values():
+            assert cell['below_minimum_cell'] is True and cell['minimum_per_class'] == 20
+            assert cell['auc'] is None and cell['reliability_bins'] == []
+            assert cell['unavailable_auc_reason'] == 'suppressed_below_20_per_class'
+
+
+def test_report_allows_subgroups_at_minimum_cell_boundary():
+    values = sum((cohort(split, 20) for split in ('calibration', 'threshold_validation', 'test', 'held_out')), ())
+    report = evaluation_report(values, held_out_source='synthetic-source-c')
+    source = report['splits']['held_out']['by_source']['synthetic-source-c']
+    assert not source['below_minimum_cell']
+    assert source['auc'] is not None and source['reliability_bins']
+
+
 def test_report_rejects_any_source_leakage():
     values = cohort("test", 2)
     with pytest.raises(ValueError, match="boundary"):

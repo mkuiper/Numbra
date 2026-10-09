@@ -1,9 +1,11 @@
 {
   "bootstrap_protocol": {
     "cohort_seed": "first four SHA256 bytes of seed:split:cohort, big endian",
+    "identical_cohorts": "reuse first cohort's result and seed",
     "replicates": 1000,
     "scope": "test and held_out, primary frozen endpoint, overlapping source/colour cohorts",
-    "seed": 20261009
+    "seed": 20261009,
+    "subgroup_minimum_per_class": 20
   },
   "calibration": {
     "boundary": null,
@@ -22,7 +24,7 @@
     "status": "fitted",
     "temperature": 19.150006376043688
   },
-  "evaluation_version": "1.0.0",
+  "evaluation_version": "1.1.0",
   "exclusions": {
     "components": 0,
     "reasons": {}
@@ -31,7 +33,8 @@
     "generated circle/square targets, not clinical performance",
     "synthetic colour strata are not human skin-tone/fairness evidence",
     "temperature-scaled scores are not clinically calibrated probabilities",
-    "before-calibration threshold metrics are descriptive; thresholds were fitted after scaling",
+    "before-calibration threshold metrics unavailable; thresholds were fitted after scaling",
+    "source/colour AUC/calibration/bootstrap suppressed below 20 components per class; engineering guard only",
     "selection intervals are descriptive after search; test threshold is frozen",
     "calibration-split summaries are in-sample after temperature fitting",
     "multi-source components count once per represented source; strata overlap"
@@ -206,6 +209,28 @@
     "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=a1cb3cc05d46d198467bebbb6e8fba50a325d4e7, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.8.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
     "torch_cpu_capability": "AVX2"
   },
+  "reporting_revision": {
+    "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+    "original_evaluation_version": "1.0.0",
+    "original_report_sha256": "7c96e19a31f2e75113a3eecd126e5200a8c5062fd673e6002b0147bb2662cb5e",
+    "reason": "M3 REVIEW-1 reporting fixes only; no changed pixels, logits, fitted model, temperature or thresholds",
+    "source_files_sha256": {
+      "ml/src/numbra_ml/__init__.py": "c437709a69fabe6a5d5fd2dbc742b1a43cee0056db7640394a397e7a0fba3a45",
+      "ml/src/numbra_ml/dataset.py": "5a6732734ef6198e37b4ea02ae217cd568925cd31209693b6bb0326cff382f79",
+      "ml/src/numbra_ml/evaluation.py": "493aa1be7c014b62ebd98af56c45bfc4aac0cf72d59077de91ff3bf1ed3a15b8",
+      "ml/src/numbra_ml/manifest.py": "a68b6246dde24481dec928cd73bafc224b084e07873ff3caa9bbc3bae7d3f90b",
+      "ml/src/numbra_ml/preparation.py": "0e72499c4208882780345f7c633224a18c140d803d57289b5db2e06527677dfd",
+      "ml/src/numbra_ml/prepare.py": "57cc5d9eabd8744419aef42f7616981d67c557d1f130714ec187752fbd567c97",
+      "ml/src/numbra_ml/preprocessing.py": "c9fbe31e531db054e8674d859f2c866ce91f3bbcc7e8b85be3a69147dbe1998a",
+      "ml/src/numbra_ml/pretrained.py": "570868b592338f678b9b83b6605beca9a8b85acdd5a0ebb59c4f29b3105c4bc6",
+      "ml/src/numbra_ml/schema.py": "8d45f5d4fc846508e372f527d87f193bf0f584b9f2a22a4f6a39f577ebaa0c40",
+      "ml/src/numbra_ml/synthetic.py": "a42c55d5c35c6d1406d307fc38a024601a2b7c307c5522dddd194da760e3c0b6",
+      "ml/src/numbra_ml/taxonomy.py": "842352e533ee6f5506e43fb07389a0d02f7e707c3f3a3acc07511a461713ebe5",
+      "ml/src/numbra_ml/train.py": "cff1073528080cdfb0ee2f76d60e14591d644fd4bd4d8fcc1599423f489975d4",
+      "ml/src/numbra_ml/training.py": "1067ca5a5212445369d3a9d6e2dc7e0587490b1054cb2fe454ffdb819ba196ed",
+      "ml/src/numbra_ml/verify.py": "7384905472a9ca5c3962bf4272252cebac6068ed9606f2b0b7e4546e80c09ead"
+    }
+  },
   "secondary_operating_point": {
     "comparison": "score >= threshold",
     "counts": {
@@ -244,8 +269,8 @@
           "1": 52
         },
         "ece": 0.3239657806825712,
-        "fn": 18,
-        "fp": 21,
+        "fn": null,
+        "fp": null,
         "log_loss": 2.6623031345669137,
         "n": 104,
         "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
@@ -321,24 +346,20 @@
             "upper": 1.0
           }
         ],
-        "sensitivity": 0.6538461538461539,
-        "sensitivity_interval_95": [
-          0.5091439205364967,
-          0.7803420977861777
-        ],
-        "specificity": 0.5961538461538461,
-        "specificity_interval_95": [
-          0.4510157703015507,
-          0.729940260408311
-        ],
-        "tn": 31,
-        "tp": 34,
+        "sensitivity": null,
+        "sensitivity_interval_95": null,
+        "specificity": null,
+        "specificity_interval_95": null,
+        "threshold_metrics_unavailable_reason": "threshold_fitted_on_calibrated_scores_only",
+        "tn": null,
+        "tp": null,
         "unavailable_auc_reason": null,
         "warning": "synthetic component intervals only; small strata are unstable"
       },
       "by_source": {
         "synthetic-source-a": {
           "auc": 0.7914201183431953,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.20584618129651752,
           "counts": {
@@ -349,6 +370,7 @@
           "fn": 0,
           "fp": 20,
           "log_loss": 0.6087950079363973,
+          "minimum_per_class": 20,
           "n": 52,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -440,6 +462,7 @@
         },
         "synthetic-source-b": {
           "auc": 0.5133136094674556,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.2524786596572341,
           "counts": {
@@ -450,6 +473,7 @@
           "fn": 4,
           "fp": 22,
           "log_loss": 0.6976698354230474,
+          "minimum_per_class": 20,
           "n": 52,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -746,91 +770,23 @@
       },
       "synthetic_colour_strata": {
         "background-stratum-0": {
-          "auc": 0.7263157894736842,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.21449677520661992,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 19,
             "1": 20
           },
-          "ece": 0.14660171446793407,
+          "ece": null,
           "fn": 0,
           "fp": 15,
-          "log_loss": 0.617144584003931,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 39,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 0,
-              "lower": 0.0,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 4,
-              "lower": 0.3,
-              "mean_score": 0.3713637012815195,
-              "positive_fraction": 0.0,
-              "upper": 0.4
-            },
-            {
-              "count": 17,
-              "lower": 0.4,
-              "mean_score": 0.45445159563809745,
-              "positive_fraction": 0.47058823529411764,
-              "upper": 0.5
-            },
-            {
-              "count": 10,
-              "lower": 0.5,
-              "mean_score": 0.5416385294797971,
-              "positive_fraction": 0.4,
-              "upper": 0.6
-            },
-            {
-              "count": 6,
-              "lower": 0.6,
-              "mean_score": 0.6299464914546056,
-              "positive_fraction": 1.0,
-              "upper": 0.7
-            },
-            {
-              "count": 1,
-              "lower": 0.7,
-              "mean_score": 0.7828086906574864,
-              "positive_fraction": 1.0,
-              "upper": 0.8
-            },
-            {
-              "count": 1,
-              "lower": 0.8,
-              "mean_score": 0.896208470441843,
-              "positive_fraction": 1.0,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 1.0,
           "sensitivity_interval_95": [
             0.8315665290169147,
@@ -843,11 +799,12 @@
           ],
           "tn": 4,
           "tp": 20,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         },
         "background-stratum-1": {
           "auc": 0.6733333333333333,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.23024394677477575,
           "counts": {
@@ -858,6 +815,7 @@
           "fn": 3,
           "fp": 25,
           "log_loss": 0.6551926076122307,
+          "minimum_per_class": 20,
           "n": 60,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -948,91 +906,23 @@
           "warning": "synthetic component intervals only; small strata are unstable"
         },
         "background-stratum-2": {
-          "auc": 0.5,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.33057613801007246,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 3,
             "1": 2
           },
-          "ece": 0.3888435247715732,
+          "ece": null,
           "fn": 1,
           "fp": 2,
-          "log_loss": 0.9111953243607896,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 5,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 0,
-              "lower": 0.0,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 2,
-              "lower": 0.3,
-              "mean_score": 0.36248052857477314,
-              "positive_fraction": 0.5,
-              "upper": 0.4
-            },
-            {
-              "count": 0,
-              "lower": 0.4,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.5
-            },
-            {
-              "count": 1,
-              "lower": 0.5,
-              "mean_score": 0.5939437017435015,
-              "positive_fraction": 0.0,
-              "upper": 0.6
-            },
-            {
-              "count": 0,
-              "lower": 0.6,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.7
-            },
-            {
-              "count": 1,
-              "lower": 0.7,
-              "mean_score": 0.7945156026940836,
-              "positive_fraction": 1.0,
-              "upper": 0.8
-            },
-            {
-              "count": 1,
-              "lower": 0.8,
-              "mean_score": 0.8697505819579942,
-              "positive_fraction": 0.0,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 0.5,
           "sensitivity_interval_95": [
             0.012579117093425053,
@@ -1045,8 +935,8 @@
           ],
           "tn": 1,
           "tp": 1,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         }
       }
     },
@@ -1060,8 +950,8 @@
           "1": 128
         },
         "ece": 0.3790462642975771,
-        "fn": 35,
-        "fp": 76,
+        "fn": null,
+        "fp": null,
         "log_loss": 3.4978765137655072,
         "n": 256,
         "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
@@ -1137,18 +1027,13 @@
             "upper": 1.0
           }
         ],
-        "sensitivity": 0.7265625,
-        "sensitivity_interval_95": [
-          0.640760003659276,
-          0.8015775156335863
-        ],
-        "specificity": 0.40625,
-        "specificity_interval_95": [
-          0.32035226772902226,
-          0.49658739520911466
-        ],
-        "tn": 52,
-        "tp": 93,
+        "sensitivity": null,
+        "sensitivity_interval_95": null,
+        "specificity": null,
+        "specificity_interval_95": null,
+        "threshold_metrics_unavailable_reason": "threshold_fitted_on_calibrated_scores_only",
+        "tn": null,
+        "tp": null,
         "unavailable_auc_reason": null,
         "warning": "synthetic component intervals only; small strata are unstable"
       },
@@ -1367,40 +1252,40 @@
           "metrics": {
             "auc": {
               "interval_95": [
-                0.5243280523611451,
-                0.6606919382784702
+                0.5287864588299319,
+                0.6569385665216652
               ],
               "unavailable_reason": null,
               "valid_replicates": 1000
             },
             "brier": {
               "interval_95": [
-                0.2331804720679695,
-                0.26330154293637364
+                0.23306305927267376,
+                0.2631705877351976
               ],
               "unavailable_reason": null,
               "valid_replicates": 1000
             },
             "ece": {
               "interval_95": [
-                0.0497898843985525,
-                0.15269386604334945
+                0.04787767946300106,
+                0.14908920886268534
               ],
               "unavailable_reason": null,
               "valid_replicates": 1000
             },
             "sensitivity": {
               "interval_95": [
-                0.8715563564875491,
-                0.9596854838709677
+                0.8632113821138212,
+                0.9572829131652661
               ],
               "unavailable_reason": null,
               "valid_replicates": 1000
             },
             "specificity": {
               "interval_95": [
-                0.036225367532061306,
-                0.12502460629921258
+                0.034010722933241096,
+                0.128
               ],
               "unavailable_reason": null,
               "valid_replicates": 1000
@@ -1410,13 +1295,14 @@
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "replicates": 1000,
           "score_sha256": "18cb0b783505c88eaa2ecd834f3c44afd5d3e61b366be164167985d441530b1a",
-          "seed": 2271978823,
+          "seed": 408932550,
           "unit": "duplicate-connected component; one index image"
         }
       },
       "by_source": {
         "synthetic-source-c": {
           "auc": 0.592529296875,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.2483214985364524,
           "counts": {
@@ -1427,6 +1313,7 @@
           "fn": 11,
           "fp": 118,
           "log_loss": 0.6900937299255311,
+          "minimum_per_class": 20,
           "n": 256,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -1724,6 +1611,7 @@
       "synthetic_colour_strata": {
         "background-stratum-0": {
           "auc": 0.42628205128205127,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.2771941471316383,
           "counts": {
@@ -1734,6 +1622,7 @@
           "fn": 7,
           "fp": 20,
           "log_loss": 0.7501474747112502,
+          "minimum_per_class": 20,
           "n": 50,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -1825,6 +1714,7 @@
         },
         "background-stratum-1": {
           "auc": 0.6414887794198139,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.24186756664361364,
           "counts": {
@@ -1835,6 +1725,7 @@
           "fn": 3,
           "fp": 60,
           "log_loss": 0.6769236876025193,
+          "minimum_per_class": 20,
           "n": 121,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -1926,6 +1817,7 @@
         },
         "background-stratum-2": {
           "auc": 0.6413525498891353,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.24052494946908992,
           "counts": {
@@ -1936,6 +1828,7 @@
           "fn": 1,
           "fp": 38,
           "log_loss": 0.6735159402996308,
+          "minimum_per_class": 20,
           "n": 85,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -2037,8 +1930,8 @@
           "1": 26
         },
         "ece": 0.26284284338266795,
-        "fn": 6,
-        "fp": 9,
+        "fn": null,
+        "fp": null,
         "log_loss": 1.2008533535432826,
         "n": 52,
         "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
@@ -2114,177 +2007,37 @@
             "upper": 1.0
           }
         ],
-        "sensitivity": 0.7692307692307693,
-        "sensitivity_interval_95": [
-          0.5635249030586131,
-          0.910259889115425
-        ],
-        "specificity": 0.6538461538461539,
-        "specificity_interval_95": [
-          0.4433280739576094,
-          0.8278558619943337
-        ],
-        "tn": 17,
-        "tp": 20,
+        "sensitivity": null,
+        "sensitivity_interval_95": null,
+        "specificity": null,
+        "specificity_interval_95": null,
+        "threshold_metrics_unavailable_reason": "threshold_fitted_on_calibrated_scores_only",
+        "tn": null,
+        "tp": null,
         "unavailable_auc_reason": null,
         "warning": "synthetic component intervals only; small strata are unstable"
       },
       "bootstrap": {
         "colour:background-stratum-0": {
-          "conditioning": "fixed model, temperature and threshold; no fitting uncertainty",
-          "method": "ordinary bootstrap, percentile 95%, linear quantiles",
-          "metrics": {
-            "auc": {
-              "interval_95": [
-                0.45450994318181814,
-                1.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "brier": {
-              "interval_95": [
-                0.1733023297618145,
-                0.24483550493603154
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "ece": {
-              "interval_95": [
-                0.08430488927098373,
-                0.35742110585783704
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "sensitivity": {
-              "interval_95": [
-                1.0,
-                1.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "specificity": {
-              "interval_95": [
-                0.0,
-                0.6666666666666666
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            }
-          },
+          "metrics": null,
+          "minimum_per_class": 20,
           "n": 16,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "replicates": 1000,
-          "score_sha256": "d29b53d83198e36cecb3dea885a1c50df740502b272c673066cffcabfa93a108",
-          "seed": 3494259959,
-          "unit": "duplicate-connected component; one index image"
+          "status": "suppressed_small_cell"
         },
         "colour:background-stratum-1": {
-          "conditioning": "fixed model, temperature and threshold; no fitting uncertainty",
-          "method": "ordinary bootstrap, percentile 95%, linear quantiles",
-          "metrics": {
-            "auc": {
-              "interval_95": [
-                0.618956043956044,
-                0.9318420550038197
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "brier": {
-              "interval_95": [
-                0.1833256548113314,
-                0.23649002887661572
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "ece": {
-              "interval_95": [
-                0.08536844981050652,
-                0.3107327536491871
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "sensitivity": {
-              "interval_95": [
-                1.0,
-                1.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "specificity": {
-              "interval_95": [
-                0.0,
-                0.3076923076923077
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            }
-          },
+          "metrics": null,
+          "minimum_per_class": 20,
           "n": 31,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "replicates": 1000,
-          "score_sha256": "444c210b2095b68e8d3becc67297baa3ab7e32939e6cf88b566d664c84900bdd",
-          "seed": 3746636927,
-          "unit": "duplicate-connected component; one index image"
+          "status": "suppressed_small_cell"
         },
         "colour:background-stratum-2": {
-          "conditioning": "fixed model, temperature and threshold; no fitting uncertainty",
-          "method": "ordinary bootstrap, percentile 95%, linear quantiles",
-          "metrics": {
-            "auc": {
-              "interval_95": [
-                0.0,
-                1.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 914
-            },
-            "brier": {
-              "interval_95": [
-                0.12111255016021619,
-                0.3137102697589461
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "ece": {
-              "interval_95": [
-                0.10093104497549384,
-                0.556485228803371
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "sensitivity": {
-              "interval_95": [
-                1.0,
-                1.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 924
-            },
-            "specificity": {
-              "interval_95": [
-                0.0,
-                0.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 990
-            }
-          },
+          "metrics": null,
+          "minimum_per_class": 20,
           "n": 5,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "replicates": 1000,
-          "score_sha256": "292fde7035a390ae1df759fa3eaea63041fa88a81e85d0f13cd9aeff99e02358",
-          "seed": 2655654148,
-          "unit": "duplicate-connected component; one index image"
+          "status": "suppressed_small_cell"
         },
         "overall": {
           "conditioning": "fixed model, temperature and threshold; no fitting uncertainty",
@@ -2339,197 +2092,39 @@
           "unit": "duplicate-connected component; one index image"
         },
         "source:synthetic-source-a": {
-          "conditioning": "fixed model, temperature and threshold; no fitting uncertainty",
-          "method": "ordinary bootstrap, percentile 95%, linear quantiles",
-          "metrics": {
-            "auc": {
-              "interval_95": [
-                0.568612948137835,
-                0.945478896103896
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "brier": {
-              "interval_95": [
-                0.16428211080951194,
-                0.2410414526237892
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "ece": {
-              "interval_95": [
-                0.06662802319671736,
-                0.29373986864452833
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "sensitivity": {
-              "interval_95": [
-                1.0,
-                1.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "specificity": {
-              "interval_95": [
-                0.0,
-                0.2668181818181817
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            }
-          },
+          "metrics": null,
+          "minimum_per_class": 20,
           "n": 26,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "replicates": 1000,
-          "score_sha256": "7c3c7a1a179bae14f988d2f9188b152d481bd11dd718f5b8c3f222b33fe6b1f9",
-          "seed": 3666150968,
-          "unit": "duplicate-connected component; one index image"
+          "status": "suppressed_small_cell"
         },
         "source:synthetic-source-b": {
-          "conditioning": "fixed model, temperature and threshold; no fitting uncertainty",
-          "method": "ordinary bootstrap, percentile 95%, linear quantiles",
-          "metrics": {
-            "auc": {
-              "interval_95": [
-                0.5999408284023668,
-                0.9608248562582927
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "brier": {
-              "interval_95": [
-                0.19670523287758868,
-                0.23881072646860455
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "ece": {
-              "interval_95": [
-                0.10199508999384323,
-                0.37658897927561924
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "sensitivity": {
-              "interval_95": [
-                1.0,
-                1.0
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            },
-            "specificity": {
-              "interval_95": [
-                0.0,
-                0.47058823529411764
-              ],
-              "unavailable_reason": null,
-              "valid_replicates": 1000
-            }
-          },
+          "metrics": null,
+          "minimum_per_class": 20,
           "n": 26,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "replicates": 1000,
-          "score_sha256": "15551f15fd31205b23e565c2775bdab869276e6deb661fc5b5d35dc85341ddc0",
-          "seed": 2487134145,
-          "unit": "duplicate-connected component; one index image"
+          "status": "suppressed_small_cell"
         }
       },
       "by_source": {
         "synthetic-source-a": {
-          "auc": 0.7810650887573964,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.2034428740585918,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 13,
             "1": 13
           },
-          "ece": 0.10778019120177394,
+          "ece": null,
           "fn": 0,
           "fp": 12,
-          "log_loss": 0.5912438527065792,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 26,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 0,
-              "lower": 0.0,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 1,
-              "lower": 0.3,
-              "mean_score": 0.3077970005873006,
-              "positive_fraction": 0.0,
-              "upper": 0.4
-            },
-            {
-              "count": 9,
-              "lower": 0.4,
-              "mean_score": 0.44305944402364933,
-              "positive_fraction": 0.3333333333333333,
-              "upper": 0.5
-            },
-            {
-              "count": 7,
-              "lower": 0.5,
-              "mean_score": 0.5412646752189068,
-              "positive_fraction": 0.42857142857142855,
-              "upper": 0.6
-            },
-            {
-              "count": 6,
-              "lower": 0.6,
-              "mean_score": 0.6330874492426989,
-              "positive_fraction": 0.6666666666666666,
-              "upper": 0.7
-            },
-            {
-              "count": 0,
-              "lower": 0.7,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.8
-            },
-            {
-              "count": 3,
-              "lower": 0.8,
-              "mean_score": 0.8277916855433919,
-              "positive_fraction": 1.0,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 1.0,
           "sensitivity_interval_95": [
             0.752947361999529,
@@ -2542,95 +2137,27 @@
           ],
           "tn": 1,
           "tp": 13,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         },
         "synthetic-source-b": {
-          "auc": 0.7869822485207101,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.21862782228491037,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 13,
             "1": 13
           },
-          "ece": 0.21555719448635519,
+          "ece": null,
           "fn": 0,
           "fp": 10,
-          "log_loss": 0.6289662205767426,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 26,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 0,
-              "lower": 0.0,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 3,
-              "lower": 0.3,
-              "mean_score": 0.3338774168080527,
-              "positive_fraction": 0.0,
-              "upper": 0.4
-            },
-            {
-              "count": 10,
-              "lower": 0.4,
-              "mean_score": 0.4597092038650524,
-              "positive_fraction": 0.3,
-              "upper": 0.5
-            },
-            {
-              "count": 12,
-              "lower": 0.5,
-              "mean_score": 0.5325689618304409,
-              "positive_fraction": 0.75,
-              "upper": 0.6
-            },
-            {
-              "count": 1,
-              "lower": 0.6,
-              "mean_score": 0.6034096904641566,
-              "positive_fraction": 1.0,
-              "upper": 0.7
-            },
-            {
-              "count": 0,
-              "lower": 0.7,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.8
-            },
-            {
-              "count": 0,
-              "lower": 0.8,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 1.0,
           "sensitivity_interval_95": [
             0.752947361999529,
@@ -2643,8 +2170,8 @@
           ],
           "tn": 3,
           "tp": 13,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         }
       },
       "missing_or_conflicting_colour_fraction": 0.0,
@@ -2853,91 +2380,23 @@
       },
       "synthetic_colour_strata": {
         "background-stratum-0": {
-          "auc": 0.7777777777777778,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.20936715802973493,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 7,
             "1": 9
           },
-          "ece": 0.14912115966441106,
+          "ece": null,
           "fn": 0,
           "fp": 5,
-          "log_loss": 0.6089392557464874,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 16,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 0,
-              "lower": 0.0,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 2,
-              "lower": 0.3,
-              "mean_score": 0.3052033157818101,
-              "positive_fraction": 0.0,
-              "upper": 0.4
-            },
-            {
-              "count": 6,
-              "lower": 0.4,
-              "mean_score": 0.44803335131667055,
-              "positive_fraction": 0.5,
-              "upper": 0.5
-            },
-            {
-              "count": 6,
-              "lower": 0.5,
-              "mean_score": 0.5403433765899155,
-              "positive_fraction": 0.6666666666666666,
-              "upper": 0.6
-            },
-            {
-              "count": 2,
-              "lower": 0.6,
-              "mean_score": 0.6471038547467634,
-              "positive_fraction": 1.0,
-              "upper": 0.7
-            },
-            {
-              "count": 0,
-              "lower": 0.7,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.8
-            },
-            {
-              "count": 0,
-              "lower": 0.8,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 1.0,
           "sensitivity_interval_95": [
             0.6637328831200571,
@@ -2950,95 +2409,27 @@
           ],
           "tn": 2,
           "tp": 9,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         },
         "background-stratum-1": {
-          "auc": 0.7916666666666666,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.2102064125139915,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 16,
             "1": 15
           },
-          "ece": 0.1634168043688836,
+          "ece": null,
           "fn": 0,
           "fp": 14,
-          "log_loss": 0.6082565039637736,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 31,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 0,
-              "lower": 0.0,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 2,
-              "lower": 0.3,
-              "mean_score": 0.3495113097239192,
-              "positive_fraction": 0.0,
-              "upper": 0.4
-            },
-            {
-              "count": 12,
-              "lower": 0.4,
-              "mean_score": 0.45385584545082525,
-              "positive_fraction": 0.25,
-              "upper": 0.5
-            },
-            {
-              "count": 11,
-              "lower": 0.5,
-              "mean_score": 0.5373064352087392,
-              "positive_fraction": 0.6363636363636364,
-              "upper": 0.6
-            },
-            {
-              "count": 4,
-              "lower": 0.6,
-              "mean_score": 0.6255560025399898,
-              "positive_fraction": 0.75,
-              "upper": 0.7
-            },
-            {
-              "count": 0,
-              "lower": 0.7,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.8
-            },
-            {
-              "count": 2,
-              "lower": 0.8,
-              "mean_score": 0.8333885159831296,
-              "positive_fraction": 1.0,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 1.0,
           "sensitivity_interval_95": [
             0.7819806390894659,
@@ -3051,95 +2442,27 @@
           ],
           "tn": 2,
           "tp": 15,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         },
         "background-stratum-2": {
-          "auc": 0.6666666666666666,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.22151295770431217,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 3,
             "1": 2
           },
-          "ece": 0.2532621289636806,
+          "ece": null,
           "fn": 0,
           "fp": 3,
-          "log_loss": 0.6252964381091161,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 5,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 0,
-              "lower": 0.0,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 0,
-              "lower": 0.3,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.4
-            },
-            {
-              "count": 1,
-              "lower": 0.4,
-              "mean_score": 0.45015678155344135,
-              "positive_fraction": 0.0,
-              "upper": 0.5
-            },
-            {
-              "count": 2,
-              "lower": 0.5,
-              "mean_score": 0.513624610831007,
-              "positive_fraction": 0.5,
-              "upper": 0.6
-            },
-            {
-              "count": 1,
-              "lower": 0.6,
-              "mean_score": 0.6055026662668644,
-              "positive_fraction": 0.0,
-              "upper": 0.7
-            },
-            {
-              "count": 0,
-              "lower": 0.7,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.8
-            },
-            {
-              "count": 1,
-              "lower": 0.8,
-              "mean_score": 0.8165980246639167,
-              "positive_fraction": 1.0,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 1.0,
           "sensitivity_interval_95": [
             0.15811388300841894,
@@ -3152,8 +2475,8 @@
           ],
           "tn": 0,
           "tp": 2,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         }
       }
     },
@@ -3167,8 +2490,8 @@
           "1": 102
         },
         "ece": 0.30879087711904846,
-        "fn": 34,
-        "fp": 44,
+        "fn": null,
+        "fp": null,
         "log_loss": 2.0350302974313967,
         "n": 204,
         "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
@@ -3244,24 +2567,20 @@
             "upper": 1.0
           }
         ],
-        "sensitivity": 0.6666666666666666,
-        "sensitivity_interval_95": [
-          0.5664426815372057,
-          0.7569268583310003
-        ],
-        "specificity": 0.5686274509803921,
-        "specificity_interval_95": [
-          0.4668231136757778,
-          0.6663411375897696
-        ],
-        "tn": 58,
-        "tp": 68,
+        "sensitivity": null,
+        "sensitivity_interval_95": null,
+        "specificity": null,
+        "specificity_interval_95": null,
+        "threshold_metrics_unavailable_reason": "threshold_fitted_on_calibrated_scores_only",
+        "tn": null,
+        "tp": null,
         "unavailable_auc_reason": null,
         "warning": "synthetic component intervals only; small strata are unstable"
       },
       "by_source": {
         "synthetic-source-a": {
           "auc": 0.7727797001153403,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.20593765143908466,
           "counts": {
@@ -3272,6 +2591,7 @@
           "fn": 4,
           "fp": 35,
           "log_loss": 0.5991345433396982,
+          "minimum_per_class": 20,
           "n": 102,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -3363,6 +2683,7 @@
         },
         "synthetic-source-b": {
           "auc": 0.6205305651672434,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.23400326882185737,
           "counts": {
@@ -3373,6 +2694,7 @@
           "fn": 1,
           "fp": 38,
           "log_loss": 0.6592849001649135,
+          "minimum_per_class": 20,
           "n": 102,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -3670,6 +2992,7 @@
       "synthetic_colour_strata": {
         "background-stratum-0": {
           "auc": 0.6547619047619048,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.23690414045301425,
           "counts": {
@@ -3680,6 +3003,7 @@
           "fn": 0,
           "fp": 16,
           "log_loss": 0.6677146325710243,
+          "minimum_per_class": 20,
           "n": 45,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -3771,6 +3095,7 @@
         },
         "background-stratum-1": {
           "auc": 0.7202093397745571,
+          "below_minimum_cell": false,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
           "brier": 0.21458161727621222,
           "counts": {
@@ -3781,6 +3106,7 @@
           "fn": 5,
           "fp": 48,
           "log_loss": 0.6171728579394324,
+          "minimum_per_class": 20,
           "n": 141,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
           "reliability_bins": [
@@ -3871,91 +3197,23 @@
           "warning": "synthetic component intervals only; small strata are unstable"
         },
         "background-stratum-2": {
-          "auc": 0.75,
+          "auc": null,
+          "below_minimum_cell": true,
           "bin_definition": "equal width [lower, upper), final bin includes 1",
-          "brier": 0.21984886168247372,
+          "brier": null,
+          "calibration_unavailable_reason": "suppressed_below_20_per_class",
           "counts": {
             "0": 12,
             "1": 6
           },
-          "ece": 0.22308903824608103,
+          "ece": null,
           "fn": 0,
           "fp": 9,
-          "log_loss": 0.627236211239685,
+          "log_loss": null,
+          "minimum_per_class": 20,
           "n": 18,
           "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
-          "reliability_bins": [
-            {
-              "count": 1,
-              "lower": 0.0,
-              "mean_score": 0.08557739734365036,
-              "positive_fraction": 0.0,
-              "upper": 0.1
-            },
-            {
-              "count": 0,
-              "lower": 0.1,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.2
-            },
-            {
-              "count": 0,
-              "lower": 0.2,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 0.3
-            },
-            {
-              "count": 2,
-              "lower": 0.3,
-              "mean_score": 0.3481081751989617,
-              "positive_fraction": 0.0,
-              "upper": 0.4
-            },
-            {
-              "count": 5,
-              "lower": 0.4,
-              "mean_score": 0.43703876460099284,
-              "positive_fraction": 0.2,
-              "upper": 0.5
-            },
-            {
-              "count": 5,
-              "lower": 0.5,
-              "mean_score": 0.5832325280406092,
-              "positive_fraction": 0.4,
-              "upper": 0.6
-            },
-            {
-              "count": 2,
-              "lower": 0.6,
-              "mean_score": 0.625702836372412,
-              "positive_fraction": 0.5,
-              "upper": 0.7
-            },
-            {
-              "count": 1,
-              "lower": 0.7,
-              "mean_score": 0.7916587328179504,
-              "positive_fraction": 1.0,
-              "upper": 0.8
-            },
-            {
-              "count": 2,
-              "lower": 0.8,
-              "mean_score": 0.8363527687765004,
-              "positive_fraction": 0.5,
-              "upper": 0.9
-            },
-            {
-              "count": 0,
-              "lower": 0.9,
-              "mean_score": null,
-              "positive_fraction": null,
-              "upper": 1.0
-            }
-          ],
+          "reliability_bins": [],
           "sensitivity": 1.0,
           "sensitivity_interval_95": [
             0.5407418735600995,
@@ -3968,8 +3226,8 @@
           ],
           "tn": 3,
           "tp": 6,
-          "unavailable_auc_reason": null,
-          "warning": "synthetic component intervals only; small strata are unstable"
+          "unavailable_auc_reason": "suppressed_below_20_per_class",
+          "warning": "small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only"
         }
       }
     }

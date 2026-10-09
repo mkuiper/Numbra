@@ -18,7 +18,7 @@ from .dataset import require_approved_source
 from .manifest import ManifestError, ManifestRow, read_manifest, validate_manifest
 from .synthetic import TARGET_NAMES
 
-EVALUATION_VERSION = "1.0.0"
+EVALUATION_VERSION = "1.1.0"
 ACTIVE_SPLITS = ("train", "calibration", "threshold_validation", "test", "held_out")
 
 
@@ -328,6 +328,27 @@ def select_threshold(values: Iterable[Prediction], calibration: dict, *, endpoin
                               else "lowest observed qualifying threshold or above-one sentinel"}
 
 
+def subgroup_metrics(values, temperature, threshold):
+    result = metrics(values, temperature, threshold)
+    small = min(result['counts'].values()) < 20
+    result.update(minimum_per_class=20, below_minimum_cell=small)
+    if small:
+        result.update(auc=None, unavailable_auc_reason="suppressed_below_20_per_class",
+                      brier=None, log_loss=None, ece=None, reliability_bins=[],
+                      calibration_unavailable_reason="suppressed_below_20_per_class",
+                      warning="small cell: subgroup AUC/calibration/bin summaries suppressed; synthetic only")
+    return result
+
+
+def before_calibration_metrics(values, threshold):
+    result = metrics(values, 1.0, threshold)
+    for key in ('tp', 'fn', 'tn', 'fp', 'sensitivity', 'specificity',
+                'sensitivity_interval_95', 'specificity_interval_95'):
+        result[key] = None
+    result['threshold_metrics_unavailable_reason'] = 'threshold_fitted_on_calibrated_scores_only'
+    return result
+
+
 def evaluation_report(values: Iterable[Prediction], *, held_out_source: str) -> dict:
     """Freeze calibration/thresholds, then compute test and one external fold."""
     values = _validate(values)
@@ -349,10 +370,10 @@ def evaluation_report(values: Iterable[Prediction], *, held_out_source: str) -> 
         reports[split] = {"score_sha256": _hash(subset),
                          "primary": metrics(subset, temperature, threshold),
                          "secondary": metrics(subset, temperature, secondary["threshold"]),
-                         "before_calibration": metrics(subset, 1.0, threshold),
-                         "by_source": {source: metrics([item for item in subset if source in item.sources],
+                         "before_calibration": before_calibration_metrics(subset, threshold),
+                         "by_source": {source: subgroup_metrics([item for item in subset if source in item.sources],
                                                        temperature, threshold) for source in sources},
-                         "synthetic_colour_strata": {colour: metrics([item for item in subset if item.colour_stratum == colour],
+                         "synthetic_colour_strata": {colour: subgroup_metrics([item for item in subset if item.colour_stratum == colour],
                                                                       temperature, threshold) for colour in colours},
                          "missing_or_conflicting_colour_fraction": missing / len(subset) if subset else None}
     return {"notice": PLACEHOLDER_NOTICE, "evaluation_version": EVALUATION_VERSION,
@@ -364,7 +385,8 @@ def evaluation_report(values: Iterable[Prediction], *, held_out_source: str) -> 
             "limitations": ["generated circle/square targets, not clinical performance",
                             "synthetic colour strata are not human skin-tone/fairness evidence",
                             "temperature-scaled scores are not clinically calibrated probabilities",
-                            "before-calibration threshold metrics are descriptive; thresholds were fitted after scaling",
+                            "before-calibration threshold metrics unavailable; thresholds were fitted after scaling",
+                            "source/colour AUC/calibration/bootstrap suppressed below 20 components per class; engineering guard only",
                             "selection intervals are descriptive after search; test threshold is frozen",
                             "calibration-split summaries are in-sample after temperature fitting",
                             "multi-source components count once per represented source; strata overlap"]}

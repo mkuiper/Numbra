@@ -2,6 +2,9 @@
 
 Decisions made autonomously, blockers, and anything needing human review.
 
+- 2026-10-09 — M3 REVIEW-1 follow-through amends ADR-010: real-data model-selection split/nested CV before calibration, synthetic subgroup display suppression below 20/class, and raw-logit plus probability plus frozen-threshold-flip checks for M4. The M0 0.02-probability-only tolerance proposal is superseded. Display suppression is not a real-data privacy policy; review sparse-bin/disclosure controls before real cohorts.
+- 2026-10-09 — M3 REVIEW-1 human questions: confirm optional metadata fusion reading, fixed-default frozen-feature baseline, pretrained derivative notices/rights, carrying the below-target selected PLACEHOLDER vs refer-all artifact downstream, and whether to rotate all three sources. Original selected artifact retained for software tests only; symptom referrals remain mandatory. Root tests-of-record decision remains queued. Optional clean-checkout wrapper (issue 11) deferred; explicit setup then one offline training command remains documented.
+
 - 2026-10-09 — ADR-006 accepts strict versioned Python 3.12 JSONL/taxonomy/data interfaces with exact dependency pins and synthetic-only loading, pending human review. Schema missingness does not relax the canonical M6 required assessment; M7 must extend confirmation/consent/custodian provenance. No real data or clinical use authorised.
 
 - 2026-10-09 — M0 Review-2: M6 must implement the full canonical research/04 / ADR-001 question set; protected roadmap questions are a minimum. Contact yes refers, contact unknown/declined is optional, and volunteer concern is an explicit required question. Humans must clinically review this superset and all M0 ADRs before field use.

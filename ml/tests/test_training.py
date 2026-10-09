@@ -12,8 +12,9 @@ from numbra_ml.evaluation import evaluation_report, read_component_index
 from numbra_ml.prepare import prepare_run, repository_root
 from numbra_ml.preprocessing import SPEC, preprocess
 from numbra_ml.pretrained import FILES, acquire, ignored_path, verify_checkpoint
-from numbra_ml.train import add_bootstrap, environment, main, write_reports
+from numbra_ml.train import add_bootstrap, environment, main, train_run, write_reports
 from numbra_ml.training import Baseline, FeatureHead, TrainingConfig, extract_features, fit_head, initialise, predict, tensor_hash
+from numbra_ml.verify import load_reference, verify_run
 
 @pytest.fixture
 def fixture(tmp_path):
@@ -197,8 +198,9 @@ def test_environment_matches_full_hashed_platform_lock():
         if line and not line.startswith(("#", "--")):
             assert "--hash=sha256:" in line and len(line.split("sha256:")[1]) == 64
 
-def test_cli_invalid_output_refuses_before_model_load():
+def test_cli_invalid_output_refuses_before_model_load(capsys):
     assert main(["--output", "ml/reports/forbidden"]) == 1
+    assert "path must be below this repository's ignored data/ directory" in capsys.readouterr().err
 
 def test_report_writer_name_and_overwrite_guard(tmp_path):
     with pytest.raises(ValueError, match="name"):
@@ -231,3 +233,62 @@ def test_generated_fixture_to_head_to_evaluation_to_written_model_card(fixture, 
     assert "synthetic colour strata" in card
     assert "leprosy" not in json.dumps(written["target_names"])
     assert "predictions" not in written
+
+
+def test_train_run_end_to_end_with_explicit_toy_loader():
+    # Real repository environment/provenance and real ignored paths; only the
+    # backbone supplier is injected. No checkpoint/network dependency or mocks.
+    import tempfile
+    repo = repository_root()
+    parent = repo / 'data/test-runs'
+    parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=parent) as temporary:
+        root = Path(temporary)
+        prepared = root / 'prepared'
+        prepare_run(prepared, groups_per_source=16)
+        output = root / 'model'
+        name = f"PLACEHOLDER-test-{root.name}"
+        reports = [repo / 'ml/reports' / f'{name}{suffix}' for suffix in ('.json', '-MODEL-CARD.md')]
+        calls = []
+        def loader(checkpoint):
+            calls.append(checkpoint)
+            return toy_backbone().eval(), {'notice': 'PLACEHOLDER test-only toy backbone; no pretraining'}
+        try:
+            report = train_run(repo, prepared, root / 'checkpoint', output, name=name,
+                               config=TrainingConfig(epochs=3), bootstrap_replicates=100,
+                               backbone_loader=loader)
+            assert calls == [root / 'checkpoint']
+            assert sorted(p.name for p in output.iterdir()) == [
+                'PLACEHOLDER-model.safetensors', 'PLACEHOLDER-predictions.json', 'PLACEHOLDER-run.json']
+            assert json.loads(reports[0].read_text()) == report
+            assert json.loads((output / 'PLACEHOLDER-run.json').read_text()) == report
+            assert report['training']['config']['epochs'] == 3
+            assert report['provenance']['model_sha256']
+            assert len(json.loads((output / 'PLACEHOLDER-predictions.json').read_text())['predictions']) == 48
+            assert 'refer-all fallback' in reports[1].read_text()
+            assert 'TP/FN/TN/FP' in reports[1].read_text()
+            verification = verify_run(repo, prepared, output, backbone_factory=toy_backbone)
+            assert verification['status'] == 'PASS' and verification['components'] == 48
+            assert verification['max_raw_logit_absolute_error'] == 0
+            assert verification['decision_flips_at_frozen_threshold'] == 0
+            # Tampering cannot pass by relying on a trusted saved prediction.
+            prediction_path = output / 'PLACEHOLDER-predictions.json'
+            original = prediction_path.read_bytes()
+            prediction_path.write_bytes(original + b' ')
+            with pytest.raises(ValueError, match='checksum mismatch'):
+                load_reference(output, backbone_factory=toy_backbone)
+            prediction_path.write_bytes(original)
+            original_report = json.loads((output / 'PLACEHOLDER-run.json').read_text())
+            changed = json.loads(json.dumps(original_report))
+            changed['training']['head_sha256'] = '0' * 64
+            (output / 'PLACEHOLDER-run.json').write_text(json.dumps(changed))
+            with pytest.raises(ValueError, match='state hash mismatch'):
+                load_reference(output, backbone_factory=toy_backbone)
+            (output / 'PLACEHOLDER-run.json').write_text(json.dumps(original_report))
+            with pytest.raises(ValueError, match='existing report'):
+                train_run(repo, prepared, root / 'checkpoint', output, name=name,
+                          config=TrainingConfig(epochs=3), backbone_loader=loader)
+            assert len(calls) == 1
+        finally:
+            for path in reports:
+                path.unlink(missing_ok=True)
