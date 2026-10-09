@@ -130,3 +130,38 @@ Append-only log of Builder iterations.
 - Remaining M0: contribution governance, Nepal ethics/regulatory research, ADR-004,
   synthesis, consistency pass and HANDOFF. NEXT_ACTION remains CONTINUE; no review,
   gate writing, push, publishing or external messages performed.
+
+
+## 2026-10-09T12:24:10Z — iteration
+
+- Read roadmap, STATUS, HARNESS, M0 workspace, AGENTS and relevant ADRs in order.
+  No review/gate or new harness instruction exists. Stayed in M0 research only.
+- Completed 06 contribution design: role/credential boundaries, provisional versus
+  confirmed label assertions, separate consent scopes, minimisation/redaction,
+  local encryption/export proposals, retention and withdrawal limits, future QC,
+  dataset/evaluation/human-release cycle, Nepal stewardship and federation deferral.
+- Completed 07 ethics/privacy/device research: NHRC/IRC route, inspected official
+  English Privacy Act, bounded DDA/FDA/MDCG comparisons, POC versus future intended
+  use, non-goals and proposed risk/stopping controls. No clinical/legal clearance.
+- NHRC eLibrary full guidance timed out and NHRC-hosted copy failed; DDA catalogue,
+  record and directive opens failed. After two genuine attempts, labelled workaround
+  is indexed primary text and institution-owned scope statement, with jurisdiction,
+  current procedural details and software classification UNVERIFIED. Initial NIC
+  law PDF returned 404; followed Law Commission's government link and inspected text.
+- Applied Firecrawl search/scrape skills; status still zero credits. Continued the
+  earlier labelled web-tool fallback, no account/auth/billing changes. Registered
+  access dates, primary URLs and limits; no photos or patient data downloaded.
+- Wrote ADR-004 Accepted (autopilot) — pending human review and queued institutional
+  governance plus NHRC/privacy/DDA gaps. No real-data acquisition decision changed.
+- Wrote phase-0 synthesis and M0 HANDOFF with deliverable/acceptance mapping, top
+  five uncertainties and review focus. Updated README/research index and removed
+  stale pending-methods/framing wording. No training or app implementation.
+- Added a meaningful source-register citation coverage test; preserved all existing
+  tests. Observed all 5 tests PASS after final handoff edits. check.sh exit 0 /
+  RESULT PASS with ML and Android SKIPPED because neither project exists. No APK,
+  parity, model/clinical performance or legal validation claimed. URL coverage
+  audit and git diff/staged whitespace checks passed.
+- Logical research/handoff commit: 29dc47b. End-of-iteration STATUS/JOURNAL/NEXT_ACTION
+  request REVIEW M0. Harness must run review/tests of record and close the gate;
+  no review.sh, REVIEW/CHECK/GATE writes, protected edits, toolchain installs,
+  external messages, pushes, publication or M1 work performed.
