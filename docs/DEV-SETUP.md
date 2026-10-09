@@ -210,6 +210,34 @@ Android skipped, RESULT PASS. Root checks: 6 passed in 0.062s. Graph copies,
 per-component diagnostics and library artifacts stay under ignored data/.
 See [ML-EXPORT.md](ML-EXPORT.md); no M4 completion or APK evidence.
 
+## M4 BatchNorm-preserving diagnostics — observed 2026-10-09 UTC
+
+No toolchain/dependency installation, checkpoint or dataset acquisition. The
+existing 42-package hash-locked environment ran, from the repository root:
+
+```bash
+ml/.venv/bin/python -m pytest ml/tests/test_export_batchnorm.py -q
+ml/.venv/bin/python -m numbra_ml.export_batchnorm --output data/exports/PLACEHOLDER-m4-batchnorm1
+ml/.venv/bin/python -m numbra_ml.export_batchnorm --output data/exports/PLACEHOLDER-m4-batchnorm2
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+First subset run: 4 passed in 5.69s. Inspection exposed mismatched combined
+BatchNorm/activation boundaries in the first diagnostic report; its boundary
+evidence is explicitly INVALID. Corrected pre-activation hooks and two regression
+fixtures gave 6 passed in 5.85s. Both diagnostic CLI runs exit 0 to mean evidence
+generated, **not** acceptance; every original-graph training comparison fails.
+The corrected report retains all 87 boundaries. Saved states/graphs/details and
+source hashes were separately verified against that aggregate. Models and
+per-component outputs remain ignored, including the unchanged first-run details.
+
+Full check: **318 ML tests passed in 39.53s**, 34 legacy-export deprecation
+warnings; Android skipped, RESULT PASS. Root checks: **6 passed in 0.064s**.
+ORT warns that all-profile serialized optimized graphs may be hardware-specific;
+these are diagnostic copies labelled never bundle, not Android artifacts.
+See [export evidence](ML-EXPORT.md) and ADR-014. No M4 completion or APK claim.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

@@ -196,17 +196,86 @@ remaining runtime/head discrepancies reach 104.171941/57.480897. Both feature
 and head paths need attention; optimisation settings alone do not solve INT8 drift.
 No new quantisation fit, export acceptance or deployment selection was made.
 
+## BatchNorm-preserving training experiment
+
+[ADR-014](../decisions/ADR-014-batchnorm-preserving-export.md) predeclares this
+graph experiment. In the existing pinned environment, run to a new output:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_batchnorm --output data/exports/PLACEHOLDER-m4-batchnorm2
+```
+
+This uses the same selected saved baseline, original fits/interface/preprocessing
+and ADR-011 budgets. The legacy opset-17 exporter disables constant folding and
+uses PRESERVE while every module is eval. All 34 inference-only BatchNormalization
+nodes survive export. At disabled ORT optimisation, both original and head-tapped
+serialized runtime graphs retain all 34. At all optimisation, both have zero.
+Serialized optimized graphs are **PLACEHOLDER diagnostic, never bundle** copies;
+ORT warns that the all profile's NCHWc graph may depend on the current hardware.
+The folded control before diagnostic marking is byte-identical to the original
+retained float export. Full saved model state hashes before/after are identical.
+There is no quantisation fit or frozen evaluation/stress inference.
+
+[Corrected aggregate evidence](../ml/reports/PLACEHOLDER-m4-batchnorm2.json):
+all 152 training index images, the folded/preserved graphs at both profiles.
+Every original-graph comparison still fails both numeric budgets, with zero
+threshold flips. Head instrumentation logit changes are zero on these inputs.
+
+| Training-only graph / ORT profile | Max raw error | Max probability error | Raw/probability violations | Flips |
+| --- | ---: | ---: | ---: | ---: |
+| Folded / disabled | 0.000365257 | 0.00000465196 | 40 / 50 | 0 |
+| Preserved / disabled | 0.000240326 | 0.00000279320 | 26 / 29 | 0 |
+| Folded or preserved / all (each) | 0.000323296 | 0.00000411753 | 36 / 44 | 0 |
+
+The preserved diagnostic graph is 6,188,494 bytes; the marked folded control is
+6,095,644 bytes (original before marking: 6,095,579). Both are float graphs, not
+quantised deployment candidates. Preserved/disabled maximum feature drift is
+0.0000141859, induced saved-Python-head error 0.000228882, and remaining runtime
+head discrepancy 0.0000152588. Maxima may occur on different components; they do
+not form an exact decomposition of the worst logit error. Keeping BN separate
+reduces the observed maxima but does not solve the original parity contract.
+
+The corrected run also taps all **53 Conv and 34 BatchNormalization** boundaries
+at disabled optimisation, matched by saved weight names. Ordinary module-output
+hooks match Conv/plain BN; timm BatchNormAct2d instead requires a pre-hook at its
+`drop` input, after normalization and before activation. Copies are taken before
+in-place activation; all hooks are removed even on exceptions. Tests cover both
+ReLU and HardSwish on deliberately negative activations. Every matched boundary
+appears in the aggregate; no favourable layer subset is selected.
+
+| Example boundary (training only) | Max absolute local output difference |
+| --- | ---: |
+| Stem convolution | 0.000000476837 |
+| Stem BatchNormalization, before activation | 0.00000667572 |
+| First depthwise convolution | 0.000000953674 |
+| Its BatchNormalization, before activation | 0.0000457764 |
+| Final feature-head convolution | 0.0000176430 |
+
+These compare accumulated outputs from independently executed graphs. They do
+not separate propagated upstream error from operator-local arithmetic. Boundary
+instrumentation changes original logits by zero on all training inputs, but
+equivalence on unseen inputs is unverified. Same-input operator replay is the
+next diagnostic step before attributing causation or choosing precision changes.
+
+**Withdrawn boundary evidence:** the
+[first aggregate](../ml/reports/PLACEHOLDER-m4-batchnorm1.json) explicitly marks its
+boundary attribution INVALID. Initial Python hooks captured BatchNormAct2d
+outputs after activation against ONNX values before activation, yielding false
+large differences. Original ignored report/details are retained; the tracked
+copy adds a reporting erratum and original-report hash. Its original-graph
+parity and head-feature diagnostics remain valid and match the corrected run.
+No budget, model, fit or input was changed for the corrected rerun.
+
 ## Remaining M4 work
 
-Declare and investigate an export preserving the saved backbone's 34 eval-mode
-BatchNorm2d operations: the retained float graph has none, following export-time
-folding. Verify actual graph node presence and prevent runtime re-fusion. This
-is a causal hypothesis, not an observed fix. Use training-only parity first;
-decide precision/quantised operator scope from training evidence before the next
-frozen evaluation. Keep every failure, original fits/inputs and ADR-011 budgets.
-The generated toy model remains diagnostic only. No passing deployment artifact,
-runtime-metadata package or M4 review request exists. Android runtime/ABI/decode
-and device performance remain M5–M8 work.
+BatchNorm preservation alone does not meet parity. Predeclare same-input
+Conv/BatchNorm operator replay to distinguish local arithmetic from propagated
+drift, starting at the stem/first depthwise block identified by training taps.
+Choose any arithmetic or mixed-precision/quantised scope using training evidence
+before the next frozen evaluation. Keep every failure, the original reference,
+fits/inputs and ADR-011 budgets. The generated toy model remains diagnostic only.
+No passing deployment artifact, runtime-metadata package or M4 review request
+exists. Android runtime/ABI/decode and device performance remain M5–M8 work.
 
 ## Open questions
 

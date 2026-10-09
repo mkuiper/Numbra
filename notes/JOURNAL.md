@@ -637,3 +637,45 @@ CONTINUE. No new dependency/toolchain/dataset/checkpoint acquisition; existing
 42-package export lock unchanged. No patient data, weights or graph copies in git;
 no protected edits, review.sh run, publishing, push or messages. Baseline parity,
 clinical data/validation, weight notices and mobile execution remain open.
+
+## 2026-10-09T15:18:10Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent M4 review folder,
+  AGENTS and relevant ADRs. No new harness message; M4 still incomplete.
+- Predeclared ADR-014 and queued human review before executing the new graph
+  experiment. Added BatchNorm-preserving export and optional actual ORT graph
+  serialization/audit; retained original strict runtime interface and budgets.
+- Exported same saved selected baseline with folding disabled and eval PRESERVE.
+  Verified 34 inference BN nodes in export and disabled sessions, zero with all
+  optimisation; fresh unmarked folded control matches retained graph bytes.
+  Saved model state is unchanged. No new quantisation fitting or frozen/stress
+  inference, retraining, weight acquisition, fit/preprocessing/budget change.
+- First new suite 4 PASS (5.69s). First diagnostic command exit 0 generated only
+  diagnostic evidence. Inspection caught a Builder error: combined timm BN/act
+  Python outputs were post-activation while ONNX BN taps were pre-activation.
+  First tracked report's boundary attribution explicitly marked INVALID, with
+  erratum and original-report hash; ignored original report/details retained.
+  Original-graph parity/head-feature evidence unaffected. Corrected pre-hooks at
+  drop input, copied before in-place activation; added negative-input ReLU and
+  HardSwish regression tests. Expanded suite 6 PASS (5.85s, 16 warnings).
+- Corrected rerun: ml/reports/PLACEHOLDER-m4-batchnorm2.json, all 152 training
+  components, DIAGNOSTIC ONLY exit 0. Preserved/disabled max raw/probability drift
+  0.000240326/0.00000279320, still FAIL (26/29 violations) and zero flips. Folded/
+  disabled 0.000365257/0.00000465196, 40/50 violations; both all profiles
+  0.000323296/0.00000411753, 36/44 violations. Preserved graph 6,188,494 bytes.
+- All 87 corrected boundaries included: 53 Conv, 34 BN. Stem Conv drift reaches
+  0.000000476837, stem BN 0.00000667572, first depthwise Conv 0.000000953674, its
+  BN 0.0000457764. Original/instrumented logits match on training inputs. These
+  are accumulated graph differences, not isolated local arithmetic. Same-input
+  kernel replay is the next declared diagnostic step. No deployed graph chosen.
+- Checked corrected aggregate's source/model/run/graph/detail hashes against
+  current files. Updated ML-EXPORT, ML README, DEV-SETUP, ADR-014 and HUMAN-QUEUE;
+  recorded the diagnostic error, correction, measured failures and limitations.
+- bash scripts/check.sh exit 0: 318 ML tests PASS in 39.53s, 34 legacy exporter
+  deprecation warnings; Android SKIPPED, RESULT PASS. Root contract checks 6 PASS
+  in 0.064s; git diff --check clean. No existing test skipped/weakened. ORT warns
+  that all-profile serialized graphs can be hardware-specific; diagnostic copies
+  are labelled never bundle. No JDK/SDK/dependency/checkpoint/dataset acquisition.
+- M4 remains open, no HANDOFF/review request or APK. ADR-012 labelled toy pipeline
+  workaround remains in force. NEXT_ACTION CONTINUE. No protected files edited,
+  reviews/tests-of-record logs/gates written, publishing, pushing or messaging.

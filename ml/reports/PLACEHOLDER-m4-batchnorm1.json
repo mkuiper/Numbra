@@ -1,0 +1,2203 @@
+{
+  "artifacts": {
+    "batchnorm_preserved": {
+      "graph": {
+        "bytes": 6188494,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "fc064e7aceb82df1c449681bb94c9749a0da352d81f1576e759c4eeca1ee4054",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "instrumented_graph": {
+        "bytes": 6188551,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "d0b23dd539a61e7d98703fd9b3bc504dcfd85227bf9f7f8c257cc7dd13e2d3c5",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "profiles": {
+        "all": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.0022076231154864357,
+              "mean": 0.0008765847406120073
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.0003223419189453125,
+              "mean": 7.005428013048674e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 2.1219253540039062e-05,
+              "mean": 8.990105829740825e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 2.911679160888525e-06,
+              "mean": 1.1425555993363041e-06
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.1444091796875e-05,
+              "mean": 1.976364537289268e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 4.11753037443674e-06,
+            "max_raw_logit_absolute_error": 0.00032329559326171875,
+            "mean_calibrated_probability_absolute_error": 8.093640325889851e-07,
+            "mean_raw_logit_absolute_error": 7.000408674541272e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 44,
+            "raw_budget_exceeded_count": 36,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "runtime_graphs": {
+            "instrumented": {
+              "bytes": 6108488,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "8d207ca627fc3b89ebd9e948e3743f6c0d08ecec12299246ab7a6446fa341869",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "original": {
+              "bytes": 6108431,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "c728b79423a739672b692ce60aa5455881bf4a15d2080545ef2026674cbfe791",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "disabled": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.001314776330424805,
+              "mean": 0.0007021716725609136
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.0002288818359375,
+              "mean": 5.544800507394891e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 1.4185905456542969e-05,
+              "mean": 7.165497855136269e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 1.7523760078574924e-06,
+              "mean": 9.133259050223143e-07
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.52587890625e-05,
+              "mean": 2.5033950805664062e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 2.7932031085864395e-06,
+            "max_raw_logit_absolute_error": 0.000240325927734375,
+            "mean_calibrated_probability_absolute_error": 6.531008448442099e-07,
+            "mean_raw_logit_absolute_error": 5.586837467394377e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 29,
+            "raw_budget_exceeded_count": 26,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "runtime_graphs": {
+            "instrumented": {
+              "bytes": 6192463,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 6,
+                "BatchNormalization": 34,
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 6,
+                "BatchNormalization": 34,
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "6cbd2d81e265cb2153ce7972784feed4771c291c5550e90200893dcd716b1669",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "original": {
+              "bytes": 6192406,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 6,
+                "BatchNormalization": 34,
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 6,
+                "BatchNormalization": 34,
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "8d5ac32860bc978a8888a2948e68891bb536aebeca859064f29f6d297ad80c3c",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        }
+      }
+    },
+    "folded_control": {
+      "graph": {
+        "bytes": 6095644,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "f685e8bfd21f3a6f568ba2d4f239b06c8a308d66c83d9fb30c2ad40887988569",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "instrumented_graph": {
+        "bytes": 6095701,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "017885f26484ce8cfd69e6f902a50796a7890ad9c2f048d3b776ded11ff8ba6a",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "profiles": {
+        "all": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.0022076231154864357,
+              "mean": 0.0008765847406120073
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.0003223419189453125,
+              "mean": 7.005428013048674e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 2.1219253540039062e-05,
+              "mean": 8.990105829740825e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 2.911679160888525e-06,
+              "mean": 1.1425555993363041e-06
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.1444091796875e-05,
+              "mean": 1.976364537289268e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 4.11753037443674e-06,
+            "max_raw_logit_absolute_error": 0.00032329559326171875,
+            "mean_calibrated_probability_absolute_error": 8.093640325889851e-07,
+            "mean_raw_logit_absolute_error": 7.000408674541272e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 44,
+            "raw_budget_exceeded_count": 36,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "runtime_graphs": {
+            "instrumented": {
+              "bytes": 6105227,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "4580412aeececb9bc44a6d0fe92213106174d8eee8757660a63dd6dd3b84f7bc",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "original": {
+              "bytes": 6105170,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 19,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "ReorderInput": 28,
+                "ReorderOutput": 29,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "e7c8a400306d2cfd461fcceb9b368e09d663edf2205c7271e692667528f5cda9",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        },
+        "disabled": {
+          "instrumented_attribution": {
+            "affine_feature_error_bound": {
+              "max": 0.002552905328133571,
+              "mean": 0.0008614343653311204
+            },
+            "induced_python_head_absolute_error": {
+              "max": 0.00036144256591796875,
+              "mean": 6.856102692453485e-05
+            },
+            "instrumentation_absolute_logit_change": {
+              "max": 0.0,
+              "mean": 0.0
+            },
+            "max_feature_absolute_error": {
+              "max": 2.3365020751953125e-05,
+              "mean": 8.909914054368672e-06
+            },
+            "mean_feature_absolute_error": {
+              "max": 3.397317527742416e-06,
+              "mean": 1.1329552308361308e-06
+            },
+            "tapped_runtime_vs_python_head_absolute_error": {
+              "max": 1.1444091796875e-05,
+              "mean": 2.2398798089278373e-06
+            }
+          },
+          "original_graph_training_parity": {
+            "below_threshold_to_positive_count": 0,
+            "budget": {
+              "conservative_margin": 0.0,
+              "probability_absolute": 1e-06,
+              "raw_absolute": 0.0001
+            },
+            "comparison": "calibrated score >= frozen threshold",
+            "conservative_margin_added_referrals": 0,
+            "conservative_margin_lost_reference_referrals": 0,
+            "frozen_threshold_flip_count": 0,
+            "max_calibrated_probability_absolute_error": 4.651959891854851e-06,
+            "max_raw_logit_absolute_error": 0.00036525726318359375,
+            "mean_calibrated_probability_absolute_error": 8.019644706412534e-07,
+            "mean_raw_logit_absolute_error": 6.856102692453485e-05,
+            "n": 152,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "positive_to_below_threshold_count": 0,
+            "probability_budget_exceeded_count": 50,
+            "raw_budget_exceeded_count": 40,
+            "scope": "numerical parity of same tensors; not clinical validation or device performance",
+            "status": "FAIL",
+            "temperature": 19.150006376043688,
+            "threshold": 0.40079881738785716,
+            "version": "1.0.0"
+          },
+          "runtime_graphs": {
+            "instrumented": {
+              "bytes": 6099432,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 6,
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 6,
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "949060c6ffb60330fdb2bbb7718d2abe79031f5c5d1ca21e18f242faac8351e6",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            },
+            "original": {
+              "bytes": 6099375,
+              "int8_weight_qdq_operators": {},
+              "ir_version": 8,
+              "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+              "operators": {
+                "Add": 6,
+                "Conv": 53,
+                "Div": 1,
+                "Flatten": 1,
+                "Gemm": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "opsets": {
+                "ai.onnx": 17,
+                "ai.onnx.ml": 5,
+                "ai.onnx.preview.training": 1,
+                "ai.onnx.training": 1,
+                "com.microsoft": 1,
+                "com.microsoft.experimental": 1,
+                "com.microsoft.nchwc": 1,
+                "org.pytorch.aten": 1
+              },
+              "other_float_or_structural_operators": {
+                "Add": 6,
+                "Div": 1,
+                "Flatten": 1,
+                "GlobalAveragePool": 1,
+                "HardSigmoid": 28,
+                "Mul": 28,
+                "ReduceMean": 9,
+                "Relu": 14,
+                "Squeeze": 1,
+                "Sub": 1
+              },
+              "remaining_float_weight_operators": {
+                "Conv": 53,
+                "Gemm": 1
+              },
+              "sha256": "1fcf83019b199b52c3f41057ef94de90cceee9f78f5e009e10746f3a560d274a",
+              "size_pass": true,
+              "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+            }
+          },
+          "warning": "attribution uses an extra graph output; original parity is measured separately"
+        }
+      }
+    }
+  },
+  "boundary_diagnostics": {
+    "boundaries": {
+      "backbone.blocks.0.0.bn1": {
+        "max_absolute_error": 38.69905090332031,
+        "mean_absolute_error": 0.3118536569167358,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          16,
+          56,
+          56
+        ]
+      },
+      "backbone.blocks.0.0.bn2": {
+        "max_absolute_error": 1.9073486328125e-05,
+        "mean_absolute_error": 8.769179612907636e-07,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          16,
+          56,
+          56
+        ]
+      },
+      "backbone.blocks.0.0.conv_dw": {
+        "max_absolute_error": 9.5367431640625e-07,
+        "mean_absolute_error": 5.613109156826819e-09,
+        "operator": "Conv",
+        "shape": [
+          1,
+          16,
+          56,
+          56
+        ]
+      },
+      "backbone.blocks.0.0.conv_pw": {
+        "max_absolute_error": 6.556510925292969e-07,
+        "mean_absolute_error": 2.381926377071309e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          16,
+          56,
+          56
+        ]
+      },
+      "backbone.blocks.0.0.se.conv_expand": {
+        "max_absolute_error": 2.384185791015625e-07,
+        "mean_absolute_error": 9.11715783570942e-09,
+        "operator": "Conv",
+        "shape": [
+          1,
+          16,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.0.0.se.conv_reduce": {
+        "max_absolute_error": 9.5367431640625e-07,
+        "mean_absolute_error": 9.286266408468548e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          8,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.1.0.bn1": {
+        "max_absolute_error": 34.42570495605469,
+        "mean_absolute_error": 0.46570692116633117,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          72,
+          56,
+          56
+        ]
+      },
+      "backbone.blocks.1.0.bn2": {
+        "max_absolute_error": 19.250621795654297,
+        "mean_absolute_error": 0.36650266109022417,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          72,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.0.bn3": {
+        "max_absolute_error": 1.6510486602783203e-05,
+        "mean_absolute_error": 1.2734488961512728e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          24,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.0.conv_dw": {
+        "max_absolute_error": 6.4373016357421875e-06,
+        "mean_absolute_error": 1.1775669328967768e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          72,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.0.conv_pw": {
+        "max_absolute_error": 8.344650268554688e-06,
+        "mean_absolute_error": 2.2125701642051762e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          72,
+          56,
+          56
+        ]
+      },
+      "backbone.blocks.1.0.conv_pwl": {
+        "max_absolute_error": 4.276633262634277e-06,
+        "mean_absolute_error": 2.64894089337007e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          24,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.1.bn1": {
+        "max_absolute_error": 20.273334503173828,
+        "mean_absolute_error": 0.34852667162418494,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          88,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.1.bn2": {
+        "max_absolute_error": 35.808570861816406,
+        "mean_absolute_error": 0.7515706181017867,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          88,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.1.bn3": {
+        "max_absolute_error": 6.198883056640625e-05,
+        "mean_absolute_error": 2.0101540969689004e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          24,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.1.conv_dw": {
+        "max_absolute_error": 3.7550926208496094e-06,
+        "mean_absolute_error": 7.890894756904363e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          88,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.1.conv_pw": {
+        "max_absolute_error": 4.291534423828125e-06,
+        "mean_absolute_error": 2.512892621424568e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          88,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.1.1.conv_pwl": {
+        "max_absolute_error": 7.957220077514648e-06,
+        "mean_absolute_error": 4.1080301803226384e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          24,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.2.0.bn1": {
+        "max_absolute_error": 38.356910705566406,
+        "mean_absolute_error": 0.6951420160980754,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          96,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.2.0.bn2": {
+        "max_absolute_error": 24.685588836669922,
+        "mean_absolute_error": 0.41078555766107283,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          96,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.0.bn3": {
+        "max_absolute_error": 4.673004150390625e-05,
+        "mean_absolute_error": 3.170503192822194e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          40,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.0.conv_dw": {
+        "max_absolute_error": 5.841255187988281e-06,
+        "mean_absolute_error": 2.0562702811386724e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          96,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.0.conv_pw": {
+        "max_absolute_error": 9.298324584960938e-06,
+        "mean_absolute_error": 4.6648288394481645e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          96,
+          28,
+          28
+        ]
+      },
+      "backbone.blocks.2.0.conv_pwl": {
+        "max_absolute_error": 1.8477439880371094e-06,
+        "mean_absolute_error": 1.3462041757753962e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          40,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.0.se.conv_expand": {
+        "max_absolute_error": 1.9073486328125e-06,
+        "mean_absolute_error": 1.4195265656892667e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          96,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.2.0.se.conv_reduce": {
+        "max_absolute_error": 5.7220458984375e-06,
+        "mean_absolute_error": 5.962006469959752e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          24,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.2.1.bn1": {
+        "max_absolute_error": 28.6997127532959,
+        "mean_absolute_error": 0.8669060371541385,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.1.bn2": {
+        "max_absolute_error": 37.85565948486328,
+        "mean_absolute_error": 0.8395798533853345,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.1.bn3": {
+        "max_absolute_error": 4.9591064453125e-05,
+        "mean_absolute_error": 2.85462964227396e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          40,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.1.conv_dw": {
+        "max_absolute_error": 1.895427703857422e-05,
+        "mean_absolute_error": 1.71591842519825e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.1.conv_pw": {
+        "max_absolute_error": 8.404254913330078e-06,
+        "mean_absolute_error": 5.95273223437179e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.1.conv_pwl": {
+        "max_absolute_error": 5.252659320831299e-07,
+        "mean_absolute_error": 3.617478763840877e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          40,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.1.se.conv_expand": {
+        "max_absolute_error": 2.86102294921875e-06,
+        "mean_absolute_error": 1.9011888326260084e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          240,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.2.1.se.conv_reduce": {
+        "max_absolute_error": 1.6927719116210938e-05,
+        "mean_absolute_error": 7.17059696111583e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          64,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.2.2.bn1": {
+        "max_absolute_error": 19.44402313232422,
+        "mean_absolute_error": 0.9267064287659954,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.2.bn2": {
+        "max_absolute_error": 54.80312728881836,
+        "mean_absolute_error": 0.8729773643144938,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.2.bn3": {
+        "max_absolute_error": 6.747245788574219e-05,
+        "mean_absolute_error": 2.800393656891257e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          40,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.2.conv_dw": {
+        "max_absolute_error": 1.5735626220703125e-05,
+        "mean_absolute_error": 1.8798415414843294e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.2.conv_pw": {
+        "max_absolute_error": 1.3470649719238281e-05,
+        "mean_absolute_error": 8.079493962144769e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          240,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.2.conv_pwl": {
+        "max_absolute_error": 7.003545761108398e-07,
+        "mean_absolute_error": 5.108677972729275e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          40,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.2.2.se.conv_expand": {
+        "max_absolute_error": 1.6927719116210938e-05,
+        "mean_absolute_error": 3.1173143437818477e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          240,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.2.2.se.conv_reduce": {
+        "max_absolute_error": 2.5272369384765625e-05,
+        "mean_absolute_error": 9.544455679133534e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          64,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.3.0.bn1": {
+        "max_absolute_error": 18.24748420715332,
+        "mean_absolute_error": 0.34022014649541765,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          120,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.0.bn2": {
+        "max_absolute_error": 14.747517585754395,
+        "mean_absolute_error": 0.3835729218478622,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          120,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.0.bn3": {
+        "max_absolute_error": 7.343292236328125e-05,
+        "mean_absolute_error": 4.776812985760868e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          48,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.0.conv_dw": {
+        "max_absolute_error": 2.485513687133789e-05,
+        "mean_absolute_error": 2.460649755801081e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          120,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.0.conv_pw": {
+        "max_absolute_error": 1.2576580047607422e-05,
+        "mean_absolute_error": 1.0506762919845147e-06,
+        "operator": "Conv",
+        "shape": [
+          1,
+          120,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.0.conv_pwl": {
+        "max_absolute_error": 3.691762685775757e-06,
+        "mean_absolute_error": 2.527668517020961e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          48,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.0.se.conv_expand": {
+        "max_absolute_error": 1.6689300537109375e-06,
+        "mean_absolute_error": 1.957919857088934e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          120,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.3.0.se.conv_reduce": {
+        "max_absolute_error": 6.079673767089844e-06,
+        "mean_absolute_error": 3.742464430519919e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          32,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.3.1.bn1": {
+        "max_absolute_error": 14.0953950881958,
+        "mean_absolute_error": 0.4779220868038309,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          144,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.1.bn2": {
+        "max_absolute_error": 16.702800750732422,
+        "mean_absolute_error": 0.8976979737048603,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          144,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.1.bn3": {
+        "max_absolute_error": 3.7550926208496094e-05,
+        "mean_absolute_error": 2.181670579500821e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          48,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.1.conv_dw": {
+        "max_absolute_error": 2.4378299713134766e-05,
+        "mean_absolute_error": 1.643304873672835e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          144,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.1.conv_pw": {
+        "max_absolute_error": 1.3649463653564453e-05,
+        "mean_absolute_error": 1.0654553969516106e-06,
+        "operator": "Conv",
+        "shape": [
+          1,
+          144,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.1.conv_pwl": {
+        "max_absolute_error": 3.045424818992615e-07,
+        "mean_absolute_error": 2.1959206242469277e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          48,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.3.1.se.conv_expand": {
+        "max_absolute_error": 1.4901161193847656e-06,
+        "mean_absolute_error": 1.1465002984157084e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          144,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.3.1.se.conv_reduce": {
+        "max_absolute_error": 2.652406692504883e-06,
+        "mean_absolute_error": 3.4980230817669317e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          40,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.4.0.bn1": {
+        "max_absolute_error": 22.733612060546875,
+        "mean_absolute_error": 0.8862066901920695,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          288,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.4.0.bn2": {
+        "max_absolute_error": 7.328333854675293,
+        "mean_absolute_error": 0.32820917159114077,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          288,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.0.bn3": {
+        "max_absolute_error": 6.198883056640625e-05,
+        "mean_absolute_error": 3.819022111436786e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          96,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.0.conv_dw": {
+        "max_absolute_error": 3.0994415283203125e-05,
+        "mean_absolute_error": 1.1203133665035103e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          288,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.0.conv_pw": {
+        "max_absolute_error": 1.2606382369995117e-05,
+        "mean_absolute_error": 1.0847067990280158e-06,
+        "operator": "Conv",
+        "shape": [
+          1,
+          288,
+          14,
+          14
+        ]
+      },
+      "backbone.blocks.4.0.conv_pwl": {
+        "max_absolute_error": 1.080334186553955e-06,
+        "mean_absolute_error": 8.490172446788774e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          96,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.0.se.conv_expand": {
+        "max_absolute_error": 4.5299530029296875e-06,
+        "mean_absolute_error": 2.793647751909251e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          288,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.4.0.se.conv_reduce": {
+        "max_absolute_error": 1.0251998901367188e-05,
+        "mean_absolute_error": 6.659758040322025e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          72,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.4.1.bn1": {
+        "max_absolute_error": 24.0103759765625,
+        "mean_absolute_error": 0.5231336256499778,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.1.bn2": {
+        "max_absolute_error": 14.953356742858887,
+        "mean_absolute_error": 0.6895419698744149,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.1.bn3": {
+        "max_absolute_error": 6.318092346191406e-05,
+        "mean_absolute_error": 2.704857048318448e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          96,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.1.conv_dw": {
+        "max_absolute_error": 1.811981201171875e-05,
+        "mean_absolute_error": 1.2205527021621621e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.1.conv_pw": {
+        "max_absolute_error": 1.6301870346069336e-05,
+        "mean_absolute_error": 1.193789957556744e-06,
+        "operator": "Conv",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.1.conv_pwl": {
+        "max_absolute_error": 4.3213367462158203e-07,
+        "mean_absolute_error": 3.662359832467908e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          96,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.1.se.conv_expand": {
+        "max_absolute_error": 3.337860107421875e-06,
+        "mean_absolute_error": 2.44280192674252e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          576,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.4.1.se.conv_reduce": {
+        "max_absolute_error": 6.198883056640625e-06,
+        "mean_absolute_error": 6.580159915012051e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          144,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.4.2.bn1": {
+        "max_absolute_error": 24.441986083984375,
+        "mean_absolute_error": 0.940188792956626,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.2.bn2": {
+        "max_absolute_error": 16.7222900390625,
+        "mean_absolute_error": 1.3645355201116458,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.2.bn3": {
+        "max_absolute_error": 6.183981895446777e-05,
+        "mean_absolute_error": 2.631370883466065e-06,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          96,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.2.conv_dw": {
+        "max_absolute_error": 1.633167266845703e-05,
+        "mean_absolute_error": 1.1176019477439743e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.2.conv_pw": {
+        "max_absolute_error": 1.4543533325195312e-05,
+        "mean_absolute_error": 1.345022511783475e-06,
+        "operator": "Conv",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.2.conv_pwl": {
+        "max_absolute_error": 4.6938657760620117e-07,
+        "mean_absolute_error": 2.9159566523488177e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          96,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.4.2.se.conv_expand": {
+        "max_absolute_error": 3.337860107421875e-06,
+        "mean_absolute_error": 1.8220563686033437e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          576,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.4.2.se.conv_reduce": {
+        "max_absolute_error": 5.7220458984375e-06,
+        "mean_absolute_error": 5.667023830475253e-07,
+        "operator": "Conv",
+        "shape": [
+          1,
+          144,
+          1,
+          1
+        ]
+      },
+      "backbone.blocks.5.0.bn1": {
+        "max_absolute_error": 31.766769409179688,
+        "mean_absolute_error": 4.251232636080177,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.blocks.5.0.conv": {
+        "max_absolute_error": 1.8477439880371094e-05,
+        "mean_absolute_error": 1.379847412608889e-06,
+        "operator": "Conv",
+        "shape": [
+          1,
+          576,
+          7,
+          7
+        ]
+      },
+      "backbone.bn1": {
+        "max_absolute_error": 9.206092834472656,
+        "mean_absolute_error": 0.34480695429134284,
+        "operator": "BatchNormalization",
+        "shape": [
+          1,
+          16,
+          112,
+          112
+        ]
+      },
+      "backbone.conv_head": {
+        "max_absolute_error": 1.7642974853515625e-05,
+        "mean_absolute_error": 2.034996190272259e-06,
+        "operator": "Conv",
+        "shape": [
+          1,
+          1024,
+          1,
+          1
+        ]
+      },
+      "backbone.conv_stem": {
+        "max_absolute_error": 4.76837158203125e-07,
+        "mean_absolute_error": 1.79343031101235e-08,
+        "operator": "Conv",
+        "shape": [
+          1,
+          16,
+          112,
+          112
+        ]
+      }
+    },
+    "components": 152,
+    "instrumentation_absolute_logit_change": {
+      "max": 0.0,
+      "mean": 0.0
+    },
+    "instrumented_graph": {
+      "bytes": 6196407,
+      "int8_weight_qdq_operators": {},
+      "ir_version": 8,
+      "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+      "operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Constant": 1,
+        "Conv": 53,
+        "Div": 1,
+        "Flatten": 1,
+        "Gemm": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 9,
+        "HardSwish": 19,
+        "Mul": 9,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "opsets": {
+        "ai.onnx": 17
+      },
+      "other_float_or_structural_operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Constant": 1,
+        "Div": 1,
+        "Flatten": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 9,
+        "HardSwish": 19,
+        "Mul": 9,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "remaining_float_weight_operators": {
+        "Conv": 53,
+        "Gemm": 1
+      },
+      "sha256": "4b142d384b99efb865750404e202090a83e11ee22e0864d8f2241c5b728a2d12",
+      "size_pass": true,
+      "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+    },
+    "notice": "PLACEHOLDER diagnostic graph; never bundle",
+    "optimisation": "disabled",
+    "runtime_graph": {
+      "bytes": 6200319,
+      "int8_weight_qdq_operators": {},
+      "ir_version": 8,
+      "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+      "operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Conv": 53,
+        "Div": 1,
+        "Flatten": 1,
+        "Gemm": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 28,
+        "Mul": 28,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "opsets": {
+        "ai.onnx": 17,
+        "ai.onnx.ml": 5,
+        "ai.onnx.preview.training": 1,
+        "ai.onnx.training": 1,
+        "com.microsoft": 1,
+        "com.microsoft.experimental": 1,
+        "com.microsoft.nchwc": 1,
+        "org.pytorch.aten": 1
+      },
+      "other_float_or_structural_operators": {
+        "Add": 6,
+        "BatchNormalization": 34,
+        "Div": 1,
+        "Flatten": 1,
+        "GlobalAveragePool": 1,
+        "HardSigmoid": 28,
+        "Mul": 28,
+        "ReduceMean": 9,
+        "Relu": 14,
+        "Squeeze": 1,
+        "Sub": 1
+      },
+      "remaining_float_weight_operators": {
+        "Conv": 53,
+        "Gemm": 1
+      },
+      "sha256": "4f55a9763f09136b45909bf4945827b9ca38f6b8df799c4db902d24eaaf84129",
+      "size_pass": true,
+      "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+    },
+    "status": "INVALID \u2014 mismatched BatchNormAct2d activation boundary; do not use",
+    "warning": "local accumulated boundary drift; taps can affect execution; not causal attribution"
+  },
+  "created_utc": "2026-10-09T15:10:11.408342+00:00",
+  "diagnostic_details_sha256": "9ff3e5f930bae48a155df18df7adb66321732cc3d40211bf076230460deb6f07",
+  "environment": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 275HX",
+    "dependencies": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.19.2",
+      "attrs": "25.3.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.2",
+      "coloredlogs": "15.0.1",
+      "filelock": "4.0.12",
+      "flatbuffers": "25.12.19",
+      "fsspec": "2026.9.0",
+      "hf-xet": "1.7.0",
+      "huggingface-hub": "0.36.0",
+      "humanfriendly": "10.0",
+      "idna": "3.20",
+      "iniconfig": "2.1.0",
+      "jsonschema": "4.25.1",
+      "jsonschema-specifications": "2025.9.1",
+      "ml-dtypes": "0.6.0",
+      "mpmath": "1.3.0",
+      "networkx": "3.7",
+      "numpy": "2.2.6",
+      "onnx": "1.19.1",
+      "onnxruntime": "1.23.2",
+      "packaging": "25.0",
+      "pillow": "11.3.0",
+      "pluggy": "1.6.0",
+      "protobuf": "7.36.2",
+      "pytest": "8.4.2",
+      "referencing": "0.36.2",
+      "requests": "2.34.2",
+      "rpds-py": "0.27.1",
+      "safetensors": "0.6.2",
+      "setuptools": "80.9.0",
+      "sympy": "1.14.0",
+      "timm": "1.0.22",
+      "torch": "2.8.0+cpu",
+      "torchvision": "0.23.0+cpu",
+      "tqdm": "4.70.1",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.8.0",
+      "wheel": "0.45.1"
+    },
+    "dependency_lock_sha256": "54022e4eb1ab4fad6d90f65e2f21784411daf7e7875cf5b8f81a75d90f0309cd",
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "export_dependency_lock_sha256": "eb639013b6c6fca1b4cba2e77a19a1cbe098ddf688d13a58463df93714c1f396",
+    "git_commit": "490b979f9abb2995a2f24755a05d606374697897",
+    "git_dirty": true,
+    "logical_cpu_count": 24,
+    "machine": "x86_64",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.12.3",
+    "reproduction_scope": "same pinned environment/hardware; other platforms unverified",
+    "source_files_sha256": {
+      "ml/src/numbra_ml/__init__.py": "c437709a69fabe6a5d5fd2dbc742b1a43cee0056db7640394a397e7a0fba3a45",
+      "ml/src/numbra_ml/dataset.py": "5a6732734ef6198e37b4ea02ae217cd568925cd31209693b6bb0326cff382f79",
+      "ml/src/numbra_ml/evaluation.py": "493aa1be7c014b62ebd98af56c45bfc4aac0cf72d59077de91ff3bf1ed3a15b8",
+      "ml/src/numbra_ml/export.py": "a25f4b8076209edb1ac451e7f8fa0885c6e492934d07997a48c12f327ab57b5f",
+      "ml/src/numbra_ml/export_batchnorm.py": "674fd0d05b7d1420a03b768b492aa7e70bdaecfe48c4fe29b65b3c07979b1e7e",
+      "ml/src/numbra_ml/export_diagnostics.py": "fbe36ab1c0a502c0be6c21be0f484a4a8101dd0b2de29c67ba878adf38f446c0",
+      "ml/src/numbra_ml/manifest.py": "a68b6246dde24481dec928cd73bafc224b084e07873ff3caa9bbc3bae7d3f90b",
+      "ml/src/numbra_ml/parity.py": "185e1361d78be178020fafbbf3c7943a626230e01362b47c013d7e46f68be6d4",
+      "ml/src/numbra_ml/preparation.py": "0e72499c4208882780345f7c633224a18c140d803d57289b5db2e06527677dfd",
+      "ml/src/numbra_ml/prepare.py": "57cc5d9eabd8744419aef42f7616981d67c557d1f130714ec187752fbd567c97",
+      "ml/src/numbra_ml/preprocessing.py": "c9fbe31e531db054e8674d859f2c866ce91f3bbcc7e8b85be3a69147dbe1998a",
+      "ml/src/numbra_ml/pretrained.py": "570868b592338f678b9b83b6605beca9a8b85acdd5a0ebb59c4f29b3105c4bc6",
+      "ml/src/numbra_ml/schema.py": "8d45f5d4fc846508e372f527d87f193bf0f584b9f2a22a4f6a39f577ebaa0c40",
+      "ml/src/numbra_ml/synthetic.py": "a42c55d5c35c6d1406d307fc38a024601a2b7c307c5522dddd194da760e3c0b6",
+      "ml/src/numbra_ml/taxonomy.py": "842352e533ee6f5506e43fb07389a0d02f7e707c3f3a3acc07511a461713ebe5",
+      "ml/src/numbra_ml/train.py": "cff1073528080cdfb0ee2f76d60e14591d644fd4bd4d8fcc1599423f489975d4",
+      "ml/src/numbra_ml/training.py": "1067ca5a5212445369d3a9d6e2dc7e0587490b1054cb2fe454ffdb819ba196ed",
+      "ml/src/numbra_ml/verify.py": "7384905472a9ca5c3962bf4272252cebac6068ed9606f2b0b7e4546e80c09ead"
+    },
+    "source_tree_sha256": "deb5b77a882c23870b6494d6c5f485ac029660c08d7bd1c813b3c16b5d22baac",
+    "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=a1cb3cc05d46d198467bebbb6e8fba50a325d4e7, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.8.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "torch_cpu_capability": "AVX2"
+  },
+  "folded_control_before_diagnostic_marking_sha256": "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35",
+  "folded_control_matches_retained_float": true,
+  "head_sensitivity": {
+    "effective_coefficient_l1": 1362.4646539532419,
+    "features": 1024,
+    "maximum_absolute_effective_coefficient": 59.662623509726096,
+    "maximum_scale": 1.0,
+    "minimum_scale": 0.004729056730866432,
+    "warning": "real-arithmetic affine sensitivity; does not bound float rounding"
+  },
+  "manifest_sha256": "2d141bc62205d88b7116cbe410e9262a96d771dec34c30e88ae6ad9c4bee839e",
+  "model_state_after_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "model_state_before_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+  "preparation_report_sha256": "c8fb349db94a251e7f8c8b0a25335bff973819f2a44e00ba54b7869777883a22",
+  "protocol": {
+    "component_ids_sha256": "b867ec82627f947b268603a763d235dac0ab66444af26e283ba36ca2d802e908",
+    "components": 152,
+    "decision": "ADR-014",
+    "do_constant_folding": false,
+    "execution": "sequential",
+    "expected_batchnorm_nodes": 34,
+    "exporter_utils_sha256": "5262586714b85deb6c24a9c7646cc467a6f4cc6ff890ab0333943f8f70ad9965",
+    "frozen_evaluation_inputs_used": false,
+    "inter_op_threads": 1,
+    "intra_op_threads": 2,
+    "optimisation_levels": [
+      "disabled",
+      "all"
+    ],
+    "quantisation_fit": false,
+    "shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "split": "train",
+    "temperature": 19.150006376043688,
+    "threshold": 0.40079881738785716,
+    "training": "PRESERVE; every module eval"
+  },
+  "reporting_erratum": {
+    "change": "Boundary attribution INVALID: Python BatchNormAct2d module outputs include activation; ONNX taps precede activation. Original-graph parity and saved-head feature attribution remain valid. Ignored original report/details retained unchanged; corrected rerun required.",
+    "original_report_sha256": "3cdf9ff15418795140bc0433717a51e61f11ed3f9d1047f71c3d6d0b21a6d9bd"
+  },
+  "retained_artifacts": {
+    "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b": {
+      "graph": {
+        "bytes": 1861702,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    },
+    "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa": {
+      "graph": {
+        "bytes": 1730515,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        }
+      ]
+    },
+    "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35": {
+      "graph": {
+        "bytes": 6095579,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "float",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        },
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    }
+  },
+  "saved_model_sha256": "734328e3568335b9f415b4ca06b813872a9e43bd432717908bc0f1d4c7e2ae43",
+  "saved_run_sha256": "1d729fba54ecee14b118124531f1c60d5bbe33ceb15e21b90d3182ba7b61fc11",
+  "scope": "PLACEHOLDER training-only graph experiment; never bundle; no clinical/mobile/deployment evidence",
+  "status": "DIAGNOSTIC ONLY",
+  "version": "1.0.0"
+}

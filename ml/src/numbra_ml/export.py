@@ -167,8 +167,10 @@ def session_options(optimisation='all'):
     return options
 
 
-def runtime(path, *, optimisation='all'):
+def runtime(path, *, optimisation='all', optimized_path=None):
     options = session_options(optimisation)
+    if optimized_path is not None:
+        options.optimized_model_filepath = str(optimized_path)
     session = ort.InferenceSession(str(path), sess_options=options, providers=['CPUExecutionProvider'])
     inputs, outputs = session.get_inputs(), session.get_outputs()
     if (len(inputs) != 1 or inputs[0].name != INPUT_NAME or inputs[0].type != 'tensor(float)'

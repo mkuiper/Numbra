@@ -82,4 +82,7 @@ under ignored data/, aggregate reports/model cards under ml/reports/.
 
 See [export and diagnostics](../docs/ML-EXPORT.md) for the fixed M4 budgets,
 retained failed ONNX/INT8 attempts and training-only runtime/head attribution.
-All exports remain **PLACEHOLDER**; diagnostic success does not close M4.
+It also documents BatchNorm-preserving graphs, audits of actual ORT graphs and
+corrected pre-activation boundary taps. These still fail the unchanged baseline
+parity contract. All exports remain **PLACEHOLDER**; diagnostic success does not
+close M4.

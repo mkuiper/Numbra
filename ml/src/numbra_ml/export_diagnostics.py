@@ -82,9 +82,16 @@ def head_sensitivity(head):
 
 
 def diagnose_profile(model, original_path, tapped_path, feature_name, inputs,
-                     *, optimisation, temperature, threshold, budget):
-    original = runtime(original_path, optimisation=optimisation)
-    tapped = ort.InferenceSession(str(tapped_path), sess_options=session_options(optimisation),
+                     *, optimisation, temperature, threshold, budget, audit_directory=None):
+    original_audit = None if audit_directory is None else audit_directory / 'PLACEHOLDER-original-optimized.onnx'
+    tapped_audit = None if audit_directory is None else audit_directory / 'PLACEHOLDER-features-optimized.onnx'
+    if audit_directory is not None:
+        audit_directory.mkdir(parents=True, exist_ok=False)
+    original = runtime(original_path, optimisation=optimisation, optimized_path=original_audit)
+    options = session_options(optimisation)
+    if tapped_audit is not None:
+        options.optimized_model_filepath = str(tapped_audit)
+    tapped = ort.InferenceSession(str(tapped_path), sess_options=options,
                                  providers=['CPUExecutionProvider'])
     ids, reference, candidate, instrumented, rows = [], [], [], [], []
     with torch.inference_mode():
@@ -112,6 +119,9 @@ def diagnose_profile(model, original_path, tapped_path, feature_name, inputs,
                'instrumented_attribution': {key: {'max': max(row[key] for row in rows),
                         'mean': float(np.mean([row[key] for row in rows]))} for key in aggregate_keys},
                'warning': 'attribution uses an extra graph output; original parity is measured separately'}
+    if audit_directory is not None:
+        summary['runtime_graphs'] = {'original': graph_report(original_audit),
+                                    'instrumented': graph_report(tapped_audit)}
     details = {'component_ids': ids, 'python_logits': reference, 'original_onnx_logits': candidate,
                'instrumented_onnx_logits': instrumented, 'feature_attribution': rows, 'parity': parity}
     return summary, details
