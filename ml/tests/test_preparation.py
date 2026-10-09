@@ -3,6 +3,8 @@
 from collections import defaultdict
 from dataclasses import replace
 import hashlib
+from pathlib import Path
+import uuid
 
 import numpy as np
 from PIL import Image
@@ -11,8 +13,8 @@ import pytest
 from numbra_ml.dataset import DataError, ManifestDataset
 from numbra_ml.manifest import ManifestError, read_manifest, validate_manifest, write_manifest
 from numbra_ml.preparation import PreparationConfig, prepare
-from numbra_ml.prepare import main, prepare_run
-from numbra_ml.synthetic import SOURCES, SyntheticConfig, generate
+from numbra_ml.prepare import main, prepare_run, repository_root
+from numbra_ml.synthetic import GENERATOR_VERSION, SOURCES, SyntheticConfig, colour_stratum, generate, shape_mask
 from numbra_ml.taxonomy import LabelFamily, unresolved_label
 
 
@@ -54,6 +56,14 @@ def test_component_splits_are_deterministic_and_isolate_held_out_source(generate
         first, second = pair["records"]
         assert lookup[first].split == lookup[second].split
     assert "PLACEHOLDER" in report["notice"]
+    assert len(report["components"]) == 48  # Distinct invented groups must stay separate.
+    assert report["nearest_unlinked_pair"]["rms_uint8"] > 2
+    for split in ("train", "calibration", "threshold_validation", "test"):
+        counts = report["components_by_split_source_class"][split]
+        assert counts[SOURCES[0]] == counts[SOURCES[1]]
+        assert set(counts[SOURCES[0]]) == {"0", "1"}
+        assert all(count > 0 for count in counts[SOURCES[0]].values())
+        assert counts[SOURCES[2]] == {"0": 0, "1": 0}
 
 
 def test_exact_byte_opposing_labels_quarantine_entire_patient(generated):
@@ -183,6 +193,120 @@ def test_cli_rejects_output_outside_ignored_data(tmp_path):
     assert error.value.code == 2 and not (tmp_path / "bad").exists()
 
 
+def test_cli_rejects_symlink_parent_escape(tmp_path):
+    repo = repository_root()
+    link = repo / "data" / f".tmp-symlink-{uuid.uuid4().hex}"
+    link.parent.mkdir(exist_ok=True)
+    link.symlink_to(tmp_path, target_is_directory=True)
+    try:
+        with pytest.raises(SystemExit) as error:
+            main(["--output", str(link / "escaped")])
+        assert error.value.code == 2
+        assert not (tmp_path / "escaped").exists()
+    finally:
+        link.unlink()
+
+
+def test_root_discovery_works_from_site_packages_and_worktree_marker(tmp_path):
+    checkout = tmp_path / "checkout"
+    (checkout / "docs").mkdir(parents=True)
+    (checkout / "docs" / "ROADMAP.md").write_text("test checkout marker")
+    (checkout / ".git").write_text("gitdir: worktree-marker")
+    installed = checkout / "ml" / ".venv" / "lib" / "python3.12" / "site-packages"
+    installed.mkdir(parents=True)
+    assert repository_root(installed) == checkout
+    assert repository_root(checkout / "docs") == checkout
+    (checkout / ".git").unlink()
+    assert repository_root(installed) == repository_root()  # The outer checkout still exists.
+    with pytest.raises(ManifestError, match="no checkout root"):
+        repository_root(Path("/"))
+
+
+@pytest.mark.parametrize("boundary_pixel", [129, 130, 131])
+def test_visual_rms_boundary_and_nearest_final_unlinked_pair(generated, boundary_pixel):
+    root, rows = generated
+    changed = list(rows)
+    for index in (0, 1, 4, 5):  # Two independent same-class source-A groups.
+        pixels = np.full((16, 16, 3), 128 if index < 4 else 130, dtype=np.uint8)
+        if index >= 4:
+            pixels[0, 0, 0] = boundary_pixel
+        path = root / rows[index].image_path
+        Image.fromarray(pixels).save(path)
+        changed[index] = replace(rows[index], sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    _, report = prepare(root, tuple(changed))
+    first = report["record_components"][rows[0].record_id]
+    second = report["record_components"][rows[4].record_id]
+    assert (first != second) == (boundary_pixel > 130)
+    if boundary_pixel > 130:
+        assert report["nearest_unlinked_pair"]["rms_uint8"] == pytest.approx(2.001627, abs=1e-6)
+        assert set(report["nearest_unlinked_pair"]["records"]) <= {
+            rows[i].record_id for i in (0, 1, 4, 5)}
+    else:
+        assert any(1.998 < pair["rms_uint8"] <= 2 for pair in report["duplicates"]["near_visual"])
+        assert report["nearest_unlinked_pair"]["rms_uint8"] > 2
+
+
+@pytest.mark.parametrize("area", [250, 513, 749])
+def test_circle_and_square_have_matching_exact_pixel_areas(area):
+    y, x = np.mgrid[:64, :64]
+    square = shape_mask(x, y, 32, 32, area, 0)
+    circle = shape_mask(x, y, 32, 32, area, 1)
+    assert square.sum() == circle.sum() == area
+    assert np.any(square != circle)
+
+
+def test_v2_fixture_is_not_separable_by_mean_intensity(tmp_path):
+    root = tmp_path / "difficulty"
+    rows = generate(root, SyntheticConfig(groups_per_source=128))[::2]
+    means = np.array([np.asarray(Image.open(root / row.image_path)).mean() for row in rows])
+    target = np.array([row.label.binary_target for row in rows])
+    best = 0.0
+    for threshold in means:
+        positive = means >= threshold
+        accuracy = (positive[target == 1].mean() + (~positive[target == 0]).mean()) / 2
+        best = max(best, accuracy, 1 - accuracy)
+    assert best < 0.65  # Regression on fixed procedural seed, no clinical meaning.
+
+
+def test_synthetic_colour_bands_and_shape_diagnoses(generated):
+    root, rows = generated
+    assert colour_stratum(np.array([84, 84, 84])) == "background-stratum-0"
+    assert colour_stratum(np.array([85, 85, 85])) == "background-stratum-1"
+    assert colour_stratum(np.array([169, 169, 169])) == "background-stratum-1"
+    assert colour_stratum(np.array([170, 170, 170])) == "background-stratum-2"
+    for row in rows[::2]:
+        source_index = SOURCES.index(row.source.id)
+        group = int(row.group_id.rsplit("-", 1)[1])
+        key = f"{GENERATOR_VERSION}:20261009:{row.source.id}:{group}"
+        rng = np.random.default_rng(int.from_bytes(hashlib.sha256(key.encode()).digest()[:8]))
+        background = np.clip(rng.integers(25, 220, size=3) *
+                             np.roll([0.75, 1.0, 1.25], source_index), 0, 255)
+        assert row.skin_tone.value == colour_stratum(background)
+        assert row.label.diagnosis == ("synthetic_circle" if row.label.binary_target else "synthetic_square")
+
+
+def test_selection_exercise_reaches_count_guard_without_raising_row_cap(tmp_path):
+    report = prepare_run(tmp_path / "selection", groups_per_source=256,
+                         split_profile="selection_exercise")
+    assert len(report["components"]) == 768
+    assert sum(report["rows_by_split"].values()) == 1536
+    counts = report["components_by_split_source_class"]
+    for target in ("0", "1"):
+        assert sum(counts["threshold_validation"][source][target] for source in SOURCES) == 102
+        assert sum(counts["calibration"][source][target] for source in SOURCES) == 52
+    assert report["generator"]["target_names"] == {0: "synthetic square", 1: "synthetic circle"}
+    assert report["config"]["split_profile"] == "selection_exercise"
+
+
+@pytest.mark.parametrize("source", SOURCES[:2])
+def test_other_predeclared_source_holdouts_preserve_components(generated, source):
+    root, rows = generated
+    output, report = prepare(root, rows, PreparationConfig(held_out_source=source))
+    assert len(report["components"]) == 48
+    assert {row.source.id for row in output if row.split == "held_out"} == {source}
+    assert all(row.split == "held_out" for row in output if row.source.id == source)
+
+
 @pytest.mark.parametrize("kwargs", [{"groups_per_source": 15}, {"groups_per_source": 258},
                                      {"groups_per_source": True}, {"seed": True}])
 def test_invalid_generator_config_rejected(kwargs):
@@ -191,7 +315,8 @@ def test_invalid_generator_config_rejected(kwargs):
 
 
 @pytest.mark.parametrize("kwargs", [{"near_rms": float("nan")}, {"near_rms": 6},
-                                     {"seed": True}, {"held_out_source": "real-source"}])
+                                     {"seed": True}, {"held_out_source": "real-source"},
+                                     {"split_profile": "invented"}])
 def test_invalid_preparation_config_rejected(kwargs):
     with pytest.raises(ManifestError):
         PreparationConfig(**kwargs)

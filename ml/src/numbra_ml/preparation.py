@@ -18,9 +18,12 @@ from .dataset import load_rgb, require_approved_source
 from .manifest import ManifestError, ManifestRow, validate_manifest
 from .taxonomy import LabelFamily, LabelStatus
 
-PREPARATION_VERSION = "1.0.0"
+PREPARATION_VERSION = "1.1.0"
 ACTIVE_SPLITS = ("train", "calibration", "threshold_validation", "test")
 FRACTIONS = (0.60, 0.15, 0.15, 0.10)
+# With 256 groups/source this reaches 102 threshold components/class without
+# expanding the duplicate-search cap. The default still exercises refer-all.
+SELECTION_FRACTIONS = (0.30, 0.20, 0.40, 0.10)
 MAX_ROWS = 2000  # Explicit quadratic-fixture scope, never silently sample rows.
 
 
@@ -29,6 +32,7 @@ class PreparationConfig:
     held_out_source: str = "synthetic-source-c"
     seed: int = 20261009
     near_rms: float = 2.0  # uint8 units, fixed before splitting; not a clinical metric.
+    split_profile: str = "default"
 
     def __post_init__(self):
         if not isinstance(self.seed, int) or isinstance(self.seed, bool):
@@ -37,6 +41,8 @@ class PreparationConfig:
             raise ManifestError("held-out source must be synthetic")
         if not np.isfinite(self.near_rms) or not 0 <= self.near_rms <= 5:
             raise ManifestError("near_rms must be finite and in [0, 5]")
+        if self.split_profile not in {"default", "selection_exercise"}:
+            raise ManifestError("unknown synthetic split_profile")
 
 
 class _Components:
@@ -54,13 +60,13 @@ class _Components:
         self.parent[max(first, second)] = min(first, second)
 
 
-def _allocations(count: int) -> list[int]:
-    # Guarantee all four partitions when at least four components/class exist.
-    if count < len(ACTIVE_SPLITS):
-        raise ManifestError("need at least four eligible development components per binary class")
-    remaining = count - len(ACTIVE_SPLITS)
-    raw = [remaining * fraction for fraction in FRACTIONS]
-    sizes = [1 + int(value) for value in raw]
+def _allocations(count: int, fractions: tuple[float, ...]) -> list[int]:
+    # Minimum one per source-membership/class/split when the stratum permits it.
+    # Rare cross-source components remain intact; do not split or drop them.
+    minimum = int(count >= len(ACTIVE_SPLITS))
+    remaining = count - minimum * len(ACTIVE_SPLITS)
+    raw = [remaining * fraction for fraction in fractions]
+    sizes = [minimum + int(value) for value in raw]
     order = sorted(range(4), key=lambda i: (-(raw[i] - int(raw[i])), i))
     for i in order[:count - sum(sizes)]:
         sizes[i] += 1
@@ -116,8 +122,10 @@ def prepare(root: Path, rows: tuple[ManifestRow, ...], config: PreparationConfig
     # All candidate pairs, including already-linked ones, are audited. No silent
     # subsampling and no split-dependent duplicate search.
     signatures = np.stack(signatures)
+    pair_distances = np.full((len(rows), len(rows)), np.inf, dtype=np.float32)
     for i in range(len(rows)):
         distance = np.sqrt(np.mean((signatures[i + 1:] - signatures[i]) ** 2, axis=1))
+        pair_distances[i, i + 1:] = distance
         for offset in np.flatnonzero(distance <= config.near_rms):
             j = i + 1 + int(offset)
             links.join(i, j)
@@ -125,6 +133,17 @@ def prepare(root: Path, rows: tuple[ManifestRow, ...], config: PreparationConfig
                 "records": [rows[i].record_id, rows[j].record_id],
                 "rms_uint8": round(float(distance[offset]), 6),
             })
+
+    # Measure the closest pair in distinct FINAL connected components. Links may
+    # be transitive, so computing this before the union is complete is misleading.
+    roots = np.array([links.find(i) for i in range(len(rows))])
+    pair_distances[roots[:, None] == roots[None, :]] = np.inf
+    nearest_index = np.unravel_index(np.argmin(pair_distances), pair_distances.shape)
+    nearest_distance = float(pair_distances[nearest_index])
+    nearest_unlinked = None if not np.isfinite(nearest_distance) else {
+        "records": [rows[i].record_id for i in nearest_index],
+        "rms_uint8": round(nearest_distance, 6),
+    }
 
     members = defaultdict(list)
     for i, row in enumerate(rows):
@@ -152,15 +171,22 @@ def prepare(root: Path, rows: tuple[ManifestRow, ...], config: PreparationConfig
                 "held_out" if config.held_out_source in group_sources else "unassigned"),
         }
 
-    for target in (0, 1):
-        candidates = [key for key, value in components.items()
-                      if value["split"] == "unassigned" and value["target"] == target]
+    fractions = SELECTION_FRACTIONS if config.split_profile == "selection_exercise" else FRACTIONS
+    strata = defaultdict(list)
+    for key, value in components.items():
+        if value["split"] == "unassigned":
+            strata[(tuple(value["sources"]), value["target"])].append(key)
+    for candidates in strata.values():
         candidates.sort(key=lambda key: (hashlib.sha256(f"{config.seed}:{key}".encode()).hexdigest(), key))
         offset = 0
-        for split, count in zip(ACTIVE_SPLITS, _allocations(len(candidates)), strict=True):
+        for split, count in zip(ACTIVE_SPLITS, _allocations(len(candidates), fractions), strict=True):
             for key in candidates[offset:offset + count]:
                 components[key]["split"] = split
             offset += count
+    for split in ACTIVE_SPLITS:
+        if {value["target"] for value in components.values() if value["split"] == split} != {0, 1}:
+            raise ManifestError("need at least four eligible development components per binary class; "
+                                "each development partition must have both classes")
     if {value["target"] for value in components.values() if value["split"] == "held_out"} != {0, 1}:
         raise ManifestError("held-out source needs both binary classes after quarantine")
 
@@ -173,16 +199,28 @@ def prepare(root: Path, rows: tuple[ManifestRow, ...], config: PreparationConfig
             label = replace(label, status=LabelStatus.QUARANTINED)
         output.append(replace(row, split=component["split"], label=label))
     output = validate_manifest(output)
+    source_class_counts = {
+        split: {source: {str(target): sum(
+            value["split"] == split and source in value["sources"] and value["target"] == target
+            for value in components.values()) for target in (0, 1)} for source in sorted(sources)}
+        for split in (*ACTIVE_SPLITS, "held_out", "quarantine")
+    }
     report = {
         "notice": PLACEHOLDER_NOTICE,
         "preparation_version": PREPARATION_VERSION,
         "config": {"seed": config.seed, "held_out_source": config.held_out_source,
-                   "near_rms_uint8": config.near_rms, "thumbnail": "16x16 RGB bilinear"},
-        "split_fractions": dict(zip(ACTIVE_SPLITS, FRACTIONS, strict=True)),
-        "split_method": "binary-class component stratification; one/class/split minimum then largest remainder",
+                   "near_rms_uint8": config.near_rms, "thumbnail": "16x16 RGB bilinear",
+                   "split_profile": config.split_profile},
+        "split_fractions": dict(zip(ACTIVE_SPLITS, fractions, strict=True)),
+        "split_method": "source-membership x binary-class component stratification; "
+                        "one/stratum/split where feasible, then largest remainder",
         "components": dict(sorted(components.items())),
         "record_components": record_components,
         "duplicates": duplicates,
+        "nearest_unlinked_pair": nearest_unlinked,
+        "components_by_split_source_class": source_class_counts,
+        "source_class_count_note": "multi-source components count once for each represented source; "
+                                   "quarantined components have null targets",
         "rows_by_split": dict(sorted(Counter(row.split for row in output).items())),
         "components_by_split": dict(sorted(Counter(value["split"] for value in components.values()).items())),
         "unresolved_by_source_label": [

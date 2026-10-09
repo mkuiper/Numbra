@@ -41,17 +41,11 @@ The research iteration used the available web search/open tool as a labelled
 workaround; no new account, subscription, authentication, or licence acceptance
 was performed. `.firecrawl/` is ignored and must never store tracked content.
 
-## Open questions
-
-- What exact dependency versions and Android device targets will later ADRs select?
-
-## Confidence
-
-High for observed research/Python setup; Android and later ML build setup is pending.
-
 ## M2 fixture preparation — observed 2026-10-09
 
-No additional toolchain/dependency installation. From repository root:
+No additional toolchain/dependency installation. Historical shapes-v1 command;
+current generator is shapes-v2. Use the M3 commands below for new runs; the original
+local run is preserved. From repository root at M2:
 
 ```bash
 ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v1 --groups-per-source 128 --seed 20261009
@@ -60,3 +54,25 @@ ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v1 --g
 Observed 768 generated images/384 components, all byte hashes and decodes verified.
 See [preparation evidence](DATA-PREPARATION.md). This does not train or download a
 model. The output and raw/prepared manifests/audit remain entirely ignored.
+
+## M3 fixture follow-through — observed 2026-10-09
+
+No toolchain/dependency addition or pretrained weight acquisition yet.
+
+```bash
+ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v2 --groups-per-source 128 --seed 20261009
+ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v2-selection --groups-per-source 256 --split-profile selection_exercise --seed 20261009
+```
+
+Observed 768/1536 procedural images; source-stratified component counts and
+threshold-count exercise described in [data preparation](DATA-PREPARATION.md).
+These commands do not train or download a model. M3 dependencies, weight licence/
+revision/checksum verification, training and evaluation are still pending.
+
+## Open questions
+
+- What exact dependency versions and Android device targets will later ADRs select?
+
+## Confidence
+
+High for observed research/Python setup; Android and later ML build setup is pending.

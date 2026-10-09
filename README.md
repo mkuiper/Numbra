@@ -9,8 +9,8 @@ not have leprosy. There is no clinically validated model, deployable app, or fie
 pilot at this stage. Any model trained only on synthetic fixtures must display
 **PLACEHOLDER** in its model card, reports, and app UI.
 
-Current work: M1 Python data scaffold, after the harness closed M0's engineering
-gate (human review pending). See [status](notes/STATUS.md), the
+Current work: M3 baseline preparation, after the harness closed M0–M2 engineering
+gates (human review pending). See [status](notes/STATUS.md), the
 [phase-0 synthesis](docs/01-phase0-synthesis.md), the [roadmap](docs/ROADMAP.md),
 and [human review queue](notes/HUMAN-QUEUE.md).
 No patient data or model weights are committed. No server, upload service,
@@ -23,4 +23,4 @@ permissions are separate; the code licence grants no rights to either.
 Run `python3 -m unittest discover -s tests -v` for documentation
 and repository-safety checks, and `bash scripts/check.sh` for the harness's
 available-project checks. M1 now runs the synthetic ML suite; Android remains
-skipped until M5. See [ML setup](ml/README.md); green checks at M1 are not a working APK.
+skipped until M5. See [ML setup](ml/README.md); green ML checks are not a working APK.

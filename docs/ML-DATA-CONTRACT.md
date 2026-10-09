@@ -24,7 +24,7 @@ by split so a subset cannot conceal patient, group or exact-hash split leakage.
 | `label` | Original label, mapped diagnosis/family, label status, explicit PB/MB and reaction status. |
 | `confirmed_by` | Null, or allow-listed method/opaque confirmer-evidence reference/ISO calendar date (not future). A confirmed label needs this assertion and a resolved diagnosis; model predictions cannot confirm. Credentials are not verified by this schema. |
 | `patient_id`, `group_id` | Explicit opaque tokens or null; namespaced by source. Group ID defines the primary evaluation unit; repeated patient IDs across groups must still stay in one split. Missing IDs are never inferred from filenames. |
-| `split` | `unassigned`, `train`, `calibration`, `threshold_validation`, `test`, `held_out`, `quarantine`. Assignment follows ADR-007. Quarantine and unassigned remain group-level partitions; mixed active/quarantine rows in one connected group fail. |
+| `split` | `unassigned`, `train`, `calibration`, `threshold_validation`, `test`, `held_out`, `quarantine`. Assignment follows ADR-007, amended by ADR-008 for source stratification/profiles. Quarantine and unassigned remain group-level partitions; mixed active/quarantine rows in one connected group fail. |
 | `synthetic`, `placeholder` | Explicit booleans. Synthetic rows require PLACEHOLDER, original labels beginning `SYNTHETIC:`, and no clinical confirmation. |
 | `skin_tone` | Null or controlled scheme/value/assigned_by (Fitzpatrick I–VI, Monk 1–10, or synthetic colour). Generated data permits only `synthetic_colour`, never invented Fitzpatrick/Monk annotations. |
 | `capture` (optional) | Nullable opaque site ID, device class and body site. Omission preserves null values; no guessed capture metadata. |

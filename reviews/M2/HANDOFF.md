@@ -1,8 +1,19 @@
-# M2 handoff — PLACEHOLDER synthetic preparation ready for harness review
+# M2 handoff — original review snapshot and post-gate follow-through
 
 Date: 2026-10-09
 
-Builder requests **M2** review. M0 and M1 harness GATE files exist, both PASS WITH
+M2's harness gate closed **PASS WITH CHANGES** on 2026-10-09. All ten non-blocking
+issues are answered in [RESPONSE-1](RESPONSE-1.md). shapes-v2/preparation 1.1.0
+updates and current observed evidence are in [data preparation](../../docs/DATA-PREPARATION.md)
+and [ADR-008](../../decisions/ADR-008-m3-synthetic-evaluation-fixture.md). No new M2
+review requested; M3 is in progress.
+
+The remaining sections preserve the **original shapes-v1 review snapshot**;
+their commands/counts/versions and “next step” describe the initial submission,
+not current generator behaviour. New runs must use the version-2 commands linked
+above. No historical run is overwritten.
+
+At initial submission, Builder requested **M2** review. M0 and M1 harness GATE files exist, both PASS WITH
 CHANGES; human review is pending. M1 Review-1 is answered in
 [RESPONSE-1](../M1/RESPONSE-1.md). No M2 gate is claimed.
 

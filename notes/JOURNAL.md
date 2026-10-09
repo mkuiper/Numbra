@@ -296,3 +296,49 @@ Final staged audit: 17 builder code/text files, no protected/data/image/weight
 paths; NEXT_ACTION exactly REVIEW M2. Staged whitespace check PASS. Final root
 link/contract suite after HANDOFF/STATUS: 5 PASS. Commit: M2: prepare deterministic
 PLACEHOLDER fixtures and source holdout.
+
+## 2026-10-09T13:38:44Z — iteration
+
+Read ROADMAP, STATUS, HARNESS, M2 HANDOFF/REVIEW-1/CHECK-1/GATE, AGENTS and
+relevant ADRs in order. Harness has closed M2 PASS WITH CHANGES; advanced to M3
+preparation and answered every M2 numbered issue in RESPONSE-1. No review requested.
+
+Implemented shapes-v2 matched exact areas, overlapping contrast, intentional 0.10
+Bernoulli group-level rendered-shape flips and stronger procedural source styles.
+Synthetic target diagnoses/names are circle/square; colour strata derive from
+actual pre-texture background luminance. Preparation 1.1.0 stratifies by complete
+source membership × class, preserves whole linked components, reports source/class
+counts and nearest pair across final distinct components. ADR-008 selects an explicit
+30/20/40/10 selection_exercise profile within existing caps; default still exercises
+insufficient-count fallback. Queued decision for human review. No model trained.
+
+Added tests at RMS just below/exactly/above 2, unrelated group counts, full-size
+threshold counts, same raster area, weak mean-intensity separation, colour provenance,
+symlink-parent escape, installed-path/worktree root discovery and alternate holdouts.
+Initial new subset run: 34 passed, 1 failed. The new root-discovery test erroneously
+expected no checkout after deleting nested markers, although the valid outer Numbra
+checkout remained. Fixed the test to verify correct ancestor discovery plus a separate
+no-ancestor failure at filesystem root; production root discovery was already correct.
+No existing test removed, skipped or weakened. Documented rationale in HUMAN-QUEUE.
+Final preparation subset: 40 passed.
+
+Observed check.sh exit 0: 150 ML tests passed in 13.90s; Android SKIPPED, RESULT PASS.
+Root repository suite 5 passed; pip check no broken requirements. Initial diff check
+caught a documentation trailing blank line, fixed; final git diff --check passed.
+Default and larger generation completed with all hashes/decodes checked; no conflicts,
+quarantine or unrelated-group merges. Default 384 components/768 images; larger
+768/1536. Selection-exercise threshold 102/class and separate calibration 52/class;
+default threshold 20/class. Source A/B balanced in each development partition/class.
+Nearest unlinked RMS 8.586645/8.204261. Mean-intensity-threshold balanced accuracy
+0.541667 on default generated groups only. No model/clinical performance claimed.
+Default command repeated in new run: 771 generated files byte-identical, manifest
+SHA-256 0a4adb62e625bed27271c42abbc8aef27bb28a05f5bd9ea018a14471738d7b58.
+Larger manifest SHA-256 2d141bc62205d88b7116cbe410e9262a96d771dec34c30e88ae6ad9c4bee839e.
+
+Updated docs/DEV-SETUP to place setup before final uncertainty sections; preserved
+historical shapes-v1 evidence and clarified new commands. Updated README/data contract/
+preparation docs and M2 HANDOFF with post-gate status. No real data/weights/downloads,
+new toolchains, protected edits, review/check/gate writes, publishing or pushes.
+M3 remains incomplete: next implement tested component evaluation, then verify CPU
+dependencies/checkpoint permission and build reproducible transfer training/model card.
+NEXT_ACTION CONTINUE; committing the logical fixture/evaluation-preparation step.
