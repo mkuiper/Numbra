@@ -1,0 +1,11 @@
+### ml: /home/mike/Projects/Numbra/ml/.venv/bin/python -m pytest
+........................................................................ [ 52%]
+................................................................         [100%]
+136 passed in 4.97s
+== ml tests: PASS
+== app: SKIPPED (no app/gradlew yet)
+
+===== CHECK SUMMARY =====
+ml tests: PASS
+app: SKIPPED (no app/gradlew yet)
+RESULT: PASS
