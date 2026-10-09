@@ -542,3 +542,35 @@ fields are validated separately; all other evidence is reconstructed exactly.
 Generated full-architecture capture/fidelity evidence uses new random weights
 and generated tensors, never the saved M3 model or training index images.
 The full check result is recorded in JOURNAL; Android/M4 acceptance remains open.
+
+
+## M4 complete runtime foundation — observed 2026-10-09 UTC
+
+No installation, dependency change, acquisition or saved-baseline inference.
+Existing pinned environment, from repository root:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_runtime.py
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_runtime.py ml/tests/test_export_remaining_native.py ml/tests/test_export_complete_replay.py
+bash scripts/check.sh > data/exports/PLACEHOLDER-m4-runtime-check.log 2>&1
+python3 -m unittest discover -s tests -v
+git diff --check
+```
+
+The new runtime suite first had 10 PASS/52 ERROR (5.61s): disabled ORT changes
+independent scheduling. Next 58 PASS/4 FAIL (6.27s) exposed a pass-through input
+output backed by freed temporary feed memory and a test-only protobuf access
+mistake; corrected those and the test's promoted-node prefix. The corrected
+62-test suite passed (6.17s). Expanded with full random mobile architecture,
+exact corruption/copy regressions and native/complete controls: 129 PASS (16.63s),
+230 warnings, including 71 new tests. No existing tests or parity budgets changed.
+
+Full check: exit 0, 642 ML tests PASS (94.51s), 438 warnings, Android SKIPPED,
+RESULT PASS. Root contract suite before final docs: 6 PASS (0.068s).
+Generated-fixture runtime graphs and test logs remain ignored under data/ or
+pytest's ignored temporary directory. All original runtime expressions/constants
+and internal double BN arithmetic are audited on both full random graphs;
+159 original computational nodes and 373 original tap boundaries per graph.
+This is fixture evidence only. No saved model/input inference, new parity result,
+accepted deployment bundle, M4 gate or APK exists. Final documentation checks
+are recorded in JOURNAL.

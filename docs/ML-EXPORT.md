@@ -813,12 +813,59 @@ existing parity budgets remain. The original preflight reports remain historical
 current-code audits intentionally change when source changes. The new mapping
 report records this implementation's complete source/dependency provenance.
 
+## ADR-023 complete runtime foundation — 2026-10-09 UTC
+
+`export_remaining_runtime.CompleteRuntime` constructs separate original and
+fully tapped disabled-optimisation CPU sessions using the fixed two intra-op/one
+inter-op thread configuration. It audits their serialized and actual runtime
+graphs before running any caller-supplied tensor; it has no saved-baseline or
+dataset CLI. All runtime expressions, constants and static boundaries are
+accounted for, including internal rounded-BN double arithmetic. Audit PASS means
+the declared expressions remain intact, never numerical agreement with Python.
+
+Generated fixtures show the pinned runtime reschedules independent nodes,
+lowers tensor Constant to an identical initializer, reorders attribute records
+and materializes specific operator defaults. The auditor binds every original
+node by output and exact name/operator/ordered operands, validates topological
+execution, and permits only the bounded default attributes, bit-identical
+Constant lowering and the previously declared HardSwish function expansion.
+Every runtime node is checked exactly once. It records runtime node order,
+operator inventory and graph hashes; changed weights, aliases, coefficients,
+casts, operands, domains, attributes, interfaces or extra boundaries fail closed.
+
+Each supplied input produces separately measured original/tapped logits and
+the complete original operand/output tuples. All taps must have the declared
+shape/dtype; input and constant bits must match exactly. Instrumentation changes
+are reported as signed metrics without a numerical suppression threshold.
+Both feed dictionaries remain alive until output copies are complete because
+ORT pass-through taps can alias input memory. Returned arrays are independent of
+subsequent runs and the caller's input. Signed four-term accounting now supports
+head/flatten output ranks as well as NCHW, retaining finite nonempty float32,
+same-shape and exact telescoping checks; Conv/BN input validation is unchanged.
+
+The combined generated-fixture suite has 129 PASS. Both complete random mobile
+graphs account for all 159 original computational nodes and 373 original tap
+boundaries; every runtime expression passes the audit and original/tapped
+logits agree bit-for-bit on the fixed generated input. Corruption tests cover
+HardSwish ordering/attributes, all rounded-BN expression stages, exact constant
+bits including signed zero, alias connections, extra nodes/boundaries and invalid
+interfaces. Initial runs exposed independent scheduling and input-buffer lifetime
+bugs; corrected both, retaining exact assertions. Fixture errors in test-only
+protobuf access and the promoted-node prefix were also corrected.
+
+This iteration runs no saved model forward, training image decoding, baseline
+ORT inference, quantisation fit or frozen evaluation. Earlier static report
+source hashes remain historical; no new saved-baseline reconstruction or parity
+PASS is claimed. Complete training replay and ordered-detail auditing remain
+unfinished, and all earlier failed deployment exports remain rejected.
+
 ## Remaining M4 work
 
 Optimisation profiles do not fix selected-baseline parity. Next implement
 ADR-023's complete training runner using the implemented native mapping,
-pre-mutation capture and static taps. Measure original/tapped native and runtime
-logits and full training-only replay on both unchanged graphs. Use every ordered
+pre-mutation capture, complete runtime expression audits and validated taps.
+Integrate both-origin isolated replay and measure original/tapped native and
+runtime logits on both unchanged graphs. Use every ordered
 training component and complete remaining scope; distinguish local arithmetic
 from propagation, including both binary operands, and preserve all Conv/BN
 controls and exact prior disabled logits. Do not keep rerunning the failed

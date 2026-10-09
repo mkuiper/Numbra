@@ -1229,3 +1229,55 @@ publication or push.
   and all 159 computational nodes. Historical git context survives commit; every
   other static provenance/mapping/tap field reconstructs exactly. Clean worktree
   observed before recording this final audit.
+
+## 2026-10-09T17:42:49Z — iteration
+
+- Oriented in required order: roadmap, STATUS, HARNESS, missing M4 review folder,
+  AGENTS and relevant ADRs (005/011/013/019/022/023). No new harness message or
+  gate; continued M4 under existing ADR-023 only. No new unattended model/runtime/
+  budget choice; no baseline dataset image or saved model forward was opened.
+- Added complete original/tapped disabled-runtime graph audits and session/tap
+  primitives. Audit every computational expression, parameter/Constant/Identity
+  bit and boundary, including internal double BN arithmetic; account for every
+  actual runtime node once. Runtime order/hashes/inventory retained. Bounded
+  normalization accepts only observed explicit defaults, attribute ordering,
+  bit-identical Constant lowering and declared HardSwish expansion. Independent
+  node scheduling may change; topological validity and ordered operands stay exact.
+- Run primitives validate input before inference and every original tap's exact
+  scope/shape/dtype and input/constant bits afterwards; measure original and
+  tapped logits separately and report unsuppressed signed instrumentation drift.
+  Retain feed dictionaries until output copies finish, because ORT input outputs
+  can alias feeds. Output-copy stability and fresh output directory checks tested.
+- Extended signed accounting to finite nonempty float32 outputs at all head/
+  flatten ranks, with same-shape and exact four-term telescoping checks retained;
+  Conv/BN replay input validation still NCHW. No parity tolerance changed.
+- Added 71 generated-only tests, including full random mobile architecture on
+  both graphs (159 original computational nodes, 373 original boundaries), exact
+  fixture original/tapped logits, corruption of every rounded-BN expression stage,
+  weights/aliases/signed-zero bits, HardSwish ordering, extra scope/interfaces,
+  invalid inputs/taps, independent schedule integrity and nonzero drift retention.
+  All fixture weights/tensors generated anew; no saved baseline inference.
+- Test progression: first 10 PASS/52 ERROR (5.61s) exposed independent runtime
+  node scheduling. Second 58 PASS/4 FAIL (6.27s) exposed pass-through input-buffer
+  lifetime and test-only protobuf opset access; also fixed test-only promoted-node
+  prefix. Corrected code/tests with exact assertions and corruption checks intact.
+  Runtime suite then 62 PASS (6.17s); expanded runtime/native/complete subset
+  **129 PASS** (16.63s), 230 warnings. No existing tests changed/deleted/skipped.
+- Full bash scripts/check.sh observed exit 0: **642 ML tests PASS** (94.51s),
+  438 warnings; Android SKIPPED, RESULT PASS. Log ignored under
+  data/exports/PLACEHOLDER-m4-runtime-check.log. Root contract suite 6 PASS
+  (0.068s) before final docs; git diff --check clean. No APK or M4 acceptance claim.
+- Updated ADR-023 implementation observations, ML README/export/setup documents,
+  STATUS and human visibility queue. Previous static reports remain historical
+  source snapshots; no claim their live source hashes still match. No new saved
+  provenance reconstruction or parity result; all earlier failed exports rejected.
+- Next: complete guarded two-graph/both-origin isolated replay, every Conv/BN
+  control, original/captured native logits, ordered-row and exact ADR-022 prior
+  disabled-logit audit before all 152 existing ordered training images. Selective
+  QDQ/mobile support remain blockers. NEXT_ACTION CONTINUE; do not start M5.
+- No reference/state/fits/budget change, saved retraining, frozen evaluation,
+  acquisition/install, protected edit, review.sh, REVIEW/CHECK/GATE write,
+  external message/publication/push or accepted deployment selection.
+- Final documentation repository-contract verification: 6 PASS (0.073s);
+  git diff --check clean. Committing the complete logical step and iteration
+  records as M4: audit complete disabled runtime graphs.

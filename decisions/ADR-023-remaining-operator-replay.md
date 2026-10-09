@@ -124,6 +124,44 @@ deployment selection or accepted export occurred. Actual runtime graph audits,
 original/tapped saved logits, full training replay, signed accounting and complete
 ordered-row/prior-logit reconstruction remain unimplemented. Stage two is incomplete.
 
+## Observed complete runtime foundation — 2026-10-09 UTC
+
+Added `export_remaining_runtime` primitives for original and fully tapped
+disabled sessions of both declared graphs. Before any input is run, independently
+audit every actual runtime operator, ordered operand connection, constant bit and
+static boundary, including every internal double BN Cast/Mul/Add/coefficient.
+This does not invoke the saved baseline or establish numerical equivalence.
+
+Generated fixtures reveal bounded serialization changes: disabled ORT lowers
+tensor Constant into an identical initializer, reorders attribute records and
+materializes Conv auto_pad=NOTSET, HardSigmoid beta=0.5 and Gemm transA=0 defaults.
+It also reschedules independent nodes, particularly constant Identity aliases.
+The auditor allows only those defaults, exact Constant lowering and the already
+declared HardSwish expansion. Every original node remains independently bound
+by its output, exact name/type and connections; every runtime expression must
+be accounted for once. The runtime node order and graph hashes are recorded;
+topological validity and exact operand order remain required. Identity parameter
+aliases cannot change bits or connectivity. This bounded fixture observation
+does not select a new arithmetic expression, runtime profile or deployable graph.
+
+Original and tapped whole logits are measured separately; all original input,
+constant and computational taps are checked for exact scope, shape and dtype.
+Instrumentation drift is reported without suppression. ORT pass-through input
+taps may alias the feed buffer, so both feed dictionaries stay alive until
+all outputs are copied. Generated regressions retain corruption/invalid-input
+failures, output independence and the exact tapped input bits. Four-term signed
+accounting now supports head/flatten ranks while Conv/BN inputs remain NCHW.
+Shape, float32, finite/nonempty and exact telescoping checks remain enforced.
+
+Combined generated-only verification: 129 tests PASS, including all 159 original
+computational nodes/373 original boundaries on both full random mobile graphs,
+all runtime expressions and constants, and exact original/tapped logits on the
+fixed generated input. These weights and inputs are generated anew, never saved
+M3 artifacts or ordered training images. Full guarded training replay,
+both-origin isolated runtime integration, ordered-detail/prior-logit audit,
+selective QDQ and mobile execution remain incomplete. All earlier failed exports
+remain rejected; M4 stays open and this does not authorise M5.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?

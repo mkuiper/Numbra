@@ -146,6 +146,10 @@ It performs no image decoding or model inference. The companion
 `export_remaining_native` module provides complete native owner mapping,
 pre-mutation multi-operand capture, full static taps and separate eager-fidelity
 metrics. Its generated-only tests cover the full random mobile architecture;
-saved-baseline mapping is static only. The complete two-graph training replay
-runner is unfinished, so no baseline replay CLI or new accepted export exists.
+saved-baseline mapping is static only. `export_remaining_runtime` adds complete
+original/tapped disabled-runtime graph audits, validated multi-operand taps and
+unsuppressed instrumentation measurements for both graphs. Generated fixtures
+also cover both complete random mobile graphs; no saved-baseline replay is run.
+The complete two-graph training replay runner and ordered-detail audit remain
+unfinished, so no baseline replay CLI or new accepted export exists.
 See [the export document](../docs/ML-EXPORT.md) for scope and evidence limits.

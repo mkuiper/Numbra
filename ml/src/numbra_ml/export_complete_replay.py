@@ -126,8 +126,14 @@ def audit_affine_graph(module, formula, path):
 
 
 def signed_accounting(py_output, py_on_py, py_on_ort, ort_on_ort, ort_output):
-    arrays = [validate_array(value).astype(np.float64)
-              for value in (py_output, py_on_py, py_on_ort, ort_on_ort, ort_output)]
+    # Remaining head/flatten boundaries have ranks one and two. Keep NCHW
+    # validation on Conv/BN replay inputs, but accounting applies to any
+    # nonempty finite float32 output, including a scalar.
+    values = (py_output, py_on_py, py_on_ort, ort_on_ort, ort_output)
+    if any(not isinstance(value, np.ndarray) or value.dtype != np.float32
+           or not value.size or not np.isfinite(value).all() for value in values):
+        raise ValueError('signed accounting requires nonempty finite float32 arrays')
+    arrays = [value.astype(np.float64) for value in values]
     if any(value.shape != arrays[0].shape for value in arrays):
         raise ValueError('signed accounting shape mismatch')
     differences = {key: after - before for key, before, after in zip(
