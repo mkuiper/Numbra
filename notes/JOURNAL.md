@@ -892,3 +892,58 @@ clinical data/validation, weight notices and mobile execution remain open.
 - No toolchain/dependency/acquisition changes, protected edits, review.sh,
   REVIEW/CHECK/GATE writes, publishing/push or external messages. All changes
   committed before ending.
+
+## 2026-10-09T16:16:35Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent M4 review folder,
+  AGENTS, relevant M4/data/runtime ADRs. No new harness instruction or M4 review.
+  Worked only on M4; all baseline exports remain rejected, no app or gate claim.
+- Predeclared ADR-019, queued humans and committed 0858a72 before experiments.
+  Implemented complete guarded same-input replay for every saved Conv/BN,
+  native saved-bit/geometry audits, both promoted BN runtime expression audits,
+  four-term signed accounting and full aggregate/detail/graph/source auditing.
+  Old two-pair replay/precision behavior retained. Added generated fixtures for
+  grouped Conv, Conv without following BN, plain/in-place timm BN, signed-zero
+  parameter corruption, node ambiguity, partial recipes, runtime corruption,
+  cancellation, hook cleanup, training-image isolation and stale provenance.
+- Initial subset 32 PASS / 1 FAIL in 15.24s (52 warnings): duplicate graph
+  correctly refused by existing boundary matcher, but error lacked new
+  one-to-one scope wording. Added production scope context, retaining exact
+  test assertion. Corrected combined subset 33 PASS in 16.07s, 52 warnings.
+  After audit/refusal additions, complete-only subset 19 PASS in 7.05s,
+  28 warnings. No test weakened/skipped/deleted. Committed aabfb06 before run.
+- Diagnostic CLI exit 0: all and only 152 ordered training component inputs,
+  every 53 Conv/34 BN, 517 graph records. Report
+  ml/reports/PLACEHOLDER-m4-complete-replay1.json. No frozen test/held-out/stress
+  inference, quantisation fit, reference/model/budget change or deployment.
+- Native/promoted serialized/runtime audits PASS. Python/ORT replay fidelity,
+  original/tapped logit changes and four-term signed residuals are zero at all
+  87 layers. Saved-state hashes match. Local native kernel differences remain
+  at 48/53 Conv and all BNs; Python-origin maxima 0.00000190735/0.00000762939,
+  propagated maxima 0.0000308752/0.000339508. Separate maxima do not add as
+  worst-case causal accounting. Complete min/max/mean evidence retained.
+- Both promoted BN recipes match their Python expressions at all 34 layers on
+  both origins, but neither exactly matches native Python across all tested
+  inputs at any layer. Rsqrt local maxima lower/equal at 22/12 Python-origin
+  and 23/11 ORT-origin layers; divide lower/equal/higher at 9/14/11 and 9/18/7.
+  No favourable subset or whole-model improvement selected from those counts.
+- Independent audit PASS without inference: tracked/private equality,
+  reconstructed complete aggregates, all 517 graphs, recomputed runtime audits,
+  ordered training IDs, saved-model/preparation/source/dependency/retained
+  provenance and exact prior preserved ordered Python/ORT logits/parity.
+  Preserved still FAILS raw/probability budgets (0.000240326/0.00000279320,
+  26/29 violations, zero flips). No new whole-model or INT8 artifact accepted.
+  Graphs, weights, component details, command/check/audit logs stay ignored.
+- Updated ADR follow-through, HUMAN-QUEUE, ML-EXPORT, DEV-SETUP and ML README.
+  M4 incomplete; ADR-012 labelled toy workaround stays diagnostic only.
+  NEXT_ACTION CONTINUE; no HANDOFF/review request. Next predeclare all-BN
+  coefficient/epsilon-rounding replay; Conv drift/QDQ/mobile support unresolved.
+- bash scripts/check.sh exit 0: 377 ML tests PASS in 111.72s, 144 exporter
+  warnings (ran alongside diagnostic replay); Android SKIPPED, RESULT PASS.
+  Root tests after command docs: 6 PASS in 0.068s. No APK/completion claim.
+- No toolchain/dependency/acquisition changes, protected edits, review.sh,
+  REVIEW/CHECK/GATE writes, publishing/push or external messages.
+- Final root repository-contract checks: 6 PASS in 0.080s after all docs and
+  iteration records; git diff --check clean. NEXT_ACTION exactly CONTINUE.
+  Changed paths contain no protected files and data/ has no tracked files.
+  All changes committed before ending.

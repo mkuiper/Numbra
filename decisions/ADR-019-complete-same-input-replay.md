@@ -52,6 +52,35 @@ selective-QDQ strategy, but is not a complete-model fix. Native extraction and
 taps may change execution. Mobile operator support, unseen-input parity and
 clinical performance remain unverified. Roadmap order still prevents M5 work.
 
+## Observed follow-through — 2026-10-09 UTC
+
+[Complete aggregate evidence](../ml/reports/PLACEHOLDER-m4-complete-replay1.json)
+retains all 152 ordered training inputs, 53 Conv and 34 BN layers. Every native
+and both promoted BN serialized/runtime audits pass; 517 graph records are
+checked. Original/tapped logits, Python and ONNX replay-fidelity differences and
+all four-term signed telescoping residuals are zero. Saved state is unchanged.
+Independent audit reconstructs all aggregates, verifies saved model/preparation/
+source/retained-artifact provenance and exactly reproduces preserved-control
+ordered Python/ONNX logits and parity. No additional inference is used for audit.
+
+Native same-Python-input differences are nonzero at 48/53 Conv layers and all
+34 BNs. Their maxima are 0.00000190735 and 0.00000762939; propagated maxima are
+0.0000308752 and 0.000339508 respectively. These separate layer/component maxima
+are not additive whole-model accounting. Both promoted BN recipes match their
+Python expression exactly at all 34 layers on both origins, yet neither matches
+native Python exactly across the tested inputs at any BN layer. Rsqrt-promoted
+local maxima are lower/equal at 22/12 layers on Python inputs and 23/11 on ORT
+inputs; divide-promoted maxima are lower/equal/higher at 9/14/11 and 9/18/7.
+These counts concern maxima only, not complete-model or all-statistic improvement.
+
+The preserved control still FAILS raw/probability budgets: maxima
+0.000240326/0.00000279320, 26/29 violations, zero flips. No new whole-model
+candidate, INT8 fit, frozen evaluation, deployment selection or acceptance.
+Every prior failed export remains rejected; ADR-012's labelled toy workaround
+remains diagnostic only. M4 remains incomplete. Next predeclare complete BN
+coefficient/epsilon-rounding replay before any further whole-graph substitution;
+Conv kernel differences, selective QDQ and mobile support remain unresolved.
+
 ## Open questions
 
 - Is there an actionable residual arithmetic strategy that meets the fixed contract?
@@ -60,5 +89,6 @@ clinical performance remain unverified. Roadmap order still prevents M5 work.
 
 ## Confidence
 
-High for the previously tested replay building blocks; complete-layer results
-and any deployable arithmetic strategy remain unverified before execution.
+High for tested complete-layer isolation, saved-parameter auditing and observed
+finite-training arithmetic. Deployable parity, mobile execution and clinical
+performance remain unverified.

@@ -351,6 +351,55 @@ Full check: **358 ML tests passed in 56.27s**, 116 exporter deprecation warnings
 Android skipped, RESULT PASS. Final root repository checks: **6 passed in
 0.074s**. No APK or M4 completion claim.
 
+## M4 complete same-input replay — 2026-10-09 UTC
+
+No installation or acquisition; the existing pinned environment ran:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_complete_replay.py ml/tests/test_export_replay.py ml/tests/test_export_precision.py
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_complete_replay.py
+ml/.venv/bin/python -m numbra_ml.export_complete_replay --output data/exports/PLACEHOLDER-m4-complete-replay1
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+The initial subset had **32 passed, 1 failed in 15.24s**, 52 exporter warnings.
+The new duplicate-node test correctly rejected the graph, but the error lacked
+its declared one-to-one scope wording. Production now adds that scope to the
+existing boundary error, preserving the test assertion. Corrected subset:
+**33 passed in 16.07s**, 52 warnings. After adding evidence auditing and the
+partial-recipe refusal regression, the complete-only subset had **19 passed in
+7.05s**, 28 warnings. No test weakened, deleted or skipped.
+
+Diagnostic CLI exit 0, DIAGNOSTIC ONLY: all 152 training components, 87 saved
+operators and 517 graph records. Separate audit PASS: aggregate reconstruction,
+all native/promoted runtime audits, model/preparation/source/retained provenance,
+ordered training IDs and exact preserved-control logits/parity reproduction.
+No new fit, frozen inference, deployment selection or baseline acceptance.
+
+Full check (ran alongside replay): **377 ML tests passed in 111.72s**, 144
+legacy-export warnings; Android skipped, RESULT PASS. No APK or M4 completion
+claim. Root repository checks after command documentation: **6 passed in 0.068s**;
+final **6 passed in 0.080s** after all docs/iteration records.
+
+The standalone evidence audit can be repeated without inference using:
+
+```python
+import json
+from pathlib import Path
+from numbra_ml.export_complete_replay import audit_complete_report
+
+repo = Path.cwd()
+output = repo / "data/exports/PLACEHOLDER-m4-complete-replay1"
+report = json.loads((repo / "ml/reports/PLACEHOLDER-m4-complete-replay1.json").read_text())
+print(audit_complete_report(repo, output, report))
+```
+
+This checks source/dependency provenance against the current checkout. A later
+source change intentionally invalidates that comparison; use the recorded source
+commit to reproduce it. The experiment and independent audit retain graph copies,
+ordered rows and logs under ignored data/. See [export evidence](ML-EXPORT.md).
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

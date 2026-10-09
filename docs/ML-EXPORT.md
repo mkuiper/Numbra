@@ -491,16 +491,87 @@ ignored. Tests cover multi-pixel border/channel arithmetic through both timm
 in-place activations, scope/parameter/geometry/cast/constant corruption, training
 pixel isolation and stale provenance rejection. Exit 0 is DIAGNOSTIC ONLY.
 
+## Complete same-input Conv/BatchNorm replay — ADR-019
+
+**PLACEHOLDER diagnostic, never bundle.** Run to a new ignored output:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_complete_replay --output data/exports/PLACEHOLDER-m4-complete-replay1
+```
+
+[ADR-019](../decisions/ADR-019-complete-same-input-replay.md) was committed
+before execution. Selection follows saved module order and requires a one-to-one
+match with every native Conv/BN graph node, including Conv without a following
+BN. Exact saved parameter bits (including signed zero), Conv geometry, BN epsilon
+and inference mode are validated, resolving only initializer/Identity aliases.
+Both Python and preserved-ORT input origins are replayed for every operator.
+All BNs retain three primitive expressions and the rounded float64 diagnostic,
+plus both promoted affine coefficient recipes. No Conv is promoted in this run.
+
+Isolated serialized and actual disabled-runtime native graphs must retain saved
+parameters, geometry and float32 interfaces. Both promoted BN runtime expressions
+must retain the declared double Cast/Mul/Add sequence, float32 coefficient bits
+and single float32 output boundary. All graph checksums and complete aggregate
+reconstruction are audited before the report is written. Exit 0 means diagnostic
+evidence was generated; it cannot establish whole-model parity or close M4.
+
+For each element, four signed float64 terms telescope to total boundary drift:
+Python replay fidelity, propagation through the Python operator, same-input ORT
+kernel difference, and extracted-versus-whole-graph execution difference. The
+complete report records minima, maxima and means across component statistics,
+including each term's signed extrema/mean and absolute extrema/mean. These are
+per-boundary measurements; summing layer or component maxima is not causal
+whole-model accounting. Individual component IDs, logits and rows stay ignored.
+
+[Complete aggregate evidence](../ml/reports/PLACEHOLDER-m4-complete-replay1.json):
+all 152 training components, 53 Conv and 34 BN nodes, 517 serialized/runtime graph
+records. Python and ORT replay-fidelity errors, original/tapped logit changes and
+both signed-accounting residuals are zero at every layer. Saved state hashes are
+unchanged. The independent audit passes aggregate reconstruction, graph checksums,
+ordered training IDs, saved-model/preparation/source/dependency provenance,
+recomputed runtime audits and exact preserved-control ordered-logit/parity
+reproduction. Audit performs no additional inference.
+
+| Maximum across complete training replay | Conv (53 layers) | BN (34 layers) |
+| --- | ---: | ---: |
+| Native local kernel error, Python input | 0.00000190735 | 0.00000762939 |
+| Native local kernel error, ORT input | 0.00000154972 | 0.00000762939 |
+| Propagated input effect | 0.0000308752 | 0.000339508 |
+| Whole-graph boundary drift | 0.0000309944 | 0.000339508 |
+| Layers with nonzero local kernel maxima | 48 | 34 |
+| Python / ORT replay fidelity | 0 / 0 | 0 / 0 |
+
+The largest Conv local difference is at blocks.5.0.conv; largest propagated Conv
+difference is at blocks.4.0.conv_dw. Largest native BN local difference is at
+blocks.0.0.bn1, while largest propagated BN difference is at blocks.2.2.bn2.
+Separate maxima can occur on different elements/inputs/layers. They cannot be
+added as whole-model worst-case causal accounting or used to select a favourable
+layer subset. Complete per-layer aggregates remain in the linked report.
+
+| Promoted BN recipe / input origin | Max local error versus native Python | Layers with lower / equal / higher maxima than native ORT |
+| --- | ---: | ---: |
+| affine_rsqrt / Python | 0.00000381470 | 22 / 12 / 0 |
+| affine_rsqrt / ORT | 0.00000762939 | 23 / 11 / 0 |
+| affine_divide / Python | 0.00000762939 | 9 / 14 / 11 |
+| affine_divide / ORT | 0.00000762939 | 9 / 18 / 7 |
+
+Both promoted recipes agree exactly with their matching Python expressions at
+all 34 BNs on both origins. Neither matches native Python across every tested
+input at any BN layer. Counts compare maxima only; means and full-graph behavior
+can differ. Original preserved parity is unchanged: FAIL, maximum raw/probability
+error 0.000240326/0.00000279320, 26/29 violations, zero threshold flips. This
+experiment creates no whole-model replacement or INT8 candidate, fits nothing
+and never reads frozen test/held-out/stress inputs.
+
 ## Remaining M4 work
 
-The joint substitution still fails float parity and provides no quantised
-candidate. Next predeclare complete saved Conv/BN same-input replay on training
-inputs, extending ADR-015 beyond its two pairs. Compare all 34 BNs against the
-existing native and both promoted coefficient recipes, and all 53 native Conv
-replays, with complete rather than favourably selected reporting. This can test
-whether remaining kernel discrepancies have an actionable arithmetic explanation
-before proposing further whole-graph replacements. Keep every failed export,
-reference, fit, input and ADR-011 budget; never adapt to frozen evaluation.
+Complete same-input replay confirms residual kernel differences throughout the
+saved backbone and neither promoted BN recipe matches native Python exactly.
+Next predeclare complete BN coefficient/epsilon-rounding variants using all
+34 layers, both input origins and the existing training inputs before any further
+whole-graph replacement. This is a hypothesis to test, not an assumed fix;
+Conv kernel drift also remains unresolved. Keep every failed export, reference,
+fit, input and ADR-011 budget; never adapt to frozen evaluation.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

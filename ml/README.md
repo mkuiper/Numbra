@@ -110,3 +110,12 @@ Joint promoted stem/BN substitution is available as
 ADR-018 and the export document record training-only controls, exact runtime
 expression audits and unchanged-model provenance. The joint graph still fails
 both numerical budgets, with worse maxima than BN-only. M4 remains open.
+
+Complete same-input Conv/BN replay is available as
+`python -m numbra_ml.export_complete_replay --output data/exports/PLACEHOLDER-<new-name>`.
+[ADR-019](../decisions/ADR-019-complete-same-input-replay.md) extends the guarded
+training-only replay to every saved Conv/BN, including Conv without a following
+BN. It measures both promoted BN recipes, audits saved parameters and runtime
+arithmetic, and reports four-term signed accounting. Graphs and ordered rows
+remain ignored. Aggregate reconstruction/checksum success is diagnostic only;
+no baseline export is accepted and M4 remains incomplete.
