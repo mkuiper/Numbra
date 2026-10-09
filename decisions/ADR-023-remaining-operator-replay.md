@@ -82,7 +82,7 @@ measured rounding differences. No baseline inference has occurred.
 
 ## Observed first stage — 2026-10-10 UTC
 
-[Static preflight](../ml/reports/PLACEHOLDER-m4-remaining-preflight1.json) accounts
+[Static preflight](../ml/reports/PLACEHOLDER-m4-remaining-preflight2.json) accounts
 for all 160 preserved-graph nodes: 87 Conv/BN controls, 72 remaining replay nodes
 and one Constant; all 212 initializer records. Remaining/control serialized
 nodes and original constants are unchanged in the rounded graph. Saved head
@@ -91,12 +91,20 @@ and saved/prior/source/dependency provenance pass independent reconstruction.
 Actual execution blocked image decoding, model forward and baseline ORT sessions
 with raising guards. No baseline inference or new parity result occurred.
 
-All 66 generated-fixture tests pass, including full artifact/preparation/prior
+All 69 generated-fixture tests pass, including full artifact/preparation/prior
 reconstruction with unreadable images and inference blocked. Native HardSwish
 versus its ORT function expansion has nonzero measured local drift on the fixed
 generated fixture; no baseline extrapolation or equivalence claim. Stage two's
 native capture and complete training replay remain unimplemented. M4 remains
 incomplete and all failed graphs remain rejected.
+
+The first report is retained. Its post-commit audit exposed an incorrect
+comparison of historical git context with current HEAD/dirty state. The corrected
+auditor validates the recorded commit exists and dirty flag is boolean; every
+other field, including live code/dependency hashes, is still reconstructed
+exactly. Added commit-context regressions and regenerated the second report;
+complete scope/plan/graph/saved/preparation/prior evidence is identical. No
+inference-expression or parity-budget change.
 
 ## Open questions
 

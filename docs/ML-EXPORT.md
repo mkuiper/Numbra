@@ -719,7 +719,7 @@ tapped training replay. The first stage is implemented in
 
 ```bash
 ml/.venv/bin/python -m numbra_ml.export_remaining \
-  --output data/exports/PLACEHOLDER-m4-remaining-preflight1
+  --output data/exports/PLACEHOLDER-m4-remaining-preflight2
 ```
 
 The command refuses an existing output or aggregate report. Use a new
@@ -728,7 +728,7 @@ call or baseline ONNX runtime session occurs. Observed execution additionally
 blocked all three paths with raising guards. Saved weights/fits, prior graphs,
 preparation/ordered training scope and dependency/code provenance are verified.
 
-[Preflight evidence](../ml/reports/PLACEHOLDER-m4-remaining-preflight1.json)
+[Preflight evidence](../ml/reports/PLACEHOLDER-m4-remaining-preflight2.json)
 accounts for every 160 serialized preserved-graph node: 87 saved Conv/BN controls,
 72 remaining operators and one Constant. All 212 initializers are checked against
 the unchanged rounded graph. The complete remaining scope is 19 HardSwish,
@@ -753,6 +753,16 @@ run isolated the HardSwish function expansion. These tooling errors were fixed
 in code and fixture constant resolution, with corruption regressions. Existing
 tests and ADR-011 budgets remain unchanged. Reports contain no baseline replay
 results or clinical claim; every failed export remains rejected.
+
+The original preflight remains retained. A post-commit audit exposed that its
+auditor compared historical git commit/dirty fields with the current checkout.
+The corrected auditor validates that the recorded commit exists and the dirty
+flag is boolean, preserves both as historical context, and still reconstructs
+all other fields exactly, including current code/dependency hashes. New
+regressions cover changed current checkout context and invalid recorded metadata.
+The second report regenerates provenance after the fix; complete plan, graphs,
+scope, saved-model/preparation/prior records reproduce the first report exactly.
+There is no inference-expression change or additional baseline inference.
 
 ## Remaining M4 work
 

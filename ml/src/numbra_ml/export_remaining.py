@@ -9,6 +9,8 @@ from collections import Counter
 import hashlib
 import json
 from pathlib import Path
+import re
+import subprocess
 import sys
 
 import numpy as np
@@ -385,10 +387,22 @@ def audit_preflight(repo, output, prepared, run, experiments, source, prior, *, 
     report = json.loads((output / REPORT).read_text())
     expected = preflight_evidence(repo, prepared, run, experiments, source, prior,
                                   backbone_factory=backbone_factory)
+    # Historical checkout metadata must survive the required iteration commit.
+    # All live code/dependency/artifact/scope fields remain reconstructed exactly.
+    context = report.get('environment')
+    if (not isinstance(context, dict) or not isinstance(context.get('git_commit'), str)
+            or not re.fullmatch(r'[0-9a-f]{40}', context['git_commit'])
+            or type(context.get('git_dirty')) is not bool
+            or subprocess.run(['git', 'cat-file', '-e', context['git_commit'] + '^{commit}'],
+                              cwd=repo, capture_output=True).returncode):
+        raise ValueError('remaining preflight complete reconstruction/provenance mismatch')
+    for key in ('git_commit', 'git_dirty'):
+        expected['environment'][key] = context[key]
     if report != expected:
         raise ValueError('remaining preflight complete reconstruction/provenance mismatch')
     return {'notice': NOTICE, 'status': 'PASS', 'baseline_inference': False,
-            'complete_scope_and_provenance_reconstruction': True}
+            'complete_scope_and_provenance_reconstruction': True,
+            'historical_git_context_commit_exists': True}
 
 
 def main(argv=None):

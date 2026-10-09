@@ -3,6 +3,7 @@
 import copy
 import json
 from pathlib import Path
+import subprocess
 
 import numpy as np
 import onnx
@@ -255,8 +256,11 @@ def test_constant_resolution_rejects_cycles_external_data_and_invalid_types():
 def test_no_inference_report_reconstruction_rejects_rehashed_partial_evidence(tmp_path, monkeypatch, change):
     # A report checksum alone is insufficient: complete expected evidence is rebuilt.
     from numbra_ml import export_remaining as module
+    repo = module.repository_root()
     expected = {'status': 'PREFLIGHT ONLY; NO INFERENCE', 'plan': {'nodes': [1, 2]},
-                'fit': 19.15, 'scope': 'train', 'environment': 'original'}
+                'fit': 19.15, 'scope': 'train', 'environment': {
+                    'git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo, text=True).strip(),
+                    'git_dirty': True, 'source_tree_sha256': 'original'}}
     monkeypatch.setattr(module, 'preflight_evidence', lambda *a, **k: copy.deepcopy(expected))
     report = copy.deepcopy(expected)
     if change == 'omitted_node':
@@ -269,9 +273,9 @@ def test_no_inference_report_reconstruction_rejects_rehashed_partial_evidence(tm
         report[change] = 'changed'
     (tmp_path / REPORT).write_text(json.dumps(report))
     with pytest.raises(ValueError, match='complete reconstruction'):
-        audit_preflight(None, tmp_path, None, None, None, None, None)
+        audit_preflight(repo, tmp_path, None, None, None, None, None)
     (tmp_path / REPORT).write_text(json.dumps(expected))
-    assert audit_preflight(None, tmp_path, None, None, None, None, None)['baseline_inference'] is False
+    assert audit_preflight(repo, tmp_path, None, None, None, None, None)['baseline_inference'] is False
 
 
 def test_cli_refuses_existing_output_before_preflight(tmp_path, monkeypatch):
@@ -335,6 +339,18 @@ def test_full_preflight_reconstructs_provenance_without_any_image_or_inference(p
     path.write_text(json.dumps(report))
     assert audit_preflight(repo, output, prepared, run, experiments, source, prior,
                           backbone_factory=toy_backbone)['status'] == 'PASS'
+    # Advancing HEAD/dirty state cannot invalidate otherwise identical source.
+    from numbra_ml import export_remaining as module
+    original_environment = module.export_environment
+    def different_checkout_context(repository):
+        env = original_environment(repository)
+        env['git_commit'] = subprocess.check_output(['git', 'rev-parse', 'HEAD~1'], cwd=repo, text=True).strip()
+        env['git_dirty'] = not report['environment']['git_dirty']
+        return env
+    with monkeypatch.context() as patch:
+        patch.setattr(module, 'export_environment', different_checkout_context)
+        assert audit_preflight(repo, output, prepared, run, experiments, source, prior,
+            backbone_factory=toy_backbone)['historical_git_context_commit_exists'] is True
     for bad in ('nodes', 'environment', 'components', 'model'):
         changed = copy.deepcopy(report)
         if bad == 'nodes':
@@ -366,3 +382,24 @@ def test_full_preflight_reconstructs_provenance_without_any_image_or_inference(p
         finally:
             previous_path.write_text(original)
     assert {p: sha256(p) for p in paths} == retained
+
+
+@pytest.mark.parametrize('change', ['unknown_commit', 'invalid_commit', 'non_boolean_dirty'])
+def test_audit_retains_and_validates_historical_checkout_context(tmp_path, monkeypatch, change):
+    from numbra_ml import export_remaining as module
+    repo = module.repository_root()
+    current = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo, text=True).strip()
+    expected = {'environment': {'git_commit': current, 'git_dirty': False, 'source_tree_sha256': 'unchanged'}}
+    monkeypatch.setattr(module, 'preflight_evidence', lambda *a, **k: copy.deepcopy(expected))
+    report = copy.deepcopy(expected)
+    report['environment']['git_dirty'] = True
+    path = tmp_path / REPORT
+    path.write_text(json.dumps(report))
+    assert audit_preflight(repo, tmp_path, None, None, None, None, None)['status'] == 'PASS'
+    if change == 'non_boolean_dirty':
+        report['environment']['git_dirty'] = 1
+    else:
+        report['environment']['git_commit'] = '0' * 40 if change == 'unknown_commit' else 'HEAD'
+    path.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match='complete reconstruction/provenance'):
+        audit_preflight(repo, tmp_path, None, None, None, None, None)
