@@ -48,3 +48,15 @@ was performed. `.firecrawl/` is ignored and must never store tracked content.
 ## Confidence
 
 High for observed research/Python setup; Android and later ML build setup is pending.
+
+## M2 fixture preparation — observed 2026-10-09
+
+No additional toolchain/dependency installation. From repository root:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v1 --groups-per-source 128 --seed 20261009
+```
+
+Observed 768 generated images/384 components, all byte hashes and decodes verified.
+See [preparation evidence](DATA-PREPARATION.md). This does not train or download a
+model. The output and raw/prepared manifests/audit remain entirely ignored.

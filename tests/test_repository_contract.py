@@ -16,6 +16,8 @@ class RepositoryContractTests(unittest.TestCase):
             "data/manifests/example.jsonl",
             ".firecrawl/page.md",
             "ml/.venv/bin/python",
+            "tests/.tmp/generated.png",
+            "ml/tests/.tmp/fixture.jsonl",
             "ml/output/model.pt",
             "ml/output/model.safetensors",
             "ml/output/model.tflite",

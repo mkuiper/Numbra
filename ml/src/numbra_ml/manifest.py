@@ -191,11 +191,12 @@ class ManifestRow:
 
 
 def validate_manifest(rows: Iterable[ManifestRow]) -> tuple[ManifestRow, ...]:
-    """Fail on split leakage; M2 will merge duplicate-connected groups before splits."""
+    """Fail on split leakage; preparation merges duplicate components before splits."""
     rows = tuple(rows)
     seen: set[str] = set()
     assignments: dict[tuple, str] = {}
     source_versions: dict[str, tuple[str, str, str, str, str]] = {}
+    hash_labels: dict[str, tuple[str, str | None]] = {}
     for row in rows:
         # Revalidate direct dataclass construction, too.
         ManifestRow.from_dict(row.to_dict())
@@ -207,6 +208,11 @@ def validate_manifest(rows: Iterable[ManifestRow]) -> tuple[ManifestRow, ...]:
         previous = source_versions.setdefault(row.source.id, provenance)
         if previous != provenance:
             raise ManifestError(f"inconsistent source version/licence: {row.source.id}")
+        if row.split not in {"unassigned", "quarantine"} and row.label.family != LabelFamily.UNRESOLVED:
+            label_key = (str(row.label.family), row.label.diagnosis)
+            previous_label = hash_labels.setdefault(row.sha256, label_key)
+            if previous_label != label_key:
+                raise ManifestError("conflicting labels on identical bytes must be quarantined")
         keys = [("hash", row.sha256)]
         if row.group_id is not None:
             keys.append(("group", row.source.id, row.group_id))

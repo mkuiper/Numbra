@@ -1,8 +1,9 @@
-# Numbra ML — M1 data scaffold
+# Numbra ML — PLACEHOLDER data pipeline
 
 **PLACEHOLDER — synthetic demonstration, not clinically validated.**
-M0's harness gate is closed. M1 provides data interfaces and tests; no training,
-real-data acquisition, model export or Android implementation occurs here.
+M0/M1 harness gates are closed. M2 adds deterministic generated data, duplicate
+components and frozen splits. No training, real-data acquisition, model export or
+Android implementation occurs here.
 [ADR-002](../decisions/ADR-002-dataset-selection.md) approves generated fixtures
 only. Every future synthetic model, report and app result must say PLACEHOLDER.
 
@@ -36,8 +37,8 @@ from pathlib import Path
 from numbra_ml.dataset import ManifestDataset
 
 dataset = ManifestDataset.from_manifest(
-    root=Path("data/prepared/example"),
-    path=Path("data/manifests/example.jsonl"),
+    root=Path("data/prepared/synthetic-v1"),
+    path=Path("data/prepared/synthetic-v1/manifest.jsonl"),
     split="train",
 )
 eligible, exclusions = dataset.supervised_selection()
@@ -49,6 +50,18 @@ for sample in dataset:
 No example manifest/image is committed. Missing/unconfirmed labels return no
 target, and the explicit supervised selection also excludes missing groups and
 unassigned/quarantined rows. Evaluation code must retain exclusion counts.
-M2 will implement deterministic generation, deduplication and group/source split
-assignment. M3 adds training/evaluation; M4 specifies and tests model preprocessing.
+M2 implements deterministic generation, deduplication and group/source split
+assignment; see [data preparation](../docs/DATA-PREPARATION.md). M3 adds training/evaluation; M4 specifies and tests model preprocessing.
 The raw loader's RGB conversion is not the future model's full preprocessing spec.
+
+
+Generate the M2 PLACEHOLDER run from repository root (output must be new/empty):
+
+```bash
+ml/.venv/bin/python -m numbra_ml.prepare --output data/prepared/synthetic-v1 --groups-per-source 128 --seed 20261009
+```
+
+The companion preparation report identifies connected evaluation components and
+the held-out source. M3 must use those components, preserve frozen splits and
+report the insufficient-count threshold fallback; synthetic metrics are not
+clinical performance. No model weights exist yet.

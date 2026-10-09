@@ -258,3 +258,41 @@ Android SKIPPED, RESULT PASS. Initial run 1 failed/109 passed due to policy orde
 fixed code to reject unapproved source first, preserving the existing test. No
 reviewer files or protected files edited. Starting M2 synthetic-only as ADR-002
 requires; no acquisition attempts for held real datasets are authorised or needed.
+
+### 2026-10-09T13:20:58Z — M2 implementation and iteration completion
+
+Committed M1 follow-ups as 9610650, then implemented M2 only: procedural fixture
+acquisition CLI with no network, licence-bearing unassigned/prepared manifests,
+verified image decoding, source-scoped patient/group/global byte/decoded-pixel/
+near-visual connected components, whole-component quarantine and deterministic
+class-stratified frozen partitions with synthetic source C held out. Ordinary
+manifest readers now reject active exact-byte diagnosis conflicts. Added explicit
+M2 conflict/leakage/transitive/re-encoding/small-edit/quarantine/withdrawal/missing/
+seed/source/policy/integrity/cohort/cap/reproduction/overwrite tests. ADR-007 records
+schema 1.1.0, duplicate heuristic, synthetic splits and threshold fallback, pending
+human review; HUMAN-QUEUE plainly says no approved suitable real task data.
+
+Observed documented default CLI: 768 generated 64×64 RGB images/384 components,
+all images verified/decoded, all eligible, licence/PLACEHOLDER metadata retained.
+Split components: train150, calibration40, threshold-validation40, test26,
+held-out128, balanced per target. Audit has 384 near-visual view pairs, no default
+quarantine; adversarial cases tested separately. Second default run produced all
+771 files byte-identical, including 2 manifests and report. Manifest checksum:
+ff0e5d1749bf1f33fe64ac4234e7b788ea36e7db0996aa6c13208e76459911c4. All generated
+runs remain ignored data/. No real dataset, model/weights/training/app acquired.
+
+Final check.sh: exit0, 136 ML tests PASS, app SKIPPED, RESULT PASS. Root repository
+suite 5 PASS (Builder-attested; protected check script unchanged). pip check: no
+broken requirements. git diff --check PASS. No M2 implementation tests failed or
+were weakened/skipped. No additional toolchain installed. Wrote HANDOFF, STATUS
+and exact REVIEW M2 request. M3 must aggregate audit components, honour frozen
+splits, and use ADR-001's unselected refer-all fallback (threshold validation only
+20/class, not100/class). Synthetic metrics cannot establish clinical performance.
+
+No protected edits, review.sh, REVIEW/CHECK/GATE writes, data/image/weight commits,
+external messages, publishing or pushes. Harness owns review and gate closure.
+
+Final staged audit: 17 builder code/text files, no protected/data/image/weight
+paths; NEXT_ACTION exactly REVIEW M2. Staged whitespace check PASS. Final root
+link/contract suite after HANDOFF/STATUS: 5 PASS. Commit: M2: prepare deterministic
+PLACEHOLDER fixtures and source holdout.

@@ -1,9 +1,9 @@
-# M1 data contract
+# ML data contract — M1 interfaces and M2 preparation
 
 **PLACEHOLDER — synthetic demonstration, not clinically validated.**
 The implementation is [numbra_ml](../ml/src/numbra_ml/__init__.py), governed by
 [ADR-006](../decisions/ADR-006-ml-data-contract.md). This document describes actual
-M1 behaviour; it does not claim a clinically verified taxonomy or real-data rights.
+M1/M2 behaviour; it does not claim a clinically verified taxonomy or real-data rights.
 
 ## Schema and provenance
 
@@ -24,7 +24,7 @@ by split so a subset cannot conceal patient, group or exact-hash split leakage.
 | `label` | Original label, mapped diagnosis/family, label status, explicit PB/MB and reaction status. |
 | `confirmed_by` | Null, or allow-listed method/opaque confirmer-evidence reference/ISO calendar date (not future). A confirmed label needs this assertion and a resolved diagnosis; model predictions cannot confirm. Credentials are not verified by this schema. |
 | `patient_id`, `group_id` | Explicit opaque tokens or null; namespaced by source. Group ID defines the primary evaluation unit; repeated patient IDs across groups must still stay in one split. Missing IDs are never inferred from filenames. |
-| `split` | `unassigned`, `train`, `calibration`, `threshold_validation`, `test`, `held_out`, `quarantine`. Assignment is M2 work. Quarantine and unassigned remain group-level partitions; mixed active/quarantine rows in one connected group fail. |
+| `split` | `unassigned`, `train`, `calibration`, `threshold_validation`, `test`, `held_out`, `quarantine`. Assignment follows ADR-007. Quarantine and unassigned remain group-level partitions; mixed active/quarantine rows in one connected group fail. |
 | `synthetic`, `placeholder` | Explicit booleans. Synthetic rows require PLACEHOLDER, original labels beginning `SYNTHETIC:`, and no clinical confirmation. |
 | `skin_tone` | Null or controlled scheme/value/assigned_by (Fitzpatrick I–VI, Monk 1–10, or synthetic colour). Generated data permits only `synthetic_colour`, never invented Fitzpatrick/Monk annotations. |
 | `capture` (optional) | Nullable opaque site ID, device class and body site. Omission preserves null values; no guessed capture metadata. |
@@ -68,9 +68,10 @@ claim clinical confirmation.
 
 `ManifestDataset.supervised_selection()` returns eligible rows and per-record
 exclusion reasons, additionally excluding null groups and unassigned/quarantined
-splits. It performs no training or scoring. Leave-one-source-out, perceptual
-duplicates, conflicting-label quarantine and duplicate-connected merging remain
-M2 work; the current exact-hash check alone does not prove all leakage absent.
+splits. It performs no training or scoring. M2 adds [component preparation](DATA-PREPARATION.md), synthetic source holdout,
+near-visual candidate detection and group-wide conflict quarantine. The raw
+manifest check alone is not the full preparation pipeline and does not prove
+real patient independence.
 
 ## Observation contract for M6/M7
 
@@ -110,7 +111,8 @@ the eventual model preprocessing and Python/Android parity separately.
 
 - Does clinical review approve the exact challenge vocabulary and question superset?
 - Which future permitted cohort supplies auditable patient/group and confirmation provenance?
-- How will M2 handle perceptual duplicates and M7 extend confirmer/custodian/consent fields?
+- Will real-data review accept an amended visual-duplicate policy, and how will M7
+  extend confirmer/custodian/consent fields?
 
 ## Confidence
 

@@ -4,14 +4,16 @@ The entire `data/` directory is git-ignored, including its README. Do not force-
 files from it. This tracked document replaces an in-data README so the stronger
 autopilot rule (no committed data) is unambiguous.
 
-Planned layout for M2:
+Implemented M2 layout (generated content remains local):
 
 ```
 data/
   README.md             # optional local reminder; never committed
-  raw/<source>/<version>/
   prepared/<run-id>/
-  manifests/<run-id>.jsonl
+    images/*.png          # generated RGB textures only
+    unassigned.jsonl      # raw generator provenance, before split assignment
+    manifest.jsonl        # frozen schema 1.1.0 prepared rows
+    preparation-report.json # component/duplicate/quarantine/split audit
 ```
 
 All images, source metadata, patient identifiers, manifests, and derivative data
@@ -28,10 +30,11 @@ text extracts are ignored evidence notes, not datasets.
 
 ## Open questions
 
-- ADR-006 defines JSONL schema 1.1.0; M2 must document its duplicate audit and
-  component split metadata.
+- ADR-007 and [data preparation](DATA-PREPARATION.md) now document schema 1.1.0,
+  duplicate audits and component split metadata. Future real-data layout needs
+  a new dataset decision; no real raw source is acquired.
 - How should M4 regenerate and package its model reproducibly during Android builds?
 
 ## Confidence
 
-High on repository boundaries; medium on the proposed layout before M2 implementation.
+High on repository boundaries; high for generated M2 layout; future real-data layout remains unapproved.
