@@ -47,6 +47,13 @@ and purpose limits for personal data and health-examination disclosure; section
 information for research collection. Section 27 identifies physical/mental health
 as sensitive information for public-body processing and contains health-service
 exceptions. These are not a blanket AI-training permission.
+Section **11(2)(b)** includes medical history and health-examination reports among
+personal documents; section 11(4) describes exceptions including consent for
+study/research. Section **16(1)** addresses non-consensual photography that damages
+character/social prestige and defamatory composites/publication; **16(3)** restricts
+dissemination/commercial use of non-consensual photographs with the specified
+harmful/profit intentions. These provisions matter to lesion photos and stigma;
+they are not paraphrased as a blanket prohibition of every photograph.
 [Act, government-hosted English text](https://giwmscdnone.gov.np/media/app/public/275/posts/1721034328_44.pdf),
 linked from [Law Commission](https://lawcommission.gov.np/content/12261/the-privacy-act-2075/).
 Text inspected; the initial National Information Commission copy returned 404.

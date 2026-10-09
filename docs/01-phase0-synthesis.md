@@ -12,6 +12,14 @@ differential cohort meeting anonymous access, permission and scientific needs;
 this is a survey limitation, not proof none exists. No real dataset is approved
 by [ADR-002](../decisions/ADR-002-dataset-selection.md). Generated sources/groups
 exercise manifests, duplicates, patient/group splits and source holdout mechanics.
+Review-1 correction: AI4Leprosy has verified CC BY-NC 4.0 but request-gated files;
+DermaCon-IN adds a South Asian clinical smartphone/camera candidate with documented
+patient IDs and CC BY-NC-SA 4.0. Its documentation downloads anonymously, but
+target-label coverage, actual linkage and image flow remain UNVERIFIED. Humans
+must assess NC-SA/derived-weight obligations. Fitzpatrick17k has no leprosy label;
+the 32-category Kaggle compilation is excluded for unresolved upstream rights.
+These corrections retain the synthetic-only decision, without claiming regional
+data do not exist or assuming DermaCon-IN is negatives-only.
 
 Use versioned `leprosy / leprosy_differential / other / unresolved` families with
 original named diagnosis, explicit PB/MB and reaction status, source/licence,
@@ -26,6 +34,12 @@ with transparent symptom-first referral: urgent deterioration, sensory/nerve
 concern, incomplete/failed assessment, then photo score. A low score permits only
 qualified low-photo-concern wording with follow-up; never a negative diagnosis.
 Every synthetic result says **PLACEHOLDER — not clinically validated**.
+Intact sensation does not exclude MB disease. Proposed independent triggers now
+also cover patch burden/distribution, raised/nodular/thickened skin/earlobes,
+eyebrow loss, painless wounds/burns and close contact with the presenting concern.
+M6 must test each with intact sensation and a zero score. Incomplete required
+concern assessment refers; humans must decide if low-photo wording should exist
+in any future pilot. Macular PKDL is added to the local differential vocabulary.
 
 [ADR-005](../decisions/ADR-005-baseline-runtime.md) selects CPU PyTorch/timm
 MobileNetV3Small frozen transfer features and a binary head, with quantised ONNX
@@ -40,7 +54,12 @@ the threshold chosen for illustrative validation sensitivity ≥0.95; report ach
 test sensitivity/specificity, AUC, calibration, uncertainty, source/presentation/
 tone breakdowns where labels exist, and failures in workflow denominators. Report
 secondary sensitivity at specificity ≥0.80 separately. Synthetic metrics are
-software evidence only. M4 measures ≤20 MB and parity at the proposed probability
+software evidence only. Threshold selection requires at least 100 independent
+groups per class after a separate calibration subset (20 per class); otherwise
+selection is unavailable and the app uses a labelled refer-all fallback. Report
+the exact 95% sensitivity lower bound alongside the point estimate; selection
+intervals do not establish independent support or clinical approval. M4 measures
+≤20 MB and parity at the proposed probability
 tolerance 0.02; M6 tests preprocessing and conservative threshold handling.
 [Deployment research](../research/05-deployment-constraints.md) proposes offline
 bundling, neutral UI, reviewed-later Nepali, bounded decoding and encrypted records;

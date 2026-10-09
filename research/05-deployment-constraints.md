@@ -118,6 +118,14 @@ this POC provides deliberate local export only, with no automatic synchronisatio
 
 ## Language, literacy and privacy proposals
 
+The Sarlahi [FCHV study, Table 2](https://www.kumj.com.np/issue/65/40-45.pdf)
+reports 31.8% of its participants as illiterate, and its introduction describes
+18 days of basic training. Incentives did not establish successful referral;
+the authors discuss concealment/stigma. This is historical local evidence, not
+today's national volunteer profile. **Design inference:** supervised demonstrations,
+comprehension checks, symbols with text and optional bundled audio deserve testing;
+Nepali text alone cannot establish accessibility.
+
 Ship English and Nepali string resources, with every Nepali clinical instruction
 flagged for **native-language and clinical review**. Do not claim translation is
 validated. Keep one question per screen, visible unknown/declined answers, large

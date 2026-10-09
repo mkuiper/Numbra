@@ -8,9 +8,16 @@ Status: Accepted (autopilot) — pending human review
 
 The hard limits prohibit account creation, signed agreements and accepting terms
 on another person's behalf. The [dataset survey](../research/03-datasets.md)
-documents primary-source evidence and UNVERIFIED fields. AI4Leprosy repository
-verification failed on the DOI and a candidate landing page; no suitable positive
-archive has been verified. [DDI](https://ddi-dataset.github.io/index.html) requires
+documents primary-source evidence and UNVERIFIED fields. The
+[AI4Leprosy catalogue](https://arcadados.fiocruz.br/api/datasets/:persistentId/?persistentId=doi:10.35078/1PSIEL)
+now verifies CC BY-NC 4.0 and restricted, request-gated files; it is excluded under
+the hard limits, rather than held because its licence is unknown. DermaCon-IN's
+[documentation](https://dataverse.harvard.edu/api/access/datafile/11362259) verifies
+patient IDs/subject-wise splits and the South Asian candidate improves the survey.
+Anonymous documentation access is verified; leprosy/differential label coverage,
+actual patient linkage and image download flow are UNVERIFIED. Its CC BY-NC-SA 4.0
+terms and possible derived-weight obligations need human review. It must not be
+assumed negative-only without a label audit. [DDI](https://ddi-dataset.github.io/index.html) requires
 registration/agreement. [DermNet](https://dermnetnz.org/image-licence) prohibits AI
 use of free website images. [PAD](https://data.mendeley.com/datasets/zr7vgbcyr2/1)
 has a documented CC BY 4.0 licence but the wrong target taxonomy.
@@ -20,6 +27,8 @@ has a documented CC BY 4.0 licence but the wrong target taxonomy.
 - Pool readily found photos: rejected because public visibility is insufficient
   permission and mixing positive-only and negative-only sources risks shortcuts.
 - Acquire custom-terms or registration-gated sources: excluded during autopilot.
+- Approve DermaCon-IN now: defer; promising domain and documented patient IDs
+  do not resolve target labels, linkage audit or NC-SA weight obligations.
 - Synthetic-only demonstrator: permits honest, reproducible development while
   real-data permissions and scientific fitness remain unresolved.
 
@@ -50,7 +59,9 @@ not a legal opinion on whether any custom public licence is unusable.
 
 ## Open questions
 
-- Can humans verify AI4Leprosy permission and a compatible external validation cohort?
+- Will humans seek AI4Leprosy access via the owner and accept non-commercial data terms?
+- Can DermaCon-IN's target labels, patient linkage, image access and NC-SA/weight obligations be verified?
+- Is there a compatible independent positive/control validation cohort?
 - Which local clinical/ethics partner could govern future Nepal data collection?
 - Do humans agree with the conservative hold on custom-terms data?
 

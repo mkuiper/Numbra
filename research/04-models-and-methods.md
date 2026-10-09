@@ -65,6 +65,11 @@ WHO's cardinal signs and the implications for photographs are sourced in the
 [clinical document](01-clinical-background.md) and
 [WHO fact sheet](https://www.who.int/news-room/fact-sheets/detail/leprosy).
 The decision is a POC safety design, not a validated Nepal clinical protocol.
+Intact sensation does not exclude leprosy, especially MB disease; the
+[ILA report, sections 2.1–2.2](http://ila.ilsl.br/pdfs/v70n1s1a05.pdf) explains
+the limitations of an anaesthetic-patch-only criterion. Volunteer touch-test
+sensitivity in Nepal remains UNVERIFIED. Photo and touch results cannot clear
+the person of disease.
 
 ## Proposed transparent rule precedence
 
@@ -74,8 +79,14 @@ action plus every applicable reason, rule version, model version and quality sta
 1. New weakness, eye pain/difficulty closing an eye, or other clinically reviewed
    urgent deterioration → **refer urgently**, regardless of image or score.
 2. Reduced/absent patch sensation, concerning nerve symptoms, or volunteer concern
-   → **refer**, regardless of score. A deterioration flag may elevate urgency.
-3. Unknown/uncertain/not-tested sensation, unusable image, missing/failed/non-finite
+   → **refer**, regardless of score. Also refer for **>5 patches; many/widespread
+   patches with unknown count; raised, nodular or thickened skin/earlobes; eyebrow
+   loss; painless hand/foot wounds or burns; or reported close contact with the
+   presenting skin concern**. Intact sensation and low score cannot cancel these
+   triggers. These are clinical-review proposals, not validated MB detection rules.
+   A deterioration flag may elevate urgency.
+3. Unknown/uncertain/not-tested sensation or incomplete required patch/skin/nerve
+   concern assessment, unusable image, missing/failed/non-finite
    model output → **refer for clinical review**; offer a retake without delaying
    symptom-based action. Never silently substitute a low score on failure.
 4. Usable photo, completed symptom assessment and score at/above the frozen
@@ -83,15 +94,24 @@ action plus every applicable reason, rule version, model version and quality sta
 5. Otherwise → **low concern from photo; refer if sensation loss or change**.
    This is qualified photo wording, not exclusion of disease or a discharge decision.
 
-Patch count, duration and optional contact history contextualise the referral
-summary; neither a short duration nor absent contact cancels referral. Multiple
-patches are recorded without assigning PB/MB. Exact additional escalation rules
-need clinical review. Urgent candidates derive from
+Duration contextualises the summary and cannot rule out disease. Contact history
+stays optional/private; absent/unknown/declined contact never cancels referral and
+does not alone force a positive answer. Other required concern fields use explicit
+yes/no/uncertain; uncertain/declined/omitted required fields route to rule 3, while
+any positive trigger still routes to rule 2. Patch count never assigns PB/MB.
+Even with all negative answers, disease may be missed; humans must decide whether
+any low-photo outcome should exist in a future pilot. Urgent candidates derive from
 [WHO reaction guidance](https://www.who.int/publications/i/item/9789290227595)
 and [the clinical draft](01-clinical-background.md); symptom cutoffs, timing and
 local competency remain **UNVERIFIED**. Future M6 tests must cover each rule,
 overlapping reasons, missingness, score boundaries, failures and monotonicity
-(adding a red flag cannot lower urgency). Test every returned outcome against
+(adding a red flag cannot lower urgency). **Planned M6 regression cases:** sensation
+present, usable photo and score zero, paired separately with each new trigger,
+must refer; >5 versus exactly 5, widespread/unknown count, contact declined,
+uncertain morphology and omitted required fields must preserve the stated rules.
+Adding any trigger must suppress low concern at every finite model score, even
+under overlap with urgency/failure. These tests are planned, not executed in M0.
+Test every returned outcome against
 negative-diagnosis language, including translated equivalents under native review.
 Every POC result includes **PLACEHOLDER**.
 
@@ -127,8 +147,21 @@ These are project specifications for M1–M4, not claimed empirical findings.
   the most specific qualifying threshold). Save threshold, target, counts,
   selection rule and split hashes. Freeze it for test and held-out source; report
   actual sensitivity and specificity with no promise test sensitivity reaches
-  0.95. If there are no positives, report unavailable and use a documented
-  refer-all safety fallback rather than an invented measured threshold.
+  0.95. **Proposed minimum:** 100 independent positive and 100 negative groups
+  in threshold-selection, after a separate calibration-fit subset of at least
+  20 groups per class. These are conservative engineering guardrails, not a
+  clinical sample-size calculation. Below these counts, mark selection
+  `unavailable_insufficient_groups` and use an explicitly unselected refer-all
+  fallback (`threshold=0` for bounded probabilities); never manufacture a
+  “selected” threshold from a tiny fixture. Small unit fixtures exercise that
+  fallback; generated M3 runs should meet the counts in each feasible source fold.
+  Save TP/FN counts and the **lower endpoint of a two-sided 95% Clopper–Pearson
+  interval** with sensitivity, on selection, frozen test and reported subgroups.
+  [NIST exact binomial interval construction](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm).
+  If the point estimate meets 0.95 but its lower bound does not, label it
+  `empirical_target_only`, never “supported sensitivity ≥0.95”. Selection-set
+  intervals are descriptive after threshold search; use the independent frozen
+  test for a fixed-threshold interval. Synthetic intervals concern fixtures only.
 - **Secondary requested endpoint:** sensitivity at validation specificity
   **≥0.80**, a separate illustrative target. Choose the lowest threshold meeting
   that specificity, with a prespecified above-maximum sentinel for the all-negative
@@ -162,7 +195,9 @@ These are project specifications for M1–M4, not claimed empirical findings.
 
 Future tests should assert disjoint patient/duplicate groups, held-out-source
 exclusion, calibration/threshold isolation, ties at thresholds, one-class and
-empty subsets, and transparent unavailable metrics. The model card must record
+empty subsets, transparent unavailable metrics, count guards, exact-bound
+zero/all-success cases and insufficient-count fallbacks.
+The model card must record
 data/licences, intended use, excluded populations, input spec, rules, thresholds,
 evaluation limits and **PLACEHOLDER** status. No model promotion follows from a
 green synthetic report; a clinical programme needs independent representative

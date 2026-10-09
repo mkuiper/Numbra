@@ -165,3 +165,46 @@ Append-only log of Builder iterations.
   request REVIEW M0. Harness must run review/tests of record and close the gate;
   no review.sh, REVIEW/CHECK/GATE writes, protected edits, toolchain installs,
   external messages, pushes, publication or M1 work performed.
+
+## 2026-10-09T12:44:00Z — iteration
+
+- Oriented in required order and read Review-1/CHECK-1 in full. Harness requested
+  REVISE M0; no gate. Stayed research-only and addressed all 10 numbered issues.
+- Added DermaCon-IN record and amended ADR-002/synthesis: South Indian smartphone/
+  camera candidate, CC BY-NC-SA 4.0, anonymous documentation, Subject_ID and
+  documented subject-wise splits. Ordinary Harvard API/page failed; metadata
+  export then README/schema/dictionary succeeded. Documentation omits disease
+  enumeration: labelled documentation-only workaround keeps target coverage
+  UNVERIFIED, queues permitted label/linkage/rights audit, assumes no negative-only
+  role and retains synthetic-only. No patient tables/images/weights acquired.
+- Corrected AI4 via direct Fiocruz HTML/API: CC BY-NC 4.0 and 1,456 restricted
+  files, v1.10 release 2024-05-16. API null guestbook ID means generic UI alone
+  cannot establish a download guestbook requirement. Updated obsolete queue/source
+  notes. Europe PMC full text/supplement confirms ResNet-50, main Table 3's 89/91%
+  SEN/SP row and unresolved CV/holdout descriptions; final refit includes test
+  patients. Abstract/results count discrepancy retained. MIT code/current archive
+  verified with repository README/licence/file listing; no data/weights reused.
+- ILA HTTPS/web/direct opens failed; HTTP publication PDF/text succeeded. Confirmed
+  intact sensation cannot exclude MB, and 30% concerns missed patients using one
+  criterion in a cited study, not universal lesion prevalence. Amended 01/04/ADR-001
+  with independent patch/skin/eyebrow/injury/contact triggers, missingness handling
+  and planned M6 intact-sensation/zero-score, boundary/overlap/monotonicity tests.
+  Clinical proposals/low-photo permissibility queued; no rule safety claim.
+- Addressed smaller issues: macular PKDL; Sarlahi Table 2 literacy plus training,
+  incentives/passive detection/stigma context; excluded 32-category upstream Kaggle
+  compilation; transient in-memory Fitzpatrick label counts (no leprosy); verified
+  Privacy Act ss.11/16; minimum group-count/exact-interval threshold plan; targeted
+  Leprosy Review/IJDVL/IJL searches. No patient rows/image URLs retained or followed.
+- Applied Firecrawl skills; status confirms zero credits. Continued documented
+  web-tool/direct-document workaround without accounts, billing or terms submission.
+  Updated source register/access limits and HUMAN-QUEUE. No toolchains installed.
+- Wrote RESPONSE-1 addressing all blocking/non-blocking issues, missed work and
+  human questions; updated HANDOFF, STATUS and REVIEW M0 request. Two patch calls
+  failed verification before applying changes; corrected the patches. No protected
+  files changed. No review.sh, reviewer/check/gate writes, publishing or pushes.
+- Observed five repository tests PASS and bash scripts/check.sh exit 0 / RESULT
+  PASS (ML/Android SKIPPED, no projects). git diff --check PASS. Final suite and
+  staged boundary/whitespace verification recorded below before committing.
+- Final documentation suite: all 5 tests PASS; staged diff --check PASS. Staged
+  boundary audit confirms 16 builder files, no protected/data files, and exact
+  single-line REVIEW M0 request. Commit: M0: address first research review.

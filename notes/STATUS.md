@@ -1,67 +1,76 @@
 # Status
 
-Updated: 2026-10-09T12:24:10Z
+Updated: 2026-10-09T12:44:00Z
 
-Current milestone: **M0 — Research and plan**, deliverables complete and **ready
-for harness review**. No review or GATE exists yet. Work remains research only;
-NEXT_ACTION requests REVIEW M0. Do not begin M1 until the harness closes M0.
+Current milestone: **M0 — Research and plan**, Review-1 REVISE addressed and
+**ready for harness re-review**. No GATE exists. NEXT_ACTION: REVIEW M0.
+Research only; do not begin M1 until the harness closes M0.
 
 ## Acceptance status
 
-- **All research/0x documents, synthesis and required ADRs: SATISFIED.** Seven
-  research documents (`01`–`07`), source register, brief/glossary and
-  docs/01-phase0-synthesis.md exist. Required ADR-001/002/003/004 and additional
-  ADR-005 have Accepted (autopilot) — pending human review status; all queued.
-  reviews/M0/HANDOFF.md maps deliverables, verification and five uncertainties.
-- **Every dataset claim sourced or UNVERIFIED: SATISFIED.** Survey retains primary
-  links and explicit uncertainty/access limits. No real dataset approved or
-  acquired; ADR-002 remains synthetic-only. Research documents distinguish
-  proposals from facts and end with Open questions and Confidence.
-- **Review/gate: PENDING.** Only the harness runs review.sh, writes tests of record
-  and closes GATE.md. No engineering, scientific or clinical approval claimed.
+- **Research documents, synthesis and required ADRs: SATISFIED.** Seven research
+  documents, source register, synthesis and required ADR-001/002/003/004 exist;
+  additional ADR-005 remains. All ADRs Accepted (autopilot) — pending human review.
+  ADR-001/002 revised following review; amendments and unresolved choices queued.
+- **Every dataset claim sourced or UNVERIFIED: SATISFIED.** DermaCon-IN added,
+  AI4 restricted access/licence corrected, Fitzpatrick label counts checked and
+  32-category compilation excluded. Target coverage/linkage/access gaps explicit.
+  No real task dataset approved. Research retains Open questions/Confidence.
+- **Review response: COMPLETE.** reviews/M0/RESPONSE-1.md answers all 3 blocking,
+  7 non-blocking, missed-work and human-question items. HANDOFF updated.
+- **Gate: PENDING.** No clinical, scientific, legal or milestone approval claimed.
 
 ## Verification observed
 
-- `python3 -m unittest discover -s tests -v`: all **5** tests passed after final
-  handoff and source-register edits. Added citation-register coverage; existing
-  checks cover ignored paths, no tracked data, local links and uncertainty sections.
-  These do not verify research facts, legal compliance or clinical rule safety.
+- `python3 -m unittest discover -s tests -v`: **5 tests PASS** after research edits;
+  final documentation pass recorded in JOURNAL. No tests changed or weakened.
 - `bash scripts/check.sh`: exit 0, RESULT PASS; ML and Android explicitly SKIPPED
-  because projects do not exist. No APK or ML/clinical validation claimed.
-- External citation coverage audit: no missing source-register URLs across builder
-  research/docs/ADRs; permanent test now enforces this evidence bookkeeping.
-- `git diff --check` and staged diff check passed. Research/handoff committed as
-  29dc47b (M0: complete governance research and phase-zero handoff).
-- No training/app implementation, photos, patient records, data archives, weights,
-  toolchain installations, protected edits, review.sh, pushes or external messages.
+  because projects do not exist. No APK, model performance or clinical validation.
+- `git diff --check`: passed after review-response/handoff edits; staged whitespace
+  and boundary checks recorded in JOURNAL before commit.
+- No protected edits, review.sh, REVIEW/CHECK/GATE writes, training/app work,
+  toolchain installation, clinical images, patient-row tables, weights, external
+  messages, publishing or pushes. Fitzpatrick CSV counted transiently in memory
+  only; no individual rows/image URLs retained. Publication PDFs/supplements,
+  documentation and catalogues inspected as research evidence.
 
-## Decisions and open blockers
+## Review findings, decisions and open blockers
 
-- ADR-004 selects local-only versioned consent/provenance records and explicit
-  metadata export. Capture labels stay provisional; external clinical confirmation,
-  steward-approved datasets and human model-release approval are separate events.
-  No real collection, backend, research image transfer or automatic learning.
-- Nepal custodian, credentials, consent/assent translations, numeric real-data
-  retention, withdrawal/recipient-copy/model limits, residency and benefits need
-  human institutional decisions before real collection. All queued in HUMAN-QUEUE.
-- Full NHRC 2022 guidance opens failed on eLibrary and NHRC copies; DDA catalogue,
-  record and directive opens failed. **Labelled research workaround:** indexed
-  official evidence, plus an institution's IRC scope statement. Current review
-  jurisdiction/application details and Numbra software classification UNVERIFIED.
-- Government-linked English Privacy Act text inspected. Current amendments/rules,
-  actor-specific duties, secondary-use, retention/breach/transfer interpretation
-  remain UNVERIFIED; no clearance asserted. FDA/EU comparisons are illustrative.
-- Existing dataset/clinical/current-burden/device/HMIS limitations remain in
-  research/HANDOFF/HUMAN-QUEUE. Proposed thresholds, letterbox, parity tolerance
-  and device budgets are unvalidated engineering choices. Every downstream model,
-  report and app inference surface must say **PLACEHOLDER**.
-- Firecrawl still has zero credits; retained the previously documented web-tool
-  workaround with no auth/account/billing changes. No blocker to bounded M0 review.
+- AI4Leprosy Fiocruz direct HTML/API verifies CC BY-NC 4.0, v1.10 release
+  2024-05-16, 1,456 restricted files (1,231 JPEG / 225 JSON), owner request route.
+  Excluded under unattended limits. Human access/NC decisions replace stale
+  unknown-licence queue entry. No access requested. Actual guestbook requirement
+  remains UNVERIFIED (generic UI but API guestbook ID null).
+- AI4 full text/supplement and code verified: ResNet-50 close-ups, MIT code,
+  currently archived. Main Table 3 SEN/SP 89/91% is metadata outputs plus patient
+  info; supplement conflicts on CV/holdout description. Final refit includes
+  testing patients. Abstract/results count discrepancy retained; no invented
+  reconciliation or Numbra performance inferred.
+- DermaCon-IN: regional clinical smartphone/camera candidate, CC BY-NC-SA 4.0,
+  anonymous README/schema access, documented Subject_ID/subject-wise split.
+  Actual target diagnoses, patient linkage, image flow and derived-weight terms
+  unresolved. Documentation/dictionary omit diagnosis enumeration; **labelled
+  documentation-only workaround** keeps coverage UNVERIFIED and queues a future
+  permitted audit. No negatives-only assumption. ADR-002 remains synthetic-only;
+  every downstream model/report/UI must say **PLACEHOLDER**.
+- ADR-001 now includes intact-sensation/MB limitation and proposed independent
+  patch/skin/eyebrow/injury/contact referral triggers; unknown required assessment
+  refers. Planned M6 tests cover intact sensation/zero score, boundaries and
+  monotonicity. Human clinical approval and whether low-photo wording is ever
+  appropriate remain unresolved; added rules do not guarantee all MB detection.
+- Proposed M3 threshold guardrails: 100 independent groups/class after separate
+  calibration subset 20/class, exact 95% sensitivity bounds and explicitly
+  unselected refer-all fallback below counts. Engineering choices queued; no
+  clinical sample-size or supported-sensitivity claim.
+- Added macular PKDL, historical Sarlahi literacy/training/incentive/stigma context,
+  Privacy Act ss.11/16 and journal-targeted search coverage. Existing NHRC/DDA,
+  Nepal field/device/language, governance/custodian and real-pilot gaps persist.
+- Firecrawl credits remain zero; continued documented web-tool/direct-document
+  workaround. ILA HTTP PDF works after HTTPS failures; Harvard export works after
+  ordinary API/page failures. No auth/account/billing changes.
 
 ## Next concrete step
 
-Harness reviews M0. On the next iteration, read its REVIEW and CHECK in full;
-without a gate answer every numbered issue in RESPONSE and revise the research.
-If a gate exists, fix cheap non-blocking issues, queue the rest and begin **M1 only**:
-pinned Python project, taxonomy/manifest/loading interfaces and generated synthetic
-fixture tests. Scientific, clinical and legal field-use approvals remain separate.
+Harness reruns checks and M0 review. Read next REVIEW/CHECK in full; if still
+REVISE, answer each numbered issue and fix within M0. If GATE exists, address cheap
+non-blocking issues, queue remaining human decisions and begin **M1 only**.

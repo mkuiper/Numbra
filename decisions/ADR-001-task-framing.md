@@ -41,6 +41,21 @@ classification or a clinically calibrated probability. Every synthetic POC resul
 says **PLACEHOLDER — not clinically validated**. Local clinical rules, translations,
 urgency and receiving services require human approval before field use.
 
+Review-1 amendment: **intact patch sensation does not exclude leprosy or MB**;
+the [ILA Technical Forum report, S24–S25](http://ila.ilsl.br/pdfs/v70n1s1a05.pdf)
+warns against relying on anaesthetic patches alone. Volunteer touch-test sensitivity
+is UNVERIFIED. Before interpreting scores, the proposed engine also refers for
+more than five patches, many/widespread patches with unknown count, raised/nodular/thickened
+skin or earlobes, eyebrow loss, painless hand/foot wounds/burns, close contact
+with the presenting skin concern, or volunteer concern. Incomplete required
+assessment routes to clinical review. These proposals cannot guarantee detection
+of all MB disease; future humans must explicitly approve whether low-photo wording
+is appropriate at all. M6 must test each override with intact sensation and score
+zero, overlap, boundaries and monotonicity. The methods plan now sets minimum
+group counts and exact sensitivity bounds before threshold selection; insufficient
+counts use a labelled unselected refer-all fallback. This amendment retains
+Accepted (autopilot) — pending human review status and synthetic-only authority.
+
 ## Consequences and revisit trigger
 
 Model metrics and workflow metrics are separate; low scores cannot cancel symptom

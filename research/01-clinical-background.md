@@ -26,6 +26,16 @@ an external clinical source explicitly supplies it. A missing smear or unknown
 nerve status is not a negative result. The later rule engine must not diagnose,
 assign treatment, or reassure a person that leprosy is absent.
 
+**Intact patch sensation does not exclude leprosy, especially MB disease.** The
+ILA Technical Forum report (2002, sections 2.1–2.2, S24–S25) warns that using an
+anaesthetic patch as the sole diagnostic criterion misses MB cases. It describes
+an Ethiopian study in which that criterion missed about 30% of **patients**,
+most smear-positive; this is not a universal proportion of lesions or a measured
+Numbra miss rate. [ILA report](http://ila.ilsl.br/pdfs/v70n1s1a05.pdf).
+HTTPS opens failed; direct HTTP retrieved the publication PDF and its text was
+inspected. A volunteer-administered gentle-touch test has **UNVERIFIED sensitivity**
+in this setting; recording “present” must never amount to diagnostic clearance.
+
 ## Presentations and differential diagnoses
 
 The Zambia Ministry of Health's 2020 guideline describes hypopigmented patches,
@@ -41,7 +51,16 @@ photo taxonomy. It is a primary national clinical guideline hosted by WHO;
 | Other macular/plaque-like lesions | Tinea corporis, psoriasis, morphea, lupus vulgaris, discoid lupus erythematosus | Treat this as a challenge vocabulary, not an exhaustive classifier label set. |
 | Nodular lesions | Post-kala-azar dermal leishmaniasis, cutaneous leishmaniasis, Kaposi sarcoma, neurofibromatosis | An alternative diagnosis may itself require referral; it is not a “don't refer” control. |
 
+| Additional pale-lesion candidate | Primary evidence beyond the Zambia table | Proposed implication |
+| --- | --- | --- |
+| Macular PKDL | Nepal cohort cited below describes hypopigmented macules/plaques. | Include macular as well as nodular PKDL for local clinical ranking. |
+
 The table is a subset of the guideline, **not a claim about prevalence in Nepal**.
+Add **macular PKDL** to the pale-lesion challenge vocabulary, alongside nodular
+PKDL. A south-eastern Nepal cohort describes hypopigmented macules/plaques as the
+commonest presentation in its 16 probable/confirmed PKDL cases, and the potential
+confusion with leprosy. [Uranw et al., 2011 Nepal cohort](https://pmc.ncbi.nlm.nih.gov/articles/PMC3243697/).
+This supports local clinical ranking, not a claim of current national prevalence.
 Eczema/dermatitis remains a **proposed** additional common-condition challenge
 class from the brief; its priority as a leprosy differential in the intended Nepal
 setting is **UNVERIFIED**. Local clinicians must rank the vocabulary. Use
@@ -81,15 +100,24 @@ for FCHVs are **UNVERIFIED**; demonstration alone is not training certification.
 | --- | --- | --- |
 | Patch sensation | Explain and demonstrate gentle touch on unaffected skin; after consent, test the patch with eyes closed without cueing; record present/reduced/absent/uncertain/not tested plus assessor and method. | Only a clinically reviewed skin-touch procedure belongs in the POC. No needles, heat, or eye sensation testing. Reduced/absent or uncertain sensation must not be overridden by an image score. |
 | Nerve symptoms/function | Ask about numbness, tingling, new weakness or pain in hands/feet and difficulty closing eyes. | Do not ask untrained users to palpate or diagnose thickened nerves. Record reported symptoms separately from professional examination. |
-| Patch count | Ask about all patches, not just the photographed one; allow unknown and an approximate count. | Count does not establish PB/MB without the other clinical information. Respect privacy during any examination. |
+| Patch count/distribution | Ask about all patches, not just the photographed one; allow unknown and an approximate count or many/widespread. | Proposed referral for >5 patches or many/widespread patches with unknown count, even when sensation is present. Count never assigns PB/MB in the app. Respect privacy. |
+| Other skin/functional concerns | Ask about raised/nodular/thickened skin or earlobes, loss of eyebrows, and painless wounds/burns on hands/feet; allow uncertain. | Proposed independent referral triggers; do not ask volunteers to diagnose morphology or palpate nerves. Uncertain required assessment goes to clinical review. |
 | Duration and change | Approximate onset in days/weeks/months, change and prior treatment, with unknown allowed. | Recall is uncertain; no duration threshold may rule out disease. |
 | Contact history | Private, optional question about close contact with a diagnosed person; allow declined/unknown. | Do not record another person's name or treat absent/unknown contact as exclusion. |
 | Photo and quality | Record capture/pick provenance and blur/exposure results; allow retake. | Quality checks measure image usability, not disease absence. Symptoms can trigger referral without a usable photo. |
 
-**Proposed precedence:** urgent symptoms → urgent assessment; sensory loss or other
-concerning symptoms → referral; unusable photo or incomplete sensory assessment →
-retake/clinical review; otherwise a high model score → referral. A low score permits
-only qualified wording about the photo with follow-up for sensory loss or change.
+**Proposed precedence:** urgent symptoms → urgent assessment; sensory/nerve concern,
+more than five patches, many/widespread patches with unknown count, raised/nodular/thickened
+skin or earlobes, eyebrow loss, painless wounds/burns, reported close contact with
+the presenting skin concern, or volunteer concern → referral regardless of photo
+score or intact sensation. Unusable photo or incomplete required concern assessment
+→ clinical review, with retake offered; otherwise a high score → referral. Only a
+completed assessment with no triggers permits qualified low-photo wording and
+follow-up. These **proposed** answer-based triggers require clinical review and
+do not guarantee detection of every MB case. The Zambia guideline's sections 5.1
+and 10.1 support skin thickening/nodules and painless injuries as assessment
+concerns; the [AI4 study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9903738/)
+records eyebrow loss. None validates this combined volunteer rule set.
 The methods document and ADR-001 must make this precedence testable. For the
 synthetic POC, every result also says **PLACEHOLDER — not clinically validated**.
 
@@ -124,6 +152,13 @@ the district hospital. They reported no cases detected through FCHV active
 referral, although household screening identified two leprosy cases. The paper
 also describes leprosy treatment available down to health-post level at that time.
 [Primary study, KUMJ 2019](https://www.kumj.com.np/issue/65/40-45.pdf).
+Table 2 reports 48/151 (**31.8%**) participants as illiterate; the prose's “majority”
+wording conflicts with that table, so use the table. The introduction describes
+18 days of basic FCHV training, distinct from the study's one-day orientation.
+The district recorded 36 leprosy cases through passive detection during the
+same period. Incentives supported training participation, with referral incentives
+offered. The authors attribute failure to refer to stigma/concealment; this is
+their interpretation, not a causal effect established by the design.
 **Inference:** training knowledge and app availability do not establish case
 detection or successful referral. A future pilot must measure referral completion,
 time to qualified assessment, missed cases and stigma, not just app accuracy.

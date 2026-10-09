@@ -1,7 +1,9 @@
 # Dataset survey and combination plan
 
 Evidence checked 2026-10-09. **This is a documentation survey, not acquisition.**
-No clinical photos, archives, per-image URLs or patient metadata were downloaded.
+No clinical photos or task-data archives were acquired. Documentation and file
+catalogues were inspected; Fitzpatrick17k's public CSV was read in memory only
+to count labels, without following image URLs or retaining individual rows.
 “Public” and a paper's “open-source” description do not establish a usable licence.
 The [source register](sources.md) records which pages were accessible.
 
@@ -14,11 +16,14 @@ and an independent validation source; negative-only public data do not suffice.
 
 ## Candidate records
 
-### AI4Leprosy — hold, licence and access UNVERIFIED
+### AI4Leprosy — excluded: verified licence, request-gated files
 
 - **Owner/link:** Fiocruz investigators with Microsoft and Novartis Foundation;
   [authors' paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9903738/).
-- **Size:** paper reports 222 participants, 1,229 skin images and 585 metadata sets.
+- **Size:** abstract reports 222 participants, 1,229 images and 585 metadata sets;
+  the full results text instead reports 1,226 images and 582 lesions. Keep these
+  source discrepancies visible. Repository v1.10 lists 1,456 files, all restricted;
+  1,231 JPEG and 225 JSON files; repository totals are not analytical cohort size.
 - **Modality/geography:** high-resolution clinical images from a Brazilian leprosy
   referral centre. Exact camera mix and public-file mapping: **UNVERIFIED**.
 - **Taxonomy/confirmation:** study compares leprosy and other dermatological
@@ -26,13 +31,60 @@ and an independent validation source; negative-only public data do not suffice.
   released files: **UNVERIFIED**.
 - **Skin tone:** paper describes diverse skin types; public distribution and
   annotation method: **UNVERIFIED**.
-- **Licence/access:** paper points to [repository DOI](https://doi.org/10.35078/1PSIEL).
-  Opening it failed, as did a candidate Fiocruz landing URL. No licence, anonymous
-  archive endpoint, group identifiers or current availability verified. The
-  paper's licence is not automatically the data licence.
+- **Licence/access:** [repository DOI](https://doi.org/10.35078/1PSIEL),
+  [Fiocruz page](https://arcadados.fiocruz.br/dataset.xhtml?persistentId=doi:10.35078/1PSIEL)
+  and [public catalogue API](https://arcadados.fiocruz.br/api/datasets/:persistentId/?persistentId=doi:10.35078/1PSIEL)
+  inspected directly after web-tool opens failed. API declares **CC BY-NC 4.0**,
+  v1.10 released **2024-05-16**, all files restricted, access requests enabled and
+  owner-contact instructions. This supersedes the earlier failed-open uncertainty.
+  No access requested. HTML contains guestbook UI, but the API reports no
+  guestbook ID; an actual download guestbook requirement is **UNVERIFIED** and
+  irrelevant to exclusion because the files already require permission.
 - **Relevance:** contains the positive class needed by the proposed task. Do not
   acquire or infer permissions from mirrors. Revisit only on verifiable primary
-  repository terms and provenance.
+  repository terms and provenance. Humans may consider contacting the owner via
+  the page, and must assess non-commercial use and future weight redistribution
+  separately from MIT-licensed code. Released row/group schema remains UNVERIFIED.
+
+### DermaCon-IN — relevant South Asian candidate, held pending audit
+
+- **Owner/link:** Madarkar et al.; [paper v2](https://arxiv.org/html/2506.06099v2),
+  [Harvard record](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/W7OUZM)
+  and [catalogue export](https://dataverse.harvard.edu/api/datasets/export?exporter=dataverse_json&persistentId=doi%3A10.7910%2FDVN%2FW7OUZM).
+- **Size/modality/geography:** paper reports 5,450 clinical images, 3,002 patients,
+  South Indian outpatient clinics and smartphone/camera capture. A closer regional
+  candidate than Brazilian/US cohorts, **not a Nepal validation cohort**.
+- **Taxonomy/confirmation:** paper reports 245 dermatologist-assigned diagnoses.
+  [README](https://dataverse.harvard.edu/api/access/datafile/11394641) and
+  [schema](https://dataverse.harvard.edu/api/access/datafile/11362259) describe
+  hierarchical labels and confidence but do not enumerate `Disease_label` values.
+  **Leprosy, PB/MB and exact differential coverage/counts remain UNVERIFIED**.
+  The paper's descriptor examples name vitiligo, pityriasis alba and tinea
+  versicolor; examples do not prove released disease labels. Do not call this a
+  negatives-only source or infer laboratory confirmation for individual cases.
+- **Tone/grouping:** schema documents Fitzpatrick and Monk annotations and
+  **`Subject_ID` as a patient identifier**, with a stratified subject-wise 80:20
+  split. The [public data dictionary](https://dataverse.harvard.edu/api/access/datafile/13321639/metadata/ddi)
+  also lists that column. The paper's privacy wording does not prove linkage is
+  absent. Completeness, uniqueness across visits and actual split disjointness
+  remain UNVERIFIED without an authorised row audit; image IDs cannot substitute.
+- **Licence/access:** export v4.0 (released 2026-01-11) declares **CC BY-NC-SA 4.0**;
+  17 catalogue files are unrestricted, no extra terms or guestbook ID shown.
+  Anonymous GETs of README/schema returned HTTP 200 with no account or acceptance
+  step. Metadata export worked after two failing ordinary API/page paths.
+  **Image/weight retrieval was not attempted**; their download flow is UNVERIFIED.
+  No patient-row tables, archives or weights downloaded.
+- **Licence fitness (bounded inference):** NC restricts permitted uses; SA applies
+  when sharing qualifying adapted material, under the
+  [licence text](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en).
+  An Apache-2.0 code licence cannot replace these terms. Whether trained weights
+  qualify as adapted material, whether later redistribution is non-commercial,
+  and which notices/licences apply need human legal review. No blanket weight
+  redistribution clearance is claimed.
+- **Disposition:** hold under ADR-002. This promising candidate changes the survey,
+  but unverified target labels, unaudited patient linkage, NC-SA weight obligations
+  and lack of an approved independent positive/control cohort prevent promotion.
+  If eventually used only as controls, cross-source class shortcuts need testing.
 
 ### Fitzpatrick17k — hold, atlas rights unresolved
 
@@ -40,8 +92,13 @@ and an independent validation source; negative-only public data do not suffice.
   [authors' repository](https://github.com/mattgroh/fitzpatrick17k/blob/main/README.md).
 - **Size/modality:** 16,577 clinical images, 114 conditions, sourced from two
   online atlases. This is not a prospective smartphone screening cohort.
-- **Taxonomy/confirmation:** atlas disease labels; independent confirmation and
-  exact leprosy/differential class counts: **UNVERIFIED** in this iteration.
+- **Taxonomy/confirmation:** atlas disease labels; independent confirmation is
+  **UNVERIFIED**. An in-memory count of the authors' [CSV label column](https://raw.githubusercontent.com/mattgroh/fitzpatrick17k/main/fitzpatrick17k.csv)
+  confirms 16,577 rows / 114 labels, **no leprosy label**; vitiligo 166, psoriasis
+  653, eczema 204, dyshidrotic eczema 83, allergic contact dermatitis 430.
+  No exact tinea corporis/versicolor, pityriasis alba/rotunda, morphea, lupus
+  vulgaris or PKDL label appears. Other pityriasis/lupus labels are not synonyms.
+  These are row counts, not confirmed independent patients.
 - **Skin tone/geography:** human Fitzpatrick annotations; authors report light
   skin types overrepresented. Patient geography and per-patient IDs: **UNVERIFIED**.
 - **Licence/access:** README declares CC BY-NC-SA 3.0 and identifies Atlas
@@ -126,6 +183,21 @@ and an independent validation source; negative-only public data do not suffice.
 - **Relevance:** references may inform clinical research, but no image acquisition,
   scraping or third-party mirror is authorised.
 
+### 32 Curated Categories of Skin Disease Images — excluded: upstream rights
+
+- **Owner/link:** depositor Kurnia Adi Cahyanto;
+  [Mendeley v2 record](https://data.mendeley.com/datasets/pgd42j3h5c/2), May 2026.
+- **Labels/modality:** record lists borderline, lepromatous and tuberculoid
+  leprosy, plus tinea corporis, psoriasis and other clinical-image categories.
+  Exact image/patient counts, independent clinical confirmation, tone, camera,
+  geography and patient grouping are **UNVERIFIED**.
+- **Rights/access:** landing page lists CC BY 4.0 but describes compilation from
+  websites and Kaggle. Individual upstream rights/consent are **UNVERIFIED**;
+  a depositor's blanket licence does not establish permission over every original
+  image. Anonymous binary access untested; no files or linked images acquired.
+- **Disposition:** exclude. Do not use this collection or mirrors as a shortcut
+  around DermNet/atlas permissions, grouping or diagnostic-provenance requirements.
+
 ### ISIC — collection-specific, task mismatch
 
 - **Owner/link:** International Skin Imaging Collaboration;
@@ -199,7 +271,8 @@ Keep the original source label and confirmation provenance alongside the mapping
 | --- | --- | --- |
 | AI4 study's leprosy label | `leprosy`; classification/reaction unknown unless explicit | Released label schema UNVERIFIED |
 | AI4 other condition | Named differential only if exact source diagnosis matches verified vocabulary; otherwise `other`/`unresolved` | Must not presume all controls are one disease |
-| Fitzpatrick17k / SCIN disease name | Exact, versioned name-to-diagnosis mapping after audit | Target label availability UNVERIFIED; data not approved |
+| Fitzpatrick17k disease name | Exact, versioned name-to-diagnosis mapping after rights audit | No leprosy label; documented differential row counts above; not approved |
+| DermaCon-IN / SCIN disease name | Exact mapping only after permitted label audit | DermaCon-IN schema has patient IDs; target diagnoses remain UNVERIFIED; neither approved |
 | DDI pathology diagnosis | Preserve name; usually outside current target vocabulary | Do not collapse benign into “safe”; acquisition prohibited |
 | PAD's six labels | `other`, with exact disease name retained | Verified record taxonomy; cancer may still require clinical referral |
 | ISIC cancer label | `other` or `unresolved` with original name | Collection must be verified; data not selected |
@@ -237,8 +310,9 @@ These are proposed checks, not measured findings on downloaded data:
    sensitivity and specificity or AUC. Mark unavailable metrics explicitly.
 7. **Representation:** per-tone/presentation reports need counts, missingness and
    uncertainty intervals; tiny cells and absent labels cannot support fairness claims.
-   This survey has not verified a Nepal/South Asian smartphone cohort suitable for
-   the task. Do not infer patient geography from the name of an atlas.
+   DermaCon-IN is a verified South Asian clinical smartphone/camera candidate;
+   its task-label fitness and permitted image access remain UNVERIFIED. No Nepal
+   validation cohort is established. Do not infer geography from atlas names.
 
 ## Recommendation and next acquisition gate
 
@@ -256,7 +330,9 @@ Human-reviewed local collection/ethics is a later phase, not an overnight workar
 
 ## Open questions
 
-- What licence and anonymous access does the AI4Leprosy repository currently expose?
+- Will humans seek AI4Leprosy owner permission and accept its non-commercial obligations?
+- Does DermaCon-IN include confirmed leprosy and key differentials, and do its patient IDs prevent leakage?
+- Do DermaCon-IN's anonymous image flow and NC-SA terms permit the intended use and possible weight redistribution?
 - Can any compatible second source support independent, patient-grouped evaluation?
 - What clinically reviewed differential vocabulary and reaction schema should be final?
 - What patient-linkage, tone and confirmation fields actually exist in candidate files?
@@ -265,5 +341,6 @@ Human-reviewed local collection/ethics is a later phase, not an overnight workar
 ## Confidence
 
 Medium for the primary-documentation survey and conservative acquisition decision;
-low for real-data feasibility because no suitable positive archive and licence
-were verified, and no actual files or row-level schema were inspected.
+low for real-data feasibility: AI4 rights are documented but access is restricted;
+DermaCon-IN documentation is anonymously readable but target coverage is unknown.
+No patient-row or image audit establishes a suitable independent real-data cohort.

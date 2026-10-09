@@ -3,8 +3,11 @@
 Date: 2026-10-09
 
 Builder requests M0 review; **no gate or approval is claimed**. Work is research
-only. No training/app code, clinical photos, patient records, data archives or
+only. Review-1's numbered issues are answered in [RESPONSE-1](RESPONSE-1.md).
+No training/app code, clinical photos, patient records, task-data archives or
 model binaries acquired. No review.sh, publishing, pushes or external messages.
+Publication text/PDFs, catalogues and documentation were inspected; Fitzpatrick17k
+labels were counted in memory only with no images or individual rows retained.
 
 ## Produced and acceptance evidence
 
@@ -68,31 +71,49 @@ parity or security implementation evidence at M0. The harness reruns its own che
 
 ## Top five uncertainties and requested scrutiny
 
-1. **Usable task data:** AI4 repository rights/access and suitable confirmed
-   positive/differential external cohorts remain unverified. Scrutinise whether
-   synthetic-only ADR-002 is honest and whether survey exclusions follow the hard
-   limits; public availability/code/paper licences never grant image rights.
+1. **Usable task data:** AI4 CC BY-NC 4.0 is verified, all files restricted;
+   DermaCon-IN adds South Asian capture, anonymous documentation, CC BY-NC-SA 4.0
+   and documented Subject_ID/subject-wise splits. Target-label coverage, actual
+   linkage, image flow and derived-weight obligations remain UNVERIFIED. Scrutinise
+   the retained synthetic-only ADR-002 and these bounded deferrals; no negatives-only
+   assumption or claim that South Asian candidates do not exist remains. Fitzpatrick
+   counts confirm no leprosy label; the 32-category compilation is excluded.
 2. **Clinical workflow:** local FCHV competency, urgency/sensory protocol and current
    receiving clinics are unverified. Scrutinise symptom precedence, missingness,
    low-photo wording, potential over-referral and lack of clinical threshold approval.
+   Review-1 adds the intact-sensation/MB limitation and answer-based patch/skin/
+   eyebrow/injury/contact referral triggers, with required-answer missingness and
+   planned M6 zero-score regression tests. Macular PKDL and literacy/stigma findings
+   inform local review. These proposed triggers do not guarantee all MB detection.
 3. **Study comparability:** reported aggregate sensitivity, positive-only top-5
    recall, training usability and internal accuracy are different endpoints.
    Scrutinise metrics/denominators and abstract/indexed evidence limits, especially
    AI4 and the independent WHO evaluation; no borrowed Numbra performance claim.
+   AI4 ResNet-50 and MIT code are verified. Main Table 3's SEN/SP 89/91% belong to
+   metadata outputs plus patient info; supplement descriptions conflict about CV
+   versus holdout and final refit includes test patients. No reconciliation invented.
 4. **Engineering fitness:** pretrained binary access and notices, letterbox geometry,
    quantisation/parity and Nepal devices are untested. Scrutinise ADR-005's transfer
    workaround and fixed tolerances, group/duplicate/held-out leakage controls and
-   explicit engineering-versus-clinical gates.
+   explicit engineering-versus-clinical gates. Review-1 adds proposed threshold
+   minimum group counts, insufficient-count refer-all fallback and exact 95%
+   sensitivity lower bounds; these are unimplemented and not clinical evidence.
 5. **Governance and law:** full NHRC/DDA opens failed twice; indexed evidence cannot
    settle current jurisdiction or software classification. Scrutinise consent,
    provisional/confirmed labels, export/withdrawal limits and missing custodian/
    retention/legal determinations. Autonomous ADRs authorise synthetic development
-   only, never real collection, pilot or distribution.
+   only, never real collection, pilot or distribution. Review-1 adds Privacy Act
+   sections 11/16 without claiming every photography circumstance is prohibited.
 
 ## Known gaps and next boundary
 
 Firecrawl has zero credits; earlier failed requests established the labelled
-web-tool workaround. NHRC/DDA/current Nepal reports and several full papers have
+web-tool/direct-document workaround. HTTP retrieved the ILA report after HTTPS
+failed; Harvard's metadata export worked after ordinary API/page failures; direct
+Fiocruz and Europe PMC access corrected earlier AI4 failed-open notes. DermaCon
+README/schema/dictionary do not enumerate diagnosis values: target coverage is
+explicitly deferred rather than acquiring unauthorised patient rows. NHRC/DDA/
+current Nepal reports and several full papers have
 access limits recorded beside claims and in the source register. These are
 bounded research workarounds, not fabricated verification. All human decisions
 and field gaps are queued. No new toolchains installed in this iteration.

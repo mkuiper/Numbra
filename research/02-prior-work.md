@@ -5,6 +5,14 @@ systematic review. Searches covered PubMed, IEEE Xplore, arXiv and medRxiv, plus
 WHO, implementing organisations and author repositories. No clinical images,
 image archives or weights were acquired. No organisations were contacted.
 **Reported metrics below belong to those studies, not Numbra.**
+Review-1 added targeted journal-domain searches for leprosy AI/imaging in
+**Leprosy Review, IJDVL and Indian Journal of Leprosy**, initially omitted.
+Search results found [Leprosy Review's 2024 WHO-app commentary](https://leprosyreview.org/article/95/2/20-24030),
+[IJDVL's AI review](https://ijdvl.com/?article=f95403cc7ddbe468fc249d9a2284fcb6kOH1AhQgusZg2Q%3D%3D&embedded=true&view-pdf=1)
+and [IJL's 2025 research editorial](https://www.ijl.org.in/published-articles/26032025110641/1_Editorial__VMK_Jan_March_2025_final_print_version.pdf).
+These are context/commentary, not new primary diagnostic-accuracy estimates;
+no metrics or image rights are borrowed from them. The search remains targeted,
+not exhaustive or a systematic review.
 
 ## AI4Leprosy — multimodal research, not a transferable clinical guarantee
 
@@ -19,10 +27,31 @@ and broader-population validation were described as future work.
 
 **Limit:** this is a small single-centre internal test, not prospective Nepal
 volunteer validation. Accuracy/AUC do not establish sensitivity at Numbra's chosen
-operating point. Exact CNN backbone and threshold-specific sensitivity/specificity
-are **UNVERIFIED** here; full PMC/Europe PMC access was blocked. The paper links a
-data DOI, but code/weights licences and current data permission/access remain
-**UNVERIFIED**; see the [dataset survey](03-datasets.md). Learn to compare image-only,
+operating point. Full text is now inspected via
+[Europe PMC XML](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9903738/fullTextXML)
+after the web tool's PMC browser check. **ResNet-50, fine-tuned on close-up images**
+was selected over Inception-v4 for Model 1. In main Table 3, elastic-net Model-2
+outputs plus patient information reports sensitivity **89%** and specificity
+**91%**, with the caption identifying 40 held-out patients; this is not the
+photo-only result. The abstract reports accuracy/AUC, not sensitivity/specificity.
+The [supplement](https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9903738/supplementaryFiles)
+does not supply an alternate final sensitivity/specificity: Supplementary Table 3
+is coefficients from a refit including the testing patients. Supplementary Fig. 6
+describes Tables 2/3 as cross-validation averages, conflicting with Table 3's
+held-out caption. The operating cutoff and resolution of that description are
+**UNVERIFIED**; preserve the source attribution and do not invent reconciliation.
+Also retain the abstract's 1,229 images/585 metadata sets versus results text's
+1,226 images/582 lesions as a discrepancy.
+
+The linked [Microsoft code repository](https://github.com/microsoft/leprosy-skin-lesion-ai-analysis)
+is currently archived; its [README](https://raw.githubusercontent.com/microsoft/leprosy-skin-lesion-ai-analysis/main/README.md)
+documents ResNet-50 experiments and research-only intended use, and its
+[code licence](https://raw.githubusercontent.com/microsoft/leprosy-skin-lesion-ai-analysis/main/LICENSE)
+is **MIT**. No patient data or pretrained weights are supplied by the inspected
+code listing; this does not grant rights to Fiocruz data or clinical use. Archive
+date is not established by current status. The data repository now verifies
+**CC BY-NC 4.0 with all files restricted/request-gated**; see the
+[dataset survey](03-datasets.md). Learn to compare image-only,
 metadata-only and fused models with patient separation. Keep a symptom-only
 referral path even when an image model is present.
 
@@ -168,7 +197,7 @@ be ranked as if they measure the same task.
 
 | System/work | Main role | Evidence most relevant here | Proposed reuse boundary |
 | --- | --- | --- | --- |
-| AI4Leprosy | Multimodal probability research | Internal patient test, accuracy/AUC | Learn symptom fusion and ablations; artifact rights unverified. |
+| AI4Leprosy | ResNet-50 close-up and metadata research | Internal patient results; Table 3/Supplement Fig. 6 description conflict | MIT code; CC BY-NC 4.0 restricted data; learn ablations, no data acquisition. |
 | WHO Kenya AI beta | Broad skin-condition assistance | Preliminary aggregate sensitivity | Learn field workflow; no inferred leprosy accuracy or public offline weights. |
 | WHO independent study | Leprosy top-5 retrieval | Positive-case, image-level recall; reaction gaps | Learn failure/presentation audits; cannot estimate specificity. |
 | WHO training/NLR SkinApp | Education and structured knowledge | Usability and staged development | Learn language/glossary/referral design; no content copying permission assumed. |
@@ -190,8 +219,10 @@ data or field use.
 2. WHO skin-NTD initiative, UniversalDoctor/UOC and NLR: clarify current AI access,
    offline operation, integration interfaces, content licences and whether extending
    existing education/referral tooling is preferable. Use [WHO's initiative contact route](https://www.who.int/initiatives/who-initiative-on-artificial-intelligence-for-skin-conditions).
-3. AI4Leprosy authors/Fiocruz: verify DOI availability, original image/weight/code
-   permissions, group IDs, diagnostic confirmation and external validation plans.
+3. AI4Leprosy authors/Fiocruz: consider access via the owner-contact route on the
+   repository; review non-commercial data/weight obligations, group IDs,
+   diagnostic confirmation and the Table 3/supplement evaluation discrepancy.
+   Code licence is verified MIT; data permission is a separate request.
 4. WHO independent-evaluation authors and Yotsu/eSkinHealth collaborators: discuss
    reactional/atypical test design, privacy-controlled external testing and the
    release-review status. Do not request or transfer patient data in autopilot.
@@ -201,7 +232,7 @@ data or field use.
 ## Open questions
 
 - Which WHO app version/AI algorithm is currently available, and under what offline and reuse terms?
-- Can AI4's full methods/artifact permissions and the independent study's patient counts/failure handling be verified?
+- Can AI4's evaluation-caption discrepancy and restricted-data permission, and the independent study's patient counts/failure handling, be settled?
 - Which systems offer reusable software interfaces rather than just free app access?
 - Will prospective Nepal validation include early, reactional, atypical and non-classical presentations and track referral completion?
 - Can a separately licensed external positive-and-differential cohort be obtained under the project's access limits?
