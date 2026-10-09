@@ -148,10 +148,53 @@ dependency installed or exported graph yet. M4 dependency setup is the next step
 record exact verified pins/install commands here before claiming export acceptance.
 See [ML-EXPORT.md](ML-EXPORT.md) for the fixed preprocessing/parity contract.
 
+## M4 ONNX export environment — observed 2026-10-09 UTC
+
+Added onnx 1.19.1, onnxruntime 1.23.2, coloredlogs 15.0.1, flatbuffers 25.12.19,
+humanfriendly 10.0, ml-dtypes 0.6.0, protobuf 7.36.2 in ml/.venv. The final combined
+export lock has 42 unique wheel pins/hashes and includes the unchanged 35-package
+CPU lock. No JDK/SDK/system install or model/dataset acquisition this iteration.
+Commands observed from repository root:
+
+```bash
+mkdir -p data/toolchains/m4-wheels ml/.tmp/pip
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip download --only-binary=:all: --dest data/toolchains/m4-wheels --constraint data/toolchains/m4-constraints.txt 'onnx==1.19.1' 'onnxruntime==1.23.2'
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --no-index --find-links data/toolchains/m4-wheels --find-links data/toolchains/m3-wheels --require-hashes -r ml/requirements-export.lock
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --no-build-isolation --no-deps -e ml
+ml/.venv/bin/python -m pip check
+```
+
+The ignored constraint file is generated from existing CPU-lock name/version pins
+with hash/options removed, retaining old dependencies during initial resolution.
+An initial attempt using the hashed CPU lock directly as a constraint failed:
+pip required hashes for the new ONNX requirement too. No install occurred from
+that failed attempt. Wheel METADATA and SHA-256 produced the additions lock before
+install. The first generated additions also duplicated `typing_extensions` as
+`typing-extensions` at the identical version/hash. Removed that redundant alias
+after the experiments; reports retain historical lock hashes. Reconstruct that
+historical lock by appending the CPU lock's typing_extensions line with its name
+normalised to typing-extensions to the final export lock; dependency bytes match.
+
+For a new environment, use the final checked-in lock instead of regenerating
+constraints or resolving versions:
+
+```bash
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip download --require-hashes --dest data/toolchains/m4-wheels -r ml/requirements-export.lock
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --no-index --find-links data/toolchains/m4-wheels --require-hashes -r ml/requirements-export.lock
+TMPDIR="$PWD/ml/.tmp/pip" PIP_NO_CACHE_DIR=1 ml/.venv/bin/python -m pip install --no-build-isolation --no-deps -e ml
+```
+
+Observed editable installation and pip check succeeded. Export/summary commands
+and rejected-model results are in [ML-EXPORT.md](ML-EXPORT.md). ONNX library
+temporaries now use the ignored export output directory; the first prototype
+used library defaults before this confinement was added. No unrelated files
+manually modified. Firecrawl still has zero credits; official documentation read
+through the prior labelled web-tool workaround without credentials/auth changes.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?
 
 ## Confidence
 
-High for observed research/Python setup; Android and later ML build setup is pending.
+High for observed research/Python/export setup; Android toolchain setup is pending.

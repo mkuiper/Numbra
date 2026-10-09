@@ -1,9 +1,11 @@
 # Numbra ML — PLACEHOLDER data pipeline
 
 **PLACEHOLDER — synthetic demonstration, not clinically validated.**
-M0–M2 harness gates are closed. M3 supplies generated data, frozen component splits, CPU frozen-feature transfer
+M0–M3 harness gates are closed. M3 supplies generated data, frozen component splits, CPU frozen-feature transfer
 training, isolated evaluation and PLACEHOLDER model-card/report generation. Real
-task data, model export and Android implementation remain later work.
+task data and Android implementation remain later work. M4 now exports and tests
+ONNX graphs; both baseline INT8 attempts failed the fixed parity budgets. See
+[export evidence](../docs/ML-EXPORT.md); no accepted deployable model yet.
 [ADR-002](../decisions/ADR-002-dataset-selection.md) approves generated fixtures
 only. Every future synthetic model, report and app result must say PLACEHOLDER.
 
@@ -17,8 +19,8 @@ bash scripts/check.sh
 python3 -m unittest discover -s tests -v
 ```
 
-Or from `ml/`: `.venv/bin/python -m pytest -q`. All direct and transitive M3 runtime/test/build dependencies are pinned with wheel
-hashes in `requirements-cpu.lock`, included by `requirements-dev.txt`. This lock
+Or from `ml/`: `.venv/bin/python -m pytest -q`. Direct and transitive dependencies are pinned with wheel
+hashes in `requirements-cpu.lock` plus `requirements-export.lock`, included by `requirements-dev.txt`. The combined lock
 supports CPython 3.12 Linux x86_64 only. Install before the editable project so
 pip can find the CPU-specific torch versions without dependency re-resolution.
 Tests set their temporary directory to ignored `ml/tests/.tmp/`; their PNG/GIF

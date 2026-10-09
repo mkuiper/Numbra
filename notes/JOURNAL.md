@@ -501,3 +501,71 @@ messages or pushes. Final diff/status validation precedes the logical-step commi
   verification/pinning then float/static-INT8 export under fixed budgets. M4 not
   ready for review; M0–M3 gates closed. No protected files, review.sh/REVIEW/CHECK/
   GATE writes, committed data/weights/secrets, publishing/messages/pushes.
+
+## 2026-10-09T14:50:43Z — iteration
+
+Worked only on M4 after ordered roadmap/status/harness/review-folder (absent)/
+AGENTS/ADR orientation. No new harness message. Installed ONNX 1.19.1 and ORT
+1.23.2 plus transitive pins in ml/.venv; hash-locked seven additions, unchanged
+35-package CPU lock, 42 unique packages total. Initial pip download with hashed
+constraints failed because new requirements lacked hashes; resolved with ignored
+unhashed existing-version constraints, generated wheel METADATA/SHA-256 lock,
+then installed hashes offline. Initial duplicate typing name alias had identical
+version/hash; removed duplicate, retain historical experiment lock hashes and
+reconstruction instructions. Editable install/pip check succeeded. Toolchain
+commands in DEV-SETUP. Firecrawl scrape failed at zero credits; reused labelled
+web-tool fallback for official PyTorch/ONNX Runtime docs, no auth changes.
+
+Built numbra_ml.export: strict saved-reference/environment verification, confined
+new PLACEHOLDER outputs, fixed 1×3×224×224 float32 opset-17 ONNX, static QDQ INT8,
+all/only 152 train images for MinMax calibration, graph size/operator audit,
+same-single-tensor raw/probability/threshold parity on 768 components and 14 fixed
+independent stress inputs, separate 308 frozen test/held-out comparison, margin
+accounting and exported metrics at frozen M3 fits. Per-component logits/failures
+and weights stay ignored. Aggregate summary validates original run/preparation,
+graph hashes/ordered logits and parity; reporting revision rebuilds source/colour
+aggregates from saved logits (corrects first prototype grouping), no inference or
+refitting. Reports also disclose original saved-batch vs single-image Python raw
+max difference 0.000383378, zero flips. Original-batch saved verification exact.
+
+Two genuine predeclared experiments executed: per-tensor then per-channel INT8
+weights. Both CLIs and summary CLIs exit 1/FAIL, no false test-pass claim. Float
+6,095,579 bytes, identical graph: test/held-out max raw/probability errors
+0.000272334/0.00000355427, zero flips, exceeds both fixed budgets. Per-tensor INT8
+1,730,515 bytes: 50.784990/0.506519, 26 test/held-out flips; per-channel 1,861,702:
+62.403598/0.612635, 28 flips. All-component/stress parity also fails. INT8 graphs
+have 53 Conv/one Gemm with INT8 QDQ weights; remaining float operators reported.
+Per-channel source-C sensitivity 1.0/specificity 0.0 demonstrates changed scores,
+not better screening. Sizes pass ≤20 MB; numerical acceptance remains blocked.
+No budgets, frozen inputs/fits, selected baseline or training changed.
+
+ADR-012 and HUMAN-QUEUE document **PLACEHOLDER labelled workaround — generated
+toy-model diagnostic export only** after two failures. Retain rejected baseline
+artifacts and continue training-only precision/operator diagnostics; toy evidence
+cannot close M4 or replace the selected reference. No review request/HANDOFF until
+acceptance. Source/command/evidence docs updated; M5 remains unstarted.
+
+Tests: initial new export subset 11 PASS/2 FAIL. One expected 42 dependencies but
+lock duplicated typing alias; fixed lock rather than changing expected count.
+Other assumed pooled untrained toy would meet float budgets; actual runtime
+rounding disproved it. Retained that fixture as a FAIL regression and retained
+strict PASS assertion with independent centre-pixel toy; no tolerance widening.
+Final export subset 14 PASS in 6.85s, including generated preparation→toy training→
+strict save/restore→actual ONNX/INT8 runtime→summary path, tamper/unsafe/overwrite
+rejection. Full bash scripts/check.sh exit 0: 304 PASS in 32.09s, six upstream
+legacy-export deprecation warnings; Android SKIPPED, RESULT PASS, no APK.
+
+Additional root contract suite initially failed (four upstream Privacy.md links
+in ignored installed ORT and missing new PyTorch documentation source). Disputed
+checker scope documented in HUMAN-QUEUE; git tracked/nonignored untracked
+markdown discovery corrects Builder ownership, regression explicitly retains new
+Builder documents while excluding ignored third-party files. No Builder
+link/citation assertion removed; source-register entry added. Final root suite
+6 PASS in 0.070s. pip check no broken requirements; git diff --check clean before
+records. Model/individual output files remain ignored; no protected file edit,
+review invocation, patient data, push, publication or external messages.
+
+Next: original-baseline float runtime/fusion and INT8 activation/weight precision
+diagnostics on training inputs; predeclare next graph strategy, preserve all
+failures and original budgets. NEXT_ACTION CONTINUE. Commit iteration records
+and all Builder changes before finishing.

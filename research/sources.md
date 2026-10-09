@@ -142,6 +142,14 @@ its build toolchain; no new clinical/dataset survey or patient-data authority.
 | TIMM-PINNED-M3 | [Revision-pinned publisher card](https://huggingface.co/timm/mobilenetv3_small_100.lamb_in1k/blob/1824797e7887cbec1990e4adbd6675960a36c589/README.md), [anonymous repository metadata](https://huggingface.co/api/models/timm/mobilenetv3_small_100.lamb_in1k?blobs=true) | Accessed 2026-10-09 UTC using web/direct anonymous HTTP. Card/config checksum verified, Apache-2.0 publisher declaration, private=false/gated=false, pinned revision and safetensors SHA-256; anonymous weight retrieval matched bytes/checksum. No ImageNet or patient images. No warranty about all pretraining-image rights. |
 | PYTORCH-CPU-M3 | [Official previous-version installation instructions](https://pytorch.org/get-started/previous-versions/), [official CPU wheel index](https://download.pytorch.org/whl/cpu) | Accessed 2026-10-09 UTC via web/pip. torch 2.8.0 / torchvision 0.23.0 CPU pair, anonymous CPython 3.12 Linux x86_64 wheels downloaded and hash-locked. Other platforms unverified; no clinical or conversion success claim. |
 
+## M4 implementation documentation — accessed 2026-10-09 UTC
+
+| ID | Primary source | What was checked / limits |
+| --- | --- | --- |
+| PYTORCH-ONNX-2.8 | [PyTorch 2.8 ONNX API](https://docs.pytorch.org/docs/2.8/onnx.html) | Legacy export option, opset/input/output configuration. Available web tool used after Firecrawl zero-credit scrape failure. Actual conversion/parity measured in M4 reports; documentation does not establish success. |
+| ORT-QUANT-M4 | [ONNX Runtime quantisation documentation](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html) | Rechecked static QDQ, calibration and quantisation-loss guidance; no patient data or registration. Both measured baseline INT8 attempts fail fixed parity. |
+| ORT-MOBILE-M4 | [ONNX Runtime mobile documentation](https://onnxruntime.ai/docs/tutorials/mobile/) | Rechecked mobile deployment route. No Android/ABI/device execution observed; compatible deployment of these exact graphs remains UNVERIFIED. |
+
 ## Open questions
 
 - Will humans seek AI4's restricted-data permission and resolve its evaluation-description discrepancy?

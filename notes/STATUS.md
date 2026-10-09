@@ -1,86 +1,88 @@
 # Status
 
-Updated: 2026-10-09T14:29:21Z
+Updated: 2026-10-09T14:50:43Z
 
 Current milestone: **M4 — On-device model export**, in progress. NEXT_ACTION:
-CONTINUE. M0–M3 gates exist, PASS WITH CHANGES; human review pending. M3 review
-follow-through committed as d0e594f. No M4 gate, ONNX graph, Android app or APK.
-Every task model/result remains **PLACEHOLDER**, synthetic-only under ADR-002.
+CONTINUE. M0–M3 gates exist, PASS WITH CHANGES; human review pending. No M4 gate,
+Android app or APK. Every task model/result remains **PLACEHOLDER**, synthetic-only
+under ADR-002. Both baseline export experiments are rejected for app bundling.
 
 ## M4 acceptance status
 
-- **Quantised ONNX Runtime Mobile export: PENDING.** ADR-005 runtime retained;
-  conversion/runtime dependencies not installed yet. No conversion or quantisation
-  experiment attempted. ADR-011 fixes budgets before experiments and requires
-  training-only quantisation calibration, remaining-float operator inspection,
-  held-out exported evaluation and no silent tolerance widening.
-- **Exported/Python parity: FOUNDATION BUILT, ACCEPTANCE PENDING.** New saved-model
-  reference/verify entry point strictly restores bundled backbone/scaling/head,
-  checks artifact/preparation/state hashes and component metadata, and rescores.
-  Actual baseline/reproduction/default: 768/768/384 components, max raw/probability
-  errors 0, frozen-threshold flips 0. This is saved Python parity only.
-  New tested parity reporter independently checks raw/probability budgets and zero
-  flips, all failure cases, and separate conservative-margin added/lost referrals.
-  Float budgets 1e-4 raw / 1e-6 probability; quantised 0.1 raw / 0.001 probability,
-  zero original-threshold flips. Margin 0.001 cannot rescue a failed parity test.
-- **Size ≤20 MB / preprocessing written and tested: PARTIAL.** ML-EXPORT.md writes
-  the full RGB letterbox/rounding/normalisation contract; executable SPEC and tests
-  remain authoritative. Planned graph input 1×3×224×224 float32 NCHW, raw-logit
-  output. Original float safetensors 6,156,620 bytes is not an exported model.
-  Actual quantised size/operator/Android decode/ABI checks remain pending.
+- **Quantised ONNX Runtime Mobile export: BUILT, ACCEPTANCE INCOMPLETE.** Pinned
+  ONNX 1.19.1 / ORT 1.23.2 added with seven new hash-locked packages (42 unique
+  total). Legacy PyTorch opset-17 fixed single-image float export and static signed
+  INT8 QDQ run offline. MinMax uses all/only 152 training components. Attempt 1
+  per-tensor / attempt 2 per-channel weights, predeclared before the first run.
+  Each INT8 graph has 53 Conv/one Gemm with INT8 QDQ weights, remaining float
+  nonlinear/pool/arithmetic operators fully reported. Actual desktop CPU runtime
+  loading succeeds; Android/ABI compatibility unverified.
+- **Exported/Python parity: FAIL, budgets unchanged.** Float identical across both
+  attempts; test/held-out 308 inputs: max raw error 0.000272334, probability error
+  0.00000355427, zero flips. Both numeric budgets exceeded. INT8 per-tensor:
+  50.784990 / 0.506519 errors, 26 flips; per-channel: 62.403598 / 0.612635, 28 flips.
+  All 768 components and 14 independently generated stress inputs also tested;
+  each artifact fails. Complete failure cases/ordered logits remain ignored.
+  Separate conservative-margin accounting never rescues parity. Saved Python
+  verification (original batch size) remains exact. Single-image Python vs saved
+  batch max raw difference 0.000383378, zero flips; independently disclosed.
+- **Size ≤20 MB / preprocessing written and tested: BUILT.** Float 6,095,579 bytes;
+  INT8 1,730,515 / 1,861,702 bytes. SPEC letterbox/rounding/normalisation unchanged;
+  runtime validates rgb float32 1×3×224×224 → raw_logit float32 [1]. Size passing
+  alone cannot close M4. No accepted deployment metadata package or Android decode.
 
-## M3 post-gate follow-through
+## Built evidence and labelled workaround
 
-- RESPONSE-1 answers all 11 numbered issues. Issues 1–10 implemented/documented;
-  real-data disclosure policy and optional clean-checkout wrapper deferred to
-  HUMAN-QUEUE. All reviewer human questions relevant to Numbra queued.
-- Test of record now runs train_run end to end on a 16-group fixture with an
-  explicit toy backbone supplier, including artifacts/provenance/report/card,
-  saved-model verification, tamper rejection and overwrite guard. CLI production
-  supplier remains pinned/checksum verified; no mock/network/checkpoint in tests.
-- Cards now show empirical evidence, confusion/exact intervals, below-target
-  held-out sensitivity and per-row fallback markers. Evaluation 1.1.0 nulls
-  pre-calibration threshold fields and suppresses source/colour AUC/calibration/
-  bins/bootstrap below 20/class, with flags; identical bootstrap cohorts reuse
-  seeds/results. All three tracked aggregate reports/cards rebuilt from verified
-  stored logits, no retraining or fit changes. Original training provenance and
-  report hashes remain; separate reporting revision hashes record the rebuild.
-- ADR-010 amended for real-data model-selection/nested CV before calibration,
-  display suppression limits and raw/probability/flip checks. ADR-011 queued.
+- numbra_ml.export verifies the saved model/environment/preparation, rejects unsafe
+  or existing outputs, converts, calibrates train-only, inspects graph operators,
+  checks numerical/threshold/stress parity and generates frozen exported metrics
+  without refitting calibration or threshold. Aggregate evidence in
+  ml/reports/PLACEHOLDER-m4-attempt1.json and PLACEHOLDER-m4-attempt2.json;
+  source/weight/lock/report hashes retained. Reporting revision 1.0.1 corrects
+  initial subgroup grouping and adds batch diagnostics without re-inference.
+- ADR-012: **PLACEHOLDER labelled workaround — generated toy-model export for
+  diagnostic pipeline testing only**, after two genuine baseline failures.
+  Complete generated preparation→toy training→save/restore→ONNX/QDQ→ORT path is
+  tested. Toy evidence cannot replace the selected baseline or justify review.
+  No tolerance, threshold, model or frozen fixture tuning. ADR queued for humans.
+- docs/ML-EXPORT.md and DEV-SETUP.md record commands, rejected results and library
+  temporary confinement. No checkpoint/task dataset acquired this iteration.
+- Root Builder markdown checker now uses tracked + nonignored untracked git files
+  instead of scanning installed wheel documentation. New regression retains
+  untracked Builder documents and excludes ignored third-party files. Source
+  register includes checked official PyTorch 2.8 exporter docs.
 
 ## Observed verification
 
-- Final bash scripts/check.sh: exit 0, **290 ML tests PASS in 27.13s**, Android
-  SKIPPED, RESULT PASS. No debug APK claim. Earlier checks 258 PASS in 27.36s and
-  288 PASS in 27.09s. No existing tests skipped/weakened.
-- New targeted M3 suite: 108 PASS in 12.88s; saved-reference training subset
-  36 PASS in 8.17s. Initial new parity subset: 29 PASS / 1 failed because its
-  invented extreme fixture did not actually underflow at T=19.15; corrected to
-  ±1e6 while retaining the exact expected assertion. Then 30 PASS in 1.92s;
-  two additional float32-range guards included in final 290.
-- Root repository contract suite: 5 PASS in 0.104s (Builder-attested only).
-  pip check: no broken requirements. git diff --check clean before records.
-- Current training/reference/reporting code differs from original fd93e34 training
-  provenance by documented review changes; original saved weights/logits/fits and
-  ignored historical run JSON remain intact. No tolerance/performance tuning.
+- bash scripts/check.sh: exit 0, **304 ML tests PASS in 32.09s**, six exporter
+  deprecation warnings; Android SKIPPED; RESULT PASS. No APK claim.
+- Export subset: initial 11 PASS / 2 failed (duplicate dependency-name alias and
+  mistaken PASS expectation for actual runtime rounding); corrected final subset
+  **14 PASS in 6.85s**, including a retained rounding-failure regression and full
+  export/summary/tamper tests. No budget or existing Builder assertion weakened.
+- Root contract suite initially failed on four ignored third-party broken links
+  plus one missing source entry. Corrected discovery with regression and added
+  source entry; final **6 PASS in 0.070s**. pip check: no broken requirements.
+- Both actual baseline experiment CLIs and their summary CLIs returned 1/FAIL,
+  as required by failed parity. Both summaries verify graph hashes and ordered
+  logits, retain original source/lock provenance, report only aggregate data.
+- git diff --check clean including iteration records; all generated artifacts ignored.
 
 ## Open blockers and limits
 
-No current implementation blocker. Quantisation operator support/parity may fail;
-record two genuine attempts before a labelled workaround and amended ADR.
-Strict finite-fixture parity cannot establish unseen-input/mobile/clinical safety.
-No real task dataset approved; no patient/ImageNet images acquired. Clinical,
-legal, ethics, native-language and pretrained-weight notices review still pending.
-Synthetic source-C sensitivity remains 0.914063 below 0.95, specificity 0.078125;
-no clinical or fairness claim. Small-cell display guard is not a privacy policy.
-No publishing/pushes/messages/protected edits or committed data/weights/APK.
+Baseline numerical/quantised parity is the implementation blocker. Two genuine
+attempts completed; diagnostic-only workaround documented, not accepted as the
+baseline. No M4 HANDOFF/review request. No suitable approved real task data,
+clinical/ethics/legal/native-language validation, or weight-notice approval.
+Per-channel source-C sensitivity 1.0 has specificity 0.0; not improved screening.
+Finite desktop tests do not establish unseen-input or mobile safety/performance.
+No protected edits, patient data, weights/APK in git, publishing, push or messages.
 
 ## Next concrete step
 
-Read M4 folder/status/harness, verify primary ONNX/PyTorch export and runtime docs,
-pin/hash-lock conversion/runtime dependencies in ml/.venv and document installs.
-Export original selected PLACEHOLDER baseline float graph and run same-tensor raw/
-probability/threshold parity; then static INT8 QDQ with train-only calibration,
-independent generated stress inputs, all frozen test/held-out inputs, exported
-held-out evaluation, operator/size report. Keep fixed ADR-011 budgets. Request
-REVIEW M4 only when every M4 acceptance item has actual passing evidence.
+Diagnose the original selected baseline's float ONNX rounding and INT8 drift,
+using training-only operator/activation evidence. Predeclare next graph/runtime
+strategy before running (e.g. inspect CPU graph fusions and precision-sensitive
+feature scaling/head; consider selective mixed precision with every float operator
+reported). Keep ADR-011 budgets and frozen inputs/fits. Retain all attempts;
+request REVIEW M4 only after the selected baseline meets every acceptance item.

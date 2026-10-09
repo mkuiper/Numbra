@@ -3,10 +3,23 @@
 from pathlib import Path
 import re
 import subprocess
+import tempfile
 import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def builder_markdown_files():
+    # Include new Builder documents before staging, but never installed packages
+    # or generated output. The previous rglob walked ignored ml/.venv wheels.
+    result = subprocess.run(
+        ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", "*.md"],
+        cwd=ROOT, capture_output=True, text=True, check=True,
+    )
+    folders = {"docs", "research", "decisions", "ml", "app", "reviews"}
+    return sorted({ROOT / name for name in result.stdout.split("\0") if name and
+                   (name in {"README.md", "AGENTS.md"} or Path(name).parts[0] in folders)})
 
 
 class RepositoryContractTests(unittest.TestCase):
@@ -48,10 +61,7 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual(result.stdout, "", "Patient data must never be tracked")
 
     def test_builder_markdown_local_links_resolve(self):
-        files = [ROOT / "README.md", ROOT / "AGENTS.md"]
-        for folder in ("docs", "research", "decisions", "ml", "app", "reviews"):
-            files.extend((ROOT / folder).rglob("*.md"))
-        for file in files:
+        for file in builder_markdown_files():
             # Protected harness/reviewer files have their own independent ownership.
             if file.name.startswith(("REVIEW-", "CHECK-", "GATE")):
                 continue
@@ -62,6 +72,22 @@ class RepositoryContractTests(unittest.TestCase):
                     continue
                 with self.subTest(file=str(file.relative_to(ROOT)), target=target):
                     self.assertTrue((file.parent / target.split("#")[0]).exists())
+
+    def test_builder_markdown_discovery_keeps_new_docs_and_excludes_installed_files(self):
+        ignored = ROOT / 'ml/.tmp'
+        ignored.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=ROOT / 'docs', prefix='contract-fixture-') as builder_dir:
+            with tempfile.TemporaryDirectory(dir=ignored) as ignored_dir:
+                builder = Path(builder_dir) / 'new-builder.md'
+                third_party = Path(ignored_dir) / 'third-party.md'
+                # A broken Builder link must still enter the normal check. A
+                # broken link in ignored dependencies must not change its scope.
+                for file in (builder, third_party):
+                    file.write_text('[broken](does-not-exist.md)')
+                files = builder_markdown_files()
+                self.assertIn(builder, files)
+                self.assertNotIn(third_party, files)
+                self.assertIn(ROOT / 'docs/ML-EXPORT.md', files)
 
     def test_research_documents_keep_uncertainty_sections(self):
         for file in (ROOT / "research").glob("[0-9][0-9]-*.md"):

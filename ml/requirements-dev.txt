@@ -1,2 +1,2 @@
-# Full hash-pinned M3 runtime/test/build lock, CPython 3.12 Linux x86_64.
--r requirements-cpu.lock
+# Full hash-pinned M4 export/runtime/test/build lock, CPython 3.12 Linux x86_64.
+-r requirements-export.lock
