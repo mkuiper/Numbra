@@ -1,0 +1,7 @@
+== ml tests: SKIPPED (no ml/ project yet)
+== app: SKIPPED (no app/gradlew yet)
+
+===== CHECK SUMMARY =====
+ml tests: SKIPPED (no ml/ project yet)
+app: SKIPPED (no app/gradlew yet)
+RESULT: PASS
