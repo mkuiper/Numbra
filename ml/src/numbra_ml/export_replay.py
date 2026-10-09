@@ -203,7 +203,11 @@ def aggregate_values(values, *, complete=False):
             'max': max(values), 'mean': float(np.mean(values))}
 
 
-def replay_diagnostics(model, source, output, inputs, *, promoted=False, complete=False):
+def replay_diagnostics(model, source, output, inputs, *, promoted=False, complete=False, rounding=False):
+    if rounding:
+        from .export_bn_rounding import coefficient_cache, coefficient_records, rounding_differences
+        if not complete or not promoted:
+            raise ValueError('rounding replay requires complete promoted control protocol')
     if complete:
         from .export_complete_replay import (audit_affine_graph, audit_native_graph,
             complete_operators, operator_counts, signed_accounting)
@@ -255,7 +259,7 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False, complet
         tapped = ort.InferenceSession(str(tapped_path), sess_options=options, providers=['CPUExecutionProvider'])
         original_audit = output / 'PLACEHOLDER-original-optimized.onnx'
         original = runtime(source, optimisation='disabled', optimized_path=original_audit)
-        sessions, graphs, formula_sessions, promoted_sessions = {}, {}, {}, {}
+        sessions, graphs, formula_sessions, promoted_sessions, rounding_cache = {}, {}, {}, {}, {}
         for position, (name, module, node) in enumerate(selected):
             path = output / f'PLACEHOLDER-operator-{position}.onnx'
             extracted = onnx.utils.Extractor(graph).extract_model([node.input[0]], [node.output[0]])
@@ -271,6 +275,9 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False, complet
                 graphs[name]['native_audits'] = {'serialized': audit_native_graph(module, path),
                                                 'runtime': audit_native_graph(module, optimized)}
             if isinstance(module, nn.BatchNorm2d):
+                if rounding:
+                    rounding_cache[name] = coefficient_cache(module)
+                    graphs[name]['rounding_coefficients'] = coefficient_records(module, rounding_cache[name])
                 graphs[name]['formula_graphs'] = {}
                 for formula in FORMULAS:
                     path = output / f'PLACEHOLDER-operator-{position}-{formula}.onnx'
@@ -325,6 +332,10 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False, complet
                         stats['signed_accounting'] = signed_accounting(
                             py_output, py_on_py, py_on_ort, ort_on_ort, ort_output)
                     if isinstance(module, nn.BatchNorm2d):
+                        if rounding:
+                            stats['rounding'] = {origin: rounding_differences(x, native, rounding_cache[name])
+                                for origin, x, native in (('python_input', py_input, py_on_py),
+                                                          ('onnx_input', ort_input, py_on_ort))}
                         stats['formulas'] = {}
                         for origin, x, native in (('python_input', py_input, py_on_py), ('onnx_input', ort_input, py_on_ort)):
                             stats['formulas'][origin] = {'float64_rounded_vs_native': difference(native, double_formula(module, x))}
@@ -371,7 +382,9 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False, complet
 
 
 def replay_run(repo, prepared, run, experiments, source, output, *, backbone_factory=backbone_architecture,
-               promoted=False, complete=False):
+               promoted=False, complete=False, rounding=False):
+    if rounding and (not complete or not promoted):
+        raise ValueError('rounding replay requires complete promoted control protocol')
     prepared, run, source, output = [ignored_path(repo, path) for path in (prepared, run, source, output)]
     experiments = tuple(ignored_path(repo, path) for path in experiments)
     if not experiments:
@@ -396,11 +409,12 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
         selected_operators(model, onnx.load(path, load_external_data=False))
     output.mkdir(parents=True, exist_ok=False)
     summary, details = replay_diagnostics(model, path, output,
-        ((item.id, component_input(prepared, item)) for item in training), promoted=promoted, complete=complete)
+        ((item.id, component_input(prepared, item)) for item in training),
+        promoted=promoted, complete=complete, rounding=rounding)
     after = tensor_hash(model.state_dict())
     if after != before or any(module.training for module in model.modules()):
         raise ValueError('replay changed saved model state or eval mode')
-    kind = 'complete-replay' if complete else 'precision' if promoted else 'replay'
+    kind = 'bn-rounding' if rounding else 'complete-replay' if complete else 'precision' if promoted else 'replay'
     details_path = output / f'PLACEHOLDER-{kind}-details.json'
     details_path.write_text(json_text(details))
     report = {'notice': PLACEHOLDER_NOTICE, 'status': 'DIAGNOSTIC ONLY', 'version': '1.0.0',
@@ -411,7 +425,7 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
         'source_graph': graph_report(path), 'source_report_sha256': sha256(report_path),
         'retained_artifacts': {digest: {'kind': artifact['kind'], 'graph': artifact['graph'],
             'source_experiments': artifact['sources']} for digest, artifact in artifacts.items()},
-        'protocol': {'decision': 'ADR-019' if complete else 'ADR-016' if promoted else 'ADR-015', 'split': 'train', 'components': len(training),
+        'protocol': {'decision': 'ADR-020' if rounding else 'ADR-019' if complete else 'ADR-016' if promoted else 'ADR-015', 'split': 'train', 'components': len(training),
             'component_ids_sha256': hashlib.sha256(json_text([item.id for item in training]).encode()).hexdigest(),
             'frozen_evaluation_inputs_used': False, 'quantisation_fit': False, 'optimisation': 'disabled',
             'intra_op_threads': 2, 'inter_op_threads': 1, 'execution': 'sequential', 'formulas': list(FORMULAS),
@@ -424,6 +438,12 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
             'batchnorm': ['float32 coefficients, float64 multiply/add, float32 boundary: ' + formula
                           for formula in AFFINE_FORMULAS]}
     if complete:
+        if rounding:
+            from .export_bn_rounding import RECIPES, audit_rounding_coefficients
+            report['protocol']['rounding_recipes'] = list(RECIPES)
+            report['protocol']['rounding_engines'] = ['numpy', 'torch']
+            report['protocol']['rounding_scope'] = 'all saved BNs, both input origins; no replacement graph'
+            report['coefficient_audit'] = audit_rounding_coefficients(model, report)
         report['protocol']['promoted_strategies']['stem'] = 'none; native Conv replay only'
         report['protocol']['selection_scope'] = 'every saved Conv2d/BatchNorm2d in module order'
         report['protocol']['signed_accounting'] = 'float64 elementwise python_replay + propagation + kernel + extraction = total'
@@ -433,7 +453,7 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
     return report
 
 
-def main(argv=None, *, promoted=False, complete=False):
+def main(argv=None, *, promoted=False, complete=False, rounding=False):
     parser = argparse.ArgumentParser(description=f'{PLACEHOLDER_NOTICE}; training-only operator replay')
     parser.add_argument('--prepared', type=Path, default=Path('data/prepared/synthetic-v2-selection'))
     parser.add_argument('--run', type=Path, default=Path('data/models/PLACEHOLDER-m3-baseline'))
@@ -451,7 +471,7 @@ def main(argv=None, *, promoted=False, complete=False):
                 or not output.name.startswith('PLACEHOLDER-')):
             raise ValueError('aggregate target must be new, local and PLACEHOLDER-*')
         report = replay_run(repo, args.prepared, args.run, args.experiments, args.source, output,
-                            promoted=promoted, complete=complete)
+                            promoted=promoted, complete=complete, rounding=rounding)
         with target.open('x') as stream:
             stream.write(json_text(report))
     except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:

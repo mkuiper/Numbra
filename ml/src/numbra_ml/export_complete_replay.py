@@ -154,14 +154,16 @@ def audit_complete_report(repo, output, report):
     Saved model/preparation/source provenance are independently rechecked by the
     caller; this audit concerns the new evidence and refuses partial row scope.
     """
-    detail_path = output / 'PLACEHOLDER-complete-replay-details.json'
+    rounding = report['protocol']['decision'] == 'ADR-020'
+    detail_path = output / ('PLACEHOLDER-bn-rounding-details.json' if rounding
+                            else 'PLACEHOLDER-complete-replay-details.json')
     if sha256(detail_path) != report['diagnostic_details_sha256']:
         raise ValueError('complete replay detail checksum mismatch')
     details = json.loads(detail_path.read_text())
     protocol, summary = report['protocol'], report['diagnostics']
     if (report['notice'] != PLACEHOLDER_NOTICE or report['status'] != 'DIAGNOSTIC ONLY'
             or details['notice'] != PLACEHOLDER_NOTICE
-            or protocol['decision'] != 'ADR-019' or protocol['split'] != 'train'
+            or protocol['decision'] != ('ADR-020' if rounding else 'ADR-019') or protocol['split'] != 'train'
             or any(protocol[key] for key in ('frozen_evaluation_inputs_used', 'quantisation_fit', 'deployment_selection'))
             or report['model_state_before_sha256'] != report['model_state_after_sha256']
             or protocol['optimisation'] != 'disabled' or protocol['execution'] != 'sequential'
@@ -195,6 +197,11 @@ def audit_complete_report(repo, output, report):
                 raise ValueError('complete replay BN recipe scope mismatch')
         elif 'promoted_graphs' in graphs or 'promoted' in errors:
             raise ValueError('complete replay must not promote Conv')
+        if rounding:
+            from .export_bn_rounding import validate_rounding_scope
+            validate_rounding_scope(protocol, graphs, errors)
+        elif 'rounding_coefficients' in graphs or 'rounding' in errors:
+            raise ValueError('complete replay must not add undeclared rounding recipes')
     current = export_environment(repo)
     for key in ('source_files_sha256', 'source_tree_sha256', 'dependencies',
                 'dependency_lock_sha256', 'export_dependency_lock_sha256'):
