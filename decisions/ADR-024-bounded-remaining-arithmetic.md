@@ -204,6 +204,35 @@ Required scripts/check.sh observed exit 0: 909 ML PASS, 588 deprecation warnings
 273.91s; Android SKIPPED, RESULT PASS. All 37 new arithmetic persistence tests
 included, with every historical audit/control/parity test intact. No APK claim.
 
+## Observed guarded runner foundation — 2026-10-09 UTC
+
+`export_arithmetic_run` connects complete original experiment reconstruction,
+`training_rows`, `ArithmeticReplay` and `OrderedArithmeticEvidence`. All original
+historical-source/dependency/hardware/saved/preparation/prior/control evidence
+is independently audited before session construction; all new serialized/runtime
+setup records are reconstructed before retained inputs. The original report hash
+is bound. Original/new source snapshots are separately caller-supplied; no
+snapshot is inferred from recorded evidence and no live dependency is relaxed.
+
+Reader exhaustion, including its final row/array scope checks, precedes completing
+the evidence index. A complete diagnostic report is published only after read-only
+reconstruction of both original and arithmetic experiments, every array/metric/
+prior bit/setup graph and unchanged state/fits/budgets. A failed final audit may
+leave an ignored completed storage index, but cannot publish a completed report.
+No original control replay, image decoding or native model call is used.
+
+Generated tests cover complete round-trip with forbidden-operation guards,
+pre-access audit ordering, corrupt last original row, interrupted reader/write/
+final-audit failures, runtime graph mutation, rehashed context/aggregate/acceptance
+corruption, private rows and separate historical snapshot bindings. Observed test
+results are recorded in JOURNAL/STATUS. This implements the already declared
+runner, with no new scientific decision or selected arithmetic execution.
+
+Next execute and independently audit the complete selected 152-component retained
+experiment. All original failed exports remain rejected. Recipe numerical truth,
+historical execution authentication, whole-model parity, mobile compatibility and
+M4 acceptance are not established by generated runner results.
+
 ## Open questions
 
 - Which fixed recipes reduce native drift across the complete retained scope?

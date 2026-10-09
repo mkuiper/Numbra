@@ -1781,3 +1781,51 @@ publication or push.
 - Final root repository contracts: six PASS (0.068s); whitespace clean.
   Staging only permitted code/tests/ADR/docs and iteration records for the
   logical M4 commit. No protected files, tracked data/weights or push.
+
+## 2026-10-09T20:45:10Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, M4 folder (absent),
+  AGENTS and ADR-024/023/011. No new harness instruction; M0–M3 gates exist.
+  Stayed on M4, no review request or M5 implementation.
+- Implemented export_arithmetic_run: guarded complete retained training runner
+  and separate read-only report audit. Full original saved/preparation/prior/
+  source/dependency/hardware/control evidence checked before recipe sessions;
+  every serialized/runtime recipe graph independently rebuilt before reader
+  access. Original report hash bound; all original controls and exact prior bits
+  retained. Separate explicit old/new source snapshots keep live checks exact.
+- Exhaustion including the reader's final scope check precedes index completion;
+  independent reconstruction of both original/new evidence, every array/metric/
+  setup/aggregate/parity/budget/state/fit precedes completed diagnostic report.
+  A failed final audit can leave an ignored index, never a completed report.
+  Whole-model recipe parity remains UNVERIFIED; deployment selection false.
+- Generated-only 31-test runner suite PASS, six exporter deprecation warnings,
+  92.15s. Covers full round-trip, forbidden native/decode/control operations,
+  read-only audit with sessions/eager/writes also blocked, private-row exclusion,
+  complete pre-access audit ordering, corrupt last original row before sessions,
+  partial reader/final-scope/write/audit failures and setup mutation, rehashed
+  context/aggregate/budget/acceptance rejection, separate historical snapshot
+  bindings and output/CLI refusal. Tightened hardware corruption case to mutate
+  the actual machine field before the full check. No test failed or weakened.
+- Updated ADR-024 observations, ML README/ML-EXPORT/DEV-SETUP. Next selected
+  execution command documented, explicitly not run. No new scientific decision.
+  Disk read observed 199 GB available; original archives total 68.6 GB.
+- Root repository contracts six PASS (0.074s), git diff --check clean. Required
+  scripts/check.sh running; final observed result recorded below before commit.
+- No selected retained recipe execution, native baseline inference, new fit,
+  frozen evaluation, whole-model candidate/reference/budget change, data or
+  toolchain acquisition, protected edit, review.sh, REVIEW/CHECK/GATE write,
+  external message, publication or push. All failed exports remain rejected;
+  no accepted bundle or APK. NEXT_ACTION CONTINUE.
+- Required scripts/check.sh observed exit 0: 940 ML PASS, 594 exporter
+  deprecation warnings, 364.89s; Android SKIPPED (no app/gradlew), RESULT PASS.
+  Includes all 31 new runner cases, tightened actual hardware-field corruption
+  test, and every existing historical/control/parity regression. No failed or
+  skipped ML test; no accepted export or APK claim.
+- Final status updated at 2026-10-09T20:51:04Z; NEXT_ACTION overwritten CONTINUE.
+  Next execute all 152 retained training components, independently reconstruct
+  original/new evidence and perform separate guarded committed-source audit.
+  No selected arithmetic outcome claimed. No new scientific decision or M4
+  acceptance; all earlier failed exports remain rejected.
+- Final root repository contracts six PASS (0.084s); whitespace clean.
+  Staging only permitted runner/tests/ADR/docs/iteration records for the logical
+  M4 commit. No protected edits, tracked data/weights, publication or push.

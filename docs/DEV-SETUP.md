@@ -661,3 +661,55 @@ runner and full selected experiment remain unfinished; M4 is incomplete.
 Required full check observed exit 0: 909 ML tests PASS, 588 deprecation warnings,
 273.91s; Android SKIPPED (no app/gradlew), RESULT PASS. Includes all 37 new
 arithmetic persistence regressions. No failing test was weakened or skipped.
+
+## M4 guarded retained arithmetic runner — observed 2026-10-09 UTC
+
+No installation, dependency change, data acquisition or selected arithmetic
+execution. Used the existing pinned environment, from repository root:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_arithmetic_run.py
+bash scripts/check.sh > data/exports/PLACEHOLDER-m4-arithmetic-runner-check.log 2>&1
+python3 -m unittest discover -s tests -v
+git diff --check
+```
+
+Focused runner suite: 31 PASS, six exporter deprecation warnings, 92.15s.
+The hardware-corruption case was then tightened to change the actual `machine`
+field; the required full check includes it. Generated original training evidence
+and all new arithmetic files stay ignored; temporary fixture reports clean up.
+Native forward, image decoding and original control replay are blocked during
+the fixture run. Separate read-only audit additionally blocks new sessions,
+eager recipe execution and evidence persistence. Failure cases cannot publish a
+completed report; a failed final audit can leave an ignored storage index.
+
+Full check results are recorded in JOURNAL and STATUS after completion. No
+selected retained recipe execution, reference/budget/fit change, new whole-model
+candidate, mobile compatibility result, accepted export or APK is claimed.
+
+For the next selected experiment, the runner's original defaults correspond to
+the existing retained 152-component evidence. Supply exact local ADR-023 source
+snapshot `50f7c65e7b6a6168a17d498be4d663c89b11742f` and ADR-022 snapshot
+`808cc3393ccf1cce95c2feeef91e5a8608b481e4` via `--retained-source-commit` and
+`--profile-source-commit`. Use a fresh ignored PLACEHOLDER output directory.
+The following command is documented for the next iteration and **has not been
+executed** in this one:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_arithmetic_run \
+  --retained-source-commit 50f7c65e7b6a6168a17d498be4d663c89b11742f \
+  --profile-source-commit 808cc3393ccf1cce95c2feeef91e5a8608b481e4 \
+  --output data/exports/PLACEHOLDER-m4-arithmetic-training1
+```
+
+Independently call `audit_arithmetic_training` afterwards with decode/native/
+session/eager/write guards, and its explicitly committed new source snapshot if
+the code has since advanced. Original snapshot arguments remain separate. Disk
+and iteration duration need checking before this full retained-tensor run; the
+original experiment alone contains 68.6 GB of ignored tensor archives. Generated
+success cannot establish selected arithmetic or complete-model parity.
+
+Required full check observed exit 0: 940 ML PASS, 594 deprecation warnings,
+364.89s; Android SKIPPED (no app/gradlew), RESULT PASS. All 31 new runner
+cases included, with actual hardware-field corruption and all prior regressions.
+No failing test was weakened or skipped; no accepted export or APK claim.

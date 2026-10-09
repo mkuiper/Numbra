@@ -289,9 +289,29 @@ These are recorded observations, not independently recomputed numerical truth.
 ml/.venv/bin/python -m pytest -q ml/tests/test_export_arithmetic_evidence.py
 ```
 
-The persistence API requires its caller to verify full original experiment and
-source/dependency provenance and all new setup graphs before recipe execution.
-Next build the guarded runner that exhausts `training_rows`, connects all 152
-ordered components to this persistence/audit, and publishes a complete report
-only after final independent reconstruction. No selected arithmetic experiment
-or accepted export is established by generated fixture success.
+`numbra_ml.export_arithmetic_run` now provides that guarded runner. It completely
+audits the original retained experiment before constructing recipe sessions,
+then independently rebuilds every setup graph before accessing `training_rows`.
+The reader is exhausted in order; every original control and every fixed recipe
+output is persisted. A complete diagnostic report is written only after separate
+read-only reconstruction of the original and new evidence. Interrupted runs and
+failed final audits cannot publish a completed report.
+
+The original ADR-023 and ADR-022 source snapshots are supplied separately, as
+`--retained-source-commit` and `--profile-source-commit`. A later report audit may
+also explicitly supply its own `source_commit`; it never selects a historical
+snapshot from a report. All live dependency/hardware checks remain exact.
+The original report hash binds the experiment; saved state, fits, scope, budgets,
+original parity failures and exact prior bits remain checked.
+
+```sh
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_arithmetic_run.py
+```
+
+Generated runner tests block image decoding, native model calls and original
+control replay. Independent audit additionally blocks session creation, eager
+recipes and persistence. These checks do not independently rerun numerical
+truth or authenticate historical execution. Whole-model recipe parity remains
+UNVERIFIED; no selected arithmetic experiment or accepted export is established
+by generated fixture success. Next execute and independently audit the complete
+152-component retained experiment before declaring a whole-model candidate.

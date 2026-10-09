@@ -1146,12 +1146,29 @@ bits, signed-zero/nonzero errors, and per-component memory release. A mismatched
 protocol or aggregate acceptance claim is rejected. This is software evidence;
 no selected retained arithmetic replay or new baseline parity result occurred.
 
-Next build a guarded training runner. It must audit full original source/
-dependency/context evidence and every new setup graph before recipe inputs,
-exhaust the verified reader over all and only the 152 training components,
-then reconstruct the entire persisted experiment before publishing a completed
-report. Resolve float arithmetic before choosing a selective QDQ scope,
-fitting or using frozen acceptance inputs.
+`export_arithmetic_run` now supplies the guarded training runner. It fully audits
+the original experiment's saved/preparation/source/dependency/control/prior
+evidence before session construction. It then independently audits every new
+serialized/runtime setup graph before retained reader access. Complete ordered
+reader exhaustion precedes final persistence; independent reconstruction of
+both original and new evidence precedes writing the completed diagnostic report.
+The original report hash is bound explicitly. Separate caller-supplied ADR-023,
+ADR-022 and (for later audits) new-report source snapshots retain exact live
+dependencies/hardware and unchanged state/fits/budgets. There is no image decode,
+native forward, original-control replay or whole-model recipe session.
+
+Generated regressions cover full runner/audit round-trip, private row exclusion,
+historical snapshot bindings, corrupt/rehashed provenance/metrics/acceptance
+claims, corrupt final original row before sessions, pre-access setup ordering,
+reader exhaustion, persistence failures, final setup mutation and final-audit
+failure with no completed report. These are generated software checks, not a
+selected arithmetic result. Partial diagnostic files stay ignored under data/;
+an evidence index alone is not a completed/audited experiment.
+
+Next execute and independently audit all 152 retained training components,
+every fixed recipe on both unchanged graphs and both exact input origins.
+Resolve float arithmetic before choosing a whole-model candidate or selective
+QDQ scope, fitting or using frozen acceptance inputs.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile
