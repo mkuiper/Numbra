@@ -18,7 +18,7 @@ from timm.layers import BatchNormAct2d
 from . import PLACEHOLDER_NOTICE
 from .evaluation import read_component_index
 from .export import INPUT_SHAPE, component_input, export_environment, graph_report
-from .export_batchnorm import assert_batchnorm, boundaries, mark_diagnostic
+from .export_batchnorm import assert_batchnorm, mark_diagnostic
 from .export_diagnostics import diagnose_profile, head_sensitivity, tap_features, verified_artifacts
 from .export_replay import bn_constants, verified_preserved
 from .parity import FLOAT_BUDGET
@@ -70,8 +70,15 @@ def substitute_batchnorm(model, source, target):
         raise ValueError('complete substitution requires every module in eval mode')
     graph = onnx.load(source, load_external_data=False)
     assert_batchnorm(graph, sum(isinstance(module, nn.BatchNorm2d) for module in model.modules()))
-    matched = [(name, module, tensor) for name, module, tensor in boundaries(model, graph)
-               if isinstance(module, nn.BatchNorm2d)]
+    matched = []
+    for name, module in model.named_modules():
+        if not isinstance(module, nn.BatchNorm2d):
+            continue
+        nodes = [node for node in graph.graph.node if node.op_type == 'BatchNormalization'
+                 and len(node.input) > 1 and node.input[1] == f'{name}.weight']
+        if len(nodes) != 1:
+            raise ValueError(f'expected one saved BatchNorm boundary node: {name}')
+        matched.append((name, module, nodes[0].output[0]))
     names = [item.name for item in graph.graph.initializer]
     names += [value.name for value in (*graph.graph.input, *graph.graph.output, *graph.graph.value_info)]
     names += [name for node in graph.graph.node for name in (*node.input, *node.output, node.name)]
@@ -159,7 +166,7 @@ def audit_promoted_graph(path, source, records, *, serialized=False):
 
 
 def promoted_bn_run(repo, prepared, run, experiments, source, output,
-                    *, backbone_factory=backbone_architecture):
+                    *, backbone_factory=backbone_architecture, joint_stem=False):
     prepared, run, source, output = [ignored_path(repo, path) for path in (prepared, run, source, output)]
     experiments = tuple(ignored_path(repo, path) for path in experiments)
     if not experiments:
@@ -180,6 +187,18 @@ def promoted_bn_run(repo, prepared, run, experiments, source, output,
     output.mkdir(parents=True, exist_ok=False)
     promoted = output / 'PLACEHOLDER-complete-promoted-bn.onnx'
     records = substitute_batchnorm(model, preserved, promoted)
+    artifacts = [('preserved_control', preserved), ('complete_promoted_bn', promoted)]
+    stem_record = None
+    if joint_stem:
+        from .export_joint import substitute_stem, audit_stem_graph
+        stem_only = output / 'PLACEHOLDER-promoted-stem-preserved-bn.onnx'
+        stem_record = substitute_stem(model, preserved, stem_only)
+        joint = output / 'PLACEHOLDER-joint-promoted-stem-bn.onnx'
+        joint_records = substitute_batchnorm(model, stem_only, joint)
+        if joint_records != records:
+            raise ValueError('joint substitution changed BatchNorm coefficients or boundaries')
+        audit_stem_graph(joint, promoted, stem_record, serialized=True)
+        artifacts.append(('joint_promoted_stem_bn', joint))
     report = {'notice': PLACEHOLDER_NOTICE, 'status': 'DIAGNOSTIC ONLY', 'version': '1.0.0',
         'created_utc': datetime.now(timezone.utc).isoformat(), 'environment': environment,
         'saved_model_sha256': saved['provenance']['model_sha256'], 'saved_run_sha256': sha256(run / 'PLACEHOLDER-run.json'),
@@ -197,8 +216,15 @@ def promoted_bn_run(repo, prepared, run, experiments, source, output,
             'expected_batchnorm_substitutions': len(records)},
         'substitutions': records, 'artifacts': {},
         'scope': 'PLACEHOLDER complete training-only BN graph experiment; never bundle; no mobile/clinical/deployment evidence'}
+    if joint_stem:
+        report['protocol'].update(decision='ADR-018', promoted_stem_convolutions=1,
+            stem_formula='saved float32 weights; fixed patches; double MatMul; float32 boundary')
+        report['stem_substitution'] = stem_record
+        report['stem_only_graph'] = graph_report(stem_only)
+        report['isolated_stem_graph'] = graph_report(stem_only.with_name(stem_only.stem + '-isolated.onnx'))
+        report['scope'] = 'PLACEHOLDER training-only joint stem/BN experiment; never bundle; no mobile/clinical/deployment evidence'
     details = {'notice': PLACEHOLDER_NOTICE, 'artifacts': {}}
-    for name, path in (('preserved_control', preserved), ('complete_promoted_bn', promoted)):
+    for name, path in artifacts:
         tapped = output / f'PLACEHOLDER-{name}-features.onnx'
         feature_name = tap_features(path, tapped, model.head.mean.numel())
         audit_directory = output / f'PLACEHOLDER-{name}-audit'
@@ -211,6 +237,10 @@ def promoted_bn_run(repo, prepared, run, experiments, source, output,
             audit_path = audit_directory / f'PLACEHOLDER-{tag}-optimized.onnx'
             if name == 'complete_promoted_bn':
                 audits[tag] = audit_promoted_graph(audit_path, preserved, records)
+            elif name == 'joint_promoted_stem_bn':
+                audits[tag] = {'status': 'PASS',
+                    'batchnorm': audit_promoted_graph(audit_path, stem_only, records),
+                    'stem': audit_stem_graph(audit_path, preserved, stem_record)}
             else:
                 assert_batchnorm(onnx.load(audit_path), len(records))
                 audits[tag] = {'status': 'PASS', 'batchnorm_nodes': len(records)}
@@ -228,7 +258,7 @@ def promoted_bn_run(repo, prepared, run, experiments, source, output,
     return report
 
 
-def main(argv=None):
+def main(argv=None, *, joint_stem=False):
     parser = argparse.ArgumentParser(description=f'{PLACEHOLDER_NOTICE}; complete training-only BN experiment')
     parser.add_argument('--prepared', type=Path, default=Path('data/prepared/synthetic-v2-selection'))
     parser.add_argument('--run', type=Path, default=Path('data/models/PLACEHOLDER-m3-baseline'))
@@ -245,7 +275,8 @@ def main(argv=None):
         if (target.exists() or target.is_symlink() or reports.resolve() != reports
                 or not output.name.startswith('PLACEHOLDER-')):
             raise ValueError('aggregate target must be new, local and PLACEHOLDER-*')
-        report = promoted_bn_run(repo, args.prepared, args.run, args.experiments, args.source, output)
+        report = promoted_bn_run(repo, args.prepared, args.run, args.experiments, args.source, output,
+                                 joint_stem=joint_stem)
         with target.open('x') as stream:
             stream.write(json_text(report))
     except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:
