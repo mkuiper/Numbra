@@ -859,17 +859,62 @@ source hashes remain historical; no new saved-baseline reconstruction or parity
 PASS is claimed. Complete training replay and ordered-detail auditing remain
 unfinished, and all earlier failed deployment exports remain rejected.
 
+## Complete supplied-tensor replay integration — ADR-023
+
+`export_remaining_replay.CompleteReplay` combines the native capture and
+complete runtime foundations on one supplied diagnostic tensor. It has no
+saved-model or dataset entry point. Before the first forward call it builds
+both original/tapped whole-runtime pairs and all isolated expressions, audits
+every runtime node/constant/boundary, and independently rebuilds the rounded-BN
+serialized graph from the saved coefficients and fixed ADR-021 recipe. This
+last check protects against changed serialized coefficients that a runtime
+audit against the same supplied graph would not detect.
+
+Every original computational node has an explicit isolated graph. All operands
+remain inputs, including binary operands, saved weights and squeeze axes; their
+order, shape, dtype and repeated-operand bits are checked. Rounded BN uses the
+actual rounded expression as its isolated candidate, with the preserved native
+ONNX operator retained as a control. Run both exact native and runtime operand
+tuples on both unchanged graphs. Keep all three BN primitive formulas, both
+promoted affine formulas, float64 reference expression, all 32 rounding recipes
+on both independent engines, and every saved Conv control. Record both local
+kernel origins and full four-term signed accounting at every output rank.
+Separate original/captured native logits and original/tapped runtime logits
+retain all instrumentation changes; no discrepancies are suppressed.
+
+`reconstruct_row` rebuilds every signed metric from retained arrays without
+running a model, eager recipe or runtime. It validates complete ordered operator,
+graph, operand, origin and control scope; source graph/plan binding; all tensor
+specifications; exact constant/axis bits; and exact native/runtime producer
+lineage through the final logits. All controls retain both differences from
+native eager results and paired recipe/engine differences. The arrays are
+observations: this audit does not independently recalculate their inference
+results or authenticate their historical origin. The future complete runner
+must bind ordered rows to selected saved/source/preparation evidence and exact
+ADR-022 disabled logits, persist ignored evidence, and reconstruct aggregates.
+
+Generated-only integration tests cover the complete random MobileNet
+architecture (159 computations: 53 Conv, 34 BN and 72 remaining nodes), both
+graphs and both origins. They also cover input/state/mode/hook rejection before
+inference, missing or altered scope, saved constants, axes, boundary lineage,
+nonzero native replay/instrumentation drift, exact serialized rounded expression
+and coefficient corruption, and unconditional capture cleanup on failure.
+Weights and input tensors are generated anew; no saved M3 forward or existing
+training image is used. Observed test outcomes are recorded in JOURNAL.
+
 ## Remaining M4 work
 
 Optimisation profiles do not fix selected-baseline parity. Next implement
 ADR-023's complete training runner using the implemented native mapping,
 pre-mutation capture, complete runtime expression audits and validated taps.
-Integrate both-origin isolated replay and measure original/tapped native and
-runtime logits on both unchanged graphs. Use every ordered
-training component and complete remaining scope; distinguish local arithmetic
-from propagation, including both binary operands, and preserve all Conv/BN
-controls and exact prior disabled logits. Do not keep rerunning the failed
-profiles or choose a favourable subset.
+The supplied-tensor integration now includes both-origin isolated replay,
+original/captured native logits, both original/tapped runtime logits, complete
+remaining scope and every Conv/BN control. Next add the guarded ordered
+training-scope runner and persisted evidence audit. Before opening any existing
+training image, finish independent ordered-row/aggregate reconstruction and
+exact ADR-022 disabled prior-logit checks. Then use every ordered training
+component with unchanged reference, fits, preprocessing and budgets. Do not
+keep rerunning the failed profiles or choose a favourable subset.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

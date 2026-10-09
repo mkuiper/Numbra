@@ -574,3 +574,31 @@ and internal double BN arithmetic are audited on both full random graphs;
 This is fixture evidence only. No saved model/input inference, new parity result,
 accepted deployment bundle, M4 gate or APK exists. Final documentation checks
 are recorded in JOURNAL.
+
+## M4 complete supplied-tensor replay integration — observed 2026-10-09 UTC
+
+No installation, dependency change, acquisition or selected saved-baseline
+inference. Existing pinned environment, from repository root:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_replay.py
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_remaining_replay.py -k corrupted_serialized
+bash scripts/check.sh > data/exports/PLACEHOLDER-m4-integration-check.log 2>&1
+python3 -m unittest discover -s tests -v
+git diff --check
+```
+
+Initial integration: 34 PASS (40.36s), 64 warnings. Expanded: 42 PASS/1 FAIL
+(42.78s), 82 warnings; a test-only wrong promoted-node prefix was corrected by
+using the existing PREFIX constant. Four exact serialized-corruption cases then
+PASS (2.29s), 40 deselected, eight warnings. Full check exit 0: 686 ML tests
+PASS (134.03s), 522 warnings, including all 44 new integration tests; Android
+SKIPPED, RESULT PASS. Repository contract suite: six PASS (0.098s) before final
+records; final record verification is in JOURNAL. No existing tests weakened.
+
+Both complete random mobile graphs cover all 159 computational nodes, both
+exact input origins and every Conv/BN formula/promoted/rounding control. All
+graphs/tensors are generated-only and ignored. Retained arrays support separate
+no-inference metric/constant/lineage reconstruction; authenticated ordered
+training evidence and prior-logit reconstruction remain unfinished. M4 has no
+new saved-baseline parity result, accepted bundle or gate; no app or APK exists.

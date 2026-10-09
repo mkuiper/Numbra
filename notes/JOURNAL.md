@@ -1281,3 +1281,61 @@ publication or push.
 - Final documentation repository-contract verification: 6 PASS (0.073s);
   git diff --check clean. Committing the complete logical step and iteration
   records as M4: audit complete disabled runtime graphs.
+
+## 2026-10-09T17:56:57Z — iteration
+
+- Oriented in required order: roadmap, STATUS, HARNESS, missing M4 review folder,
+  AGENTS and relevant ADRs (011/022/023). No new harness message or gate; continued
+  M4 under existing ADR-023. No new model/runtime/budget choice or new ADR needed.
+- Added export_remaining_replay.py supplied-tensor integration: independently
+  measured original/captured native logits, both original/tapped runtime pairs,
+  complete remaining scope and every saved Conv/BN, on both exact native/runtime
+  operand tuples for each graph. All ordered binary operands, parameters and
+  axes remain explicit isolated inputs. Rounded BN isolates its actual candidate
+  expression with preserved native ONNX retained as a separate control.
+- Preserve every prior Conv/BN control: three BN primitive formulas, both promoted
+  affine formulas, float64 expression and all 32 two-engine rounding recipes.
+  Keep native-control outputs and paired formula/engine differences. Complete
+  four-term signed accounting supports every head/feature rank, with exact
+  telescoping and no numerical suppression. Every instrumentation drift retained.
+- Static setup independently reconstructs the entire rounded graph from the
+  unchanged saved coefficients/recipe before sessions; all whole/isolated runtime
+  expressions are then audited before any input runs. Source graph copies bind
+  setup; invalid input, changed saved state/geometry/mode/hooks and altered
+  serialized rounded coefficient bits/expressions fail before inference.
+- Independent row reconstruction performs no model/eager/runtime inference or
+  decode: validates full ordered node/graph/operand/origin/control scope, source
+  binding, specs, saved constant/axis bits and native/runtime producer lineage
+  through final logits, then recomputes all signed metrics from retained arrays.
+  This verifies recorded observations, not independently recalculated inference
+  or historical authenticity. Persistent ordered-source/saved/prior audit remains.
+- Generated-only tests replay both full random mobile graphs, all 159 computational
+  nodes (53 Conv, 34 BN, 72 remaining), both exact origins, complete controls and
+  head ranks. Actual generated native replay and original/captured/tapped logits
+  agree exactly; local HardSwish drift remains measured. Corruption regressions,
+  injected nonzero replay/instrumentation drift, invalid inputs/stale state,
+  failure hook cleanup and retained array stability are covered. No selected saved
+  M3 forward, existing training image decode, baseline ORT inference or new saved
+  static provenance report. All earlier reports remain unchanged historical evidence.
+- Test progression: initial 34 PASS (40.36s), 64 warnings; expanded 42 PASS/1 FAIL
+  (42.78s), 82 warnings. The failure was a test-only hardcoded promoted-node prefix;
+  corrected it to use the existing PREFIX constant, retaining exact corruption
+  assertions. Four serialized-corruption tests then 4 PASS (2.29s), 40 deselected,
+  eight warnings. Added retained-evidence stability regression. No existing test
+  deleted, weakened or skipped, and no production parity budget changed.
+- Full bash scripts/check.sh observed exit 0: 686 ML tests PASS (134.03s),
+  522 warnings, including all 44 new tests; Android SKIPPED, RESULT PASS.
+  Log ignored at data/exports/PLACEHOLDER-m4-integration-check.log. Root repository
+  contracts 6 PASS (0.098s) before final records; git diff --check clean.
+- Updated ADR-023 observations, ML README/export/setup documents, STATUS and
+  HUMAN-QUEUE. M4 remains incomplete with no review request/HANDOFF or APK.
+  NEXT_ACTION CONTINUE. Next complete guarded ordered training runner, ignored
+  evidence persistence and independent component/aggregate/provenance/prior-logit
+  reconstruction before opening all 152 training components. Selective QDQ and
+  mobile support remain blockers; all failed graphs rejected; do not start M5.
+- No reference/state/fits/budget change, saved retraining, frozen evaluation,
+  quantisation fit, acquisition/install, protected edit, review.sh,
+  REVIEW/CHECK/GATE write, external message/publication/push or deployment selection.
+- Final documentation/iteration-record verification: repository contracts 6 PASS
+  (0.079s), git diff --check clean. Committing the complete logical integration
+  step and iteration records as M4: integrate complete supplied-tensor replay.

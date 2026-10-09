@@ -150,6 +150,14 @@ saved-baseline mapping is static only. `export_remaining_runtime` adds complete
 original/tapped disabled-runtime graph audits, validated multi-operand taps and
 unsuppressed instrumentation measurements for both graphs. Generated fixtures
 also cover both complete random mobile graphs; no saved-baseline replay is run.
-The complete two-graph training replay runner and ordered-detail audit remain
-unfinished, so no baseline replay CLI or new accepted export exists.
+`export_remaining_replay` integrates both graphs and exact input origins on a
+supplied tensor, including separate original/captured native logits, every
+remaining operator, complete Conv/BN formula/promoted/rounding controls, and
+four-term signed accounting. It retains arrays for independent metric and exact
+boundary-lineage reconstruction without inference. All serialized rounded-BN
+expressions and coefficients are first bound to the unchanged saved recipe.
+The generated full mobile fixture covers all 159 computational nodes. A guarded
+training-scope runner, persistence/provenance audit and exact ADR-022 prior-logit
+reconstruction remain unfinished; there is no saved-baseline replay CLI or new
+accepted export.
 See [the export document](../docs/ML-EXPORT.md) for scope and evidence limits.

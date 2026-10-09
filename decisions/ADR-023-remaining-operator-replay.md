@@ -162,6 +162,39 @@ both-origin isolated runtime integration, ordered-detail/prior-logit audit,
 selective QDQ and mobile execution remain incomplete. All earlier failed exports
 remain rejected; M4 stays open and this does not authorise M5.
 
+## Observed supplied-tensor replay integration — 2026-10-09 UTC
+
+`export_remaining_replay` now integrates complete native capture, separate
+uncaptured/captured native logits, both original/tapped whole runtime pairs,
+all isolated remaining and Conv/BN expressions on both exact input origins,
+and rank-general four-term signed accounting. All three BN primitive formulas,
+both promoted affine controls, float64 formula and 32 two-engine rounding
+controls remain, on both graph origins. No expression/profile/model is selected.
+
+Setup statically rebuilds the complete rounded graph from independently agreed
+saved coefficients and the fixed recipe, then audits every original/tapped and
+isolated runtime before a supplied input can run. Ordered operands remain
+explicit inputs, including parameters/axes; rounded BN isolates its actual
+expression with native ONNX retained as a separate control. Invalid inputs,
+stale saved state/settings/mode/hooks and changed serialized rounded coefficient
+bits/expressions fail before inference. All drift is recorded without suppression.
+
+Retained arrays permit a separate no-inference reconstruction of every metric,
+complete operator/graph/origin/control scope, exact saved constant bits and
+native/runtime boundary lineage. This checks recorded observations, not their
+numerical truth against recomputed inference. Full ordered-component persistence,
+aggregate/source/saved/prior audit and exact ADR-022 disabled-logit reconstruction
+remain separate unfinished work. No baseline dataset is opened by this module.
+
+Generated-only integration covers both full random mobile graphs and all 159
+computational nodes (53 Conv, 34 BN, 72 remaining), including head ranks and
+both binary operands. Tests retain nonzero local HardSwish drift and deliberate
+native/instrumentation discrepancies. These random weights/generated tensors
+cannot establish selected-baseline parity. No new saved M3 inference,
+quantisation fit, frozen evaluation, mobile result or accepted export occurred;
+M4 remains incomplete. The complete runner must finish before ordered training
+images are opened. Test outcomes are recorded in JOURNAL.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?
