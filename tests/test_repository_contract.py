@@ -17,6 +17,7 @@ class RepositoryContractTests(unittest.TestCase):
             ".firecrawl/page.md",
             "ml/.venv/bin/python",
             "ml/output/model.pt",
+            "ml/output/model.safetensors",
             "ml/output/model.tflite",
             "app/local.properties",
             "app/build/outputs/apk/debug/app-debug.apk",

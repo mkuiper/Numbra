@@ -1,63 +1,69 @@
 # Status
 
-Updated: 2026-10-09T12:03:06Z
+Updated: 2026-10-09T12:12:57Z
 
 Current milestone: **M0 — Research and plan**, in progress. No review requested;
 no GATE exists. Work remains research only.
 
 ## Acceptance status
 
-- **All research/0x documents, synthesis, and four ADRs: INCOMPLETE.** Scaffold,
-  brief, glossary, clinical background (`01`), prior work (`02`), dataset survey
-  (`03`), source register and ADR-002/003 are written. Still needed:
-  `04-models-and-methods.md`, `05-deployment-constraints.md`,
+- **All research/0x documents, synthesis and required ADRs: INCOMPLETE.** Scaffold,
+  brief, glossary, clinical (`01`), prior work (`02`), datasets (`03`), methods
+  (`04`), deployment (`05`) and source register are written. ADR-001 task framing,
+  ADR-002 datasets, ADR-003 code licence and additional ADR-005 baseline/runtime
+  exist with autopilot/pending-human status. Still needed:
   `06-data-contribution-platform.md`, `07-ethics-regulatory-nepal.md`,
-  `docs/01-phase0-synthesis.md`, ADR-001 task framing and ADR-004 contribution
-  governance. HANDOFF waits for these deliverables. Clinical and prior-work
-  documents include explicit limitations, Open questions and Confidence sections.
-- **Every dataset claim sourced or UNVERIFIED: SATISFIED for the expanded survey.**
-  Added WHO independent evaluation, Yotsu pilot, eSkinHealth, CO2Wounds-V2 and
-  academic image-study records, with rights/access/confirmation/grouping gaps
-  explicit. No patient photos, image archives, per-image URLs or patient rows
-  acquired. No additional real source approved.
+  `docs/01-phase0-synthesis.md` and ADR-004 contribution governance. HANDOFF waits
+  for these deliverables and a consistency pass. Research documents end with Open
+  questions and Confidence and distinguish proposals from sourced facts.
+- **Every dataset claim sourced or UNVERIFIED: SATISFIED for the existing survey.**
+  No new real source approved or downloaded. New methods/deployment sources are
+  registered with access date and limits; pretrained binary access remains untested.
 
 ## Verification observed
 
-- `python3 -m unittest discover -s tests -v`: all 4 existing repository checks
-  passed after final research/glossary edits. These check ignore boundaries,
-  tracked data absence, local links and uncertainty sections, not clinical truth.
-- `bash scripts/check.sh`: exit 0, RESULT PASS after final research edits;
-  ML and Android explicitly SKIPPED because their projects do not exist. No APK
-  or ML validation claimed. No tests added/changed because this iteration built
-  documentation only, covered by existing repository checks.
-- `git diff --check`: passed before logical commit c6ef558.
-- No protected files edited; no review.sh, remote push or external messages.
+- `python3 -m unittest discover -s tests -v`: all 4 repository checks passed;
+  extended the ignore-boundary test to cover safetensors weights. Checks cover
+  ignored paths, no tracked data, local links and uncertainty sections; they do
+  not validate research facts, clinical rules or a model.
+- `bash scripts/check.sh`: exit 0, RESULT PASS; ML and Android explicitly SKIPPED
+  because their projects do not exist. No APK or ML validation claimed.
+- New-document source-register coverage check: PASS (all external URLs in `04`,
+  `05`, ADR-001 and ADR-005 appear in `research/sources.md`).
+- `git diff --check`: passed after research/safeguard edits.
+- No training, application code, toolchain installation, protected-file edits,
+  review.sh, remote push, external messages, photos or model binaries.
 
 ## Decisions and blockers
 
-- Existing ADR-002 remains synthetic-only for downstream work. Every downstream
-  model, UI and report must say PLACEHOLDER; synthetic metrics are not clinical.
-- eSkinHealth authors' February 2026 notice still holds release for ethical/legal
-  review. CO2Wounds paper and Mendeley disagree on licence and its wound
-  segmentation task does not supply initial leprosy triage labels. Yotsu's 2023
-  pilot data are explicitly non-public. Queue entries record these findings.
-- Firecrawl CLI still has zero credits; retained the previously documented web
-  research workaround without billing/account changes.
-- Full Nepal reports failed on multiple official endpoints (timeout/size limit).
-  **Labelled workaround:** indexed primary-document text, with current burden
-  figures UNVERIFIED against full reports. Current complete endemic-district
-  list and local FCHV sensory/referral protocols remain UNVERIFIED.
-- WHO initiative page says public app lacks AI while its 2024 news update uses
-  broader availability wording. Exact public/offline AI release and reuse rights
-  remain UNVERIFIED; no available classifier assumed.
-- Humans must review local clinical procedures/urgent rules, language, receiving
-  services, referral completion, data rights and existing ADRs before field use.
+- ADR-002 remains synthetic-only. Every downstream model/report/UI must say
+  **PLACEHOLDER**; synthetic metrics are not clinical performance.
+- ADR-001 chooses a binary image evidence score with separate symptom-first
+  referral and explicit missingness/failure handling. Proposed sensitivity 0.95,
+  secondary specificity 0.80 and clinical rule precedence need human scrutiny.
+- ADR-005 selects timm MobileNetV3Small transfer features and static-quantised
+  ONNX Runtime Mobile/CPU. Publisher declares Apache-2.0 for the checkpoint;
+  anonymous binary access, pins/checksum, conversion, parity, notices and actual
+  Android support must be verified in later milestones. Derm Foundation is
+  gated by account/terms acceptance and excluded. No weights acquired here.
+- Proposed preprocessing changes pretrained centre crop to deterministic bilinear
+  letterbox. Quantised probability tolerance 0.02 and conservative threshold
+  margin are unmeasured engineering choices, requiring M4/M6 tests and review.
+- Rural Nepal FCHV devices, OS/ABI, charging and connectivity remain UNVERIFIED
+  after manufacturer/NTA searches. **Labelled research workaround:** conservative
+  test profiles and a regional manufacturer example; budgets are not measurements.
+  Nepal HMIS indexed page identifies DHIS2 but direct open failed HTTP 502;
+  authenticated configuration/API/permissions remain UNVERIFIED.
+- Firecrawl status again shows zero credits; retained the previously documented
+  web-tool workaround without account, billing or authentication changes.
+- Existing clinical-pathway, data-permission and Nepal-report limitations remain
+  in research documents and HUMAN-QUEUE. All autonomous ADRs are queued for humans.
 
 ## Next concrete step
 
-Continue M0 with methods/evaluation and deployment research: verify mobile
-backbones and pretrained-weight licences, choose a CPU-trainable/exportable
-synthetic PLACEHOLDER baseline, specify threshold selection and grouped/held-out
-source evaluation, and write ADR-001. Then research contribution governance and
-Nepal ethics/privacy/device-regulation sources, write ADR-004 and synthesis.
-Only after all M0 deliverables are ready, write HANDOFF and set REVIEW M0.
+Continue M0 with contribution governance and Nepal ethics/privacy/device-regulation
+research. Design local-only consent/provenance/export records and a separate future
+clinician confirmation/release cycle; write `06`, `07` and ADR-004. Mark legal
+classification/process details UNVERIFIED where primary evidence cannot establish
+them. Then write synthesis, check consistency across all deliverables, run checks,
+write HANDOFF and request REVIEW M0. Do not begin M1 before the harness's M0 gate.

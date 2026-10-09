@@ -88,3 +88,45 @@ Append-only log of Builder iterations.
   symptom precedence and field procedures remain clearly labelled proposals.
 - Remaining M0 work: methods, deployment, contribution governance, Nepal ethics/
   regulatory research, ADR-001/004 and synthesis. Set CONTINUE, not a review request.
+
+
+## 2026-10-09T12:12:57Z — iteration
+
+- Read roadmap, STATUS, HARNESS, M0 review workspace, AGENTS and existing ADRs in
+  the required order. No review/gate or new harness action exists; stayed in M0.
+- Added research/04-models-and-methods.md: audited architecture/weight candidates,
+  selected an image-only frozen-feature transfer baseline, separated disease
+  evidence from referral actions, and specified patient/group and duplicate
+  isolation, calibration/threshold validation, sensitivity/specificity endpoints,
+  held-out-source evaluation, subgroup missingness and abstention denominators.
+- Added research/05-deployment-constraints.md: compared LiteRT and ONNX Runtime,
+  proposed deterministic letterbox preprocessing/parity and measured-later budgets,
+  documented offline behaviour, language/privacy needs and ODK/Kobo/DHIS2 options.
+  None of these are implemented or measured; no clinical performance is claimed.
+- Wrote ADR-001 task framing and ADR-005 baseline/runtime with status Accepted
+  (autopilot) — pending human review, and queued both plus engineering/field gaps.
+  ADR-002 remains synthetic-only. Every downstream artifact must say PLACEHOLDER.
+- Primary publisher card declares Apache-2.0 for timm MobileNetV3Small weights;
+  binary retrieval/pinning/checksum still await M3. Derm Foundation requires login
+  and HAI-DEF acceptance and is excluded. No weights/photos/patient rows acquired.
+- Rural Nepal FCHV device specifications remain UNVERIFIED after manufacturer/NTA
+  searches. Labelled research workaround: explicit test profiles plus a regional
+  Samsung hardware example, with no Nepal ownership claim. HMIS indexed government
+  text identifies DHIS2; direct open failed HTTP 502, so authenticated integration
+  schemas/permissions are UNVERIFIED. No account or integration attempt.
+- Firecrawl skill/status checked: zero credits persists. Continued the earlier
+  labelled web search/open workaround, with no billing/auth changes. Added access
+  dates/limits and all new cited URLs to research/sources.md. A guessed Keras API
+  subpage failed; followed the official index link and corrected the citation.
+- Added safetensors extension to .gitignore and the existing ignore-boundary test;
+  proposed pretrained cache is under ignored data/pretrained/. No toolchains installed.
+- Observed verification: python3 -m unittest discover -s tests -v passed all 4
+  repository tests; bash scripts/check.sh exit 0 / RESULT PASS with ML and Android
+  explicitly SKIPPED (no projects). Source-register coverage check passed for all
+  four new documents; git diff --check passed. These do not verify clinical truth,
+  model parity or an APK. No tests weakened; no protected files edited.
+- Metadata patches failed to parse (empty update hunk, then duplicate target
+  operations) and made no changes; wrote STATUS and appended JOURNAL separately.
+- Remaining M0: contribution governance, Nepal ethics/regulatory research, ADR-004,
+  synthesis, consistency pass and HANDOFF. NEXT_ACTION remains CONTINUE; no review,
+  gate writing, push, publishing or external messages performed.

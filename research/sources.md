@@ -57,13 +57,47 @@ Only publication/documentation text was inspected; no image links were followed.
 | DDI-STUDY | [Daneshjou et al., author manuscript arXiv:2203.08807](https://arxiv.org/abs/2203.08807) | External dermatology-model/tone performance findings; different clinical target from leprosy. |
 | CLINICAL-TERMS | [Benedetti, Description of Skin Lesions, MSD Manual Professional, August 2026](https://www.msdmanuals.com/professional/dermatologic-disorders/approach-to-the-dermatologic-patient/description-of-skin-lesions) | Authored clinical reference for glossary morphology definitions, not a diagnostic-performance primary study. Text inspected; images not fetched. |
 
+## Methods and deployment additions
+
+All accessed **2026-10-09** using the previously labelled web-tool workaround;
+Firecrawl status again showed zero credits. Documentation text only was inspected;
+no model binaries, patient photos, registrations or terms acceptances.
+
+| ID | Primary source | What was checked / access limits |
+| --- | --- | --- |
+| MOBILENET-V3 | [Howard et al., arXiv:1905.02244](https://arxiv.org/abs/1905.02244) | Mobile CPU architecture motivation and Small/Large variants; no Numbra performance inferred. |
+| EFFICIENTNET | [Tan and Le, arXiv:1905.11946](https://arxiv.org/abs/1905.11946) | Compound scaling alternative; no particular Lite checkpoint approved. |
+| TIMM-MNV3-CARD | [Publisher checkpoint README](https://huggingface.co/timm/mobilenetv3_small_100.lamb_in1k/raw/main/README.md) | Apache-2.0 declaration, ImageNet-1k provenance, small backbone and feature extraction. No binary retrieval. |
+| TIMM-MNV3-FILES | [Publisher file listing](https://huggingface.co/timm/mobilenetv3_small_100.lamb_in1k/tree/main) | Public listing and safetensors option; anonymous binary access untested. |
+| TIMM-MNV3-CONFIG | [Publisher preprocessing config](https://huggingface.co/timm/mobilenetv3_small_100.lamb_in1k/raw/main/config.json) | NCHW size, bicubic/centre crop, normalisation; Numbra's proposed letterbox differs explicitly. |
+| TIMM-CODE | [timm repository licence](https://github.com/huggingface/pytorch-image-models/blob/main/LICENSE) | Apache-2.0 code licence; separately checked checkpoint declaration. |
+| KERAS-MOBILE | [Keras MobileNet API](https://keras.io/api/applications/mobilenet/mobilenet_models/) | MobileNetV3Small initialisation options and model-specific preprocessing. Initial guessed subpage failed; followed official index link to this page. |
+| KERAS-CODE | [Keras repository licence](https://github.com/keras-team/keras/blob/master/LICENSE) | Apache-2.0 code text, not a separately established checkpoint licence. |
+| TORCHVISION-WEIGHTS | [Models and pretrained weights](https://docs.pytorch.org/vision/stable/models.html) | Explicit warning about dataset-derived weight terms and model-specific transforms. |
+| DERM-FOUNDATION | [Google publisher model card](https://huggingface.co/google/derm-foundation) | Architecture/embedding details and login/HAI-DEF acceptance gating; no request for access made. |
+| TEMPERATURE | [Guo et al., arXiv:1706.04599](https://arxiv.org/abs/1706.04599) | Calibration and temperature scaling research; not a Nepal validation source. |
+| ORT-MOBILE | [ONNX Runtime mobile guide](https://onnxruntime.ai/docs/tutorials/mobile/) | Android bindings, CPU-first quantised inference, profiling dimensions and native-runtime footprint caveat. |
+| ORT-QUANT | [ONNX Runtime quantisation guide](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html) | Static CNN quantisation, QDQ/default recommendations; actual Numbra graph not tested. |
+| ORT-LICENCE | [ONNX Runtime licence](https://raw.githubusercontent.com/microsoft/onnxruntime/main/LICENSE) | MIT code licence; transitive notices still require audit. |
+| LITERT-ANDROID | [LiteRT Android guide](https://developers.google.com/edge/litert/android) | API/version/minSdk matrix, last updated September 2026; version matrix and sample dependency differ. |
+| LITERT-QUANT | [TensorFlow conversion/PTQ](https://developers.google.com/edge/litert/conversion/tensorflow/quantization/post_training_quantization) | Representative-data requirements and quantisation modes; original ai.google.dev link redirects here. |
+| SAMSUNG-EXAMPLE | [Galaxy A04e Philippines 3/32 GB specification](https://www.samsung.com/ph/smartphones/galaxy-a/galaxy-a04e-black-32gb-sm-a042fzkdphl/) | Entry-level regional hardware example only; rural Nepal device distribution remains UNVERIFIED after Nepal manufacturer/NTA searches. |
+| NTA-MIS | [Nepal telecom regulator MIS page](https://www.nta.gov.np/misreport) | Subscription categories; current values and field-visit connectivity not established from accessed text. |
+| ODK-COLLECT | [ODK Collect introduction](https://docs.getodk.org/collect-intro/) | Android offline forms/media support; no project/account created. |
+| ODK-ENCRYPTION | [ODK encrypted forms](https://docs.getodk.org/encrypted-forms/) | Finalisation encryption plus plaintext-draft/capture-copy limitations. |
+| KOBO-COLLECT | [KoboCollect collection guide](https://support.kobotoolbox.org/data_collection_kobocollect.html) | Offline forms after setup and later submission; no account or upload. |
+| DHIS2-ANDROID | [DHIS2 Android overview](https://dhis2.org/android/) | Offline aggregate/individual capture and synchronisation; no claim about Nepal programme configuration. |
+| HMIS-LOGIN | [Nepal HMIS government login page](https://hmis.gov.np/dataportal/dhis-web-commons/security/login.action) | Indexed primary-page text identifies DHIS2/DoHS; direct open failed HTTP 502. Authenticated schemas/APIs/permissions UNVERIFIED and not accessed. |
+
 ## Open questions
 
 - Can the AI4 repository's licence and stable anonymous access be verified later?
 - Can full Nepal burden tables, current district pathways and local sensory-test protocols be verified?
-- Which primary methods, deployment, contribution-governance and regulatory sources will the remaining M0 documents require?
+- Can anonymous checkpoint access and measured export/device budgets be verified during the implementation milestones?
+- Which primary contribution-governance and regulatory sources will the remaining M0 documents require?
 
 ## Confidence
 
-Medium: linked primary documentation supports the current survey, but the central
-AI4 repository could not be inspected and several label details remain unverified.
+Medium: linked primary documentation supports the research, but the central AI4
+repository, real-data label details and Nepal field/device configuration remain
+unverified; proposed methods and budgets are not measured performance.
