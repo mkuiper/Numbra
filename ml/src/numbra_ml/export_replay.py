@@ -192,12 +192,28 @@ def verified_preserved(source, model, saved, index, prepared, run):
     return path, report_path, report
 
 
-def replay_diagnostics(model, source, output, inputs, *, promoted=False):
+def aggregate_values(values, *, complete=False):
+    """Rebuild complete nested aggregates from private per-component rows."""
+    first = values[0]
+    if isinstance(first, dict):
+        if any(set(value) != set(first) for value in values):
+            raise ValueError('inconsistent replay row scope')
+        return {key: aggregate_values([value[key] for value in values], complete=complete) for key in first}
+    return {**({'min': min(values)} if complete else {}),
+            'max': max(values), 'mean': float(np.mean(values))}
+
+
+def replay_diagnostics(model, source, output, inputs, *, promoted=False, complete=False):
+    if complete:
+        from .export_complete_replay import (audit_affine_graph, audit_native_graph,
+            complete_operators, operator_counts, signed_accounting)
+        if not promoted:
+            raise ValueError('complete replay requires both promoted BN recipes')
     if promoted:
         from .export_precision import (AFFINE_FORMULAS, promoted_affine_graph,
             promoted_conv_graph, python_promoted_affine, python_promoted_conv)
     graph = onnx.shape_inference.infer_shapes(onnx.load(source, load_external_data=False), strict_mode=True)
-    selected = selected_operators(model, graph)
+    selected = complete_operators(model, graph) if complete else selected_operators(model, graph)
     observed, handles = {}, []
     def input_hook(name):
         def capture(module, args):
@@ -251,6 +267,9 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False):
             sessions[name] = operator_session(path, optimized)
             graphs[name] = {'original_operator': node.op_type, 'input_shape': shapes[node.input[0]],
                 'output_shape': shapes[node.output[0]], 'graph': graph_report(path), 'runtime_graph': graph_report(optimized)}
+            if complete:
+                graphs[name]['native_audits'] = {'serialized': audit_native_graph(module, path),
+                                                'runtime': audit_native_graph(module, optimized)}
             if isinstance(module, nn.BatchNorm2d):
                 graphs[name]['formula_graphs'] = {}
                 for formula in FORMULAS:
@@ -259,7 +278,7 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False):
                     formula_graph(module, shapes[node.input[0]], formula, graph, path)
                     formula_sessions[name, formula] = operator_session(path, optimized)
                     graphs[name]['formula_graphs'][formula] = {'graph': graph_report(path), 'runtime_graph': graph_report(optimized)}
-            if promoted and (position == 0 or isinstance(module, nn.BatchNorm2d)):
+            if promoted and ((position == 0 and not complete) or isinstance(module, nn.BatchNorm2d)):
                 strategies = AFFINE_FORMULAS if isinstance(module, nn.BatchNorm2d) else ('stem_matmul',)
                 graphs[name]['promoted_graphs'] = {}
                 for strategy in strategies:
@@ -272,6 +291,10 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False):
                     promoted_sessions[name, strategy] = operator_session(path, optimized)
                     graphs[name]['promoted_graphs'][strategy] = {'graph': graph_report(path),
                         'runtime_graph': graph_report(optimized)}
+                    if complete:
+                        graphs[name]['promoted_graphs'][strategy]['audits'] = {
+                            'serialized': audit_affine_graph(module, strategy, path),
+                            'runtime': audit_affine_graph(module, strategy, optimized)}
         rows, ids = [], []
         with torch.inference_mode():
             for identifier, value in inputs:
@@ -298,6 +321,9 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False):
                         'propagated_input_effect': difference(py_output, py_on_ort),
                         'onnx_replay_fidelity': difference(ort_output, ort_on_ort),
                         'telescoping_max_residual': float(np.abs(total - (propagation + kernel + extraction)).max())}
+                    if complete:
+                        stats['signed_accounting'] = signed_accounting(
+                            py_output, py_on_py, py_on_ort, ort_on_ort, ort_output)
                     if isinstance(module, nn.BatchNorm2d):
                         stats['formulas'] = {}
                         for origin, x, native in (('python_input', py_input, py_on_py), ('onnx_input', ort_input, py_on_ort)):
@@ -331,23 +357,21 @@ def replay_diagnostics(model, source, output, inputs, *, promoted=False):
             handle.remove()
     if not rows:
         raise ValueError('replay diagnostics require training inputs')
-    def aggregate(values):
-        first = values[0]
-        if isinstance(first, dict):
-            return {key: aggregate([value[key] for value in values]) for key in first}
-        return {'max': max(values), 'mean': float(np.mean(values))}
     summary = {'notice': DIAGNOSTIC_NOTICE, 'components': len(rows), 'selection': [name for name, _, _ in selected],
         'original_runtime_graph': graph_report(original_audit), 'instrumented_graph': graph_report(tapped_path),
         'instrumented_runtime_graph': graph_report(tapped_audit), 'operator_graphs': graphs,
-        'operators': aggregate([row['operators'] for row in rows]),
-        'instrumentation_absolute_logit_change': aggregate([row['instrumentation_absolute_logit_change'] for row in rows]),
+        'operators': aggregate_values([row['operators'] for row in rows], complete=complete),
+        'instrumentation_absolute_logit_change': aggregate_values([row['instrumentation_absolute_logit_change'] for row in rows], complete=complete),
         'status': 'VALID DIAGNOSTIC ONLY',
         'warning': 'signed elementwise telescoping; separate maxima cannot be added; extraction/taps may change execution'}
+    if complete:
+        summary['operator_counts'] = operator_counts(selected)
+        summary['selection_scope'] = 'every saved Conv2d/BatchNorm2d; no promoted Conv'
     return summary, {'notice': PLACEHOLDER_NOTICE, 'component_ids': ids, 'rows': rows}
 
 
 def replay_run(repo, prepared, run, experiments, source, output, *, backbone_factory=backbone_architecture,
-               promoted=False):
+               promoted=False, complete=False):
     prepared, run, source, output = [ignored_path(repo, path) for path in (prepared, run, source, output)]
     experiments = tuple(ignored_path(repo, path) for path in experiments)
     if not experiments:
@@ -363,14 +387,20 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
     training = tuple(item for item in index.components if item.split == 'train')
     if not training:
         raise ValueError('replay requires training components')
-    selected_operators(model, onnx.load(path, load_external_data=False))
+    if complete:
+        from .export_complete_replay import complete_operators
+        if not promoted:
+            raise ValueError('complete replay requires both promoted BN recipes')
+        complete_operators(model, onnx.load(path, load_external_data=False))
+    else:
+        selected_operators(model, onnx.load(path, load_external_data=False))
     output.mkdir(parents=True, exist_ok=False)
     summary, details = replay_diagnostics(model, path, output,
-        ((item.id, component_input(prepared, item)) for item in training), promoted=promoted)
+        ((item.id, component_input(prepared, item)) for item in training), promoted=promoted, complete=complete)
     after = tensor_hash(model.state_dict())
     if after != before or any(module.training for module in model.modules()):
         raise ValueError('replay changed saved model state or eval mode')
-    kind = 'precision' if promoted else 'replay'
+    kind = 'complete-replay' if complete else 'precision' if promoted else 'replay'
     details_path = output / f'PLACEHOLDER-{kind}-details.json'
     details_path.write_text(json_text(details))
     report = {'notice': PLACEHOLDER_NOTICE, 'status': 'DIAGNOSTIC ONLY', 'version': '1.0.0',
@@ -381,7 +411,7 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
         'source_graph': graph_report(path), 'source_report_sha256': sha256(report_path),
         'retained_artifacts': {digest: {'kind': artifact['kind'], 'graph': artifact['graph'],
             'source_experiments': artifact['sources']} for digest, artifact in artifacts.items()},
-        'protocol': {'decision': 'ADR-016' if promoted else 'ADR-015', 'split': 'train', 'components': len(training),
+        'protocol': {'decision': 'ADR-019' if complete else 'ADR-016' if promoted else 'ADR-015', 'split': 'train', 'components': len(training),
             'component_ids_sha256': hashlib.sha256(json_text([item.id for item in training]).encode()).hexdigest(),
             'frozen_evaluation_inputs_used': False, 'quantisation_fit': False, 'optimisation': 'disabled',
             'intra_op_threads': 2, 'inter_op_threads': 1, 'execution': 'sequential', 'formulas': list(FORMULAS),
@@ -393,11 +423,17 @@ def replay_run(repo, prepared, run, experiments, source, output, *, backbone_fac
         report['protocol']['promoted_strategies'] = {'stem': 'float64 patch MatMul, bias, float32 boundary',
             'batchnorm': ['float32 coefficients, float64 multiply/add, float32 boundary: ' + formula
                           for formula in AFFINE_FORMULAS]}
+    if complete:
+        report['protocol']['promoted_strategies']['stem'] = 'none; native Conv replay only'
+        report['protocol']['selection_scope'] = 'every saved Conv2d/BatchNorm2d in module order'
+        report['protocol']['signed_accounting'] = 'float64 elementwise python_replay + propagation + kernel + extraction = total'
+        from .export_complete_replay import audit_complete_report
+        report['evidence_audit'] = audit_complete_report(repo, output, report)
     (output / f'PLACEHOLDER-{kind}-report.json').write_text(json_text(report))
     return report
 
 
-def main(argv=None, *, promoted=False):
+def main(argv=None, *, promoted=False, complete=False):
     parser = argparse.ArgumentParser(description=f'{PLACEHOLDER_NOTICE}; training-only operator replay')
     parser.add_argument('--prepared', type=Path, default=Path('data/prepared/synthetic-v2-selection'))
     parser.add_argument('--run', type=Path, default=Path('data/models/PLACEHOLDER-m3-baseline'))
@@ -414,7 +450,8 @@ def main(argv=None, *, promoted=False):
         if (target.exists() or target.is_symlink() or reports.resolve() != reports
                 or not output.name.startswith('PLACEHOLDER-')):
             raise ValueError('aggregate target must be new, local and PLACEHOLDER-*')
-        report = replay_run(repo, args.prepared, args.run, args.experiments, args.source, output, promoted=promoted)
+        report = replay_run(repo, args.prepared, args.run, args.experiments, args.source, output,
+                            promoted=promoted, complete=complete)
         with target.open('x') as stream:
             stream.write(json_text(report))
     except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:
