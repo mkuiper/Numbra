@@ -134,6 +134,8 @@ def test_prior_control_checks_exact_logits_order_provenance_and_detail_hash(tmp_
     report['protocol'] = {'components': 2, 'component_ids_sha256': 'identical', 'temperature': 1., 'threshold': 0.5, 'split': 'train'}
     old = deepcopy(report)
     old['protocol']['decision'] = 'ADR-020'
+    # Match the real ADR-020 replay schema: fits are bound by saved-run hash.
+    del old['protocol']['temperature'], old['protocol']['threshold']
     old['diagnostic_details_sha256'] = sha256(previous_details)
     if bad == 'provenance':
         old['saved_model_sha256'] = 'different'

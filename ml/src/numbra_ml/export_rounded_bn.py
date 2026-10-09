@@ -135,8 +135,11 @@ def audit_prior_control(output, report, prior):
             or old['protocol']['decision'] != 'ADR-020'
             or any(old[key] != report[key] for key in ('saved_model_sha256', 'saved_run_sha256',
                 'manifest_sha256', 'preparation_report_sha256', 'source_graph', 'source_report_sha256'))
+            # ADR-020 stores no temperature/threshold in its replay protocol.
+            # Exact saved-run hashes above bind both reports to the same fits;
+            # audit_rounded_report independently checks the current fits.
             or any(old['protocol'][key] != report['protocol'][key] for key in (
-                'components', 'component_ids_sha256', 'temperature', 'threshold', 'split'))
+                'components', 'component_ids_sha256', 'split'))
             or current['component_ids'] != previous['component_ids']
             or current['python_logits'] != [row['python_logit'] for row in previous['rows']]
             or current['original_onnx_logits'] != [row['original_logit'] for row in previous['rows']]):
