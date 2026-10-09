@@ -257,6 +257,25 @@ measured. Full selected training replay remains the next step. M4 is incomplete;
 all failed exports remain rejected, selective QDQ/mobile compatibility unresolved.
 Full check outcomes are recorded in JOURNAL.
 
+## Unused-initializer audit correction — 2026-10-09 UTC
+
+The first selected runner attempt stops during rounded original-runtime setup,
+before any training image decode or forward. Disabled ORT removes 136 saved BN
+initializers that have no consumers after replacement by rounded coefficients.
+Default generated BN parameters share Identity aliases, masking this path in
+the original fixtures. The interrupted output remains retained and incomplete.
+
+Before retrying, allow removal only of an original initializer with **no direct
+node input consumer and no graph input/output role**. Constant-node lowering
+is still mandatory; Identity alias consumers and tapped parameter outputs
+prevent removal. Record every removed name, require exact bits/type/shape for
+every retained initializer, reject extra constants, and remove only those
+recorded initializer boundaries from the expected runtime specification. Every
+computation, connection, coefficient and original model file remains unchanged.
+This is a bounded serialization audit correction, never arithmetic suppression
+or approval of changed live parameters. Generated nondefault BN fixtures and
+corruption cases must pass before a fresh complete training retry.
+
 ## Open questions
 
 - Can complete remaining arithmetic replay isolate an actionable parity strategy?

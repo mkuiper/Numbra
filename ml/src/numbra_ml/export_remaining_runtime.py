@@ -62,8 +62,9 @@ def tensor(item):
 def audit_complete_runtime(original, runtime):
     """Audit *every* expression/constant/boundary of a disabled runtime graph.
 
-    Allow exact tensor Constant lowering, attribute order/default materialisation
-    and the fixed HardSwish function expansion. Everything else, including every
+    Allow removal of directly unused initializers, exact tensor Constant lowering,
+    attribute order/default materialisation and the fixed HardSwish function
+    expansion. Everything else, including every
     rounded-BN Cast/Mul/Add and coefficient bit, must remain unchanged. Runtime
     topological scheduling may reorder independent nodes; operand order and
     connectivity must stay exact. Generated HardSwish names carry no authority.
@@ -93,8 +94,16 @@ def audit_complete_runtime(original, runtime):
         expected[node.output[0]] = tensor(a['value'])
         lowered.append(node.output[0])
     actual = {item.name: tensor(item) for item in runtime.graph.initializer}
-    if (len(actual) != len(runtime.graph.initializer) or actual.keys() != expected.keys()
-            or any(not same_bits(expected[key], actual[key]) for key in expected)):
+    # Disabled ORT still removes unused initializers. Only an original initializer
+    # with no node consumer and no input/output role may disappear. Constant
+    # lowering, Identity aliases and every tapped parameter remain mandatory.
+    used = {name for node in original.graph.node for name in node.input}
+    used.update(value.name for value in (*original.graph.input, *original.graph.output))
+    removable = {item.name for item in original.graph.initializer if item.name not in used}
+    removed = expected.keys() - actual.keys()
+    if (len(actual) != len(runtime.graph.initializer) or actual.keys() - expected.keys()
+            or removed - removable
+            or any(not same_bits(expected[key], value) for key, value in actual.items())):
         raise ValueError('complete runtime constant scope/bits mismatch')
 
     nodes, checked, expanded, gates = list(runtime.graph.node), set(), [], {}
@@ -134,13 +143,15 @@ def audit_complete_runtime(original, runtime):
         checked.add(index)
     if len(checked) != len(nodes):
         raise ValueError('complete runtime extra expression')
-    if specs(runtime) != {**original_specs, **gates}:
+    expected_specs = {key: value for key, value in original_specs.items() if key not in removed}
+    if specs(runtime) != {**expected_specs, **gates}:
         raise ValueError('complete runtime boundary scope/type/shape mismatch')
     return {'notice': NOTICE, 'status': 'PASS', 'all_expressions_constants_boundaries': True,
             'original_nodes': len(original.graph.node), 'runtime_nodes': len(nodes),
             'operator_counts': dict(Counter(n.op_type for n in nodes)),
             'runtime_node_order': [n.name for n in nodes],
             'lowered_constant_outputs': lowered, 'expanded_hardswish_nodes': expanded,
+            'removed_unused_initializers': sorted(removed),
             'unused_domain_imports': {o.domain: o.version for o in runtime.opset_import if o.domain},
             'serialized_sha256': hashlib.sha256(original.SerializeToString()).hexdigest(),
             'runtime_sha256': hashlib.sha256(runtime.SerializeToString()).hexdigest(),

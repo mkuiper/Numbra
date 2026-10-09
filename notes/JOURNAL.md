@@ -1436,3 +1436,32 @@ publication or push.
   quantisation fitting, frozen evaluation, accepted export or clinical claims.
 - Final records verified: six root contract tests PASS (0.064s),
   git diff --check clean; only allowed code/documentation/aggregate files changed.
+
+## 2026-10-09T18:26:49Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent M4 review folder,
+  AGENTS and relevant ADRs. No new harness action or M4 gate. Executed the
+  previously declared ADR-023 selected training runner.
+- Attempt PLACEHOLDER-m4-remaining-training1 exited 1 before any training decode
+  or forward: disabled ORT removed 136 directly unused original BN initializers
+  from the rounded graph and the exact-scope auditor rejected their removal.
+  Partial graphs/log remain ignored; no observations/completed report published.
+- Corrected audit to permit only original initializer removal with no direct node
+  consumer or graph input/output role. Record every removed name; retain exact
+  bit/type/shape checks for all retained constants. Identity/graph output taps
+  and Constant lowering remain mandatory; every computation/connection unchanged.
+  Added generated nondefault BN and eight corruption cases; no existing tests
+  deleted/weakened/skipped and no numerical tolerance, model or fit change.
+- Focused runtime/runner suite: 112 PASS, 164 warnings, 35.45s. Static audit of
+  the failed selected rounded runtime PASS with exactly 136 removals, no inference.
+  Updated ADR-023 with this bounded rule before retrying; queued human review.
+- Fresh full training retry PLACEHOLDER-m4-remaining-training2 is running with
+  all 152 ordered training inputs, both original/tapped graphs and every control.
+  First seven rows retained; exact original prior-logit bits checked per row.
+  No completed report/parity or final-audit claim at this checkpoint.
+- bash scripts/check.sh observed exit 0: 764 ML tests PASS, 564 warnings, 176.43s;
+  Android SKIPPED, RESULT PASS. Six root contracts PASS (0.075s). Test/run logs
+  remain ignored in data/exports/PLACEHOLDER-m4-remaining-*.log and
+  PLACEHOLDER-m4-unused-constants-tests1.log. No APK or accepted export.
+- Committing the tested serialization-audit correction as a logical step; full
+  ordered replay and independent no-decode/no-inference audit continue below.

@@ -293,6 +293,78 @@ def test_runtime_audit_preserves_identity_bits_when_independent_schedule_changes
     assert audit['runtime_sha256'] != runtime.audit['original']['runtime_sha256']
 
 
+def test_generated_nondefault_bn_constants_are_pruned_only_without_consumers(generated_pair, tmp_path, monkeypatch):
+    model, _, _, value = generated_pair
+    # Distinct invented BN values expose the cleanup path hidden by default
+    # random-model parameters, which export as equal-valued Identity aliases.
+    with torch.no_grad():
+        for index, module in enumerate(model.modules()):
+            if isinstance(module, torch.nn.BatchNorm2d):
+                offsets = torch.arange(module.num_features, dtype=torch.float32) / 100
+                module.weight.copy_(1 + offsets + index / 100)
+                module.bias.copy_(offsets + index / 100)
+                module.running_mean.copy_(offsets - index / 100)
+                module.running_var.copy_(2 + offsets + index / 100)
+    source_path, rounded_path = tmp_path / 'PLACEHOLDER-distinct.onnx', tmp_path / 'PLACEHOLDER-distinct-rounded.onnx'
+    export_preserving_batchnorm(model, source_path)
+    substitute_batchnorm(model, source_path, rounded_path, rounding_recipe=RECIPE)
+    source, rounded = onnx.load(source_path), onnx.load(rounded_path)
+    plan = native_plan(model, source, rounded)
+    output = tmp_path / 'PLACEHOLDER-distinct-runtime'
+    output.mkdir()
+    runtime = CompleteRuntime(rounded, plan, output)
+    missing = set(runtime.audit['original']['removed_unused_initializers'])
+    assert missing
+    assert not runtime.audit['tapped']['removed_unused_initializers']
+    assert missing <= {i.name for i in rounded.graph.initializer}
+    assert not missing & {name for node in rounded.graph.node for name in node.input}
+    assert not missing & {v.name for v in (*rounded.graph.input, *rounded.graph.output)}
+    result = runtime.run(value)
+    assert missing <= result['values'].keys()
+    assert all(same_bits(result['values'][key], runtime.constants[key]) for key in missing)
+    monkeypatch.setattr(ort, 'InferenceSession', lambda *a, **kw: pytest.fail('audit cannot create sessions'))
+    monkeypatch.setattr(torch.nn.Module, '_call_impl', lambda *a, **kw: pytest.fail('audit cannot run native inference'))
+    for kind, graph in (('original', runtime.source), ('tapped', runtime.tapped)):
+        actual = onnx.load(output / f'PLACEHOLDER-{kind}-runtime.onnx')
+        assert audit_complete_runtime(graph, actual) == runtime.audit[kind]
+
+
+@pytest.mark.parametrize('change', ['retained_bits', 'retained_type', 'extra', 'live', 'alias', 'input', 'output', 'constant'])
+def test_unused_initializer_rule_preserves_all_other_constant_checks(runtime_pair, change):
+    runtimes, _ = runtime_pair
+    runtime = runtimes['preserved']
+    original = onnx.ModelProto()
+    original.CopyFrom(runtime.source)
+    actual = onnx.load(runtime.sessions['original'].get_session_options().optimized_model_filepath)
+    orphan = numpy_helper.from_array(np.array([-0., 1.], np.float32), 'PLACEHOLDER-unused')
+    original.graph.initializer.append(orphan)
+    audit = audit_complete_runtime(original, actual)
+    assert audit['removed_unused_initializers'] == ['PLACEHOLDER-unused']
+    if change in ('retained_bits', 'retained_type'):
+        array = np.array([0., 1.], np.float32) if change == 'retained_bits' else np.array([-0., 1.], np.float64)
+        actual.graph.initializer.append(numpy_helper.from_array(array, orphan.name))
+    elif change == 'extra':
+        actual.graph.initializer.append(numpy_helper.from_array(np.array([1.], np.float32), 'PLACEHOLDER-extra'))
+    elif change == 'live':
+        actual.graph.initializer.remove(next(i for i in actual.graph.initializer if i.name == 'head.linear.weight'))
+    elif change == 'alias':
+        original.graph.node.insert(0, helper.make_node('Identity', [orphan.name], ['PLACEHOLDER-alias'], name='PLACEHOLDER-alias'))
+        actual.graph.node.insert(0, original.graph.node[0])
+    elif change == 'input':
+        boundary = helper.make_tensor_value_info(orphan.name, onnx.TensorProto.FLOAT, [2])
+        original.graph.input.append(boundary)
+        actual.graph.input.append(boundary)
+    elif change == 'output':
+        boundary = helper.make_tensor_value_info(orphan.name, onnx.TensorProto.FLOAT, [2])
+        original.graph.output.append(boundary)
+        actual.graph.output.append(boundary)
+    else:
+        original.graph.node.append(helper.make_node('Constant', [], ['PLACEHOLDER-lowered'],
+            name='PLACEHOLDER-constant', value=numpy_helper.from_array(np.array([1.], np.float32))))
+    with pytest.raises((ValueError, onnx.checker.ValidationError, onnx.shape_inference.InferenceError)):
+        audit_complete_runtime(original, actual)
+
+
 @pytest.mark.parametrize('kind', ['missing_directory', 'occupied_directory'])
 def test_runtime_refuses_overwrite_before_sessions(generated_pair, tmp_path, monkeypatch, kind):
     model, source, rounded, _ = generated_pair

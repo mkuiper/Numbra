@@ -940,6 +940,17 @@ M3 forward was opened. Observed test results are in JOURNAL.
 
 ## Remaining M4 work
 
+The first complete selected runner attempt stopped before image decoding when
+disabled ORT removed 136 directly unused original BN initializers from the
+rounded graph. The runtime audit now records and permits only original
+initializers without any node consumer or graph input/output role to disappear.
+Identity aliases, tapped parameters and lowered Constant outputs remain
+mandatory. Every retained constant keeps its exact bits/type/shape; extra
+constants and unexplained missing boundaries still fail. Generated nondefault
+BN fixtures exercise both the removal and the tapped retention paths; corruption
+regressions preserve live/alias/input/output/Constant and signed-zero checks.
+The failed directory remains incomplete and cannot produce accepted evidence.
+
 Optimisation profiles do not fix selected-baseline parity. ADR-023's complete
 training runner now connects native mapping, pre-mutation capture, complete
 runtime expression audits, validated taps and ordered persistence.
