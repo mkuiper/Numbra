@@ -1,0 +1,248 @@
+# Dataset survey and combination plan
+
+Evidence checked 2026-10-09. **This is a documentation survey, not acquisition.**
+No clinical photos, archives, per-image URLs or patient metadata were downloaded.
+“Public” and a paper's “open-source” description do not establish a usable licence.
+The [source register](sources.md) records which pages were accessible.
+
+The selected unattended baseline is **synthetic only**, under
+[ADR-002](../decisions/ADR-002-dataset-selection.md). No suitable openly licensed
+leprosy-positive training set has been verified in this survey. This is a limit of
+the evidence collected, not a claim that no such set exists. A real-data classifier
+needs positives, clinically relevant differentials, usable provenance/group IDs,
+and an independent validation source; negative-only public data do not suffice.
+
+## Candidate records
+
+### AI4Leprosy — hold, licence and access UNVERIFIED
+
+- **Owner/link:** Fiocruz investigators with Microsoft and Novartis Foundation;
+  [authors' paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9903738/).
+- **Size:** paper reports 222 participants, 1,229 skin images and 585 metadata sets.
+- **Modality/geography:** high-resolution clinical images from a Brazilian leprosy
+  referral centre. Exact camera mix and public-file mapping: **UNVERIFIED**.
+- **Taxonomy/confirmation:** study compares leprosy and other dermatological
+  conditions. Row-level confirmation methods and PB/MB/reaction availability in
+  released files: **UNVERIFIED**.
+- **Skin tone:** paper describes diverse skin types; public distribution and
+  annotation method: **UNVERIFIED**.
+- **Licence/access:** paper points to [repository DOI](https://doi.org/10.35078/1PSIEL).
+  Opening it failed, as did a candidate Fiocruz landing URL. No licence, anonymous
+  archive endpoint, group identifiers or current availability verified. The
+  paper's licence is not automatically the data licence.
+- **Relevance:** contains the positive class needed by the proposed task. Do not
+  acquire or infer permissions from mirrors. Revisit only on verifiable primary
+  repository terms and provenance.
+
+### Fitzpatrick17k — hold, atlas rights unresolved
+
+- **Owner/link:** Groh et al.; [paper](https://arxiv.org/abs/2104.09957) and
+  [authors' repository](https://github.com/mattgroh/fitzpatrick17k/blob/main/README.md).
+- **Size/modality:** 16,577 clinical images, 114 conditions, sourced from two
+  online atlases. This is not a prospective smartphone screening cohort.
+- **Taxonomy/confirmation:** atlas disease labels; independent confirmation and
+  exact leprosy/differential class counts: **UNVERIFIED** in this iteration.
+- **Skin tone/geography:** human Fitzpatrick annotations; authors report light
+  skin types overrepresented. Patient geography and per-patient IDs: **UNVERIFIED**.
+- **Licence/access:** README declares CC BY-NC-SA 3.0 and identifies Atlas
+  Dermatologico and DermaAmin as image sources. It reports broken original links
+  and offers an alternative access form/contact. Permission to use every original
+  atlas image under that licence is **UNVERIFIED**. Annotation licensing alone
+  must not be treated as settled image rights.
+- **Relevance:** broad clinical differentials may help after rights and labels are
+  audited; no automatic scraping or form completion in autopilot.
+
+### DDI — excluded by unattended access limits
+
+- **Owner/link:** Stanford School of Medicine;
+  [project and agreement](https://ddi-dataset.github.io/index.html).
+- **Size/modality/geography:** 656 clinical images, 570 patients; retrospective
+  Stanford clinic collection from 2010–2020.
+- **Taxonomy/confirmation:** pathology-based diagnoses curated by experts.
+  Exact leprosy and target differential coverage: **UNVERIFIED**; do not relabel
+  benign/malignant as leprosy/non-leprosy without original diagnosis evidence.
+- **Skin tone:** in-person assessment cross-referenced with clinical/demographic
+  photos and two dermatologists' review; diverse skin tones. Exact distribution
+  was not extracted in this iteration.
+- **Licence/access:** individual registration and Research Use Agreement;
+  personal, noncommercial research only, with redistribution and derivative-work
+  restrictions and a non-clinical-use limit. The agreement is not accepted.
+- **Relevance:** could inform later independent fairness research if humans obtain
+  permission; prohibited for this unattended acquisition irrespective of utility.
+
+### SCIN — hold, custom licence and label fitness
+
+- **Owner/link:** Google Research with dermatologist collaborators;
+  [official README](https://github.com/google-research-datasets/scin/blob/main/README.md).
+- **Size/modality/geography:** 5,000+ volunteer contributions, 10,000+ images,
+  volunteered by US Google Search users; consumer clinical photos with symptoms.
+- **Taxonomy/confirmation:** dermatologist condition assessments, rather than
+  uniform biopsy/smear confirmation. Exact leprosy/differential counts and
+  repeat-contributor identity availability: **UNVERIFIED**.
+- **Skin tone:** self-reported and estimated Fitzpatrick types, plus estimated
+  Monk tones; full distributions not extracted. README documents known duplicates.
+- **Licence/access:** public Cloud Storage bucket documented; a bespoke
+  [SCIN Data Use License](https://github.com/google-research-datasets/scin/blob/main/LICENSE),
+  not CC BY 4.0. It grants reuse/adaptation subject to attribution, prohibits
+  re-identification/re-linking, and contains acceptance language. No bucket
+  download or use of licensed data was performed.
+- **Relevance:** potential differential source, but unsuitable as confirmed
+  leprosy evidence. Conservatively hold custom-terms data for human review under
+  the no-accepting-terms-on-behalf constraint; this is an autopilot policy choice,
+  not a legal conclusion that the licence forbids all research.
+
+### PAD-UFES-20 — verified licence, excluded from selected baseline
+
+- **Owner/link:** UFES-Brazil PAD investigators;
+  [Mendeley v1 record](https://data.mendeley.com/datasets/zr7vgbcyr2/1).
+- **Size/modality/geography:** 2,298 smartphone images, 1,641 lesions, 1,373
+  patients, collected in Brazil; metadata references patients and lesions.
+- **Taxonomy/confirmation:** BCC, SCC (including Bowen's disease), melanoma,
+  actinic keratosis, seborrheic keratosis, nevus. Cancer labels biopsy-proven;
+  other labels can be dermatologist-consensus diagnoses; about 58% biopsy-proven
+  overall. No leprosy class among these six.
+- **Skin tone:** Fitzpatrick metadata exists; exact distribution not checked.
+- **Licence/access:** record lists CC BY 4.0 and a Download All control.
+  Anonymous binary retrieval was not attempted or verified; a visible Sign In
+  link does not establish that login is required to download.
+- **Relevance:** smartphone modality and IDs are useful, but it cannot supply the
+  leprosy positives or key inflammatory/infectious differentials needed here.
+  Mixing it only as negatives risks a source shortcut. Do not download under
+  the current synthetic-only decision. Future use needs a separately approved
+  scientific role, anonymous access check and retained attribution.
+
+### DermNet — excluded for AI use of free website images
+
+- **Owner/link:** DermNet New Zealand Trust;
+  [official image licence](https://dermnetnz.org/image-licence).
+- **Size/modality/taxonomy:** broad clinical-image reference website; dataset size,
+  target-class counts and camera distribution **UNVERIFIED** here.
+- **Confirmation/skin tone/geography:** per-image confirmation, skin-tone metadata,
+  patient group IDs and patient geography **UNVERIFIED**.
+- **Licence/access:** current licence explicitly prohibits AI training and testing
+  with freely available website images. Educational use of watermarked images
+  must not be interpreted as permission for ML. A paid licensable AI dataset is
+  a separate offering; buying/licensing it is outside this unattended task.
+- **Relevance:** references may inform clinical research, but no image acquisition,
+  scraping or third-party mirror is authorised.
+
+### ISIC — collection-specific, task mismatch
+
+- **Owner/link:** International Skin Imaging Collaboration;
+  [official challenge data](https://challenge.isic-archive.com/data/).
+- **Size/modality:** varies by release; older challenges include dermoscopy,
+  while SLICE-3D includes later clinical-photo data. It is inaccurate to call
+  the entire evolving archive dermoscopic only. No combined count asserted.
+- **Taxonomy/confirmation:** skin-cancer-oriented tasks; target leprosy and
+  infectious/inflammatory differential labels **UNVERIFIED** for any selected
+  collection. Confirmation methods must be checked per collection.
+- **Skin tone/geography:** multi-institution contributions; exact target-cohort
+  distribution and group fields **UNVERIFIED** here.
+- **Licence/access:** challenge licences vary (e.g. CC0, CC BY-NC, and a permissive
+  SLICE-3D CC BY subset). [Archive terms](https://gallery.isic-archive.com/) separate
+  contributor image licences from annotation/database/software rights. Never
+  infer a blanket licence for all images. Anonymous retrieval not tested.
+- **Relevance:** not selected; different modality/clinical task would create poor
+  leprosy controls even when a specific collection has suitable permissions.
+
+### WHO Skin NTDs photo library and study datasets — hold
+
+- **Owner/link:** WHO and collaborating institutions;
+  [official AI initiative](https://www.who.int/initiatives/who-initiative-on-artificial-intelligence-for-skin-conditions).
+- **Size/modality:** page reports 5,693 library photographs as of October 2024;
+  that is a dated library total, not an accessible training release or current
+  patient count. Exact cameras **UNVERIFIED**.
+- **Taxonomy/confirmation:** skin NTDs and common conditions; source-specific
+  diagnostic adjudication and leprosy class counts **UNVERIFIED**.
+- **Skin tone/geography:** source-level composition and group IDs **UNVERIFIED**.
+- **Licence/access:** no downloadable image-data licence verified on that page.
+  Free app access is not a licence to extract its library or weights. Do not
+  generalise WHO's statistical-dataset licences to clinical photographs.
+- **Relevance:** potential collaboration for relevant positives and differentials;
+  no extraction or contact is authorised. Survey individual published studies in
+  the pending prior-work document and update this record if release terms exist.
+
+## Proposed unified taxonomy and mappings
+
+This is a **project design**, pending clinical scrutiny in the remaining M0 work.
+Keep the original source label and confirmation provenance alongside the mapping:
+
+| Field | Proposed values and rules |
+| --- | --- |
+| `label_family` | `leprosy`, `leprosy_differential`, `other`, `unresolved` |
+| `diagnosis` | Named source diagnosis; proposed differential vocabulary includes tinea, pityriasis versicolor, vitiligo, eczema and psoriasis. This initial list comes from the brief and requires clinical-source verification, not an assertion of exhaustive differentials. |
+| `leprosy_classification` | `PB`, `MB`, `unknown`; only explicit clinical labels, never inferred from image count. |
+| `reaction_status` | `type_1`, `type_2`, `none`, `unknown`; orthogonal to PB/MB, retained only when explicitly provided. |
+| `label_status` / `confirmed_by` | Provisional or confirmed; named method/provenance, never fabricated. Missing confirmation remains missing. |
+| `refer_for_review` | A workflow flag for uncertainty or poor quality, not a disease class and not a confirmed negative. |
+
+| Source label | Proposed family mapping | Availability caveat |
+| --- | --- | --- |
+| AI4 study's leprosy label | `leprosy`; classification/reaction unknown unless explicit | Released label schema UNVERIFIED |
+| AI4 other condition | Named differential only if exact source diagnosis matches verified vocabulary; otherwise `other`/`unresolved` | Must not presume all controls are one disease |
+| Fitzpatrick17k / SCIN disease name | Exact, versioned name-to-diagnosis mapping after audit | Target label availability UNVERIFIED; data not approved |
+| DDI pathology diagnosis | Preserve name; usually outside current target vocabulary | Do not collapse benign into “safe”; acquisition prohibited |
+| PAD's six labels | `other`, with exact disease name retained | Verified record taxonomy; cancer may still require clinical referral |
+| ISIC cancer label | `other` or `unresolved` with original name | Collection must be verified; data not selected |
+| WHO disease name | No executable mapping until licensed release is inspected | Library label schema UNVERIFIED |
+| Synthetic fixtures | Explicit synthetic labels across all families and missingness cases | Invented fixture labels, never evidence of disease |
+
+A model may later estimate a confirmed leprosy-vs-labelled-control score. It must
+not learn “don't refer” from controls: skin cancers and other conditions can need
+referral too. The transparent symptom/quality rules determine the action. Final
+task framing and operating point belong in ADR-001 and the methods document.
+
+## Combination risks and required controls
+
+These are proposed checks, not measured findings on downloaded data:
+
+1. **Rights:** retain source version, licence identifier/link and attribution per
+   row. No pooled Apache-2.0 dataset; reject unknown permissions and mirrors.
+2. **Labels:** record method of confirmation and retain uncertain labels separately.
+   Dermatologist photo assessment is not equivalent to biopsy or smear. Missing
+   subtype/tone information remains unknown rather than inferred.
+3. **Duplicates:** exact content hashes and perceptual-hash review across sources;
+   merge duplicate-connected groups before splitting. Conflicting labels quarantine
+   the group rather than silently choosing a label.
+4. **Leakage:** namespace IDs by source; all patient images, encounters, lesions and
+   duplicate-linked records stay together. A lesion/case ID alone does not establish
+   patient independence. Without patient linkage, use conservative groups and
+   report that patient-level independence cannot be established.
+5. **Domain shift:** track camera/modality, acquisition site, rulers, watermarks and
+   backgrounds. A positive-only source versus negative-only source can let a model
+   identify the hospital instead of disease. Such pooling is not a sound baseline.
+6. **Evaluation:** validation selects thresholds; frozen test and leave-one-source-out
+   evaluation remain untouched. A held-out set with one class cannot estimate both
+   sensitivity and specificity or AUC. Mark unavailable metrics explicitly.
+7. **Representation:** per-tone/presentation reports need counts, missingness and
+   uncertainty intervals; tiny cells and absent labels cannot support fairness claims.
+   This survey has not verified a Nepal/South Asian smartphone cohort suitable for
+   the task. Do not infer patient geography from the name of an atlas.
+
+## Recommendation and next acquisition gate
+
+Generate multiple named **synthetic** sources and patient groups for pipeline,
+duplicate/split tests and a held-out synthetic source. Every model, metric report,
+model card and app result identifies **PLACEHOLDER — synthetic demonstration**.
+Synthetic leave-one-source-out exercises software only, with no external-validity
+claim. Grouping synthetic records can be known exactly because the generator
+assigns IDs, without representing an actual person.
+
+Revisit real data only when a primary licence allows unattended access, target
+positives and clinically relevant controls are documented, confirmation and
+patient grouping are auditable, and a second suitable validation source exists.
+Human-reviewed local collection/ethics is a later phase, not an overnight workaround.
+
+## Open questions
+
+- What licence and anonymous access does the AI4Leprosy repository currently expose?
+- Can any compatible second source support independent, patient-grouped evaluation?
+- What clinically reviewed differential vocabulary and reaction schema should be final?
+- What patient-linkage, tone and confirmation fields actually exist in candidate files?
+- How should future human-approved releases handle custom licence obligations?
+
+## Confidence
+
+Medium for the primary-documentation survey and conservative acquisition decision;
+low for real-data feasibility because no suitable positive archive and licence
+were verified, and no actual files or row-level schema were inspected.
