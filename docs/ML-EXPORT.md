@@ -653,15 +653,71 @@ with a regression matching the actual schema; regenerated the second run with
 current source hashes. Both runs' graphs, details and artifact aggregates match
 exactly. This fix changes no inference arithmetic or acceptance budget.
 
+## Fixed training-only runtime profiles (ADR-022)
+
+The new `numbra_ml.export_runtime_profiles` command reuses the unchanged ADR-021
+rounded-affine graph and preserved control. It verifies prior complete evidence
+before opening training images, runs every disabled/basic/extended/all profile,
+and retains original and separate feature-tapped runtime graphs. No quantisation
+fit or test/held-out/stress inference occurs. All results remain **PLACEHOLDER
+diagnostic only, never bundle**.
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_runtime_profiles --output data/exports/PLACEHOLDER-m4-runtime-profiles1
+```
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-runtime-profiles1.json) covers
+all eight artifact/profile comparisons on all 152 ordered training index images.
+Every comparison **FAILS** fixed raw/probability budgets 0.0001/0.000001;
+every comparison has zero frozen-threshold flips and zero feature-tap changes.
+
+| Graph | Profile | Max raw error | Max probability error | Raw / probability violations |
+| --- | --- | ---: | ---: | ---: |
+| Preserved control | disabled | 0.000240326 | 0.00000279320 | 26 / 29 |
+| Preserved control | basic | 0.000365257 | 0.00000465196 | 40 / 50 |
+| Preserved control | extended | 0.000365257 | 0.00000465196 | 40 / 50 |
+| Preserved control | all | 0.000323296 | 0.00000411753 | 36 / 44 |
+| Rounded BN | disabled | 0.000143051 | 0.00000183769 | 13 / 21 |
+| Rounded BN | basic | 0.000143051 | 0.00000183769 | 13 / 21 |
+| Rounded BN | extended | 0.000143051 | 0.00000183769 | 13 / 21 |
+| Rounded BN | all | 0.000310421 | 0.00000394886 | 11 / 15 |
+
+BN-expression semantic audits PASS for all original and tapped candidate runtime
+graphs. Disabled retains all 204 expression nodes and 68 coefficient Casts;
+basic/extended/all fold those 68 Casts into exact float32-to-double coefficient
+bits and retain 136 expression nodes. Every double input/Mul/Add/float32 output
+boundary remains audited. Extended changes 18 candidate Conv nodes to FusedConv;
+all retains 53 Conv and adds 43 ReorderInput / 44 ReorderOutput operators. Basic
+folds control BNs into Conv, extended has 23 FusedConv, and all adds layout reorder
+operators. These are observed graph inventories; arithmetic equivalence outside
+BN and Android support remain **UNVERIFIED**. No profile is selected for deployment.
+
+Independent no-inference audit PASS: 20 graph records (four serialized artifact/
+tap records and sixteen runtime records), all profile/input/reference scope,
+fixed-budget parity/failure reconstruction, feature aggregates/tap accounting,
+saved parameter/epsilon/coefficient bits, current code/dependency provenance and
+saved-model/preparation/retained/source/prior hashes. Disabled details reproduce
+ADR-021 exactly for both graphs. The private audit is
+`data/exports/PLACEHOLDER-m4-runtime-profiles1/PLACEHOLDER-independent-audit.json`,
+SHA-256 `ecde48f2f7b89dd3107b5b3908b2470102671983b6f45e634896b8b3bfbe351f`.
+
+Generated regression tests also compare every tapped runtime BN output exactly
+to an independent NumPy expression on its **actual runtime input** under every
+profile, including a cancellation fixture. An initial version incorrectly used
+native Python inputs across upstream hard-swish rounding differences and failed
+four assertions. Corrected input isolation retains exact output equality and
+unchanged production arithmetic/budgets. Corrupted constant bits/types, Casts,
+Mul order, alias cycles, omitted layers/profiles, stale prior evidence and
+rehashed ordered details must still fail. Original evidence remains unchanged.
+
 ## Remaining M4 work
 
-Local exact BN agreement improves whole-model errors but does not close parity.
-Next predeclare fixed ORT optimisation profiles on this rounded-affine graph and
-the preserved control, with complete training-only scope and semantic audits of
-any folded constants/operators. Profile every declared setting; keep every failed
-export, reference, fit, input and ADR-011 budget. No new candidate may be chosen
-against frozen evaluation or a favourable layer subset. Conv arithmetic and other
-remaining float operators may still require further work.
+Optimisation profiles do not fix selected-baseline parity. Next predeclare a
+bounded, complete training-only same-input replay of the remaining activations,
+pooling and head boundaries, using saved/tapped inputs and actual runtime graphs.
+This must distinguish local arithmetic from propagation and preserve all Conv/BN
+controls; no assumption that residual error belongs solely to Conv. Do not keep
+rerunning the failed profiles or choose a favourable subset.
 
 An explicit selective static QDQ scope must still be declared from training
 evidence before a new quantisation fit or frozen evaluation. Float64 mobile

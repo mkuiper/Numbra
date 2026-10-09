@@ -53,6 +53,39 @@ and mobile compatibility work. Hardware-specific optimisations and double
 operator support/performance remain unverified on Android. This experiment does
 not authorise bundling, change budgets or permit moving to M5 before M4 closes.
 
+## Observed follow-through — 2026-10-09 UTC
+
+[Complete aggregate evidence](../ml/reports/PLACEHOLDER-m4-runtime-profiles1.json)
+contains both unchanged graphs × every four declared profiles × all 152 ordered
+training inputs. All eight comparisons FAIL the fixed numerical budgets; all
+have zero flips and zero feature-tap changes. Rounded BN disabled/basic/extended
+max raw/probability errors remain 0.000143051/0.00000183769; all increases maxima
+to 0.000310421/0.00000394886. Control disabled/basic/extended/all maxima are
+0.000240326/0.00000279320, 0.000365257/0.00000465196,
+0.000365257/0.00000465196 and 0.000323296/0.00000411753 respectively.
+No profile selected; no failed export accepted.
+
+All eight candidate runtime BN-expression audits PASS. Disabled retains 204
+expression nodes with 68 coefficient Casts; other profiles fold 68 coefficients
+exactly into double constants and retain 136 nodes. Every double Mul/Add and
+float32 boundary remains intact. Extended introduces 18 candidate FusedConv;
+all introduces layout reorder nodes. Control optimisations fold BN into Conv.
+Arithmetic equivalence outside audited BN boundaries and mobile execution remain
+UNVERIFIED, despite complete operator inventories and measured original parity.
+
+Independent no-inference audit PASS for complete scope, 20 graph records,
+fixed-budget parity/failure/feature/tap reconstruction, saved coefficient bits,
+model/preparation/prior/retained/source/current-code/dependency provenance and
+exact ADR-021 disabled details for both graphs. A new direct-boundary test first
+failed because it assumed identical upstream native/ORT hard-swish inputs;
+corrected it to use each actual runtime BN input, retaining exact equality and
+production budgets. This changes no inference code or retained evidence.
+
+Next predeclare complete same-input activation/pooling/head replay rather than
+repeating failed profiles. Quantisation scope, float parity and mobile double
+compatibility remain blockers. ADR-012's toy workaround remains diagnostic only;
+M4 remains incomplete with no frozen inference, new fit or deployment selection.
+
 ## Open questions
 
 - Which profiles preserve the declared BN expression and meet training parity?

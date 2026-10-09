@@ -1054,3 +1054,53 @@ clinical data/validation, weight notices and mobile execution remain open.
   toy workaround remains diagnostic only; M4 cannot close on these failures.
 - Final documentation verification: root contract suite 6 PASS in 0.080s;
   git diff --check clean. All changes committed before returning to harness.
+
+## 2026-10-09T16:59:54Z — iteration
+
+Worked only on M4; read ROADMAP, STATUS, HARNESS, missing current M4 review folder,
+AGENTS and relevant ADRs. No new harness action or M4 review exists. Predeclared
+ADR-022 and queued humans, committed as 9a5ae22 before implementation/execution.
+Built `export_runtime_profiles.py`: two unchanged prior graphs, all four fixed
+profiles, complete training-only scope, actual original/tapped runtime graphs,
+exact coefficient-Cast folding and double Mul/Add/float32-boundary audits.
+Added independent no-inference scope/parity/features/taps/model/preparation/
+retained/source/prior/current-code/dependency reconstruction and regressions for
+corrupted arithmetic, bits/types, cycles, scope, fit, provenance and rehashed
+ordered details. Stale prior evidence must fail before any image is opened.
+
+Executed one full declared experiment: all eight comparisons × 152 ordered
+training index images. Aggregate `PLACEHOLDER-m4-runtime-profiles1.json` retains
+all failures. Rounded BN disabled/basic/extended max raw/probability errors
+0.000143051/0.00000183769 (13/21 violations); all
+0.000310421/0.00000394886 (11/15). Control maxima for
+ disabled/basic/extended/all are 0.000240326/0.00000279320,
+0.000365257/0.00000465196, 0.000365257/0.00000465196 and
+0.000323296/0.00000411753. Every comparison has zero flips/tap changes; all FAIL
+unchanged budgets. No profile selected and every failed export stays rejected.
+
+Eight candidate runtime semantics audits PASS: disabled retains 204 nodes,
+others fold 68 coefficient Casts with exact promoted bits and retain 136 nodes.
+Extended changes 18 candidate Conv to FusedConv; all adds layout reorders.
+Control profiles fold BNs into Conv. Inventories preserved; outside-BN arithmetic
+and Android compatibility UNVERIFIED. Independent audit PASS for 20 graph records,
+complete scope/parity/failures/features/taps/coefficients/provenance; disabled
+ordered details match prior ADR-021 exactly. Private audit SHA-256
+`ecde48f2f7b89dd3107b5b3908b2470102671983b6f45e634896b8b3bfbe351f`.
+
+Verification: initial new subset 25 PASS/28 warnings in 9.27s. Strengthening the
+boundary test introduced four exact-equality failures (2.15s): it incorrectly
+compared BN outputs on native Python inputs despite upstream hard-swish rounding
+differences. Corrected same-input isolation to use every actual runtime BN input;
+independent recipe output equality remains exact under all profiles. Production
+arithmetic and budgets unchanged; corrected subset 25 PASS in 9.55s. Added four
+prior-rejection tests. Full `bash scripts/check.sh` exit 0: 463 PASS in 77.49s,
+198 warnings, app SKIPPED, RESULT PASS. Six root contract tests PASS in 0.072s;
+`git diff --check` clean. No existing test skipped/deleted/weakened or tolerance
+widened. Diagnostic exit 0 denotes evidence only; M4 remains incomplete, no APK.
+
+Updated ML-EXPORT, ADR observed evidence and HUMAN-QUEUE; overwrite STATUS and
+NEXT_ACTION=CONTINUE. ADR-012 labelled toy workaround remains diagnostic only.
+Next predeclare complete bounded same-input activation/pooling/head replay;
+quantisation scope and mobile double support remain separate blockers. No frozen
+inputs, new fit, model/reference change, protected edit, review.sh, review/check/
+gate write, install, acquisition, external message, publication or push.
