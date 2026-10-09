@@ -28,7 +28,8 @@ text extracts are ignored evidence notes, not datasets.
 
 ## Open questions
 
-- What versioned manifest and deduplication metadata will M1/M2 require?
+- ADR-006 defines JSONL schema 1.1.0; M2 must document its duplicate audit and
+  component split metadata.
 - How should M4 regenerate and package its model reproducibly during Android builds?
 
 ## Confidence

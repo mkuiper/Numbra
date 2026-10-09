@@ -171,3 +171,84 @@ def test_reader_validates_entire_manifest_before_split_filtering(tmp_path, row_f
     path.write_text("\n".join(json.dumps(row.to_dict()) for row in [first, second]) + "\n")
     with pytest.raises(ManifestError, match="split leakage"):
         read_manifest(path)
+
+
+@pytest.mark.parametrize("field,value", [
+    ("record_id", "id\n"), ("group_id", "g1\n"), ("patient_id", "p1\n"),
+    ("sha256", "a" * 64 + "\n"),
+])
+def test_identifier_and_hash_control_characters_rejected(row_factory, field, value):
+    with pytest.raises(ManifestError):
+        ManifestRow.from_dict(row_factory().to_dict() | {field: value})
+
+
+def real_row_data(row_factory):
+    data = row_factory().to_dict()
+    data["synthetic"] = False
+    data["label"].update(status="confirmed", original_label="leprosy", diagnosis="leprosy")
+    data["confirmed_by"] = {"method": "clinical_examination", "reference": "opaque", "date": "2026-10-09"}
+    return data
+
+
+@pytest.mark.parametrize("method", ["ai", "classifier", "volunteer_impression", "self_report", "model"])
+def test_confirmation_allowlist_rejects_unapproved_methods(row_factory, method):
+    data = real_row_data(row_factory)
+    data["confirmed_by"]["method"] = method
+    with pytest.raises(ManifestError):
+        ManifestRow.from_dict(data)
+
+
+@pytest.mark.parametrize("value", ["20261009", "2026-W41-5", "9999-01-01", "2026-10-09\n"])
+def test_confirmation_dates_are_calendar_dates_and_not_future(row_factory, value):
+    data = real_row_data(row_factory)
+    data["confirmed_by"]["date"] = value
+    with pytest.raises(ManifestError):
+        ManifestRow.from_dict(data)
+
+
+def test_photo_and_source_confirmation_remain_explicitly_weaker():
+    assert Confirmation("dermatologist_photo_assessment", "opaque", "2026-10-09").evidence_category == "photo_only_weaker"
+    assert Confirmation("source_dataset_assertion", "opaque", "2026-10-09").evidence_category == "source_assertion_unverified"
+
+
+@pytest.mark.parametrize("diagnosis,family", [
+    ("vitiligo", "leprosy"), ("leprosy", "other"), ("typo", "leprosy_differential"),
+])
+def test_real_diagnosis_family_must_match_vocabulary(row_factory, diagnosis, family):
+    data = real_row_data(row_factory)
+    data["label"].update(diagnosis=diagnosis, family=family)
+    with pytest.raises(ManifestError):
+        ManifestRow.from_dict(data)
+
+
+def test_named_unknown_real_diagnosis_can_be_preserved_as_other(row_factory):
+    data = real_row_data(row_factory)
+    data["label"].update(diagnosis="unlisted_condition", family="other")
+    assert ManifestRow.from_dict(data).label.diagnosis == "unlisted_condition"
+
+
+@pytest.mark.parametrize("tone", [
+    {"scheme": "Fitzpatrick", "value": "VII", "assigned_by": "clinician"},
+    {"scheme": "Monk", "value": "11", "assigned_by": "self_report"},
+    {"scheme": "Monk", "value": "1", "assigned_by": "generator"},
+    {"scheme": "arbitrary", "value": "1", "assigned_by": "algorithm"},
+])
+def test_invalid_real_tone_annotation_rejected(row_factory, tone):
+    with pytest.raises(ManifestError):
+        ManifestRow.from_dict(real_row_data(row_factory) | {"skin_tone": tone})
+
+
+def test_capture_and_controlled_tone_provenance_roundtrip(row_factory):
+    data = real_row_data(row_factory) | {
+        "skin_tone": {"scheme": "Monk", "value": "10", "assigned_by": "photo_annotator"},
+        "capture": {"site_id": "opaque-site", "device_class": "phone", "body_site": "arm"},
+    }
+    assert ManifestRow.from_dict(ManifestRow.from_dict(data).to_dict()).to_dict() == data
+
+
+def test_quarantine_is_per_connected_group_not_per_row(row_factory):
+    first, second = row_factory(1, split="quarantine"), row_factory(2)
+    second = replace(second, patient_id=first.patient_id)
+    with pytest.raises(ManifestError, match="split leakage"):
+        validate_manifest([first, second])
+    assert len(validate_manifest([first, replace(second, split="quarantine")])) == 2

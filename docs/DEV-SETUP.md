@@ -1,7 +1,7 @@
 # Development setup
 
-Research stage, 2026-10-09: uses the existing system `python3`, git, bash, and web
-tools. No toolchains were installed in this iteration. Run repository checks with:
+Current setup: existing system Python 3.12.3, git and bash, plus the repository-local
+`ml/.venv` installed at M1. No JDK or Android SDK yet. Run checks with:
 
 ```
 python3 -m unittest discover -s tests -v
@@ -31,8 +31,8 @@ python3 -m unittest discover -s tests -v
 Initial install used pip's default cache; later installs disabled it. The exact
 direct/transitive pins in `ml/requirements-dev.txt` match the observed Python 3.12
 environment. `pyproject.toml` restricts support to Python 3.12 until other versions
-are tested. pytest's basetemp is `ml/tests/.tmp/`, which is ignored and regenerated
-per run. Editable installation succeeded with pinned setuptools/wheel, without
+are tested. pytest's basetemp is `tests/.tmp/` relative to the working directory; `.tmp/`
+is ignored at every depth and regenerated per run. Editable installation succeeded with pinned setuptools/wheel, without
 build isolation or dependency re-resolution. No task data or model weights fetched.
 
 Firecrawl CLI 1.14.8 is installed and authenticated, but status showed zero credits.

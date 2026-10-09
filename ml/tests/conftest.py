@@ -8,6 +8,7 @@ from PIL import Image
 import pytest
 
 from numbra_ml.manifest import ManifestRow
+from numbra_ml.schema import SCHEMA_VERSION
 
 
 def make_row(root: Path, index: int = 0, *, source: str = "synthetic-shapes",
@@ -19,7 +20,7 @@ def make_row(root: Path, index: int = 0, *, source: str = "synthetic-shapes",
     pixels[3:9, 4:12] = (180, 100 + index % 50, 40)
     Image.fromarray(pixels).save(path)
     return ManifestRow.from_dict({
-        "schema_version": "1.0.0", "taxonomy_version": "1.0.0",
+        "schema_version": SCHEMA_VERSION, "taxonomy_version": "1.0.0",
         "record_id": f"synthetic-{index}", "image_path": path.name,
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         "source": {"id": source, "version": "fixture-v1", "url": "urn:numbra:synthetic"},

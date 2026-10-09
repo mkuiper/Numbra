@@ -7,7 +7,11 @@ from .taxonomy import (
 )
 
 
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
+CONFIRMATION_METHODS = (
+    "clinical_examination", "slit_skin_smear", "histopathology",
+    "dermatologist_photo_assessment", "source_dataset_assertion",
+)
 SPLITS = (
     "unassigned", "train", "calibration", "threshold_validation", "test",
     "held_out", "quarantine",
@@ -32,7 +36,7 @@ def manifest_schema() -> dict:
     """Structural schema; manifest.py adds provenance/group/path semantics."""
     text = {"type": "string", "minLength": 1, "pattern": r"\S"}
     nullable_text = {"anyOf": [text, {"type": "null"}]}
-    identifier = {"type": "string", "pattern": r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"}
+    identifier = {"type": "string", "pattern": r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}(?![\s\S])"}
     source = _object({"id": identifier, "version": text, "url": text})
     licence = _object({"id": text, "url": text, "attribution": text})
     label = _object({
@@ -42,7 +46,8 @@ def manifest_schema() -> dict:
         "reaction_status": {"enum": list(ReactionStatus)},
     })
     confirmation = _object({
-        "method": text, "reference": text, "date": {"type": "string", "format": "date"},
+        "method": {"enum": list(CONFIRMATION_METHODS)}, "reference": text,
+        "date": {"type": "string", "format": "date", "pattern": r"^[0-9]{4}-[0-9]{2}-[0-9]{2}(?![\s\S])"},
     })
     observations = {
         "sensation": {"enum": list(SENSATION)},
@@ -51,7 +56,12 @@ def manifest_schema() -> dict:
         "duration_days": {"type": ["integer", "null"], "minimum": 0},
         **{name: {"enum": list(ANSWERS)} for name in OBSERVATION_ANSWERS},
     }
-    tone = _object({"scheme": text, "value": text})
+    tone = _object({
+        "scheme": {"enum": ["synthetic_colour", "Fitzpatrick", "Monk"]}, "value": text,
+        "assigned_by": {"enum": ["generator", "self_report", "clinician", "photo_annotator", "algorithm"]},
+    })
+    capture = _object({"site_id": nullable_text, "device_class": nullable_text,
+                       "body_site": nullable_text})
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "title": "Numbra PLACEHOLDER manifest row v1 (M1–M4 synthetic-only policy)",
@@ -60,7 +70,7 @@ def manifest_schema() -> dict:
             "taxonomy_version": {"const": TAXONOMY_VERSION},
             "record_id": identifier,
             "image_path": text,
-            "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "sha256": {"type": "string", "pattern": r"^[a-f0-9]{64}(?![\s\S])"},
             "source": source, "licence": licence, "label": label,
             "confirmed_by": {"anyOf": [confirmation, {"type": "null"}]},
             "patient_id": {"anyOf": [identifier, {"type": "null"}]},
@@ -69,7 +79,10 @@ def manifest_schema() -> dict:
             "synthetic": {"type": "boolean"}, "placeholder": {"type": "boolean"},
             "skin_tone": {"anyOf": [tone, {"type": "null"}]},
             "observations": _object(observations, required=[]),
-        }),
+            "capture": capture,
+        }, required=["schema_version", "taxonomy_version", "record_id", "image_path", "sha256",
+                     "source", "licence", "label", "confirmed_by", "patient_id", "group_id",
+                     "split", "synthetic", "placeholder", "skin_tone", "observations"]),
     }
 
 

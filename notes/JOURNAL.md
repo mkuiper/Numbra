@@ -245,3 +245,16 @@ NEXT_ACTION is exactly REVIEW M1. Final link/contract rerun after HANDOFF: 5 PAS
 Staged whitespace check caught one trailing blank line in new pyproject.toml
 (earlier unstaged check did not include untracked files); removed it and reran
 the staged whitespace check before commit.
+
+## 2026-10-09T13:11:21Z — iteration
+
+Read roadmap, status, harness, M1 HANDOFF/REVIEW-1/CHECK-1/GATE, AGENTS and ADRs in
+order. M1 closed PASS WITH CHANGES. RESPONSE-1 answers all 14 numbered issues and
+missed work/human questions. Fixed validation, loader, temporary-path ignores and
+stale documentation; introduced explicit schema 1.1.0 (regenerate synthetic rows,
+no automatic real-row migration). Queued clinical vocabulary/confirmation and M3
+hash pins/pure-neural limitation. Added 27 behavioural cases: check.sh 110 ML PASS,
+Android SKIPPED, RESULT PASS. Initial run 1 failed/109 passed due to policy ordering;
+fixed code to reject unapproved source first, preserving the existing test. No
+reviewer files or protected files edited. Starting M2 synthetic-only as ADR-002
+requires; no acquisition attempts for held real datasets are authorised or needed.

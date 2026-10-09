@@ -5,7 +5,7 @@ data/
 .venv/
 __pycache__/
 .pytest_cache/
-ml/tests/.tmp/
+.tmp/
 *.py[cod]
 *.egg-info/
 .env

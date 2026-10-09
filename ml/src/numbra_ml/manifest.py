@@ -9,7 +9,7 @@ from typing import Iterable
 from jsonschema import Draft202012Validator, FormatChecker
 
 from .schema import SCHEMA_VERSION, manifest_schema
-from .taxonomy import Label, LabelFamily, LabelStatus, TAXONOMY_VERSION
+from .taxonomy import EXACT_DIAGNOSES, Label, LabelFamily, LabelStatus, TAXONOMY_VERSION
 
 
 class ManifestError(ValueError):
@@ -36,11 +36,29 @@ class Confirmation:
     reference: str
     date: str
 
+    @property
+    def evidence_category(self) -> str:
+        return {
+            "clinical_examination": "clinical_only",
+            "slit_skin_smear": "laboratory",
+            "histopathology": "laboratory",
+            "dermatologist_photo_assessment": "photo_only_weaker",
+            "source_dataset_assertion": "source_assertion_unverified",
+        }[self.method]
+
 
 @dataclass(frozen=True)
 class SkinTone:
     scheme: str
     value: str
+    assigned_by: str = "generator"
+
+
+@dataclass(frozen=True)
+class Capture:
+    site_id: str | None = None
+    device_class: str | None = None
+    body_site: str | None = None
 
 
 @dataclass(frozen=True)
@@ -86,6 +104,7 @@ class ManifestRow:
     placeholder: bool
     skin_tone: SkinTone | None
     observations: Observations
+    capture: Capture = Capture()
     schema_version: str = SCHEMA_VERSION
     taxonomy_version: str = TAXONOMY_VERSION
 
@@ -94,17 +113,19 @@ class ManifestRow:
         errors = sorted(_VALIDATOR.iter_errors(data), key=lambda e: str(list(e.path)))
         if errors:
             error = errors[0]
-            raise ManifestError(f"{'.'.join(map(str, error.path)) or 'row'}: {error.message}")
+            suffix = " (unapproved methods cannot confirm labels)" if "confirmed_by" in error.path else ""
+            raise ManifestError(f"{'.'.join(map(str, error.path)) or 'row'}: {error.message}{suffix}")
         try:
             row = cls(
                 **{k: v for k, v in data.items() if k not in {
-                    "source", "licence", "label", "confirmed_by", "skin_tone", "observations",
+                    "source", "licence", "label", "confirmed_by", "skin_tone", "observations", "capture",
                 }},
                 source=Source(**data["source"]), licence=Licence(**data["licence"]),
                 label=Label(**data["label"]),
                 confirmed_by=Confirmation(**data["confirmed_by"]) if data["confirmed_by"] else None,
                 skin_tone=SkinTone(**data["skin_tone"]) if data["skin_tone"] else None,
                 observations=Observations(**data["observations"]),
+                capture=Capture(**data.get("capture", {})),
             )
             row._validate_semantics()
             return row
@@ -137,9 +158,27 @@ class ManifestRow:
         ):
             raise ManifestError("confirmed label needs confirmation and a resolved diagnosis")
         if self.confirmed_by is not None:
-            date.fromisoformat(self.confirmed_by.date)
-            if self.confirmed_by.method.lower() in {"model", "model_prediction", "prediction"}:
-                raise ManifestError("model predictions cannot confirm labels")
+            if date.fromisoformat(self.confirmed_by.date) > date.today():
+                raise ManifestError("confirmation date cannot be in the future")
+        if not self.synthetic and self.label.family != LabelFamily.UNRESOLVED:
+            vocabulary = {code: family for family, code in EXACT_DIAGNOSES.values()}
+            expected = vocabulary.get(self.label.diagnosis)
+            if expected is None and self.label.family != LabelFamily.OTHER:
+                raise ManifestError("diagnosis must belong to the versioned vocabulary or other")
+            if expected is not None and self.label.family != expected:
+                raise ManifestError("diagnosis and family disagree")
+        if self.skin_tone is not None:
+            tone = self.skin_tone
+            values = {"Fitzpatrick": {"I", "II", "III", "IV", "V", "VI"},
+                      "Monk": {str(n) for n in range(1, 11)}}
+            if tone.scheme in values and tone.value not in values[tone.scheme]:
+                raise ManifestError("invalid controlled skin-tone value")
+            if (tone.scheme == "synthetic_colour") != (tone.assigned_by == "generator"):
+                raise ManifestError("skin-tone generator provenance is reserved for synthetic colours")
+            if self.synthetic and tone.assigned_by != "generator":
+                raise ManifestError("synthetic tone must be assigned by generator")
+            if not self.synthetic and tone.scheme == "synthetic_colour":
+                raise ManifestError("real rows cannot claim synthetic colour strata")
 
     @property
     def group_key(self) -> tuple[str, str] | None:

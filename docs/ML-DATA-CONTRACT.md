@@ -7,8 +7,8 @@ M1 behaviour; it does not claim a clinically verified taxonomy or real-data righ
 
 ## Schema and provenance
 
-One UTF-8 JSON object per line, no blank lines or duplicate JSON keys. Row/schema
-and taxonomy versions are both `1.0.0`. The executable
+One UTF-8 JSON object per line, no blank lines or duplicate JSON keys. Row/schema version is `1.1.0`; taxonomy remains `1.0.0`. Version 1.0.0 rows
+are rejected: regenerate synthetic fixtures; no real-row automatic migration. The executable
 [JSON Schema](../ml/src/numbra_ml/schema.py) is the structural authority; generate
 it with `ml/.venv/bin/python -m numbra_ml.schema`. The reader uses the same schema
 with date format checking plus semantic constraints. Unknown fields, invalid
@@ -22,12 +22,21 @@ by split so a subset cannot conceal patient, group or exact-hash split leakage.
 | `source` | `id`, `version`, `url`; one consistent release per source ID in a manifest. |
 | `licence` | `id`, `url`, `attribution` retained per row; metadata is not itself approval. |
 | `label` | Original label, mapped diagnosis/family, label status, explicit PB/MB and reaction status. |
-| `confirmed_by` | Null, or method/opaque confirmer-evidence reference/ISO date. A confirmed label needs this assertion and a resolved diagnosis; model predictions cannot confirm. Credentials are not verified by this schema. |
+| `confirmed_by` | Null, or allow-listed method/opaque confirmer-evidence reference/ISO calendar date (not future). A confirmed label needs this assertion and a resolved diagnosis; model predictions cannot confirm. Credentials are not verified by this schema. |
 | `patient_id`, `group_id` | Explicit opaque tokens or null; namespaced by source. Group ID defines the primary evaluation unit; repeated patient IDs across groups must still stay in one split. Missing IDs are never inferred from filenames. |
-| `split` | `unassigned`, `train`, `calibration`, `threshold_validation`, `test`, `held_out`, `quarantine`. Assignment is M2 work. |
+| `split` | `unassigned`, `train`, `calibration`, `threshold_validation`, `test`, `held_out`, `quarantine`. Assignment is M2 work. Quarantine and unassigned remain group-level partitions; mixed active/quarantine rows in one connected group fail. |
 | `synthetic`, `placeholder` | Explicit booleans. Synthetic rows require PLACEHOLDER, original labels beginning `SYNTHETIC:`, and no clinical confirmation. |
-| `skin_tone` | Null or scheme/value. Generated data permits only `synthetic_colour`, never invented Fitzpatrick/Monk annotations. |
+| `skin_tone` | Null or controlled scheme/value/assigned_by (Fitzpatrick I–VI, Monk 1–10, or synthetic colour). Generated data permits only `synthetic_colour`, never invented Fitzpatrick/Monk annotations. |
+| `capture` (optional) | Nullable opaque site ID, device class and body site. Omission preserves null values; no guessed capture metadata. |
 | `observations` | Object; all fields may be omitted in a manifest, preserving missingness for later workflow review. |
+
+Confirmation methods are `clinical_examination`, `slit_skin_smear`, `histopathology`,
+`dermatologist_photo_assessment` and `source_dataset_assertion`. The evidence
+category property retains clinical-only, laboratory, photo-only weaker and
+source-assertion-unverified distinctions. These categories do not verify evidence
+or establish clinical eligibility. Other methods (including model/volunteer/self
+assertions) fail. Real diagnosis codes must match the versioned family vocabulary;
+unknown named conditions may only use `other`. Clinical approval remains pending.
 
 The manifest loader can describe future real records, but the image-loading policy
 enforces ADR-002: `synthetic=true`, `placeholder=true`, source ID `synthetic-*`,

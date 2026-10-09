@@ -154,3 +154,13 @@ def test_invalid_split_and_empty_selection(tmp_path, tiny_fixture):
     assert len(dataset) == 0 and dataset.supervised_selection() == ((), {})
     with pytest.raises(IndexError):
         dataset[0]
+
+
+@pytest.mark.parametrize("mode,options", [("P", {}), ("L", {"transparency": 50}), ("RGB", {"transparency": (0, 0, 0)})])
+def test_single_frame_palette_and_transparency_chunks_rejected(tmp_path, row_factory, mode, options):
+    row = row_factory()
+    path = tmp_path / row.image_path
+    Image.new(mode, (4, 4)).save(path, **options)
+    row = replace(row, sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    with pytest.raises(DataError, match="unsupported image mode|transparency"):
+        load_rgb(tmp_path, row)

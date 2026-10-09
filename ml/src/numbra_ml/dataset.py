@@ -28,6 +28,7 @@ def require_approved_source(row: ManifestRow) -> None:
 
 def load_rgb(root: Path, row: ManifestRow) -> np.ndarray:
     """Return oriented uint8 HWC RGB; verify bytes before decoding, reject escapes."""
+    require_approved_source(row)
     # Validate even if caller bypasses read_manifest and constructs a row directly.
     try:
         row = ManifestRow.from_dict(row.to_dict())
@@ -57,9 +58,13 @@ def load_rgb(root: Path, row: ManifestRow) -> np.ndarray:
                 raise DataError("multi-frame images are unsupported")
             if image.mode not in {"RGB", "L"}:
                 raise DataError(f"unsupported image mode: {image.mode}; RGB or grayscale required")
+            if "transparency" in image.info:
+                raise DataError("image transparency is unsupported")
             rgb = ImageOps.exif_transpose(image).convert("RGB")
             return np.array(rgb, dtype=np.uint8, copy=True)
-    except (UnidentifiedImageError, OSError, Image.DecompressionBombError) as exc:
+    except DataError:
+        raise
+    except (UnidentifiedImageError, OSError, Image.DecompressionBombError, ValueError, SyntaxError) as exc:
         raise DataError(f"undecodable image: {row.record_id}") from exc
 
 
@@ -78,6 +83,9 @@ class ManifestDataset:
         self, root: Path, rows: tuple[ManifestRow, ...], *, split: str | None = None,
         transform: Callable[[np.ndarray], np.ndarray] | None = None,
     ) -> None:
+        rows = tuple(rows)
+        for row in rows:
+            require_approved_source(row)
         all_rows = validate_manifest(rows)
         for row in all_rows:
             require_approved_source(row)
