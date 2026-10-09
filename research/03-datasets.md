@@ -159,8 +159,27 @@ and an independent validation source; negative-only public data do not suffice.
   Free app access is not a licence to extract its library or weights. Do not
   generalise WHO's statistical-dataset licences to clinical photographs.
 - **Relevance:** potential collaboration for relevant positives and differentials;
-  no extraction or contact is authorised. Survey individual published studies in
-  the pending prior-work document and update this record if release terms exist.
+  no extraction or contact is authorised. Individual studies are compared in
+  [prior work](02-prior-work.md); records below retain their acquisition limits.
+
+### Additional published-study candidates — no new acquisition approval
+
+Accessed 2026-10-09 during the prior-work search. These supplement, rather than
+replace, the synthetic-only recommendation. A paper's publication licence is not
+a licence for the patient images used in its experiments.
+
+| Candidate / primary source | Owner, size, modality, labels and geography | Confirmation, tone and grouping | Licence/access and disposition |
+| --- | --- | --- | --- |
+| [WHO independent leprosy evaluation, Deps et al. 2026](https://journal.paho.org/en/articles/independent-assessment-who-skin-neglected-tropical-diseases-application-leprosy-detection) | Authors' retrospective clinical-image cohort; 439 images, 423 processed; classical/reactional/atypical leprosy. Specific cohort geography and camera mix UNVERIFIED here. | Confirmed cases per abstract; exact confirmation methods, patient count/IDs and skin-tone distribution UNVERIFIED. | No image-release licence or anonymous endpoint verified. Positive-only evaluation cannot supply specificity controls. **Hold**. |
+| [Yotsu et al. 2023 pilot](https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0011230) | Tulane/local collaborators; clinical tablet photographs from Côte d'Ivoire/Ghana; leprosy, Buruli ulcer, mycetoma, scabies, yaws. | Dermatologist adjudication with some disease-specific laboratory tests; Fitzpatrick IV+ described. Patient-independent study splits; released group schema unavailable. | Authors explicitly state images are **not public** for privacy and direct requests to Tulane IRB. No unattended download licence; **excluded**. |
+| [eSkinHealth, Wang et al. 2025](https://arxiv.org/abs/2508.18608), [authors' release notice](https://github.com/janet-sw/eSkinHealth/blob/main/README.md) | Author consortium; West African clinical images with metadata, masks/captions/concepts. Full disease counts, camera mix and confirmed leprosy subset UNVERIFIED here. | Diagnostic confirmation, skin-tone distribution, cross-release duplicates and whether case IDs establish patient independence UNVERIFIED without a release audit. | February 2026 notice still says delayed under ethical/privacy/legal review. No usable image release or data licence verified. Repository MIT badge does not license unreleased photos. **Hold**. |
+| [CO2Wounds-V2 paper](https://arxiv.org/html/2408.10827v1), [Mendeley v2](https://data.mendeley.com/datasets/s2w7rjwz49/2) | Sanchez/Hinojosa et al.; 607 labelled plus 157 unlabelled smartphone wound images; Colombian wound-care cohort. Wound/background segmentation, not initial leprosy diagnosis or PB/MB. | Medical staff capture; diagnostic confirmation, tone and patient-independent released split IDs UNVERIFIED. | Paper states CC BY-NC-ND; record lists CC BY-NC 3.0. Anonymous binary retrieval untested. **Hold** for conflicting terms and clinical task mismatch; no download authorised. |
+| [Baweja/Parhar 2016 authors' abstract](https://publications.ri.cmu.edu/leprosy-lesion-recognition-using-convolutional-neural-networks), [Banerjee et al. 2020 abstract](https://arxiv.org/abs/2004.04122) | Academic image studies. Former uses DermNet/web-scraped images; latter includes leprosy, tinea versicolor and vitiligo. Cohort size, geography/camera mix UNVERIFIED from inspected abstracts. | Confirmation, tone and defensible patient/group identifiers UNVERIFIED. | No separately licensed patient-data release verified. DermNet's current prohibition still applies; study reuse does not override source rights. **Hold/exclude scraped sources**. |
+
+These sources add no currently approved positive-and-differential cohort. The
+synthetic generator should cover `reaction_status=unknown` and missing
+confirmation/tone/group fields to test software safeguards, without pretending
+that invented labels represent these study populations.
 
 ## Proposed unified taxonomy and mappings
 
@@ -170,7 +189,7 @@ Keep the original source label and confirmation provenance alongside the mapping
 | Field | Proposed values and rules |
 | --- | --- |
 | `label_family` | `leprosy`, `leprosy_differential`, `other`, `unresolved` |
-| `diagnosis` | Named source diagnosis; proposed differential vocabulary includes tinea, pityriasis versicolor, vitiligo, eczema and psoriasis. This initial list comes from the brief and requires clinical-source verification, not an assertion of exhaustive differentials. |
+| `diagnosis` | Named source diagnosis; versioned exact-name mapping. The [clinical document](01-clinical-background.md) verifies tinea corporis/versicolor, vitiligo, psoriasis and further challenge diagnoses from a national clinical guideline. Eczema is still a proposed local challenge class requiring review; this is not an exhaustive differential list. |
 | `leprosy_classification` | `PB`, `MB`, `unknown`; only explicit clinical labels, never inferred from image count. |
 | `reaction_status` | `type_1`, `type_2`, `none`, `unknown`; orthogonal to PB/MB, retained only when explicitly provided. |
 | `label_status` / `confirmed_by` | Provisional or confirmed; named method/provenance, never fabricated. Missing confirmation remains missing. |
@@ -185,6 +204,8 @@ Keep the original source label and confirmation provenance alongside the mapping
 | PAD's six labels | `other`, with exact disease name retained | Verified record taxonomy; cancer may still require clinical referral |
 | ISIC cancer label | `other` or `unresolved` with original name | Collection must be verified; data not selected |
 | WHO disease name | No executable mapping until licensed release is inspected | Library label schema UNVERIFIED |
+| CO2Wounds wound/background mask | No mapping to a diagnostic label | Wound segmentation is not leprosy triage ground truth |
+| Other study diagnosis | Preserve original; no executable mapping until a permitted release and confirmation audit | No additional real source approved |
 | Synthetic fixtures | Explicit synthetic labels across all families and missingness cases | Invented fixture labels, never evidence of disease |
 
 A model may later estimate a confirmed leprosy-vs-labelled-control score. It must
