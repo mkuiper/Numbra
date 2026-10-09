@@ -295,6 +295,34 @@ Independent report/graph/source/provenance audit passed after correcting the
 audit command's assumed `.pt` filename to the actual `.safetensors` artifact;
 no model or implementation change. See [export evidence](ML-EXPORT.md).
 
+## M4 complete promoted BatchNorm — observed 2026-10-09 UTC
+
+No installation or acquisition; the existing pinned environment ran:
+
+```bash
+ml/.venv/bin/python -m pytest -q ml/tests/test_export_promoted_bn.py
+ml/.venv/bin/python -m numbra_ml.export_promoted_bn --output data/exports/PLACEHOLDER-m4-promoted-bn1
+bash scripts/check.sh
+python3 -m unittest discover -s tests -v
+```
+
+Initial subset: **11 passed, 1 failed in 6.17s**, 28 exporter warnings. Extra
+BN was correctly rejected by parameter matching, but the declared node-count
+check ran after that match. Moved the production count check before matching;
+the unchanged test then passed. Corrected subset: **12 passed in 6.15s**, 28
+exporter warnings. No test weakened, deleted or skipped.
+
+The diagnostic command exited 0, status DIAGNOSTIC ONLY. All 152 training
+inputs, 34 promoted BN replacements, preserved control and actual runtime
+audits completed. ORT reported removal of unused original BN initializers;
+these remain in the serialized candidate by design. Both complete graphs
+still fail the fixed numeric budgets, with zero flips; see [evidence](ML-EXPORT.md).
+Independent aggregate/private/parity/provenance/nine-graph audit passed.
+
+Full check: **345 ML tests passed in 52.62s**, 86 exporter deprecation warnings;
+Android skipped, RESULT PASS. No APK, accepted export or M4 completion claim.
+Final root repository-contract checks: **6 passed in 0.077s**.
+
 ## Open questions
 
 - What exact dependency versions and Android device targets will later ADRs select?

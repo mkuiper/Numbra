@@ -98,3 +98,9 @@ Promoted stem Conv / affine BN arithmetic is available as
 It retains training-only replay and tests float64 accumulation with float32
 boundaries against native saved operators. ADR-016 and the export document
 record local BN improvement and remaining differences; M4 stays incomplete.
+
+Complete promoted BN substitution is available as
+`python -m numbra_ml.export_promoted_bn --output data/exports/PLACEHOLDER-<new-name>`.
+ADR-017 and the export document record all 34 replacements, training-only
+whole-model parity and actual runtime audits. It lowers maximum errors but
+still fails both fixed numeric budgets; no deployment artifact is accepted.

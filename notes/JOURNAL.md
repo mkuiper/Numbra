@@ -774,3 +774,63 @@ clinical data/validation, weight notices and mobile execution remain open.
   HANDOFF/review request. No installs/acquisition, protected edits, review.sh,
   REVIEW/CHECK/GATE writes, publication/push or messages.
 - Final repository-contract rerun after docs/records: 6 PASS in 0.068s. git diff --check clean; NEXT_ACTION is exactly CONTINUE. All generated data/graphs remain ignored.
+
+## 2026-10-09T15:49:45Z — iteration
+
+- Oriented in required order: ROADMAP, STATUS, HARNESS, absent M4 review folder,
+  AGENTS and relevant export/runtime ADRs. M0–M3 gates remain closed; no new
+  harness instructions. Worked on M4 only; no delegation or human question.
+- Predeclared ADR-017 (Accepted (autopilot) — pending human review), queued it
+  and committed the protocol as 3056350 before experiment execution. Initial
+  atomic ADR/queue patch rejected a mismatched queue heading; reread and applied
+  the corrected patch, with no partial edits.
+- Built numbra_ml.export_promoted_bn: verify source/model/preparation/retained
+  graph/report/detail provenance; validate saved BN weights/bias/mean/variance/
+  epsilon; replace all 34 BNs with existing promoted rsqrt-affine expressions.
+  Exact rounded float32 coefficients, double multiply/add, one float32 stage
+  output cast. Every other serialized node/initializer/interface retained.
+  Native saved Python reference, Conv/head/activation/fits and budgets unchanged.
+- Tests cover whole-graph connections and independent arithmetic through both
+  BN/timm activations, parameter/source/state retention, actual runtime audits,
+  corrupted coefficient/cast/expression/Conv, invalid epsilon/parameter/extra
+  BN/training/collision/nonfinite input, ignored outputs, stale provenance and
+  complete synthetic pipeline. Non-training pixel bytes deliberately corrupted
+  after preparation: complete diagnostics read only training images.
+- Initial subset: 11 PASS, 1 FAIL in 6.17s with 28 exporter warnings. Extra BN
+  was rejected correctly by saved parameter matching, but node-count validation
+  occurred too late for the declared guard. Moved production count check before
+  matching; unchanged test passes. Corrected subset: 12 PASS in 6.15s with 28
+  warnings. No test removed/skipped/weakened or budget changed. Committed tested
+  implementation as 7fbfdff before the complete baseline experiment.
+- Diagnostic command exit 0, DIAGNOSTIC ONLY: all 152 ordered training components,
+  preserved control and full BN substitute. Tracked aggregate:
+  ml/reports/PLACEHOLDER-m4-promoted-bn1.json. No frozen evaluation, quantisation
+  fit, deployment selection or acquisition. All graphs/weights/details ignored.
+- Both comparisons FAIL. Preserved control reproduces raw/probability maxima
+  0.000240326/0.00000279320. Complete substitute lowers them to
+  0.000189304/0.00000240022, still above unchanged 0.0001/0.000001 budgets.
+  Mean raw/probability errors increase 0.0000558684/0.000000653101 to
+  0.0000575436/0.000000667205. Raw violations 26→23; probability violations
+  29→32; flips and instrumentation logit changes zero in both graphs.
+  Maximum feature drift increases, induced Python-head maximum decreases;
+  these are diagnostic statistics, not proof of causal improvement or deployment.
+- New serialized candidate 6,255,113 bytes; actual runtime 6,156,135. It is
+  float32/float64, not quantised. Actual disabled ORT original/tapped audits
+  verify all 204 expression nodes/136 casts/coefficient bits/float32 boundaries
+  and 53 Conv/one Gemm counts. ORT reports unused original BN initializer removal
+  and expands HardSwish even when optimisation disabled; full runtime identity
+  of all other nodes is not asserted. Source/model state unchanged.
+- Independent audit PASS: tracked/private report equality, recomputed private and
+  aggregate parity, 152 ordered training IDs/hash, model/source/lock/preparation
+  provenance and nine graph records. data/ ignored and no tracked data files.
+- Updated ADR-017 observed evidence, HUMAN-QUEUE, ML-EXPORT, DEV-SETUP and ML README.
+  M4 remains incomplete; ADR-012's labelled toy diagnostic workaround remains
+  in force. No HANDOFF/review request; NEXT_ACTION CONTINUE. Next declare joint
+  promoted stem/all-BN graph on training only; improvement uncertain. Explicit
+  quantised scope and float64 mobile compatibility remain unresolved.
+- bash scripts/check.sh exit 0: 345 ML tests PASS in 52.62s, 86 exporter
+  deprecation warnings; Android SKIPPED, RESULT PASS. No APK claim. No installs,
+  protected edits, review.sh, REVIEW/CHECK/GATE writes, publishing/push or messages.
+- Final repository-contract rerun after documentation/records: 6 PASS in 0.077s.
+  git diff --check clean; NEXT_ACTION exactly CONTINUE. No protected/data files
+  changed or staged. All iteration changes committed before ending.

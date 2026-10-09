@@ -51,6 +51,30 @@ separate explicit selective static QDQ scope and runtime strategy must be
 declared from training evidence before quantisation or new frozen evaluation.
 Training parity cannot establish unseen-input, mobile or clinical performance.
 
+## Observed follow-through — 2026-10-09 UTC
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-promoted-bn1.json) retains all
+152 training inputs only. All 34 BN nodes are replaced by 204 declared expression
+nodes with 136 Casts. Saved state hashes match; the serialized graph retains
+every other original node/initializer and interface. Actual disabled ORT graphs
+pass expression/coefficient/cast and original 53 Conv/one Gemm count audits.
+ORT removes unused BN initializers and expands HardSwish even at disabled
+optimisation; runtime identity of every other serialized node is not claimed.
+
+The unmodified preserved control reproduces its earlier max raw/probability
+errors 0.000240326/0.00000279320. Complete substitution lowers the maxima to
+0.000189304/0.00000240022 but **FAILS both unchanged budgets**. Raw violating
+inputs decrease from 26 to 23; probability violations increase from 29 to 32.
+Mean raw/probability errors also slightly increase. Zero frozen-threshold flips
+and zero instrumentation logit changes occur in both graphs. Improvements in
+one statistic do not make the comparison pass. Serialized size is 6,255,113
+bytes; graphs are float/mixed float32-float64, with no INT8 weights.
+
+Separate audit verifies aggregate/private equality, recomputed parity, ordered
+training IDs, model/source/dependency/preparation provenance and nine graph
+records. No new frozen evaluation, fit, quantisation or deployment selection.
+M4 remains incomplete and all failed exports remain rejected for bundling.
+
 ## Open questions
 
 - Does complete substitution improve native-reference logit parity on training inputs?
@@ -59,5 +83,6 @@ Training parity cannot establish unseen-input, mobile or clinical performance.
 
 ## Confidence
 
-High for the declared finite training-only protocol; complete-model results,
-deployment compatibility and clinical validity remain unverified.
+High for the tested finite training-only protocol and observed complete-model
+failures. Unseen-input parity, deployment compatibility and clinical validity
+remain unverified.

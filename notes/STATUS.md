@@ -1,85 +1,82 @@
 # Status
 
-Updated: 2026-10-09T15:40:15Z
+Updated: 2026-10-09T15:49:45Z
 
 Current milestone: **M4 — On-device model export**, in progress. NEXT_ACTION:
 CONTINUE. M0–M3 gates exist (PASS WITH CHANGES); no M4 gate, app or APK.
 Every task model/result remains **PLACEHOLDER**, synthetic-only under ADR-002.
-Retained baseline exports remain rejected; diagnostic copies are never bundles.
+All failed baseline exports remain rejected; diagnostic copies are never bundles.
 
 ## M4 acceptance status
 
 - **Quantised ONNX Runtime Mobile export: BUILT, ACCEPTANCE INCOMPLETE.** Two
-  retained INT8 QDQ graphs (53 quantised Conv/one Gemm each) fail parity. They
-  used all/only 152 training components for calibration. No new quantisation
-  fit or scope selection this iteration; Android/ABI support unverified.
-  ADR-012's labelled toy diagnostic workaround remains in force.
-- **Exported/Python parity: FAIL, budgets unchanged.** Original float/INT8 and
-  complete BatchNorm-preserved failures remain. Preserved/disabled training max
-  raw/probability errors remain 0.000240326/0.00000279320 versus the fixed
-  0.0001/0.000001 budgets. This iteration measures only same-input arithmetic:
-  no new whole-model parity, frozen test/held-out/stress inference, saved
-  reference/fit/budget change or deployment selection.
-- **Size ≤20 MB / preprocessing written and tested: BUILT.** Retained float
-  6,095,579 bytes, preserved diagnostic 6,188,494, INT8 1,730,515/1,861,702.
-  RGB letterbox/normalisation and float32 1×3×224×224 → raw_logit [1] unchanged.
-  No accepted deployment metadata package or Android decoding/preprocessing.
+  retained INT8 QDQ graphs (53 quantised Conv/one Gemm each) fail parity; their
+  calibration used all/only 152 training components. No new quantisation fit or
+  scope selection this iteration. ADR-012's labelled toy diagnostic workaround
+  remains in force; Android operator/ABI support is unverified.
+- **Exported/Python parity: FAIL, budgets unchanged.** New complete promoted BN
+  graph fails training raw/probability budgets: maxima 0.000189304/0.00000240022
+  versus fixed 0.0001/0.000001, zero flips. Preserved control reproduces previous
+  failure 0.000240326/0.00000279320. No new frozen test/held-out/stress inference,
+  reference/fit/budget change or deployment selection. Earlier failures retained.
+- **Size ≤20 MB / preprocessing written and tested: BUILT.** New float32/float64
+  BN diagnostic 6,255,113 bytes (runtime 6,156,135), original retained float
+  6,095,579, preserved 6,188,494 and INT8 1,730,515/1,861,702. RGB letterbox and
+  float32 1×3×224×224 → raw_logit [1] unchanged. No accepted deployment metadata
+  package or Android decoding/preprocessing.
 
 ## This iteration's evidence
 
-- ADR-016 predeclares training-only promoted stem Conv patch/MatMul accumulation
-  and two promoted affine BN expressions. Queued for humans. Saved float32
-  weights/coefficient bits and float32 output boundaries retained; native Python
-  stays the reference. Higher precision is a diagnostic hypothesis, not a fix.
-- New numbra_ml.export_precision reuses verified saved-model/preparation/retained
-  export/preserved-graph provenance and ADR-015 replay. Explicit Conv zero Pad,
-  strided/dilated Slice, patch ordering and float64 MatMul; float64 BN multiply/
-  add with one float32 cast. Unsupported Conv geometry rejected. Actual disabled
-  ORT graphs audited with existing sequential/two intra-op/one inter-op settings.
-- ml/reports/PLACEHOLDER-m4-precision1.json: all 152 training components only.
-  Every promoted ONNX expression matches its Python promoted expression exactly
-  on both input origins. Native-Python differences remain: stem Conv maximum
-  0.000000476837, stem BN rsqrt-affine 0.0000000596046 (divide 0.000000178814),
-  first depthwise BN 0.00000381470 on Python-origin / 0.00000762939 on ORT-origin
-  inputs with either recipe. Stem BN improves locally; promoted stem Conv does
-  not reduce the native-ORT maximum. No propagated/full-model improvement claim.
-- Original/tapped logits, replay fidelity and signed telescoping residuals are
-  zero. Saved state hashes match before/after. Separate audit verifies aggregate/
-  private equality, source/lock/preparation/saved-model provenance, ignored details
-  and 33 graph records. Graphs, weights and component tensors remain ignored.
-- Documentation, ADR follow-through and HUMAN-QUEUE updated. No model/interface/
-  threshold/temperature/budget change; every retained failure stays retained.
+- Predeclared and committed ADR-017, queued for humans. New
+  numbra_ml.export_promoted_bn validates all saved BN parameters/epsilon and
+  replaces all 34 nodes with existing promoted rsqrt-affine arithmetic. Saved
+  float32 coefficients, double Mul/Add and one float32 output boundary cast.
+  Every other serialized node/initializer/interface remains intact. Original
+  Conv/head/activation/reference retained; source/model state unchanged.
+- ml/reports/PLACEHOLDER-m4-promoted-bn1.json: all 152 training components only.
+  New maxima decrease, but mean raw/probability errors slightly increase; raw
+  violations decrease 26→23, probability violations increase 29→32. Both graphs
+  FAIL. Max feature drift increases 0.0000141859→0.0000162125; induced Python-head
+  max error decreases 0.000228882→0.000188351. No causal or deployment claim.
+- Actual disabled CPU/sequential/two intra-op/one inter-op runtime audits verify
+  all 204 expression nodes/136 casts/coefficient bits/float32 boundaries and
+  unchanged 53 Conv/one Gemm counts. ORT removes unused BN initializers and
+  expands HardSwish even at disabled optimisation; other runtime nodes are not
+  asserted byte-identical. Original/tapped logit differences remain zero.
+- Separate audit passes: aggregate/private equality, recomputed parity, ordered
+  training IDs, saved model/source/dependency/preparation provenance and nine
+  graph records. Graphs/weights/private details stay ignored. Updated export
+  documentation, ML README, DEV-SETUP, ADR follow-through and HUMAN-QUEUE.
 
 ## Observed verification
 
-- New arithmetic/replay subset: 15 PASS in 10.63s, 24 exporter deprecation
-  warnings plus one test-only scalar/autograd warning. Added explicit detach to
-  that test scalar; the full suite has only exporter warnings. No test failed,
-  was skipped, removed or weakened.
-- Diagnostic CLI exit 0: DIAGNOSTIC ONLY, M4 incomplete. The separate checksum
-  audit first assumed a .pt filename; corrected the audit to the actual saved
-  .safetensors file and it passed. No implementation/model change for this typo.
-- bash scripts/check.sh: exit 0, 333 ML tests PASS in 48.97s, 58 legacy exporter
-  warnings; Android SKIPPED, RESULT PASS. No APK claim. Root repository checks:
-  6 PASS in 0.066s before final docs/records; final rerun recorded in JOURNAL.
+- Initial new subset: 11 PASS, 1 FAIL in 6.17s. Extra BN was rejected by saved
+  parameter matching before the declared node-count check. Moved production
+  count validation ahead of matching; unchanged test then passes. Corrected
+  subset: 12 PASS in 6.15s, 28 exporter warnings. No test weakened/skipped/deleted.
+- Diagnostic CLI exit 0: DIAGNOSTIC ONLY; M4 incomplete. Independent audit PASS.
+- bash scripts/check.sh exit 0: 345 ML tests PASS in 52.62s, 86 exporter
+  deprecation warnings; Android SKIPPED, RESULT PASS. No APK claim.
+- Final root repository-contract check: 6 PASS in 0.077s after documentation/
+  record updates. git diff --check clean; NEXT_ACTION exactly CONTINUE.
 - No toolchain/dependency/checkpoint/dataset acquisition, protected edits,
-  review.sh run, review/check/gate files written, publish/push or messages.
+  review.sh run, REVIEW/CHECK/GATE writes, publication/push or messages.
 
 ## Open blockers and limits
 
 Selected-baseline float and INT8 parity remains the implementation blocker.
-Promoted local BN expressions improve some comparisons but do not exactly
-recover native Python. All baseline exports remain rejected. M4 is not ready
-for HANDOFF/review. Float64 Android support/performance, unseen-input parity,
-clinical data approval, clinical/ethics/legal/native-language validation and
-weight-notice approval are absent.
+Complete BN substitution reduces maximum errors but does not meet acceptance.
+Every failed export remains rejected. M4 is not ready for HANDOFF/review.
+Float64 Android support/performance, unseen-input parity, clinical data approval,
+clinical/ethics/legal/native-language validation and weight-notice approval absent.
 
 ## Next concrete step
 
-Predeclare a complete training-only preserved graph replacing all 34 saved BN
-nodes with promoted rsqrt-affine expressions, retaining original Conv/head and
-float32 boundaries. Audit the actual disabled runtime graph and measure complete
-training raw/probability/decision parity, preserving state/reference/ADR-011.
-Then explicitly declare and justify selective static QDQ scope from training
-results before any new frozen evaluation. Resolve float64 mobile compatibility
+Predeclare a joint training-only graph combining ADR-016's promoted stem Conv
+patch/MatMul with all ADR-017 promoted BN expressions, retaining all other
+Conv/head nodes and original float32 boundaries. Compare complete raw/probability/
+decision parity to preserved and BN-only controls, audit actual runtime and retain
+all failures. Local stem promotion did not lower its maximum native-Python error,
+so success is uncertain. Explicitly declare selective static QDQ scope from
+training results before any new frozen evaluation; resolve float64 mobile support
 before bundling. Request REVIEW M4 only when every acceptance item is met.

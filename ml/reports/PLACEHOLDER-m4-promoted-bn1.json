@@ -1,0 +1,1446 @@
+{
+  "artifacts": {
+    "complete_promoted_bn": {
+      "diagnostics": {
+        "instrumented_attribution": {
+          "affine_feature_error_bound": {
+            "max": 0.0013181055648794615,
+            "mean": 0.0006922527592332499
+          },
+          "induced_python_head_absolute_error": {
+            "max": 0.00018835067749023438,
+            "mean": 5.738672457243267e-05
+          },
+          "instrumentation_absolute_logit_change": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "max_feature_absolute_error": {
+            "max": 1.621246337890625e-05,
+            "mean": 7.09903083349529e-06
+          },
+          "mean_feature_absolute_error": {
+            "max": 1.9410711331602215e-06,
+            "mean": 9.036396914016552e-07
+          },
+          "tapped_runtime_vs_python_head_absolute_error": {
+            "max": 1.1444091796875e-05,
+            "mean": 2.1645897313168175e-06
+          }
+        },
+        "original_graph_training_parity": {
+          "below_threshold_to_positive_count": 0,
+          "budget": {
+            "conservative_margin": 0.0,
+            "probability_absolute": 1e-06,
+            "raw_absolute": 0.0001
+          },
+          "comparison": "calibrated score >= frozen threshold",
+          "conservative_margin_added_referrals": 0,
+          "conservative_margin_lost_reference_referrals": 0,
+          "frozen_threshold_flip_count": 0,
+          "max_calibrated_probability_absolute_error": 2.400220316611801e-06,
+          "max_raw_logit_absolute_error": 0.00018930435180664062,
+          "mean_calibrated_probability_absolute_error": 6.672053535004427e-07,
+          "mean_raw_logit_absolute_error": 5.754357890078896e-05,
+          "n": 152,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "positive_to_below_threshold_count": 0,
+          "probability_budget_exceeded_count": 32,
+          "raw_budget_exceeded_count": 23,
+          "scope": "numerical parity of same tensors; not clinical validation or device performance",
+          "status": "FAIL",
+          "temperature": 19.150006376043688,
+          "threshold": 0.40079881738785716,
+          "version": "1.0.0"
+        },
+        "runtime_graphs": {
+          "instrumented": {
+            "bytes": 6156192,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "b59291d56c89a08a6e723e808378d81993977a5eab33f41423b1eae88d1bbee0",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          },
+          "original": {
+            "bytes": 6156135,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 40,
+              "Cast": 136,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 62,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "fa101ff6243f79dd357055825ff7f4807b57543d3ab61695e43d30c71acacb06",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          }
+        },
+        "warning": "attribution uses an extra graph output; original parity is measured separately"
+      },
+      "graph": {
+        "bytes": 6255113,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "4799b458b60d0ad0a5c6975c4106ac2e7ea6c574514303ec03ac11ef2bec1796",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "instrumented_graph": {
+        "bytes": 6255170,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 40,
+          "Cast": 136,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 43,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "6de9bf8091db885cbbd0da958f229203bd27177143a454752d9c7c5b7193b6e9",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "runtime_audits": {
+        "features": {
+          "float32_coefficients_and_output_boundaries": true,
+          "notice": "PLACEHOLDER diagnostic graph; never bundle",
+          "original_conv_head_counts_retained": true,
+          "original_other_nodes_and_initializers_retained": false,
+          "promoted_expression_nodes": 204,
+          "replaced_batchnorm_nodes": 34,
+          "status": "PASS"
+        },
+        "original": {
+          "float32_coefficients_and_output_boundaries": true,
+          "notice": "PLACEHOLDER diagnostic graph; never bundle",
+          "original_conv_head_counts_retained": true,
+          "original_other_nodes_and_initializers_retained": false,
+          "promoted_expression_nodes": 204,
+          "replaced_batchnorm_nodes": 34,
+          "status": "PASS"
+        }
+      }
+    },
+    "preserved_control": {
+      "diagnostics": {
+        "instrumented_attribution": {
+          "affine_feature_error_bound": {
+            "max": 0.001314776330424805,
+            "mean": 0.0007021716725609136
+          },
+          "induced_python_head_absolute_error": {
+            "max": 0.0002288818359375,
+            "mean": 5.544800507394891e-05
+          },
+          "instrumentation_absolute_logit_change": {
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "max_feature_absolute_error": {
+            "max": 1.4185905456542969e-05,
+            "mean": 7.165497855136269e-06
+          },
+          "mean_feature_absolute_error": {
+            "max": 1.7523760078574924e-06,
+            "mean": 9.133259050223143e-07
+          },
+          "tapped_runtime_vs_python_head_absolute_error": {
+            "max": 1.52587890625e-05,
+            "mean": 2.5033950805664062e-06
+          }
+        },
+        "original_graph_training_parity": {
+          "below_threshold_to_positive_count": 0,
+          "budget": {
+            "conservative_margin": 0.0,
+            "probability_absolute": 1e-06,
+            "raw_absolute": 0.0001
+          },
+          "comparison": "calibrated score >= frozen threshold",
+          "conservative_margin_added_referrals": 0,
+          "conservative_margin_lost_reference_referrals": 0,
+          "frozen_threshold_flip_count": 0,
+          "max_calibrated_probability_absolute_error": 2.7932031085864395e-06,
+          "max_raw_logit_absolute_error": 0.000240325927734375,
+          "mean_calibrated_probability_absolute_error": 6.531008448442099e-07,
+          "mean_raw_logit_absolute_error": 5.586837467394377e-05,
+          "n": 152,
+          "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+          "positive_to_below_threshold_count": 0,
+          "probability_budget_exceeded_count": 29,
+          "raw_budget_exceeded_count": 26,
+          "scope": "numerical parity of same tensors; not clinical validation or device performance",
+          "status": "FAIL",
+          "temperature": 19.150006376043688,
+          "threshold": 0.40079881738785716,
+          "version": "1.0.0"
+        },
+        "runtime_graphs": {
+          "instrumented": {
+            "bytes": 6192463,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "6cbd2d81e265cb2153ce7972784feed4771c291c5550e90200893dcd716b1669",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          },
+          "original": {
+            "bytes": 6192406,
+            "int8_weight_qdq_operators": {},
+            "ir_version": 8,
+            "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+            "operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Conv": 53,
+              "Div": 1,
+              "Flatten": 1,
+              "Gemm": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "opsets": {
+              "ai.onnx": 17,
+              "ai.onnx.ml": 5,
+              "ai.onnx.preview.training": 1,
+              "ai.onnx.training": 1,
+              "com.microsoft": 1,
+              "com.microsoft.experimental": 1,
+              "com.microsoft.nchwc": 1,
+              "org.pytorch.aten": 1
+            },
+            "other_float_or_structural_operators": {
+              "Add": 6,
+              "BatchNormalization": 34,
+              "Div": 1,
+              "Flatten": 1,
+              "GlobalAveragePool": 1,
+              "HardSigmoid": 28,
+              "Mul": 28,
+              "ReduceMean": 9,
+              "Relu": 14,
+              "Squeeze": 1,
+              "Sub": 1
+            },
+            "remaining_float_weight_operators": {
+              "Conv": 53,
+              "Gemm": 1
+            },
+            "sha256": "8d5ac32860bc978a8888a2948e68891bb536aebeca859064f29f6d297ad80c3c",
+            "size_pass": true,
+            "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+          }
+        },
+        "warning": "attribution uses an extra graph output; original parity is measured separately"
+      },
+      "graph": {
+        "bytes": 6188494,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "fc064e7aceb82df1c449681bb94c9749a0da352d81f1576e759c4eeca1ee4054",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "instrumented_graph": {
+        "bytes": 6188551,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "BatchNormalization": 34,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "d0b23dd539a61e7d98703fd9b3bc504dcfd85227bf9f7f8c257cc7dd13e2d3c5",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "runtime_audits": {
+        "features": {
+          "batchnorm_nodes": 34,
+          "status": "PASS"
+        },
+        "original": {
+          "batchnorm_nodes": 34,
+          "status": "PASS"
+        }
+      }
+    }
+  },
+  "created_utc": "2026-10-09T15:47:00.950057+00:00",
+  "diagnostic_details_sha256": "2af179c2d3a83a0fa6dbe61fcdb8a41682a3d319edfbc76d4a8cfdbfaa8fc53f",
+  "environment": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 275HX",
+    "dependencies": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.19.2",
+      "attrs": "25.3.0",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.2",
+      "coloredlogs": "15.0.1",
+      "filelock": "4.0.12",
+      "flatbuffers": "25.12.19",
+      "fsspec": "2026.9.0",
+      "hf-xet": "1.7.0",
+      "huggingface-hub": "0.36.0",
+      "humanfriendly": "10.0",
+      "idna": "3.20",
+      "iniconfig": "2.1.0",
+      "jsonschema": "4.25.1",
+      "jsonschema-specifications": "2025.9.1",
+      "ml-dtypes": "0.6.0",
+      "mpmath": "1.3.0",
+      "networkx": "3.7",
+      "numpy": "2.2.6",
+      "onnx": "1.19.1",
+      "onnxruntime": "1.23.2",
+      "packaging": "25.0",
+      "pillow": "11.3.0",
+      "pluggy": "1.6.0",
+      "protobuf": "7.36.2",
+      "pytest": "8.4.2",
+      "referencing": "0.36.2",
+      "requests": "2.34.2",
+      "rpds-py": "0.27.1",
+      "safetensors": "0.6.2",
+      "setuptools": "80.9.0",
+      "sympy": "1.14.0",
+      "timm": "1.0.22",
+      "torch": "2.8.0+cpu",
+      "torchvision": "0.23.0+cpu",
+      "tqdm": "4.70.1",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.8.0",
+      "wheel": "0.45.1"
+    },
+    "dependency_lock_sha256": "54022e4eb1ab4fad6d90f65e2f21784411daf7e7875cf5b8f81a75d90f0309cd",
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "export_dependency_lock_sha256": "eb639013b6c6fca1b4cba2e77a19a1cbe098ddf688d13a58463df93714c1f396",
+    "git_commit": "7fbfdffb150a2a25cd70b6650adaf52e9a079282",
+    "git_dirty": false,
+    "logical_cpu_count": 24,
+    "machine": "x86_64",
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.12.3",
+    "reproduction_scope": "same pinned environment/hardware; other platforms unverified",
+    "source_files_sha256": {
+      "ml/src/numbra_ml/__init__.py": "c437709a69fabe6a5d5fd2dbc742b1a43cee0056db7640394a397e7a0fba3a45",
+      "ml/src/numbra_ml/dataset.py": "5a6732734ef6198e37b4ea02ae217cd568925cd31209693b6bb0326cff382f79",
+      "ml/src/numbra_ml/evaluation.py": "493aa1be7c014b62ebd98af56c45bfc4aac0cf72d59077de91ff3bf1ed3a15b8",
+      "ml/src/numbra_ml/export.py": "a25f4b8076209edb1ac451e7f8fa0885c6e492934d07997a48c12f327ab57b5f",
+      "ml/src/numbra_ml/export_batchnorm.py": "091c38aff38beca6f95070f30303dfb9094549842e959a4f4ff49a517e4a24b3",
+      "ml/src/numbra_ml/export_diagnostics.py": "fbe36ab1c0a502c0be6c21be0f484a4a8101dd0b2de29c67ba878adf38f446c0",
+      "ml/src/numbra_ml/export_precision.py": "92c98e5b0aaf54f981909a34e1a55b896d134bce6b731539f320002cf1b79a9a",
+      "ml/src/numbra_ml/export_promoted_bn.py": "4da4bef6e988036c3324b179fe27096c9c095f08459dd4c8a85d7764dbbd0a1c",
+      "ml/src/numbra_ml/export_replay.py": "7160a1157862da0ed999a0ca76535c244f32935d15763adaa772a1ec03d881bc",
+      "ml/src/numbra_ml/manifest.py": "a68b6246dde24481dec928cd73bafc224b084e07873ff3caa9bbc3bae7d3f90b",
+      "ml/src/numbra_ml/parity.py": "185e1361d78be178020fafbbf3c7943a626230e01362b47c013d7e46f68be6d4",
+      "ml/src/numbra_ml/preparation.py": "0e72499c4208882780345f7c633224a18c140d803d57289b5db2e06527677dfd",
+      "ml/src/numbra_ml/prepare.py": "57cc5d9eabd8744419aef42f7616981d67c557d1f130714ec187752fbd567c97",
+      "ml/src/numbra_ml/preprocessing.py": "c9fbe31e531db054e8674d859f2c866ce91f3bbcc7e8b85be3a69147dbe1998a",
+      "ml/src/numbra_ml/pretrained.py": "570868b592338f678b9b83b6605beca9a8b85acdd5a0ebb59c4f29b3105c4bc6",
+      "ml/src/numbra_ml/schema.py": "8d45f5d4fc846508e372f527d87f193bf0f584b9f2a22a4f6a39f577ebaa0c40",
+      "ml/src/numbra_ml/synthetic.py": "a42c55d5c35c6d1406d307fc38a024601a2b7c307c5522dddd194da760e3c0b6",
+      "ml/src/numbra_ml/taxonomy.py": "842352e533ee6f5506e43fb07389a0d02f7e707c3f3a3acc07511a461713ebe5",
+      "ml/src/numbra_ml/train.py": "cff1073528080cdfb0ee2f76d60e14591d644fd4bd4d8fcc1599423f489975d4",
+      "ml/src/numbra_ml/training.py": "1067ca5a5212445369d3a9d6e2dc7e0587490b1054cb2fe454ffdb819ba196ed",
+      "ml/src/numbra_ml/verify.py": "7384905472a9ca5c3962bf4272252cebac6068ed9606f2b0b7e4546e80c09ead"
+    },
+    "source_tree_sha256": "97a75cacda81c28703fb023423fcec9b2c38da0a1cf094bd7f9df9cd466d8740",
+    "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=a1cb3cc05d46d198467bebbb6e8fba50a325d4e7, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.8.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "torch_cpu_capability": "AVX2"
+  },
+  "head_sensitivity": {
+    "effective_coefficient_l1": 1362.4646539532419,
+    "features": 1024,
+    "maximum_absolute_effective_coefficient": 59.662623509726096,
+    "maximum_scale": 1.0,
+    "minimum_scale": 0.004729056730866432,
+    "warning": "real-arithmetic affine sensitivity; does not bound float rounding"
+  },
+  "manifest_sha256": "2d141bc62205d88b7116cbe410e9262a96d771dec34c30e88ae6ad9c4bee839e",
+  "model_state_after_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "model_state_before_sha256": "1b74a241cb28db0175b3f8a85400beb7b6c9554cecbb0b51d7ec115276cbe845",
+  "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+  "preparation_report_sha256": "c8fb349db94a251e7f8c8b0a25335bff973819f2a44e00ba54b7869777883a22",
+  "protocol": {
+    "component_ids_sha256": "b867ec82627f947b268603a763d235dac0ab66444af26e283ba36ca2d802e908",
+    "components": 152,
+    "decision": "ADR-017",
+    "deployment_selection": false,
+    "execution": "sequential",
+    "expected_batchnorm_substitutions": 34,
+    "formula": "saved float32 affine_rsqrt coefficients; double Mul/Add; float32 boundary",
+    "frozen_evaluation_inputs_used": false,
+    "inter_op_threads": 1,
+    "intra_op_threads": 2,
+    "optimisation": "disabled",
+    "quantisation_fit": false,
+    "shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "split": "train",
+    "temperature": 19.150006376043688,
+    "threshold": 0.40079881738785716
+  },
+  "retained_artifacts": {
+    "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b": {
+      "graph": {
+        "bytes": 1861702,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "3880001716de0fe0957e88d66a70e54fb3ed3425185303cd659c1671d500da8b",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    },
+    "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa": {
+      "graph": {
+        "bytes": 1730515,
+        "int8_weight_qdq_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "DequantizeLinear": 211,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "QuantizeLinear": 103,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {},
+        "sha256": "835cd0264062d1790b5ba2b17d44de6c5e4f6d9c47c5386f20c558f1c73607aa",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "int8",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        }
+      ]
+    },
+    "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35": {
+      "graph": {
+        "bytes": 6095579,
+        "int8_weight_qdq_operators": {},
+        "ir_version": 8,
+        "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+        "operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Conv": 53,
+          "Div": 1,
+          "Flatten": 1,
+          "Gemm": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "opsets": {
+          "ai.onnx": 17
+        },
+        "other_float_or_structural_operators": {
+          "Add": 6,
+          "Constant": 1,
+          "Div": 1,
+          "Flatten": 1,
+          "GlobalAveragePool": 1,
+          "HardSigmoid": 9,
+          "HardSwish": 19,
+          "Mul": 9,
+          "ReduceMean": 9,
+          "Relu": 14,
+          "Squeeze": 1,
+          "Sub": 1
+        },
+        "remaining_float_weight_operators": {
+          "Conv": 53,
+          "Gemm": 1
+        },
+        "sha256": "946777cd05485a2d85fe2b5ba5a1092b040f09f14a77d6ca46e3a27421e61b35",
+        "size_pass": true,
+        "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+      },
+      "kind": "float",
+      "source_experiments": [
+        {
+          "attempt": "minmax-per-tensor",
+          "report_sha256": "e72c462b3cb905e3d3e3c94eac57bf44a53d4f3e65587da3e6fd686e4941e2c1"
+        },
+        {
+          "attempt": "minmax-per-channel",
+          "report_sha256": "ddfce634b69b23769a60da535b32110b804c830d43d0a710e5e3aa13fe323070"
+        }
+      ]
+    }
+  },
+  "saved_model_sha256": "734328e3568335b9f415b4ca06b813872a9e43bd432717908bc0f1d4c7e2ae43",
+  "saved_run_sha256": "1d729fba54ecee14b118124531f1c60d5bbe33ceb15e21b90d3182ba7b61fc11",
+  "scope": "PLACEHOLDER complete training-only BN graph experiment; never bundle; no mobile/clinical/deployment evidence",
+  "source_graph": {
+    "bytes": 6188494,
+    "int8_weight_qdq_operators": {},
+    "ir_version": 8,
+    "notice": "PLACEHOLDER \u2014 synthetic demonstration, not clinically validated",
+    "operators": {
+      "Add": 6,
+      "BatchNormalization": 34,
+      "Constant": 1,
+      "Conv": 53,
+      "Div": 1,
+      "Flatten": 1,
+      "Gemm": 1,
+      "GlobalAveragePool": 1,
+      "HardSigmoid": 9,
+      "HardSwish": 19,
+      "Mul": 9,
+      "ReduceMean": 9,
+      "Relu": 14,
+      "Squeeze": 1,
+      "Sub": 1
+    },
+    "opsets": {
+      "ai.onnx": 17
+    },
+    "other_float_or_structural_operators": {
+      "Add": 6,
+      "BatchNormalization": 34,
+      "Constant": 1,
+      "Div": 1,
+      "Flatten": 1,
+      "GlobalAveragePool": 1,
+      "HardSigmoid": 9,
+      "HardSwish": 19,
+      "Mul": 9,
+      "ReduceMean": 9,
+      "Relu": 14,
+      "Squeeze": 1,
+      "Sub": 1
+    },
+    "remaining_float_weight_operators": {
+      "Conv": 53,
+      "Gemm": 1
+    },
+    "sha256": "fc064e7aceb82df1c449681bb94c9749a0da352d81f1576e759c4eeca1ee4054",
+    "size_pass": true,
+    "warning": "QDQ graph inspection; not proof of all-integer execution or Android support"
+  },
+  "source_report_sha256": "51b07a5afdfe2fd7e85847980825c701b81ca208146f8e69503e8d74cf47b8fc",
+  "status": "DIAGNOSTIC ONLY",
+  "substitutions": [
+    {
+      "coefficient_shape": [
+        1,
+        16,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "30d78e1aeb039f4cb1567bee9c8b0e2854b406c017d2657cef2faca259db1bdf",
+        "beta": "8c88ff67d74a3fab08c3b041eb8294222c375ec215ed8bf5448cef175e374df9"
+      },
+      "input": "/backbone/conv_stem/Conv_output_0",
+      "module": "backbone.bn1",
+      "output": "/backbone/bn1/BatchNormalization_output_0",
+      "position": 0
+    },
+    {
+      "coefficient_shape": [
+        1,
+        16,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "4a1a7451c5755731ca039bc7157bcbb34087d597cfe73facd3894dfa27751166",
+        "beta": "49563cc447c1dab9acdfddfc15d3d5efe600dfd5f54b89888238cc276117c7d8"
+      },
+      "input": "/backbone/blocks/blocks.0/blocks.0.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.0.0.bn1",
+      "output": "/backbone/blocks/blocks.0/blocks.0.0/bn1/BatchNormalization_output_0",
+      "position": 1
+    },
+    {
+      "coefficient_shape": [
+        1,
+        16,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "132246c1bcb424d63766656c6b90829151403c60010909a629cabc86338cea0c",
+        "beta": "798d025e8e84f7cb0aae7a9172916ddaeebeed8b59533e55d034147c991701a5"
+      },
+      "input": "/backbone/blocks/blocks.0/blocks.0.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.0.0.bn2",
+      "output": "/backbone/blocks/blocks.0/blocks.0.0/bn2/BatchNormalization_output_0",
+      "position": 2
+    },
+    {
+      "coefficient_shape": [
+        1,
+        72,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "9e68492debe204710b0c52a69e206188c545ff7e32313fbea8d0063f6f683b3c",
+        "beta": "7318c847e6c19f222b964a122cf27eae26ea39a3815c50998a903173e2483462"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.1.0.bn1",
+      "output": "/backbone/blocks/blocks.1/blocks.1.0/bn1/BatchNormalization_output_0",
+      "position": 3
+    },
+    {
+      "coefficient_shape": [
+        1,
+        72,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "9dbb865f77956ba544099d1d7c139fe8e42f5ad7cf1929e4407d4760cb687b16",
+        "beta": "1e9694e2b59e7b610d5a1e1799184745299005b62f62074524a5a6b92a496b56"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.1.0.bn2",
+      "output": "/backbone/blocks/blocks.1/blocks.1.0/bn2/BatchNormalization_output_0",
+      "position": 4
+    },
+    {
+      "coefficient_shape": [
+        1,
+        24,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "fb7c8ee355803c5a31bd448df0ad0766ca420bda4c7f9982eaf420e262632af5",
+        "beta": "cbc4101aba7ed0c239b9c88d79b27476a183cdd98cdd393717f257d9bbc2b08a"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.1.0.bn3",
+      "output": "/backbone/blocks/blocks.1/blocks.1.0/bn3/BatchNormalization_output_0",
+      "position": 5
+    },
+    {
+      "coefficient_shape": [
+        1,
+        88,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "f5912e07e3b732d3b48bbb75c986c2cabbf5d35b8f12a290f4d7109e518f97f7",
+        "beta": "b02ad491f14748d0caa51f13a48b9eb3c22099ccccb678a881b2404d4be555aa"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.1.1.bn1",
+      "output": "/backbone/blocks/blocks.1/blocks.1.1/bn1/BatchNormalization_output_0",
+      "position": 6
+    },
+    {
+      "coefficient_shape": [
+        1,
+        88,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "6f3ae3a4ebc8c23dc2ae2a3a262f15441ab13ed8cc9d10999658aeadf1cb6072",
+        "beta": "31c622ce4ca21c7d9316e7d33862e3074e20f374f0211294c3781e1b937ca135"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.1.1.bn2",
+      "output": "/backbone/blocks/blocks.1/blocks.1.1/bn2/BatchNormalization_output_0",
+      "position": 7
+    },
+    {
+      "coefficient_shape": [
+        1,
+        24,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "667ee463e468e123ea2841448ad5272f3fc489823732aa4460a6a25948e066f3",
+        "beta": "a4d01d681430f55c2aaf5ddccaeebe8c0b498e827303d3bc6d046a5b621159c0"
+      },
+      "input": "/backbone/blocks/blocks.1/blocks.1.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.1.1.bn3",
+      "output": "/backbone/blocks/blocks.1/blocks.1.1/bn3/BatchNormalization_output_0",
+      "position": 8
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "3eee0877cf7b61fd8c263587a28af0580fc567be4d9b2e703ca5537cbee187b0",
+        "beta": "f4ecfeaa1541f7e1cc1125af60d5b659365caa371ee004269e3df6ef42444108"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.2.0.bn1",
+      "output": "/backbone/blocks/blocks.2/blocks.2.0/bn1/BatchNormalization_output_0",
+      "position": 9
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "7f2f657adf7b147e386314cbd2ca2f53243f819026cf4c67e89af969dd54f3ed",
+        "beta": "56ae97aef08f47ff17419431913afee4ef6a05e9c3231fba96a3fb004826b742"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.2.0.bn2",
+      "output": "/backbone/blocks/blocks.2/blocks.2.0/bn2/BatchNormalization_output_0",
+      "position": 10
+    },
+    {
+      "coefficient_shape": [
+        1,
+        40,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "742aa982fcf228280166e2d31b427d3e8a890ce4d3d77feb65b49601823a1eab",
+        "beta": "584f51abb186266913fe3e3c79e68e8b96433fe04e13606083d9c9320dcf86eb"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.2.0.bn3",
+      "output": "/backbone/blocks/blocks.2/blocks.2.0/bn3/BatchNormalization_output_0",
+      "position": 11
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "c31c9b4e02159a1293a747cc83ec2c706692b3c0b2855a9bf559fce8dfff1c65",
+        "beta": "9cffa20acdc8f7f3a58c665be0176b267733c52a3a62d215841759d1080c4754"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.2.1.bn1",
+      "output": "/backbone/blocks/blocks.2/blocks.2.1/bn1/BatchNormalization_output_0",
+      "position": 12
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "af8526302fc3d81b104c05f10aaf794f7baf26e26c4c2824bf17c0e96310bf7d",
+        "beta": "64c251b07cf55194209d27808c43794dbec4187c2148cc5c36e2a7dddf63638b"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.2.1.bn2",
+      "output": "/backbone/blocks/blocks.2/blocks.2.1/bn2/BatchNormalization_output_0",
+      "position": 13
+    },
+    {
+      "coefficient_shape": [
+        1,
+        40,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "4dc6b5997661ca6c696c4f9ed81d0a06955c8df2188731dc5be1b52c0eabb2ea",
+        "beta": "7a92230abdccc40c2e8d307255506c38953e4c682bb8bd0f0cb0b0139f664c24"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.2.1.bn3",
+      "output": "/backbone/blocks/blocks.2/blocks.2.1/bn3/BatchNormalization_output_0",
+      "position": 14
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "ea23e6214036217e8cf2c5c35f2656294dc7969d72cf6d60caaa7d5c5b58b40d",
+        "beta": "86462db5d7daa60b0f041f35ab04e7cb08f6f18e619b941b0af3c6e291fbe016"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.2/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.2.2.bn1",
+      "output": "/backbone/blocks/blocks.2/blocks.2.2/bn1/BatchNormalization_output_0",
+      "position": 15
+    },
+    {
+      "coefficient_shape": [
+        1,
+        240,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "91e2936d60d8cd4cf860e13626d7c3d3f38b0dbcbf29d9039cd09d41dd144d52",
+        "beta": "4ddcf58d9112db93efedea7d9b8fe6369c2c00c55a2c6a2be6bcedf6a758efd2"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.2/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.2.2.bn2",
+      "output": "/backbone/blocks/blocks.2/blocks.2.2/bn2/BatchNormalization_output_0",
+      "position": 16
+    },
+    {
+      "coefficient_shape": [
+        1,
+        40,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "ff1eb61103b46fcdcb1b0bdb834a780526639d046b3a6ffab6ddcef7348302e9",
+        "beta": "d4071632acc1c8e61fdb70e9c203423cff175377f5815aec102223e5747a62e5"
+      },
+      "input": "/backbone/blocks/blocks.2/blocks.2.2/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.2.2.bn3",
+      "output": "/backbone/blocks/blocks.2/blocks.2.2/bn3/BatchNormalization_output_0",
+      "position": 17
+    },
+    {
+      "coefficient_shape": [
+        1,
+        120,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "4bd6d512827b03c3d38cdf53f8f075c74a5b7601f11eafe834f7e084b86b9bad",
+        "beta": "67dc5e08c61e886260ddd59dc8d4616174336dedb4274755ad0d724dea0bd067"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.3.0.bn1",
+      "output": "/backbone/blocks/blocks.3/blocks.3.0/bn1/BatchNormalization_output_0",
+      "position": 18
+    },
+    {
+      "coefficient_shape": [
+        1,
+        120,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "87b6ee17e95cabbcc1c1ddf1c5f6fb1cdb3262791cda29089eaf82acae58a0e0",
+        "beta": "8b9a7eb66ba248f32f3176b7b3f157c559fe8dda2209858b8538d9b03654f2d0"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.3.0.bn2",
+      "output": "/backbone/blocks/blocks.3/blocks.3.0/bn2/BatchNormalization_output_0",
+      "position": 19
+    },
+    {
+      "coefficient_shape": [
+        1,
+        48,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "2c90adaa2399d1e6b15f27fcd151721c6420eb894a95779873d2ac8b39f23dde",
+        "beta": "09dc3329515510751fcdebf3baaa8957af1c9de8d91343b32befe0929288a9b0"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.3.0.bn3",
+      "output": "/backbone/blocks/blocks.3/blocks.3.0/bn3/BatchNormalization_output_0",
+      "position": 20
+    },
+    {
+      "coefficient_shape": [
+        1,
+        144,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "98585f9fb9b91e39b9a51687ee1e2c6fed902c74ec9bcabafa004a123c341cb5",
+        "beta": "160ab30c287ef0c80afa75078a77e975d8bcc6c59aa1c3da7749971458012434"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.3.1.bn1",
+      "output": "/backbone/blocks/blocks.3/blocks.3.1/bn1/BatchNormalization_output_0",
+      "position": 21
+    },
+    {
+      "coefficient_shape": [
+        1,
+        144,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "32a579cbd65ca8fb82e0f034b3b443e2cc73af0d1fb50d94747a84376b5e8596",
+        "beta": "25e521d0c87ef1cb933cab48b9af6c16e14ab245e121d38208d309a18b08ad43"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.3.1.bn2",
+      "output": "/backbone/blocks/blocks.3/blocks.3.1/bn2/BatchNormalization_output_0",
+      "position": 22
+    },
+    {
+      "coefficient_shape": [
+        1,
+        48,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "a40312c7701899d26546bd7e09fa3bd7a23b5f550b61dfca045b5b6c107abc35",
+        "beta": "92afbe3f2fe2f3e9e8b46dd0d045403edbea2766aa09fb6c2c9c6170d408b962"
+      },
+      "input": "/backbone/blocks/blocks.3/blocks.3.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.3.1.bn3",
+      "output": "/backbone/blocks/blocks.3/blocks.3.1/bn3/BatchNormalization_output_0",
+      "position": 23
+    },
+    {
+      "coefficient_shape": [
+        1,
+        288,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "8e9222eaf7c17a1233b4b2110707cef16d459ed16bf95c2c8126c6b252ac1da3",
+        "beta": "82c4a58f7d86ab3e6b8c8c3278767dea7410cc3c501e25723ada4e0b90ee810c"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.0/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.4.0.bn1",
+      "output": "/backbone/blocks/blocks.4/blocks.4.0/bn1/BatchNormalization_output_0",
+      "position": 24
+    },
+    {
+      "coefficient_shape": [
+        1,
+        288,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "54ad9b110498bfe36573e817923e10077f9ba355dd726886d666d1ff6a36bbbc",
+        "beta": "88fcc039acde7fa67a27debdc4ee041c64de38a0fa53751a3b4056d3ef36a12f"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.0/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.4.0.bn2",
+      "output": "/backbone/blocks/blocks.4/blocks.4.0/bn2/BatchNormalization_output_0",
+      "position": 25
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "c71ddbbed7793698ca105494d77de7cd3582481ecedd4dfc5828f672941686a3",
+        "beta": "e2a8e8b119e528a4c6188054d61c745eb09ca603bac527f3630492d8be7129b9"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.0/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.4.0.bn3",
+      "output": "/backbone/blocks/blocks.4/blocks.4.0/bn3/BatchNormalization_output_0",
+      "position": 26
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "aa60ad9ce8dad6736d1c0f9b9c5ae044935fcfe19011d954e92998169f393e75",
+        "beta": "33faee6813f54e3cd4b3fe3c2b183920e8db7ad1c2aa16653555481518251178"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.1/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.4.1.bn1",
+      "output": "/backbone/blocks/blocks.4/blocks.4.1/bn1/BatchNormalization_output_0",
+      "position": 27
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "b087e447396c344fae8974f95c67311b5facb8728ba725829d3f328a942c0d3f",
+        "beta": "e16ec9f7943997b0db17e33b63c2037b0831880b63ba63db852f4f2481155b5c"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.1/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.4.1.bn2",
+      "output": "/backbone/blocks/blocks.4/blocks.4.1/bn2/BatchNormalization_output_0",
+      "position": 28
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "99639395d2520d56949277ea12612afb919f0226d38fedecd83e35d913c2c3ac",
+        "beta": "387cf8885cc3e4e31c3543517cfbc1fd0749a71942c168bc67d279feeb70a38c"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.1/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.4.1.bn3",
+      "output": "/backbone/blocks/blocks.4/blocks.4.1/bn3/BatchNormalization_output_0",
+      "position": 29
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "30eef7ebb8903ee0642f70f3687e224cdb941882d3fce929467c992d4d691d06",
+        "beta": "4284591cfa0236ab3a93642495ee45da43d30e3882d539c7c7934408dd8cfa54"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.2/conv_pw/Conv_output_0",
+      "module": "backbone.blocks.4.2.bn1",
+      "output": "/backbone/blocks/blocks.4/blocks.4.2/bn1/BatchNormalization_output_0",
+      "position": 30
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "763542b04c7120cb4799700d8830895d0787eb3f9f74d07145e6e54c665826ef",
+        "beta": "3f82a65ddd71d9aa43762af6f1f3a5c046b86706a4ac2b939c2572edbc0f3e3e"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.2/conv_dw/Conv_output_0",
+      "module": "backbone.blocks.4.2.bn2",
+      "output": "/backbone/blocks/blocks.4/blocks.4.2/bn2/BatchNormalization_output_0",
+      "position": 31
+    },
+    {
+      "coefficient_shape": [
+        1,
+        96,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "d8b6fe3a9276c1c358c3f269f4acf19497ad88c36b93e761a65e611ee0f697a1",
+        "beta": "ee4eea4fb1d2d38d93b0a2d4d1213c037c7e4c0d777b35a4626af3845625c21c"
+      },
+      "input": "/backbone/blocks/blocks.4/blocks.4.2/conv_pwl/Conv_output_0",
+      "module": "backbone.blocks.4.2.bn3",
+      "output": "/backbone/blocks/blocks.4/blocks.4.2/bn3/BatchNormalization_output_0",
+      "position": 32
+    },
+    {
+      "coefficient_shape": [
+        1,
+        576,
+        1,
+        1
+      ],
+      "coefficients_sha256": {
+        "alpha": "dc6625e36e5ebc7f89bfc202f4b99a983e159ea0a5e5d0d38f57f43c911da424",
+        "beta": "029149773675a86a35fe5edbed1a94c2eb44b8566db0fbb3d52d44d5d933de1d"
+      },
+      "input": "/backbone/blocks/blocks.5/blocks.5.0/conv/Conv_output_0",
+      "module": "backbone.blocks.5.0.bn1",
+      "output": "/backbone/blocks/blocks.5/blocks.5.0/bn1/BatchNormalization_output_0",
+      "position": 33
+    }
+  ],
+  "version": "1.0.0"
+}

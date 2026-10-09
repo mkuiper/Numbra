@@ -383,14 +383,71 @@ All graphs, weights, tensors and ordered component details remain ignored.
 Float64 operator support/performance on Android remains unverified; these copies
 have no deployment authority.
 
+## Complete promoted BatchNorm graph — ADR-017
+
+**PLACEHOLDER diagnostic, never bundle.** Run from the repository root with a
+new output directory:
+
+```bash
+ml/.venv/bin/python -m numbra_ml.export_promoted_bn --output data/exports/PLACEHOLDER-m4-promoted-bn1
+```
+
+This validates and replaces every saved BN node in the verified preserved
+graph, using ADR-016's promoted rsqrt-affine expression and retaining each
+original float32 output boundary. Saved weight/bias/mean/variance and epsilon
+are checked before coefficient computation. All 34 replacements use rounded
+float32 alpha/beta bits, float64 multiply/add, and a float32 output cast. Every
+original non-BN node, initializer and graph input/output remains intact in the
+serialized diagnostic. Conv, activation and head arithmetic are unchanged there.
+
+Both the preserved control and complete substitute run on all 152 training
+inputs only, with disabled optimisation and the original CPU/thread settings.
+No frozen test/held-out/stress pixels or quantisation calibration are used.
+Original graph parity is measured separately from feature-tapped copies.
+The actual original/tapped runtime graphs pass all 204 expression-node,
+coefficient-bit, float32-boundary and 53 Conv/one Gemm count audits. ORT removes
+unused BN initializers and expands HardSwish even at disabled optimisation;
+the runtime audit does not assert byte identity of every other node.
+
+[Aggregate evidence](../ml/reports/PLACEHOLDER-m4-promoted-bn1.json) records:
+
+| Training comparison | Preserved control | Complete promoted BN |
+| --- | ---: | ---: |
+| Maximum raw-logit absolute error | 0.000240326 | 0.000189304 |
+| Mean raw-logit absolute error | 0.0000558684 | 0.0000575436 |
+| Maximum calibrated-probability absolute error | 0.00000279320 | 0.00000240022 |
+| Mean calibrated-probability absolute error | 0.000000653101 | 0.000000667205 |
+| Raw / probability budget violations | 26 / 29 | 23 / 32 |
+| Frozen-threshold flips | 0 | 0 |
+| Original / instrumented logit difference | 0 | 0 |
+| Parity status | FAIL | FAIL |
+
+The control reproduces previous evidence. Substitution lowers the maximum
+errors while slightly increasing mean errors and probability violation count;
+it still fails both fixed budgets. Feature maximum error also increases from
+0.0000141859 to 0.0000162125, while induced Python-head maximum error decreases
+from 0.000228882 to 0.000188351. These are diagnostic measurements, not causal
+attribution or successful deployment. Saved state hashes match before/after.
+The candidate is 6,255,113 bytes (runtime copy 6,156,135); it has no INT8 weights.
+
+Separate audit verifies aggregate/private equality, recomputed parity, ordered
+training IDs, source/model/dependency/preparation provenance and nine graph
+records. All graphs, weights and ordered results stay ignored under data/.
+Tests cover the complete arithmetic sequence including in-place timm
+activations, unchanged graph connections, source/state preservation, runtime
+audit corruption, invalid source parameters, training-only image isolation,
+private output handling and stale provenance rejection. Float64 mobile support
+and performance remain unverified. Exit 0 means DIAGNOSTIC ONLY; M4 stays open.
+
 ## Remaining M4 work
 
-BatchNorm preservation alone fails parity; promoted expressions improve some
-local BN arithmetic but leave native differences. Next predeclare a complete
-training-only preserved graph with all saved BN nodes replaced by the promoted
-rsqrt-affine expression, original Conv/head retained, and float32 stage
-boundaries. Measure complete-model raw/probability/decision parity and actual
-runtime graph before considering quantised scope. A selective static QDQ scope
+BatchNorm preservation and complete promoted BN substitution both fail parity.
+Next predeclare a joint training-only graph combining the already declared
+promoted stem Conv patch/MatMul expression with complete promoted BN, retaining
+all other Conv/head nodes and float32 stage boundaries. Compare to the preserved
+and BN-only controls before choosing quantised scope. ADR-016's local promoted
+stem Conv did not lower its native-Python maximum, so improvement is uncertain;
+do not assume higher precision fixes the contract. A selective static QDQ scope
 must be explicitly declared and justified from training evidence before any
 new frozen evaluation; float64 mobile compatibility also needs resolution.
 Keep every failure, original reference, fits/inputs and ADR-011 budgets. The toy
